@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>大型网站电商网站架构案例和技术架构的示例 | Hechaofa</title>
+  <meta name="keywords" content=" 架构 ">
+  <meta name="description" content="大型网站电商网站架构案例和技术架构的示例 | Hechaofa">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="个人名言：喜欢在知识的海洋中遨游，更喜欢生活！ qq：1297814479 email:chaofa_vip@126.com">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="https://chaofavip.github.io/about/index.html">
+<meta property="og:site_name" content="Hechaofa">
+<meta property="og:description" content="个人名言：喜欢在知识的海洋中遨游，更喜欢生活！ qq：1297814479 email:chaofa_vip@126.com">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2019-12-17T15:56:40.000Z">
+<meta property="article:modified_time" content="2019-12-18T15:00:19.240Z">
+<meta property="article:author" content="Hechaofa">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Hechaofa</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/chaofavip" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/6e39d2c3fa52" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/chaofavip" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:chaofa_vip@126.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1297814479&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(43)</small></div></li>
+    
+        
+            
+            <li><div data-rel="支付">支付<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="docker">docker<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Mac">Mac<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="监控">监控<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="前端">前端<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="架构">架构<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="php">php<small>(15)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Ubuntu">Ubuntu<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Mysql">Mysql<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="redis">redis<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具">工具<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="43">
+<input type="hidden" id="yelog_site_word_count" value="42.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.cnblogs.com/weihui-vip/">微慧</a></li>
+            
+            <li><a target="_blank" href="https://www.jianshu.com/u/6e39d2c3fa52">Charles_ed65</a></li>
+            
+            <li><a target="_blank" href="https://blog.csdn.net/chaofavip">chaofavip</a></li>
+            
+            <li><a target="_blank" href="https://segmentfault.com/u/nidaye_5df270ab7e088">泥大爷</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color2">alipay</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ext</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">php</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">redis</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">监控</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">jq</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">架构</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">laravel</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">composer</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">git</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Ubuntu</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">ajax</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">正则</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">mac</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">tool</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">vim</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">压测</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">bogon</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">host</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">linux</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="支付 "
+           href="/2020/01/03/alipay/peizhi/"
+           data-tag="alipay"
+           data-author="" >
+            <span class="post-title" title="对接支付宝">对接支付宝</span>
+            <span class="post-date" title="2020-01-03 22:09:47">2020/01/03</span>
+        </a>
+        
+        <a  class="docker "
+           href="/2019/12/12/docker/kuozhan/"
+           data-tag="ext"
+           data-author="" >
+            <span class="post-title" title="docker之安装扩展细说">docker之安装扩展细说</span>
+            <span class="post-date" title="2019-12-12 10:09:47">2019/12/12</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2019/12/29/docker/php/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="Mac切换PHP版本">Mac切换PHP版本</span>
+            <span class="post-date" title="2019-12-29 19:09:47">2019/12/29</span>
+        </a>
+        
+        <a  class="docker "
+           href="/2019/12/13/docker/redis/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="docker之安装redis扩展">docker之安装redis扩展</span>
+            <span class="post-date" title="2019-12-13 10:09:47">2019/12/13</span>
+        </a>
+        
+        <a  class="docker "
+           href="/2019/11/09/docker/start/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="Docker的LNMP一键安装">Docker的LNMP一键安装</span>
+            <span class="post-date" title="2019-11-09 10:09:47">2019/11/09</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2017/07/20/design/design/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="设计模式">设计模式</span>
+            <span class="post-date" title="2017-07-20 11:13:47">2017/07/20</span>
+        </a>
+        
+        <a  class="监控 "
+           href="/2020/01/03/jiankong/liaojie/"
+           data-tag="监控"
+           data-author="" >
+            <span class="post-title" title="监控认知了解">监控认知了解</span>
+            <span class="post-date" title="2020-01-03 22:10:47">2020/01/03</span>
+        </a>
+        
+        <a  class="前端 "
+           href="/2017/11/09/jq/tu/"
+           data-tag="jq"
+           data-author="" >
+            <span class="post-title" title="jq">jq</span>
+            <span class="post-date" title="2017-11-09 09:09:47">2017/11/09</span>
+        </a>
+        
+        <a  class="架构 "
+           href="/2019/11/02/jiagou/shop/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="大型网站电商网站架构案例和技术架构的示例">大型网站电商网站架构案例和技术架构的示例</span>
+            <span class="post-date" title="2019-11-02 10:09:47">2019/11/02</span>
+        </a>
+        
+        <a id="top" class="php "
+           href="/2019/09/29/laravel/laravel-admin-set/"
+           data-tag="laravel"
+           data-author="" >
+            <span class="post-title" title="laravel-admin 安装">laravel-admin 安装</span>
+            <span class="post-date" title="2019-09-29 20:10:47">2019/09/29</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/2019/11/10/linux/composer/"
+           data-tag="composer"
+           data-author="" >
+            <span class="post-title" title="mac下全局安装composer">mac下全局安装composer</span>
+            <span class="post-date" title="2019-11-10 10:09:47">2019/11/10</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/2019/05/20/linux/git/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="Git常用命令速查表">Git常用命令速查表</span>
+            <span class="post-date" title="2019-05-20 08:00:47">2019/05/20</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/2019/11/12/linux/gitanzhuang/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="linux安装git">linux安装git</span>
+            <span class="post-date" title="2019-11-12 10:09:47">2019/11/12</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/2017/05/20/linux/mingling/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux常用命令">Linux常用命令</span>
+            <span class="post-date" title="2017-05-20 10:00:47">2017/05/20</span>
+        </a>
+        
+        <a  class="php "
+           href="/2017/03/02/linux/swoole_set/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="swoole安装（centos7）">swoole安装（centos7）</span>
+            <span class="post-date" title="2017-03-02 09:13:47">2017/03/02</span>
+        </a>
+        
+        <a  class="Ubuntu "
+           href="/2017/03/27/linux/ubuntu_swoole/"
+           data-tag="Ubuntu"
+           data-author="" >
+            <span class="post-title" title="Ubuntu16.04 swoole扩展安装注意！！！">Ubuntu16.04 swoole扩展安装注意！！！</span>
+            <span class="post-date" title="2017-03-27 10:13:47">2017/03/27</span>
+        </a>
+        
+        <a  class="Ubuntu "
+           href="/2017/03/20/linux/ubuntu_cron/"
+           data-tag="Ubuntu"
+           data-author="" >
+            <span class="post-title" title="Ubuntu16.04安装并搭建定时脚本cron">Ubuntu16.04安装并搭建定时脚本cron</span>
+            <span class="post-date" title="2017-03-20 15:13:47">2017/03/20</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2019/11/03/mysql/sql/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="防止SQL注入">防止SQL注入</span>
+            <span class="post-date" title="2019-11-03 10:09:47">2019/11/03</span>
+        </a>
+        
+        <a  class="php "
+           href="/2019/11/09/php/code/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="http响应状态码大全">http响应状态码大全</span>
+            <span class="post-date" title="2019-11-09 09:09:47">2019/11/09</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/03/01/php/develop/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php发展史和一些其他知识">php发展史和一些其他知识</span>
+            <span class="post-date" title="2016-03-01 10:13:47">2016/03/01</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/03/29/php/digui/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="递归，阶乘">递归，阶乘</span>
+            <span class="post-date" title="2016-03-29 11:13:47">2016/03/29</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/06/13/php/duixiang/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="面向对象">面向对象</span>
+            <span class="post-date" title="2016-06-13 09:20:47">2016/06/13</span>
+        </a>
+        
+        <a  class="php "
+           href="/2019/12/22/php/hanshu/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php常用函数">php常用函数</span>
+            <span class="post-date" title="2019-12-22 23:13:47">2019/12/22</span>
+        </a>
+        
+        <a  class="php "
+           href="/2019/11/30/php/jiagouyouhua/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="架构优化">架构优化</span>
+            <span class="post-date" title="2019-11-30 14:09:47">2019/11/30</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/03/22/php/maopao/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="冒泡排序">冒泡排序</span>
+            <span class="post-date" title="2016-03-22 11:13:47">2016/03/22</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/06/13/php/study/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php核心">php核心</span>
+            <span class="post-date" title="2016-06-13 21:20:47">2016/06/13</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/04/29/php/phpdesign/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="设计原则">设计原则</span>
+            <span class="post-date" title="2016-04-29 13:13:47">2016/04/29</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/09/30/php/youhua/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="PHP代码优化技巧大盘点">PHP代码优化技巧大盘点</span>
+            <span class="post-date" title="2016-09-30 09:13:47">2016/09/30</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/04/05/php/word/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php单词整理">php单词整理</span>
+            <span class="post-date" title="2016-04-05 11:13:00">2016/04/05</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/03/10/php/zajax/"
+           data-tag="ajax"
+           data-author="" >
+            <span class="post-title" title="ajax认知">ajax认知</span>
+            <span class="post-date" title="2016-03-10 19:13:47">2016/03/10</span>
+        </a>
+        
+        <a  class="php "
+           href="/2019/12/22/php/zhengze/"
+           data-tag="正则"
+           data-author="" >
+            <span class="post-title" title="10个实用的PHP正则表达式">10个实用的PHP正则表达式</span>
+            <span class="post-date" title="2019-12-22 23:50:47">2019/12/22</span>
+        </a>
+        
+        <a  class="redis "
+           href="/2017/10/09/redis/jichu/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="redis基础操作">redis基础操作</span>
+            <span class="post-date" title="2017-10-09 09:09:47">2017/10/09</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2018/03/20/suanfa/suanfa01/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="算法课堂1">算法课堂1</span>
+            <span class="post-date" title="2018-03-20 14:13:00">2018/03/20</span>
+        </a>
+        
+        <a  class="前端 "
+           href="/2020/07/13/web/mianshi01/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="基础面试js">基础面试js</span>
+            <span class="post-date" title="2020-07-13 13:09:47">2020/07/13</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2019/07/20/tool/baidu/"
+           data-tag="mac"
+           data-author="" >
+            <span class="post-title" title="百度网盘（破解svip）下载Mac">百度网盘（破解svip）下载Mac</span>
+            <span class="post-date" title="2019-07-20 10:13:47">2019/07/20</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2019/12/20/tool/composer/"
+           data-tag="composer"
+           data-author="" >
+            <span class="post-title" title="PHP包管理器Composer与自动加载规范">PHP包管理器Composer与自动加载规范</span>
+            <span class="post-date" title="2019-12-20 10:13:47">2019/12/20</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2017/02/20/tool/tizi/"
+           data-tag="tool"
+           data-author="" >
+            <span class="post-title" title="手把手教你购买使用Vultr服务器">手把手教你购买使用Vultr服务器</span>
+            <span class="post-date" title="2017-02-20 10:13:08">2017/02/20</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2019/04/29/tool/find/"
+           data-tag="tool"
+           data-author="" >
+            <span class="post-title" title="搜索网站">搜索网站</span>
+            <span class="post-date" title="2019-04-29 11:50:47">2019/04/29</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2018/07/20/tool/vi/"
+           data-tag="vim"
+           data-author="" >
+            <span class="post-title" title="vi编辑">vi编辑</span>
+            <span class="post-date" title="2018-07-20 10:13:47">2018/07/20</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2019/03/02/tool/yace/"
+           data-tag="压测"
+           data-author="" >
+            <span class="post-title" title="压测认识">压测认识</span>
+            <span class="post-date" title="2019-03-02 02:13:47">2019/03/02</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2020/03/10/tool/Mac/bogon/"
+           data-tag="bogon"
+           data-author="" >
+            <span class="post-title" title="MacBook 终端中的bogon的解决办法">MacBook 终端中的bogon的解决办法</span>
+            <span class="post-date" title="2020-03-10 10:13:47">2020/03/10</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2019/09/10/tool/Mac/host/"
+           data-tag="host"
+           data-author="" >
+            <span class="post-title" title="mac 下host操作管理">mac 下host操作管理</span>
+            <span class="post-date" title="2019-09-10 10:13:47">2019/09/10</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2019/09/17/tool/Mac/linux/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="Mac 怎么通过自带终端连接linux服务器">Mac 怎么通过自带终端连接linux服务器</span>
+            <span class="post-date" title="2019-09-17 10:13:47">2019/09/17</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-jiagou/shop" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">大型网站电商网站架构案例和技术架构的示例</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="架构">架构</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color3">架构</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-12-23 23:41:58'>2019-11-02 10:09</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:6.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大型网站架构是一个系列文档，欢迎大家关注。本次分享主题：电商网站架构案例。从电商网站的需求，到单机架构，逐步演变为常用的，可供参考的分布式架构的原型。除具备功能需求外，还具备一定的高性能，高可用，可伸缩，可扩展等非功能质量需求（架构目标）。</p>
+<p>根据实际需要，进行改造，扩展，支持千万PV，是没问题的。</p>
+<p>本次分享大纲<br>电商案例的原因<br>电商网站需求<br>网站初级架构<br>系统容量估算<br>网站架构分析<br>网站架构优化<br>架构总结<br>电商网站案例，一共有三篇本篇主要说明网站的需求，网站初始架构，系统容量估算方法。</p>
+<p>一、电商案例的原因<br>分布式大型网站，目前看主要有几类1.大型门户，比如网易，新浪等；2.SNS网站，比如校内，开心网等；3.电商网站：比如阿里巴巴，京东商城，国美在线，汽车之家等。大型门户一般是新闻类信息，可以使用CDN，静态化等方式优化，开心网等交互性比较多，可能会引入更多的NOSQL，分布式缓存，使用高性能的通信框架等。电商网站具备以上两类的特点，比如产品详情可以采用CDN，静态化，交互性高的需要采用NOSQL等技术。因此，我们采用电商网站作为案例，进行分析。</p>
+<p>二、电商网站需求<br>客户需求：</p>
+<p>建立一个全品类的电子商务网站（B2C），用户可以在线购买商品，可以在线支付，也可以货到付款；<br>用户购买时可以在线与客服沟通；<br>用户收到商品后，可以给商品打分，评价；<br>目前有成熟的进销存系统；需要与网站对接；<br>希望能够支持3<del>5年，业务的发展；<br>预计3</del>5年用户数达到1000万；<br>定期举办双11，双12,三八男人节等活动；<br>其他的功能参考京东或国美在线等网站。<br>客户就是客户，不会告诉你具体要什么，只会告诉你他想要什么，我们很多时候要引导，挖掘客户的需求。好在提供了明确的参考网站。因此，下一步要进行大量的分析，结合行业，以及参考网站，给客户提供方案。</p>
+<p>其他的略<del>~</del></p>
+<p>需求功能矩阵</p>
+<p>需求管理传统的做法，会使用用例图或模块图（需求列表）进行需求的描述。这样做常常忽视掉一个很重要的需求（非功能需求），因此推荐大家使用需求功能矩阵，进行需求描述。</p>
+<p>本电商网站的需求矩阵如下：<br><img src="https://img-blog.csdnimg.cn/20191223232351194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>图片存储的要求（海量小图片）用户可以在线购买商品会员管理，购物车，结算功能良好购物体验（可用性，性能）在线支付或货到付款多种在线支付方式支付过程要安全，数据加密（安全性）多种支付接口灵活切换（灵活性，扩展性）可以在线与客服沟通在线客服功能可靠性：即时通讯商品打分评价商品评论 目前有成熟的进销存系统对接进销存属于约束条件对接时要考虑数据一致性，鲁棒性支持3<del>5年，业务的发展 属于约束条件伸缩性，可扩展性3</del>5年用户数达到1000万 约束条件举办双11，双12,三八男人节等活动活动管理，秒杀突增访问流量（可伸缩）实时性要求（高性能）参考京东或国美在线 参考条件</p>
+<p>以上是对电商网站需求的简单举例，目的是说明（1）需求分析的时候，要全面，大型分布式系统重点考虑非功能需求；（2）描述一个简单的电商需求场景，使大家对下一步的分析设计有个依据。</p>
+<p>三、网站初级架构<br>一般网站，刚开始的做法，是三台服务器，一台部署应用，一台部署数据库，一台部署NFS文件系统。</p>
+<p>这是前几年比较传统的做法，之前见到一个网站10万多会员，垂直服装设计门户，N多图片。使用了一台服务器部署了应用，数据库以及图片存储。出现了很多性能问题。</p>
+<p>如下图：</p>
+<p>但是，目前主流的网站架构已经发生了翻天覆地的变化。一般都会采用集群的方式，进行高可用设计。至少是下面这个样子。</p>
+<p>（1 使用集群对应用服务器进行冗余，实现高可用；（负载均衡设备可与应用一块部署）</p>
+<p>使用数据库主备模式，实现数据备份和高可用；</p>
+<p>四、系统容量预估<br>预估步骤：</p>
+<p>注册用户数-日均UV量-每日的PV量-每天的并发量；<br>峰值预估：平常量的2<del>3倍；<br>根据并发量（并发，事务数），存储容量计算系统容量。<br>客户需求：3</del>5年用户数达到1000万注册用户；</p>
+<p>每秒并发数预估：</p>
+<p>每天的UV为200万（二八原则）；<br>每日每天点击浏览30次；<br>PV量：200<em>30=6000万；<br>集中访问量：24</em>0.2=4.8小时会有6000万<em>0.8=4800万（二八原则）；<br>每分并发量：4.8</em>60=288分钟，每分钟访问4800/288=16.7万（约等于）；<br>每秒并发量：16.7万/60=2780（约等于）；<br>假设：高峰期为平常值的三倍，则每秒的并发数可以达到8340次。<br>1毫秒=1.3次访问；<br>没好好学数学后悔了吧？！（不知道以上算是否有错误，呵呵~~）</p>
+<p>服务器预估：（以tomcat服务器举例）</p>
+<p>按一台web服务器，支持每秒300个并发计算。平常需要10台服务器（约等于）；[tomcat默认配置是150]<br>高峰期：需要30台服务器；<br>容量预估：70/90原则</p>
+<p>系统CPU一般维持在70%左右的水平，高峰期达到90%的水平，是不浪费资源，并比较稳定的。内存，IO类似。</p>
+<p>以上预估仅供参考，因为服务器配置，业务逻辑复杂度等都有影响。在此CPU，硬盘，网络等不再进行评估。</p>
+<p>五、网站架构分析</p>
+<p>根据以上预估，有几个问题：</p>
+<p>需要部署大量的服务器，高峰期计算，可能要部署30台Web服务器。并且这三十台服务器，只有秒杀，活动时才会用到，存在大量的浪费。<br>所有的应用部署在同一台服务器，应用之间耦合严重。需要进行垂直切分和水平切分。<br>大量应用存在冗余代码<br>服务器SESSION同步耗费大量内存和网络带宽<br>数据需要频繁访问数据库，数据库访问压力巨大。<br>大型网站一般需要做以下架构优化（优化是架构设计时，就要考虑的，一般从架构/代码级别解决，调优主要是简单参数的调整，比如JVM调优；如果调优涉及大量代码改造，就不是调优了，属于重构）：</p>
+<p>业务拆分<br>应用集群部署（分布式部署，集群部署和负载均衡）<br>多级缓存<br>单点登录（分布式Session）<br>数据库集群（读写分离，分库分表）<br>服务化<br>消息队列<br>其他技术<br>六、网站架构优化<br>6.1业务拆分<br>根据业务属性进行垂直切分，划分为产品子系统，购物子系统，支付子系统，评论子系统，客服子系统，接口子系统（对接如进销存，短信等外部系统）。</p>
+<p>根据业务子系统进行等级定义，可分为核心系统和非核心系统。核心系统：产品子系统，购物子系统，支付子系统；非核心：评论子系统，客服子系统，接口子系统。</p>
+<p>业务拆分作用：提升为子系统可由专门的团队和部门负责，专业的人做专业的事，解决模块之间耦合以及扩展性问题；每个子系统单独部署，避免集中部署导致一个应用挂了，全部应用不可用的问题。</p>
+<p>等级定义作用：用于流量突发时，对关键应用进行保护，实现优雅降级；保护关键应用不受到影响。</p>
+<p>拆分后的架构图：<br><img src="https://img-blog.csdnimg.cn/20191223232613939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>参考部署方案2</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223232625298.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如上图每个应用单独部署<br>核心系统和非核心系统组合部署<br>6.2应用集群部署（分布式，集群，负载均衡）<br>分布式部署：将业务拆分后的应用单独部署，应用直接通过RPC进行远程通信；</p>
+<p>集群部署：电商网站的高可用要求，每个应用至少部署两台服务器进行集群部署；</p>
+<p>负载均衡：是高可用系统必须的，一般应用通过负载均衡实现高可用，分布式服务通过内置的负载均衡实现高可用，关系型数据库通过主备方式实现高可用。</p>
+<p>集群部署后架构图：<br><img src="https://img-blog.csdnimg.cn/20191223232737929.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>6.3 多级缓存<br>缓存按照存放的位置一般可分为两类本地缓存和分布式缓存。本案例采用二级缓存的方式，进行缓存的设计。一级缓存为本地缓存，二级缓存为分布式缓存。（还有页面缓存，片段缓存等，那是更细粒度的划分）</p>
+<p>一级缓存，缓存数据字典，和常用热点数据等基本不可变/有规则变化的信息，二级缓存缓存需要的所有缓存。当一级缓存过期或不可用时，访问二级缓存的数据。如果二级缓存也没有，则访问数据库。</p>
+<p>缓存的比例，一般1:4，即可考虑使用缓存。（理论上是1:2即可）。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223232805687.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>根据业务特性可使用以下缓存过期策略：</p>
+<p>缓存自动过期；<br>缓存触发过期；<br>6.4单点登录（分布式Session）<br>系统分割为多个子系统，独立部署后，不可避免的会遇到会话管理的问题。一般可采用Session同步，Cookies，分布式Session方式。电商网站一般采用分布式Session实现。</p>
+<p>再进一步可以根据分布式Session，建立完善的单点登录或账户管理系统。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223232946574.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>流程说明</p>
+<p>用户第一次登录时，将会话信息（用户Id和用户信息），比如以用户Id为Key，写入分布式Session；<br>用户再次登录时，获取分布式Session，是否有会话信息，如果没有则调到登录页；<br>一般采用Cache中间件实现，建议使用Redis，因此它有持久化功能，方便分布式Session宕机后，可以从持久化存储中加载会话信息；<br>存入会话时，可以设置会话保持的时间，比如15分钟，超过后自动超时；<br>结合Cache中间件，实现的分布式Session，可以很好的模拟Session会话。</p>
+<p>6.5数据库集群（读写分离，分库分表）<br>大型网站需要存储海量的数据，为达到海量数据存储，高可用，高性能一般采用冗余的方式进行系统设计。一般有两种方式读写分离和分库分表。</p>
+<p>读写分离：一般解决读比例远大于写比例的场景，可采用一主一备，一主多备或多主多备方式。</p>
+<p>本案例在业务拆分的基础上，结合分库分表和读写分离。如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233007527.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>业务拆分后：每个子系统需要单独的库；<br>如果单独的库太大，可以根据业务特性，进行再次分库，比如商品分类库，产品库；<br>分库后，如果表中有数据量很大的，则进行分表，一般可以按照Id，时间等进行分表；（高级的用法是一致性Hash）<br>在分库，分表的基础上，进行读写分离；<br>相关中间件可参考Cobar（阿里，目前已不在维护），TDDL（阿里），Atlas（奇虎360），MyCat（在Cobar基础上，国内很多牛人，号称国内第一开源项目）。</p>
+<p>分库分表后序列的问题，JOIN，事务的问题，会在分库分表主题分享中，介绍。</p>
+<p>6.6服务化<br>将多个子系统公用的功能/模块，进行抽取，作为公用服务使用。比如本案例的会员子系统就可以抽取为公用的服务。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233022308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>6.7消息队列<br>消息队列可以解决子系统/模块之间的耦合，实现异步，高可用，高性能的系统。是分布式系统的标准配置。本案例中，消息队列主要应用在购物，配送环节。</p>
+<p>用户下单后，写入消息队列，后直接返回客户端；<br>库存子系统：读取消息队列信息，完成减库存；<br>配送子系统：读取消息队列信息，进行配送；</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233036104.png" alt="在这里插入图片描述"><br>目前使用较多的MQ有Active MQ,Rabbit MQ,Zero MQ，MS MQ等，需要根据具体的业务场景进行选择。建议可以研究下Rabbit MQ。</p>
+<p>6.8其他架构（技术）<br>除了以上介绍的业务拆分，应用集群，多级缓存，单点登录，数据库集群，服务化，消息队列外。还有CDN，反向代理，分布式文件系统，大数据处理等系统。</p>
+<p>此处不详细介绍，大家可以问度娘/Google，有机会的话也可以分享给大家。</p>
+<p>七、架构总结</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233056650.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>以上是本次分享的架构总结，其中细节可参考前面分享的内容。其中还有很多可以优化和细化的地方，因为是案例分享，主要针对重要部分做了介绍，工作中需要大家根据具体的业务场景进行架构设计。</p>
+<p>以上是电商网站架构案例的分享一共有三篇，从电商网站的需求，到单机架构，逐步演变为常用的，可供参考的分布式架构的原型。除具备功能需求外，还具备一定的高性能，高可用，可伸缩，可扩展等非功能质量需求（架构目标）。</p>
+<p>2.网站技术架构示例<br>最近我在阅读 2 本关于大型网站架构的书：《大型网站技术架构——核心原理与案例分析》李智慧、《大型网站系统与 Java 中间件实践》曾宪杰。</p>
+<p>　　我期望从这些书中学习到大型网站是如何做架构的，这个过程会遇到什么问题。当看完这 2 本书后，我总结出两个大问题：</p>
+<p>　　1. 网站技术架构为什么会演进？换个说法就是为什么网站会变大？</p>
+<p>　　2. 演进的过程会遇到什么问题？或者说为了演进，会遇到什么问题？</p>
+<p>　　网站技术架构为什么会演进</p>
+<p>　　我个人总结出来我们的技术架构演进的两种驱动力，驱动着我们为什么演进网站的技术架构：</p>
+<p>　　1. 内在驱动力：我们期望把当前的业务做得更好，开发更多新业务</p>
+<p>　　2. 外在驱动力：用户量的上升、用户种类的多样化</p>
+<p>　　这两种驱动力不是独立的，更多时候是并行的。我想淘宝就是两种驱动力并行驱动的结果。</p>
+<p>　　演进的原因很简单。但是在什么时机我们就应该演进网站的技术架构了，以及如何演进？面对这些问题，说实话，我没有任何经验，再说现实中每家企业当时都面临的问题都不一样，所以，我很难从经验中总结出什么是演进的时机。</p>
+<p>　　但是我可以从另一个角度切入这个问题：研究网站内外结构，找到这些结构可能出现的问题点，知道或者预见到问题点了，你当然就知道应该怎么演进了。类似于你了解了 PC 机的结构，你也就知道什么时候要加内存了，什么时候要加硬盘了。</p>
+<p>　　那么我们先看看网站的外部结构：</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233115180.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>　　外部结构中，我们可以看由以下几个部分构成：</p>
+<p>　　U：代表用户群。当用户群变了，我们的网站如何演进？用户群的分析，我目前能知道的维度有：数量，种类，地理位置（区域）。</p>
+<p>　　N：代表网络环境。网络环境在每个地区都不同。你可以想像我们为什么需要 CDN。当我们期望每个区域的用户都能得到好的体验，我们的网站如何演进？</p>
+<p>　　S：代表安全。就是我们要安全到什么程度？这与网站当前所处阶段及你网站的性质有关。</p>
+<p>　　C：代表我们的网站。属于内部结构</p>
+<p>　　网站的内部结构：</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233126266.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　内部结构的组成：</p>
+<p>　　A：应用服务。</p>
+<p>　　D：数据服务</p>
+<p>　　总结下来就是我们在考虑网站是否应该演进了或者如何演进时，这些组成部分为我们提供了考虑问题的基准。</p>
+<p>　　那么我们为什么不一开始就把网站设计成“大型”的。李智慧在后记里写到：“不要企图去设计一个大型网站”，“原因是互联网发展运行有其自己的规律，短暂的互联网历史已经一再证明这种企图行不通”。还说了：“大型网站不是设计出来的，而是逐步演化出来的”。对于最后这句话，我需要提醒下：“不是设计出来的”并不代表“随意设计”。</p>
+<p>　　对于“大型网站的设计”，我个人的看法是现在我们的有“云”了，计算是可以买的，只要我们的设计能适应“云”，我是不是就可以一开始就设计大型网站了？</p>
+<p>　　演进的过程会遇到什么问题</p>
+<p>　　- 最初</p>
+<p>　　从一个小网站说起。一台服务器也就足够了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233143429.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>　　- 数据服务与应用服务分离</p>
+<p>　　越来越多的用户代表着越来越多的数据，一台服务器已经满足不了。我们将数据服务和应用服务分离，给应用服务器配置更好的 CPU，内存。而给数据服务器配置更好更大的硬盘。</p>
+<p><img src="https://img-blog.csdnimg.cn/2019122323315249.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>　　- 使用缓存</p>
+<p>　　因为 80% 的业务访问都集中在 20% 的数据上，如果我们能将这部分数据缓存下来，性能一下子就上来了。而缓存又分为两种：本地缓存和远程分布式缓存。具体使用哪种？还是两种都用，我目前不知道。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233331869.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　这里有一个问题，书没有提到：应该缓存哪些数据？应该有一些原则的吧。</p>
+<p>　　- 使用服务器集群</p>
+<p>　　当这台服务器的处理能力达到上限时，它就会成为瓶颈。虽然你是可以通过购买更强大的硬件，但总会有上限。这时，我们就需要服务器的集群。这时，就必须加个新东西：负载均衡调度服务器。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233342938.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">　　但是，使用服务器集群时，需要考虑一个问题：Session 的管理问题。Session 的管理有以下几种方式：</p>
+<p>　　Session Sticky：打个比方就是如果我们每次吃饭都要保证我们用的是自己的碗筷，而只要我们在一家饭店里存着我们的碗筷，只要我们每次去这家饭店吃饭就好了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233649852.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>　　这种方式的问题：</p>
+<p>　　1. 一台服务器重启，上面的 session 都没了</p>
+<p>　　2. 负载均衡器成了有状态的机器，要实现容灾会有麻烦</p>
+<p>　　Session 复制：就像我们在所有的饭店里都存一份自己的碗筷。不适合做大规模集群，适合机器不多的情况<br><img src="https://img-blog.csdnimg.cn/20191223233702523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>　　这种方案的问题：</p>
+<p>　　1. 应用服务器间带宽问题</p>
+<p>　　2. 大量用户在线时，占用内存过多</p>
+<p>　　基于 Cookie：类似于每次吃饭都把自己的碗筷带上</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233713556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>　　这种方案的问题：</p>
+<p>　　1. Cookie 的长度限制</p>
+<p>　　2. 安全性</p>
+<p>　　3. 数据中心外部带宽的消耗</p>
+<p>　　4. 性能影响，服务器处理每次的请求的内容又多了</p>
+<p>　　Session 服务器：同样可以是集群的。这种方式适用于 session 数量及 web 服务器数量大的情况</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233721691.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　这种方案需要考虑的是：</p>
+<p>　　1. 保证 session 服务器的可用性</p>
+<p>　　2. 我们在写应用时需要做调整，我目前不知道应用服务器能否将这部分逻辑透明化</p>
+<p>　　- 数据库读写分离</p>
+<p>　　数据库的一部分读（未缓存、缓存过期）及所有的写操作都还需要经过数据库。当用户量达到一定量，数据库将会成为瓶颈。这边我们使用数据库提供的热备功能，将所有的读操作引入 slave 服务器。注意：读写分离解决的是读压力大的问题。<br><img src="https://img-blog.csdnimg.cn/20191223233735211.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>　　因为数据库的读写分离了，所以，我们的应用程序也得做相应的变化。我们实现一个数据访问模块使上层写代码的人不知道读写分离的存在。这里，我很想知道如果我使用 ORM 模型时，如何实现读写的分离？</p>
+<p>　　数据库读写分离会遇到如下问题：</p>
+<p>数据复制问题： 考虑时延、数据库的支持、复制条件支持。不要忘了，分机房后，这个更是问题。<br>应用对于数据源的路由问题<br>　　- 使用反向代理和 CDN 加速网站响应</p>
+<p>　　使用 CDN 可以很好的解决不同的地区的访问速度问题，反向代理则在服务器机房中缓存用户资源：</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233747708.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　- 使用分布式文件系统</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233755114.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　- 数据库专库专用：数据垂直拆分。</p>
+<p>　　这样可以解决部分数据写的问题</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233928202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>　　垂直拆分数据库时，会遇到的问题：</p>
+<p>跨业务的事务<br>应用的配置项多了<br>　　关于事务的问题，有两种办法：</p>
+<p>使用分布式事务<br>去掉事务或不追求强事务<br>　　- 某个业务的数据表的数据量或者更新量达到了单个数据库的瓶颈：数据水平拆分</p>
+<p>　　将同一个表的数据拆分到两个数据库中</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233937572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>　　数据水平拆分会遇到的问题：</p>
+<p>SQL 的路由问题，需要知道某个 User 在哪个数据库上。<br>主键的策略会有不同。<br>查询时的性能问题，如分页问题</p>
+<p>使用搜索引擎：解决数据查询问题<br>部分场景可使用 NoSQL 提高性能<br>开发数据统一访问模块：解决上层应用开发的数据源问题<br><img src="https://img-blog.csdnimg.cn/20191223233948981.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>　　- 业务拆分及应用拆分</p>
+<p>　　网站的业务日益复杂，建立一个独立的大型应用来完成这所有的业务变得不实际。从管理角度来，也不方便管理。然而，业务的拆分很难找到一种通用的模式，这是一个企业管理问题和技术问题的混合问题。同时和每个企业的具体情况有关。</p>
+<p>　　但是从这两本书来看，最终架构都走向服务化，也就是 SOA。而如何实现 SOA，是另一个很大的话题，不是本篇文章的范畴。</p>
+<p>　　我从程立 08 年的演讲中截个图来说明 SOA 后的架构大概是怎样的：</p>
+<p><img src="https://img-blog.csdnimg.cn/20191223233958822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　- 非功能性问题</p>
+<p>　　   – 安全性问题、监控问题</p>
+<p>　　– 发布问题：新的架构意味着新的发布方式</p>
+<p>　　– 分机房</p>
+<p>　– 这两本书都没有说分机房的问题。我没有经验，可是也可以猜到如果要分机房了，所有上面的问题都可能要重新考虑。</p>
+<p>　　– 组织架构的变化 </p>
+<p>　　我们的技术架构的变化，势必会引起我们的组织架构的变化，反之亦然。</p>
+<p>　　这部分看似不应该由我们来管，但是，我觉得，我们技术人员也要参与一部分的组织架构的设计。举个例子，组织架构的设计会涉及绩效，而绩效有时很像一个国家的法律。如果一个国家的法律不健全，会发生什么？你懂的。</p>
+<p>　　同时，我们还必须考虑人员对新架构的学习成本。</p>
+<p>　　这部分我目前在看相关的书籍，还没有一个系统的认识。</p>
+<p>　　总结：</p>
+<p>　　- 关于演进的顺序</p>
+<p>　　在现实中，技术架构的演进不一定就是按文章从头到尾这样列下来的，所以，要视具体情况来下决定。</p>
+<p>　　- 关于传统演进与现代有“云”环境下的演进</p>
+<p>　　很可惜，只有李智慧谈到云，而且只点了一下——“现在越来越多人的网站从建立之初就是搭建在大型网站提供的云计算服务基础之上，所需的一切资源：计算、存储、网络都可以按需购买线性伸缩，不需要自己一点一点地拼凑各种资源，综合使用各种技术方案逐步去完善自己的网站架构”。</p>
+<p>　　因为我用“云”的时间也不长，还不能总结出有云架构与传统的无云架构在演进的时候有什么不同。</p>
+<p>　　说回传统的架构演进，我自己总结和思考的结果是：</p>
+<p>　　在对网站进行架构调整时，可以从两大的维度考虑：数据服务和应用服务。而这个调整的过程中，需要分清当前哪个点是瓶颈，需要知道哪个点优化的优先级最高。同时，最重要的一点：我们虽然作为技术人员，也应该去学习业务知识，这样我们在考虑问题时分清哪些是业务问题，哪些是技术问题，分清后才能对症下药。你要知道有些问题用技术手段并不比用业务手段更有效。12306 的分时卖票就是一个典型例子。</p>
+<p>来源： <a href="http://blog.csdn.net/he90227/article/details/50800546" target="_blank" rel="noopener">http://blog.csdn.net/he90227/article/details/50800546</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 chaofa_vip@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>大型网站电商网站架构案例和技术架构的示例</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">6.7k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Hechaofa">Hechaofa</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-11-02, 10:09:47</p>
+    <p><span class="copy-title">最后更新:</span>2019-12-23, 23:41:58</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/02/jiagou/shop/" title="大型网站电商网站架构案例和技术架构的示例">https://chaofavip.github.io/2019/11/02/jiagou/shop/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2020 Hechaofa</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#alipay','#ext','#php','#redis','#docker','#监控','#jq','#架构','#laravel','#composer','#git','#Linux','#Ubuntu','#mysql','#ajax','#正则','#算法','#面试','#mac','#tool','#vim','#压测','#bogon','#host','#linux',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

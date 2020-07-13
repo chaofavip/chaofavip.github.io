@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>基础面试js</title>
+      <link href="/2020/07/13/web/mianshi01/"/>
+      <url>/2020/07/13/web/mianshi01/</url>
+      
+        <content type="html"><![CDATA[<h2 id="说说Js的数据类型都有哪些"><a href="#说说Js的数据类型都有哪些" class="headerlink" title="说说Js的数据类型都有哪些"></a>说说Js的数据类型都有哪些</h2><p>说说Js的数据类型都有哪些<br>基本类型</p><p>String<br>Number<br>Boolean<br>null<br>undefined<br>symbol</p><p>引用类型</p><p>object</p><h2 id="说说Http状态码"><a href="#说说Http状态码" class="headerlink" title="说说Http状态码"></a>说说Http状态码</h2><p>1** 信息，服务器收到请求，需要请求者继续执行操作(101，升级为websocket协议)<br>2** 成功，操作被成功接收并处理(206,部分内容，分段传输)<br>3** 重定向，需要进一步操作以完成请求(301,302重定向；304命中缓存)<br>4** 客户端错误，请求包含语法错误或无法完成请求(401,要求身份验证；403，服务器理解客服端需求，但是禁止访问)<br>5** 服务器错误，服务器在处理请求的过程中发生了错误</p><p>说说ajax状态码，ajax一定是异步的吗？<br>ajax不一定是异步的，可以通过open方法的第三个参数来配置(默认为true，异步)<br>状态码：</p><p>0 - (未初始化)还没有调用send()方法<br>1 - (载入)已调用send()方法，正在发送请求<br>2 - (载入完成)send()方法执行完成<br>3 - (交互)正在解析响应内容<br>4 - (完成)响应内容解析完成，可以在客户端调用了</p><h2 id="说说ajax是什么？优势？劣势？应该注意的问题？"><a href="#说说ajax是什么？优势？劣势？应该注意的问题？" class="headerlink" title="说说ajax是什么？优势？劣势？应该注意的问题？"></a>说说ajax是什么？优势？劣势？应该注意的问题？</h2><p>ajax是一种和后台通信的标准。全称是Asynchronous Javascript And XML(异步javascript和XML)。<br>优势：</p><p>无需刷新页面请求数据，可以使产品更快、更小、更友好<br>可以把以前服务端的任务转嫁到客户端来处理，减轻服务器负担，节省带宽<br>浏览器支持好，无需插件</p><p>劣势：</p><p>不支持浏览器的回退按钮<br>安全性存在问题，能够在用户不知情的情况下发送请求<br>暴露了http交互细节<br>对搜索引擎(网络爬虫)的支持比较弱<br>程序不容易调试</p><p>注意的问题：</p><p>浏览器兼容性问题，这个问题jQuery等库已经帮我们封装好了<br>跨域问题，不同域之间不允许通过ajax进行访问，可以参考阮一峰老师的跨域资源共享 CORS 详解<br>为了更快的速度和对搜索引擎友好，首页尽量不要用ajax而是服务端渲染(当然这看分场景)<br>ajax适合增删改查操作</p><p>你把下面的表达式的打印结果写出来<br>1.toString()  //Uncaught SyntaxError: Invalid or unexpected token<br>true.toString()  //“true”<br>[].toString()  //“”<br>{}.toString()  //Uncaught SyntaxError: Unexpected token .<br>null.toString()  //Uncaught TypeError: Cannot read property ‘toString’ of null<br>undefined.toString()  //Uncaught TypeError: Cannot read property ‘toString’ of undefined<br>NaN.toString()   //“NaN”<br>复制代码这些需要刻意背一下，其中1和{}是语法错误。null和undefined是因为没有toString方法,可以使用call来借用(想详细了解，可以到评论区看我如何被骂的)：<br>1..toString()   //“1”<br>(1).toString()  //“1”<br>Number(1).toString()  //“1”<br>({}).toString()  //[object Object]<br>Object.prototype.toString.call(null)   //[object Null]<br>Object.prototype.toString.call(undefined)   //[object Undefined]<br>复制代码</p><h2 id="前端性能优化你了解哪些"><a href="#前端性能优化你了解哪些" class="headerlink" title="前端性能优化你了解哪些"></a>前端性能优化你了解哪些</h2><p>内容层面</p><p>使用CDN<br>单域名、多域名，单域名可以减少DNS查找次数，多域名可以增加浏览器并行下载数量，这需要权衡，一般同一个域下不要超过四个资源。<br>避免重定向(分场景)<br>避免404</p><p>网络层面</p><p>利用缓存，可以参考另一篇文章手写文件服务器，说说前后端交互<br>文件压缩(通过响应头Accept-Encoding: gzip, deflate, br告诉服务器你支持的压缩类型)<br>按需加载，提取公共代码，tree-shaking等(都可以通过webpack来实现)<br>减少cookie大小<br>文件合并，通过css雪碧图合并图片<br>文件预加载、图片懒加载</p><p>渲染层间</p><p>js放底部，css放顶部<br>减少reflow(回流)和repaint(重绘)<br>减少dom节点</p><p>代码层面</p><p>缓存dom节点，减少节点查找，css选择器层级优化<br>减少dom节点操作<br>合理使用break、continue、return等，优化循环<br>像react用到的事件委托、对象池等手段</p><h2 id="说说浏览器的reflow和repaint"><a href="#说说浏览器的reflow和repaint" class="headerlink" title="说说浏览器的reflow和repaint"></a>说说浏览器的reflow和repaint</h2><p>浏览器解析过程</p><p>解析html生成dom树<br>解析css<br>把css应用于dom树，生成render树(这里记录这每一个节点和它的样式和所在的位置)<br>把render树渲染到页面</p><p>reflow(回流)<br>reflow翻译为回流，指的是页面再次构建render树。每个页面至少发生一次回流，就是第一次加载页面的时候<br>此外，当页面中有任何改变可能造成文档结构发生改变(即元素间的相对或绝对位置改变)，都会发生reflow，常见的有：</p><p>添加或删除元素(opacity:0除外，它不是删除)<br>改变某个元素的尺寸或位置<br>浏览器窗口改变(resize事件触发)</p><p>repaint(重绘)<br>repaint翻译为重绘，它可以类比为上面的第四步，根据render树绘制页面，它的性能损耗比回流要小。每次回流一定会发生重绘。此外，以下操作(不影响文档结构的操作，影响结构的会发生回流)也会发生重绘：</p><p>元素的颜色、透明度改变<br>text-align等</p><p>浏览器优化<br>我们不太容易精确知道哪些操作具体会造成哪些元素回流，不同的浏览器都有不同的实现。但是确定是他们的的耗时是比较长的，因为涉及到大量的计算。<br>浏览器为了提升性能也对这个问题进行了优化。方案就是维护一个队列,把所有需要回流和重绘的操作都缓存起来，一段时间之后再统一执行。但是，有的时候我们需要获取一些位置属性，当我们一旦调用这些api的时候，浏览器不得不立即计算队列以保证提供的数据是准确的。例如以下操作：</p><p>offsetTop, offsetLeft, offsetWidth, offsetHeight<br>scrollTop/Left/Width/Height<br>clientTop/Left/Width/Height<br>width,height<br>getComputedStyle或者IE的currentStyle</p><p>注意问题</p><p>批量处理</p><p>使用DocumentFragment进行缓存，这样只引发一次回流<br>把频繁操作的元素先display：null，只引发两次回流<br>cloneNode和replaceChild，只引发两次回流</p><p>不要频繁更改style，而是更改class<br>避免频繁调用offsetTop等属性，在循环前把它缓存起来<br>绝对定位具有复杂动画的元素，否则会引起父元素和后续大量元素的频繁回流</p><h2 id="如何去除字符串首位空格？"><a href="#如何去除字符串首位空格？" class="headerlink" title="如何去除字符串首位空格？"></a>如何去除字符串首位空格？</h2><p>//es6<br>‘ ab ‘.trim()      //“ab”<br>//正则<br>‘ ab ‘.replace(/^\s<em>|\s</em>$/g,’’)  //“ab”<br>复制代码如何获取url中的查询字符串<br>function queryUrlParameter(str) {<br>    let obj = {}<br>    let reg = /([^?=&amp;#]+)=([^?=&amp;#]+)/g;<br>    str.replace(reg, function () {<br>        obj[arguments[1]] = arguments[2]<br>    })<br>    //如果加上hash<br>    // reg = /#([^?&amp;=#]+)/g<br>    // if (reg.test(str)) {<br>    //     str.replace(reg, function () {<br>    //         obj.hash = arguments[1]<br>    //     })<br>    // }<br>    return obj<br>}<br>console.log(queryUrlParameter(‘<a href="http://www.baidu.com?a=1&amp;b=2#12222&#39;" target="_blank" rel="noopener">http://www.baidu.com?a=1&amp;b=2#12222&#39;</a>))  //{ a: ‘1’, b: ‘2’}<br>复制代码如何实现一个深拷贝、深比较<br>深拷贝<br>function clone(obj) {<br>  if (obj == null || typeof obj !== ‘object’) return obj</p><p>  let newObj = null</p><p>  // 时间对象有特殊性<br>  if (obj.constructor === Date) {<br>    newObj = new obj.constructor(obj)<br>  } else {<br>    newObj = obj.constructor()<br>  }</p><p>  for (let key in Object.getOwnPropertyDescriptors(obj)) {<br>    newObj[key] = clone(obj[key])<br>  }<br>  return newObj<br>}<br>复制代码深比较<br>function deepCompare(a, b){<br>  if(a === null<br>    || typeof a !== ‘object’<br>    || b === null<br>    || typeof b !== ‘object’){<br>    return a === b<br>  }</p><p>  const propsA = Object.getOwnPropertyDescriptors(a)<br>  const propsB = Object.getOwnPropertyDescriptors(b)<br>  if(Object.keys(propsA).length !== Object.keys(propsB).length){<br>    return false<br>  }</p><p>  return Object.keys(propsA).every( key =&gt; deepCompare(a[key], b[key]))</p><p>}</p><p>复制代码如何实现函数节流和防抖<br>节流<br>function throttle(fn, delay) {<br>  delay = delay || 50<br>  let statTime = 0<br>  return function () {<br>    statTime === 0 &amp;&amp; fn.apply(this, arguments)<br>    let currentTime = new Date()<br>    if (currentTime - statTime &gt; delay) {<br>      fn.apply(this, arguments)<br>      statTime = currentTime<br>    }<br>  }<br>}</p><p>let throttleFn = throttle(fn)</p><p>throttleFn()//只会执行一次<br>throttleFn()<br>throttleFn()<br>throttleFn()<br>复制代码防抖<br>function debounce(fn, delay) {<br>  delay = delay || 50<br>  let timer = null<br>  return function () {<br>    let self = this<br>    clearTimeout(timer)<br>    timer = setTimeout(fn.bind(self, arguments), delay);<br>  }<br>}<br>复制代码你给我写一个原生bind方法<br>Function.prototype._bind = function (context) {<br>  let self = this<br>  let args_1 = [].prototype.slice.call(arguments, 1)<br>  return function () {<br>    let args_2 = [].prototype.slice.call(arguments)<br>    let args = args_1.concat(args_2)<br>    return self.apply(context, args)<br>  }<br>}<br>复制代码这只是对bind的一种简单实现，如果有兴趣了解更多可以参考Javascript中bind()方法的使用与实现<br>如何实现一个数组的展平<br>function (ary) {<br>    return ary.toString().split(‘,’)<br>}<br>复制代码这是一个投机取巧的方法(面试写个这个也凑合吧)，如果有兴趣可以搜索一下其他实现方法</p><h2 id="如何添加、删除、移动、复制DOM节点"><a href="#如何添加、删除、移动、复制DOM节点" class="headerlink" title="如何添加、删除、移动、复制DOM节点"></a>如何添加、删除、移动、复制DOM节点</h2><p>创建</p><p>createTextNode() //创建文本节点<br>createElement() //创建元素节点<br>createDocumentFragment()  //创建文档碎片</p><p>操作</p><p>appendChild()  //增加<br>removeChild()  //删除<br>replaceChild()  //替换<br>insertBefore()  //插入</p><p>查找</p><p>getElementById()<br>getElementByTagName()<br>getElementByName()</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MacBook 终端中的bogon的解决办法</title>
+      <link href="/2020/03/10/tool/Mac/bogon/"/>
+      <url>/2020/03/10/tool/Mac/bogon/</url>
+      
+        <content type="html"><![CDATA[<p>打开终端，输入：</p><p>sudo hostname your-desired-host-name即可</p><p>例如：想把主机bogon改回，ABC，那么就可以输入：<br>sudo hostname ABC<br>之后可以用hostname指令查看当前的主机名<br>sudo hostname<br>重启终端即可看见修改后的结果</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mac </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bogon </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>监控认知了解</title>
+      <link href="/2020/01/03/jiankong/liaojie/"/>
+      <url>/2020/01/03/jiankong/liaojie/</url>
+      
+        <content type="html"><![CDATA[<p>从研发角度切入，来分析监控系统。</p><ol><li><p>业务层：监控系统需要关注业务指标，如下单量，大众点评、品购买指标、实时业务，注册成功率等。</p></li><li><p>应用层：</p></li></ol><p>（1）端监控，如：河北地区APP无法打开，需要通过端采集数据上报，查找原因；</p><p>（2）链路层监控（APM监控），如：唯品会跟踪订单的完整交易流程，或是完整调用链路，查找异常；</p><p>（3）日志监控，通过回溯旧日志，浏览TLF等，发现异常。</p><ol start="3"><li>系统层：关注网络、AOC、CDN的质量，关注中间件、数据库的问题等</li></ol><p>监控类别：<br>监控入口类别：</p><ol><li>大盘</li></ol><p>变更：大部分故障是由于变更（发布、修改配置、版本更新）引起的，大盘是看到整个变更的试件，做出变更防御进行动作收集。<br>当前报警：异常治疗<br>失败率<br>全链路<br>2. 前段：通过提供端，进行服务的服务质量监控；</p><ol start="3"><li><p>异常：对失败率、异常汇总统计入口；</p></li><li><p>业务：投稿成功率等这类指标；</p></li><li><p>链路：方便查询特定业务链路情况；</p></li><li><p>系统： 核心网络、CDN、IDC等；</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 监控 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 监控 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>对接支付宝</title>
+      <link href="/2020/01/03/alipay/peizhi/"/>
+      <url>/2020/01/03/alipay/peizhi/</url>
+      
+        <content type="html"><![CDATA[<h2 id="支付宝公私密钥配置"><a href="#支付宝公私密钥配置" class="headerlink" title="支付宝公私密钥配置"></a>支付宝公私密钥配置</h2><p>开发者模式中，进入》商家中心平台查看appidKey》开发者配置key<br>1、利用支付宝官方提供的支付宝开发者助手生成应用公钥和私钥（注意私钥要保存好，避免对接时候用到）<br>2、开发中是支付宝公钥对应支付宝私钥关系</p><h2 id="开发管理平台接入支付应用"><a href="#开发管理平台接入支付应用" class="headerlink" title="开发管理平台接入支付应用"></a>开发管理平台接入支付应用</h2><p>签约产品注意</p><h3 id="一、APP支付"><a href="#一、APP支付" class="headerlink" title="一、APP支付"></a>一、APP支付</h3><pre><code>1. 需拥有实名认证的支付宝账户，方可申请接入；2. 需提供真实有效的营业执照，营业执照主体需与支付宝账户名称一致；3. 如应用开发者与支付宝账户名称不一致，需提供开发合作协议；4. 已上架应用，需提供应用名称和下载链接；未上架应用，则需提供demo或产品说明文档；</code></pre><h3 id="二、手机网站支付"><a href="#二、手机网站支付" class="headerlink" title="二、手机网站支付"></a>二、手机网站支付</h3><pre><code>1. 需拥有实名认证的支付宝账户，方可申请接入；2. 需提供真实有效的营业执照，营业执照主体需与支付宝账户名称一致；3. 网站能正常访问，而且页面显示完整、经营内容明确、商品信息完备； 4.网站必须通过ICP备案，且备案主体需与支付宝账户主体一致； 温馨提示：团购类网站不支持个体商家签约</code></pre><h3 id="三、电脑网站支付"><a href="#三、电脑网站支付" class="headerlink" title="三、电脑网站支付"></a>三、电脑网站支付</h3><pre><code>1. 需拥有实名认证的支付宝账户，方可申请接入；2. 需提供真实有效的营业执照，营业执照主体需与支付宝账户名称一致；3. 网站能正常访问，而且页面显示完整、经营内容明确、商品信息完备，条件如下：    1）有已建设完成的网站（非淘宝.天猫.阿里巴巴网店）    2）网站必须能正常访问有正式的产品内容（真实有效产品发布5-10件，论坛网站要求有不同会员发布的主题帖10-15）    3）网站页面必须中文页面，人民币标价，可以让买家点击到可以购买的页面4.网站必须通过ICP备案，且备案主体需与支付宝账户主体一致；温馨提示：团购类网站不支持个体商家签约</code></pre><h3 id="四、-单个服务开通时间："><a href="#四、-单个服务开通时间：" class="headerlink" title="四、 单个服务开通时间："></a>四、 单个服务开通时间：</h3><pre><code>服务开通约1个工作日</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 支付 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> alipay </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mac切换PHP版本</title>
+      <link href="/2019/12/29/docker/php/"/>
+      <url>/2019/12/29/docker/php/</url>
+      
+        <content type="html"><![CDATA[<p>前言：很多开发者一般使用Mac电脑办公比较多，比如一个PHP开发者往往很需要PHP环境的搭载变成，如果我不想用默认的PHP版本，Mac下怎么方便操作使用呢？</p><p>这里准备的工具：brew</p><p>1、检查PHP版本<br>php  -v<br>2、安装PHP7.2版本<br>brew install php72<br>3、定义环境变量<br>vim  ~/.zshrc<br>export PATH=”/usr/local/opt/php@7.2/bin:$PATH”<br>source  ~/.zshrc<br>4、服务启动<br>cd /usr/local/opt/php@7.2/sbin<br>php-fpm -y /usr/local/etc/php/7.2/php-fpm.conf<br>brew services start <a href="mailto:php@7.2">php@7.2</a><br>5、服务检查<br>php  -v<br>6、完成</p><p>常用操作命令：<br>$ brew –help #简洁命令帮助<br>$ man brew #完整命令帮助<br>$ brew install git #安装软件包(这里是示例安装的Git版本控制)<br>$ brew uninstall git #卸载软件包<br>$ brew search git #搜索软件包<br>$ brew list #显示已经安装的所有软件包<br>$ brew update #同步远程最新更新情况，对本机已经安装并有更新的软件用*标明<br>$ brew outdated #查看已安装的哪些软件包需要更新<br>$ brew upgrade git #更新单个软件包<br>$ brew info git #查看软件包信息<br>$ brew home git #访问软件包官方站<br>$ brew cleanup #清理所有已安装软件包的历史老版本<br>$ brew cleanup git #清理单个已安装软件包的历史版本</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mac </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>10个实用的PHP正则表达式</title>
+      <link href="/2019/12/22/php/zhengze/"/>
+      <url>/2019/12/22/php/zhengze/</url>
+      
+        <content type="html"><![CDATA[<ol><li>验证E-mail地址</li></ol><p>这是一个用于验证电子邮件的正则表达式。但它并不是高效、完美的解决方案。在此不推荐使用。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$email &#x3D; &quot;test@ansoncheung.tk&quot;;</span><br><span class="line">if </span><br><span class="line">(preg_match(&#39;&#x2F;^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]&#123;2,4&#125;$&#x2F;&#39;,$email)) </span><br><span class="line">&#123;</span><br><span class="line">echo &quot;Your email is ok.&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo &quot;Wrong email address format&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>为了更加有效验证电子邮件地址，推荐使用filer_var。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (filter_var(&#39;test+email@ansoncheung&#39;, FILTER_VALIDATE_EMAIL)) &#123;</span><br><span class="line">echo &quot;Your email is ok.&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo &quot;Wrong email address format.&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol start="2"><li>验证用户名</li></ol><p>这是一个用于验证用户名的实例，其中包括字母、数字(A-Z，a-z，0-9)、下划线以及最低5个字符，最大20个字符。同时，也可以根据需要，对最小值和最大值做合理的修改。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$username &#x3D; &quot;user_name12&quot;;</span><br><span class="line">if (preg_match(&#39;&#x2F;^[a-z\d_]&#123;5,20&#125;$&#x2F;i&#39;, $username)) &#123;</span><br><span class="line">echo &quot;Your username is ok.&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo &quot;Wrong username format.&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol start="3"><li>验证电话号码</li></ol><p>这是一个验证美国电话号码的实例。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$phone &#x3D; &quot;(021)423-2323&quot;;</span><br><span class="line">if (preg_match(&#39;&#x2F;\(?\d&#123;3&#125;\)?[-\s.]?\d&#123;3&#125;[-\s.]\d&#123;4&#125;&#x2F;x&#39;, $phone)) &#123;</span><br><span class="line">echo &quot;Your phone number is ok.&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo &quot;Wrong phone number.&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol start="4"><li>验证IP地址</li></ol><p>这是一个用来验证IPv4地址的实例。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$IP &#x3D; &quot;198.168.1.78&quot;;</span><br><span class="line">if </span><br><span class="line">(preg_match(&#39;&#x2F;^(([1-9]?[0-9]|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5]).)&#123;3&#125;([1-9]?[0-9]|1[0-9]&#123;2&#125;|2[0-4][0-9]|25[0-5])$&#x2F;&#39;,$IP)) </span><br><span class="line">&#123;</span><br><span class="line">echo &quot;Your IP address is ok.&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo &quot;Wrong IP address.&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol start="5"><li>验证邮政编码</li></ol><p>这是一个用来验证邮政编码的实例。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$zipcode &#x3D; &quot;12345-5434&quot;;</span><br><span class="line">if (preg_match(&quot;&#x2F;^([0-9]&#123;5&#125;)(-[0-9]&#123;4&#125;)?$&#x2F;i&quot;,$zipcode)) &#123;</span><br><span class="line">echo &quot;Your Zip code is ok.&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo &quot;Wrong Zip code.&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol start="6"><li>验证SSN(社会保险号)</li></ol><p>这是一个验证美国SSN的实例。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ssn &#x3D; &quot;333-23-2329&quot;;</span><br><span class="line">if (preg_match(&#39;&#x2F;^[\d]&#123;3&#125;-[\d]&#123;2&#125;-[\d]&#123;4&#125;$&#x2F;&#39;,$ssn)) &#123;</span><br><span class="line">echo &quot;Your SSN is ok.&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo &quot;Wrong SSN.&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol start="7"><li>验证信用卡号<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$cc &#x3D; &quot;378282246310005&quot;;</span><br><span class="line">if </span><br><span class="line">(preg_match(&#39;&#x2F;^(?:4[0-9]&#123;12&#125;(?:[0-9]&#123;3&#125;)?|5[1-5][0-9]&#123;14&#125;|6011[0-9]&#123;12&#125;|3(?:0[0-5]|[68][0-9])[0-9]&#123;11&#125;|3[47][0-9]&#123;13&#125;)$&#x2F;&#39;, </span><br><span class="line">$cc)) &#123;</span><br><span class="line">echo &quot;Your credit card number is ok.&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo &quot;Wrong credit card number.&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>验证域名<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$url &#x3D; &quot;http:&#x2F;&#x2F;ansoncheung.tk&#x2F;&quot;;</span><br><span class="line">if </span><br><span class="line">(preg_match(&#39;&#x2F;^(http|https|ftp):\&#x2F;\&#x2F;([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\&#x2F;?&#x2F;i&#39;, </span><br><span class="line">$url)) &#123;</span><br><span class="line">echo &quot;Your url is ok.&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo &quot;Wrong url.&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>从特定URL中提取域名<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$url &#x3D; &quot;http:&#x2F;&#x2F;ansoncheung.tk&#x2F;articles&quot;;</span><br><span class="line">preg_match(&#39;@^(?:http:&#x2F;&#x2F;)?([^&#x2F;]+)@i&#39;, $url, $matches);</span><br><span class="line">$host &#x3D; $matches[1];</span><br><span class="line">echo $host;</span><br></pre></td></tr></table></figure></li><li>将文中关键词高亮显示<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$text &#x3D; &quot;Sample sentence from AnsonCheung.tk, regular expression has become </span><br><span class="line">popular in web programming. Now we learn regex. According to wikipedia, Regular </span><br><span class="line">expressions (abbreviated as regex or regexp, with plural forms regexes, regexps, </span><br><span class="line">or regexen) are written in a formal language that can be interpreted by a </span><br><span class="line">regular expression processor&quot;;</span><br><span class="line">$text &#x3D; preg_replace(&quot;&#x2F;\b(regex)\b&#x2F;i&quot;, &#39;\1&#39;, $text);</span><br><span class="line">echo $text;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 正则 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>php常用函数</title>
+      <link href="/2019/12/22/php/hanshu/"/>
+      <url>/2019/12/22/php/hanshu/</url>
+      
+        <content type="html"><![CDATA[<p>前言，PHP开发过程中，会使用各种各样的函数，下面大概整理一些，可以学习参考；<br><strong>一、写入文件</strong><br>1.打开资源（文件）fopen($filename,$mode)<br>2.写文件fwrite($handle,$str)<br>3.关闭文件fclose($handle)<br>4.一步写入file_put_contents($filename,$str,$mode) FILE_APPEND LOCK_EX<br>}</p><p><strong>二、读文件</strong><br>1.读文件fread($handle,字节数)<br>2.读一行fgets($handle);<br>3.读一个字符fgetc($handle)<br>4.读成一个数组中file($filename)<br>5.一步读取file_get_contents($filename)</p><p><strong>三、 目录操作</strong><br>1，建目录mkdir($dirname)<br>2，删除目录rmdir($dirname)<br>3，打开目录句柄opendir($dirname)<br>4，读取目录条数readdir($handle)<br>5，关闭目录资源closedir($handle)<br>6，重置目录资源rewinddir($dirname);</p><p><strong>四、目录和文件操作</strong><br>1， 检查文件或目录是否存在file_exists($filename)<br>2，文件或者目录重命名rename($file)</p><p><strong>五、 文件操作</strong><br>1拷贝文件copy(‘原文件’,’目标文件’)<br>2删除文件unlink($filename)<br>3获取文件大小filesize($filename)<br>4取得文件的创建时间filectime($filename)<br>5取得文件的访问时间fileatime($filename)<br>6取得文件的修改时间filemtime($filename)</p><p><strong>六、路径操作</strong><br>1获取路径dirname($path)<br>2获取文件名basename($path)<br>3获取路径信息pathinfo($path)</p><p><strong>七、数组函数（极其重要）</strong><br>1.在数组的开头插入一个元素array_unshift($arr,$v)<br>2.在数组的尾部添加数组元素array_push($arr,$v,$v1…)<br>3.将数组的第一个元素移出，并返回此元素array_shift($arr)<br>4.在数组的尾部删除元素array_pop($arr)<br>5.将数组用$separator连接成一个字符串implode($a,$arr)<br>6.检测变量是否是数组is_array($arr)<br>7.获得数组的键名array_keys($arr)<br>8.获得数组的值array_values($arr)<br>9.检索$value是否在$arr中，返回布尔值in_array($v,$arr)<br>10.检索数组$arr中，是否有$key这个键名array_key_exists($k,$arr)<br>11.检索$value是否在$arr中，若存在返回键名Array_search($value, $arr)<br>12.将一个数组逆向排序，如果第二个参数为true，则保持键名Array_reverse($arr, true)<br>13.交换数组的键和值 Array_flip($arr)<br>14.统计数组元素的个数 Count($arr)<br>15.统计数组中所有值的出现次数 Array_count_values($arr)<br>16.移除数组中的重复值 Array_unique($arr)<br>17.值由小到大排序 Sort($arr)<br>18.值由大到小排序 Rsort($arr)<br>19.键由小到大排序 ksort($arr)<br>20.键由大到小排序 krsort($arr)<br>21.随机从数组中取得$num个元素 Array_rand($arr, $num)<br>22.对数组的所有元素求和Array_sum($arr)<br>23.合并数组 array_merge($arr,$arr)</p><p><strong>八、字符串函数（极其重要）</strong><br>1.输出字符串 echo($str) echo<br>2.原样输出（区分单引号和双引号） print($str)<br>3.输出字符串，结束脚本执行 Die($str):die($str) die;<br>4.输出字符串，结束脚本执行 exit($str) exit;<br>5.输出格式化字符串 printf($str,$p1,…)<br>6.不直接输出格式化的字符串，返回格式化的字符串，保存到变量中 sprintf($str,$p1,…)<br>7.打印变量的相关信息 var_dump($p)<br>8.字符串转换为小写 strtolower($str)<br>9.字符串转换为大写 strtoupper($str)<br>10.将字符串的第一个字符转换为大写 ucfirst($str)<br>11.将字符串中每个单词转换为大写 ucwords($str)<br>12.去除字符串两端的空白字符。 Trim($str,’ ,’)<br>13.去除字符串左边空白字符。 Ltrim($str)<br>14.去除字符串右边空白字符。Rtrim($str)<br>空白字符：””，”\t”，”\n”，”\r”，”\0”<br>15取得字符串长度 strlen($str)<br>16统计包含的字符串个数 substr_count($str,’子串’)<br>17返回字符串$string中由$start开始，长度为$length的子字符串<br>Substr($string ,$start[,$length])<br>18返回字符串$string中，$search第一次出现到字符串结束的子字符串。<br>Strstr($string,$search)<br>19查找$search在$str中第一次位的置，从$offset开始。<br>Strpos($str,$search[,int $offset])<br>20.查找$search在$str中最后一次的位置，从$offset开始<br>Strrpos($str,$search[,int $offset])<br>21.替换$str中的全部$search为 $replace。<br>Str_replace($search,$replace,$str)<br>22.重复输出指定的字符串<br>Str_repeat()<br>23.加密字符串<br>Md5()<br>24.字符串翻转<br>Strrev()<br>25.使用一个字符串分割另一个字符串,形成一个数组//把字符串变成数组<br>Explode(“分隔符”,$str);</p><p><em>备注：可以关注博客持续更新其他新技术：<a href="https://chaofavip.github.io">hechaofa</a></em></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PHP包管理器Composer与自动加载规范</title>
+      <link href="/2019/12/20/tool/composer/"/>
+      <url>/2019/12/20/tool/composer/</url>
+      
+        <content type="html"><![CDATA[<p>composer学习地址：<a href="http://docs.phpcomposer.com/0" target="_blank" rel="noopener">http://docs.phpcomposer.com/0</a>…</p><p>composer.json中的自动加载映射<br>目前PSR-0自动加载、PSR-4自动加载、classmap生成和files引入都是被支持的，PSR-4是首推的方法，因为它提供了更大的易用性。</p><p>PSR-4<br>PSR-4规范了如何指定文件路径从而自动加载类，同时规范了自动加载文件的位置。乍一看这是和PSR-0重复了，实际上，在功能上确实有一部分重复。区别在于，PSR-4的规范比较干净，去除了兼容PHP5.3以前版本的内容。<br>PSR-4和PSR-0最大的区别是对下划线的定义不同，PSR-4中，在类名中使用下划线是没有特殊含义的，而在PSR-0的规则中，下划线或被转化为目录分隔符</p><p>在PSR-4的键下，你可以定义命名空间和路径的映射关系，当自动加载类如Foo\Bar\Baz时，命名空间Foo指向一个名为src/的目录意味着自动加载器将查找名为src/Bar/Baz.php文件并引用它。</p><p>命名空间的前缀必须以\结尾，以避免类似前缀之间的冲突。在安装和更新期间，PSR-4引用全部组合到一个key=&gt;value数组中，该数组可以在生成的文件vendor/composer/autoload_psr4.php中找到。</p><p>例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;autoload&quot;: &#123;</span><br><span class="line">    &quot;psr-4&quot;: &#123;</span><br><span class="line">      &quot;App\\&quot;: &quot;App&#x2F;&quot; &#x2F;&#x2F; 命名空间App映射到目录App</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>classmap<br>classmap引用的所有组合，都会在安装、更新的过程中生成并存储到vendor/composer/autoload_classmap.php文件中。<br>你可以使用classmap生成支持自定义加载的不遵循PSR-4规范的类库，要配置它指向的目录，以便能够准确的搜索到类文件</p><p>例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;autoload&quot;: &#123;</span><br><span class="line">    &quot;classmap&quot;: [&quot;src&#x2F;&quot;, &quot;lib&#x2F;&quot;, &quot;Something.php&quot;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>Files<br>如果你想要明确指定，在每次请求时都要载入某些文件，那么你可以使用files字段加载。通常作为函数库的载入方式。</p><p>例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;autoload&quot;: &#123;</span><br><span class="line">    &quot;files&quot;: [&quot;src&#x2F;MyLibrary&#x2F;functions&quot;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> composer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>docker之安装redis扩展</title>
+      <link href="/2019/12/13/docker/redis/"/>
+      <url>/2019/12/13/docker/redis/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-先进入PHP容器，下载redis扩展包"><a href="#1-先进入PHP容器，下载redis扩展包" class="headerlink" title="1.先进入PHP容器，下载redis扩展包"></a>1.先进入PHP容器，下载redis扩展包</h3><p>1.先进入php容器<br>MacbookdeMacBook-Pro:~ macbookpro$ docker exec -it de0d227feed2 /bin/bash<br>2.下载包<br>root@de0d227feed2:/usr/src/php/ext# curl -L -o /tmp/redis.tar.gz<br><a href="https://github.com/phpredis/phpredis/archive/3.1.3.tar.gz" target="_blank" rel="noopener">https://github.com/phpredis/phpredis/archive/3.1.3.tar.gz</a><br>3.解压缩 并且移动到<br>cd /tmp<br>tar xfz /tmp/redis.tar.gz<br>mv phpredis-3.1.3 /usr/src/php/ext/redis</p><p>4.运行<br>root@de0d227feed2:/tmp# docker-php-ext-install redis<br>至此完成php扩展的安装</p><h3 id="2-下载redis容器"><a href="#2-下载redis容器" class="headerlink" title="2.下载redis容器"></a>2.下载redis容器</h3><p>1.拉取redis镜像<br>MacbookdeMacBook-Pro:~ macbookpro$ docker pull redis<br>2.运行<br>MacbookdeMacBook-Pro:~ macbookpro$ docker run –name change-redis -p 6379:6379 -d redis<br>3.查看容器ip<br>MacbookdeMacBook-Pro:~ macbookpro$ docker inspect change-redis</p><h3 id="3-PHP连接redis"><a href="#3-PHP连接redis" class="headerlink" title="3.PHP连接redis"></a>3.PHP连接redis</h3><p>&lt;?php<br>/**</p><ul><li>获取Redis版本</li><li>/<br>function getRedisVersion()<br>{<br>  if (extension_loaded(‘redis’)) {<pre><code>try {    $redis = new Redis();    // $redis-&gt;connect(&apos;redis&apos;, 6379);    $redis-&gt;connect(&apos;172.17.0.5&apos;, 6379);//这里的ip填写的是redis容器的ip    $info = $redis-&gt;info();    return $info[&apos;redis_version&apos;];} catch (Exception $e) {    return $e-&gt;getMessage();}</code></pre>  } else {<pre><code>return &apos;Redis 扩展未安装 ×&apos;;</code></pre>  }<br>}</li></ul><h3 id="4-运行查看"><a href="#4-运行查看" class="headerlink" title="4.运行查看"></a>4.运行查看</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> redis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>docker之安装扩展细说</title>
+      <link href="/2019/12/12/docker/kuozhan/"/>
+      <url>/2019/12/12/docker/kuozhan/</url>
+      
+        <content type="html"><![CDATA[<p>前言<br>此篇，主要是演示docker-php-source , docker-php-ext-install ,docker-php-enable-docker-configure 这四个命令到底是用来干嘛的，它们在PHP容器中都做了哪些事情。<br>很多人很不理解在Dockerfile中安装PHP扩展的时候总是出现这几个命令，本篇就就是为你揭开这些命令的神秘面纱而准备的，所有案例都是本人自己运行过的。</p><p>Docker 中的PHP容器安装扩展的方式有<br>通过pecl方式安装<br>通过php 容器中自带的几个特殊命令来安装，这些特殊命令可以在Dockerfile中的RUN命令中进行使用。<br>这里，我们主要讨论的是第二种方案，如何通过PHP容器中的几个特殊命令来安装PHP扩展</p><p>PHP中安装扩展有几个特殊的命令<br>docker-php-source<br>docker-php-ext-install<br>docker-php-ext-enable<br>docker-php-ext-configure<br>演示这三个命令的作用<br>都是在PHP容器中进行演示的，PHP容器启动太简单，不作过多介绍</p><p>docker-php-source<br>此命令，实际上就是在PHP容器中创建一个/usr/src/php的目录，里面放了一些自带的文件而已。我们就把它当作一个从互联网中下载下来的PHP扩展源码的存放目录即可。事实上，所有PHP扩展源码扩展存放的路径： /usr/src/php/ext 里面。</p><p>格式：</p><p>docker-php-source extract | delete<br>参数说明：</p><ul><li>extract : 创建并初始化 /usr/src/php目录</li><li>delete : 删除 /usr/src/php目录</li></ul><p>案例：</p><p>root@803cbcf702a4:/usr/src# ls -l<br>total 11896 #此时，并没有php目录<br>-rw-r–r– 1 root root 12176404 Jun 28 03:23 php.tar.xz<br>-rw-r–r– 1 root root      801 Jun 28 03:23 php.tar.xz.asc</p><p>root@803cbcf702a4:/usr/src# docker-php-source extract<br>root@803cbcf702a4:/usr/src# ls -l<br>total 11900 #此时，生产了php目录，里面还有一些文件，由于篇幅问题，就不进去查看了<br>drwxr-xr-x 14 root root     4096 Aug  9 09:01 php<br>-rw-r–r–  1 root root 12176404 Jun 28 03:23 php.tar.xz<br>-rw-r–r–  1 root root      801 Jun 28 03:23 php.tar.xz.asc</p><p>root@803cbcf702a4:/usr/src# docker-php-source delete<br>root@803cbcf702a4:/usr/src# ls -l<br>total 11896 #此时，将已创建 php 目录给删除了<br>-rw-r–r– 1 root root 12176404 Jun 28 03:23 php.tar.xz<br>-rw-r–r– 1 root root      801 Jun 28 03:23 php.tar.xz.asc</p><p>root@803cbcf702a4:/usr/src#<br>docker-php-ext-enable<br>这个命令，就是用来启动 PHP扩展 的。我们使用pecl安装PHP扩展的时候，默认是没有启动这个扩展的，如果想要使用这个扩展必须要在php.ini这个配置文件中去配置一下才能使用这个PHP扩展。而 docker-php-ext-enable 这个命令则是自动给我们来启动PHP扩展的，不需要你去php.ini这个配置文件中去配置。<br>案例</p><h1 id="查看现有可以启动的扩展"><a href="#查看现有可以启动的扩展" class="headerlink" title="查看现有可以启动的扩展"></a>查看现有可以启动的扩展</h1><p>root@517b9c67507a:/usr/local/etc/php# ls /usr/local/lib/php/extensions/no-debug-non-zts-20170718/<br>opcache.so  redis.so  sodium.so<br>root@517b9c67507a:/usr/local/etc/php#</p><h1 id="查看redis-扩展是否可以启动"><a href="#查看redis-扩展是否可以启动" class="headerlink" title="查看redis 扩展是否可以启动"></a>查看redis 扩展是否可以启动</h1><p>root@517b9c67507a:/usr/local/etc/php# php -m | grep redis<br>root@517b9c67507a:/usr/local/etc/php#</p><h1 id="启动-redis-扩展"><a href="#启动-redis-扩展" class="headerlink" title="启动 redis 扩展"></a>启动 redis 扩展</h1><p>root@517b9c67507a:/usr/local/etc/php# docker-php-ext-enable redis</p><h1 id="启动-成功"><a href="#启动-成功" class="headerlink" title="启动 成功"></a>启动 成功</h1><p>root@517b9c67507a:/usr/local/etc/php# php -m | grep redis<br>redis<br>root@517b9c67507a:/usr/local/etc/php#</p><p>#说明，php容器中默认是没有php.ini配置文件的,加载原理如下所示</p><p>root@517b9c67507a:/usr/local/etc/php# php -i | grep -A 5 php.ini<br>Configuration File (php.ini) Path =&gt; /usr/local/etc/php<br>Loaded Configuration File =&gt; (none)</p><h1 id="核心是-usr-local-etc-php-conf-d-目录下的扩展配置文件"><a href="#核心是-usr-local-etc-php-conf-d-目录下的扩展配置文件" class="headerlink" title="核心是 /usr/local/etc/php/conf.d 目录下的扩展配置文件"></a>核心是 /usr/local/etc/php/conf.d 目录下的扩展配置文件</h1><p>Scan this dir for additional .ini files =&gt; /usr/local/etc/php/conf.d<br>Additional .ini files parsed =&gt; /usr/local/etc/php/conf.d/docker-php-ext-redis.ini,<br>/usr/local/etc/php/conf.d/docker-php-ext-sodium.ini</p><p>root@517b9c67507a:/usr/local/etc/php#<br>docker-php-ext-install<br>这个命令，是用来安装并启动PHP扩展的。<br>命令格式：<br>docker-php-ext-install “源码包目录名”</p><p>注意点：</p><p>“源码包“需要放在 /usr/src/php/ext 下<br>默认情况下，PHP容器没有 /usr/src/php这个目录，需要使用 docker-php-source extract来生成。<br>docker-php-ext-install 安装的扩展在安装完成后，会自动调用docker-php-ext-enable来启动安装的扩展。<br>卸载扩展，直接删除/usr/local/etc/php/conf.d 对应的配置文件即可。<br>案例</p><h1 id="卸载redis-扩展"><a href="#卸载redis-扩展" class="headerlink" title="卸载redis 扩展"></a>卸载redis 扩展</h1><p>root@803cbcf702a4:/usr/local# rm -rf /usr/local/etc/php/conf.d/docker-php-ext-redis.ini<br>root@803cbcf702a4:/usr/local# php -m<br>[PHP Modules]<br>Core<br>ctype<br>curl<br>date<br>dom<br>fileinfo<br>filter<br>ftp<br>hash<br>iconv<br>json<br>libxml<br>mbstring<br>mysqlnd<br>openssl<br>pcre<br>PDO<br>pdo_sqlite<br>Phar<br>posix<br>readline<br>Reflection<br>session<br>SimpleXML<br>sodium<br>SPL<br>sqlite3<br>standard<br>tokenizer<br>xml<br>xmlreader<br>xmlwriter<br>zlib</p><p>[Zend Modules]</p><p>root@803cbcf702a4:/usr/local#</p><p>#PHP容器默认是没有redis扩展的。所以我们通过docker-php-ext-install安装redis扩展</p><p>root@803cbcf702a4:/# curl -L -o /tmp/reids.tar.gz <a href="https://codeload.github.com/phpredis/phpredis/tar.gz/5.0.2" target="_blank" rel="noopener">https://codeload.github.com/phpredis/phpredis/tar.gz/5.0.2</a></p><p>root@803cbcf702a4:/# cd /tmp<br>root@517b9c67507a:/tmp# tar -xzf reids.tar.gz<br>root@517b9c67507a:/tmp# ls<br>phpredis-5.0.2  reids.tar.gz<br>root@517b9c67507a:/tmp# docker-php-source extract<br>root@517b9c67507a:/tmp# mv phpredis-5.0.2 /usr/src/php/ext/phpredis</p><p>#检查移过去的插件源码包是否存在<br>root@517b9c67507a:/tmp# ls -l /usr/src/php/ext | grep redis<br>drwxrwxr-x  6 root root 4096 Jul 29 15:04 phpredis<br>root@517b9c67507a:/tmp# docker-php-ext-install phpredis</p><h1 id="检查redis-扩展是否已经安装上"><a href="#检查redis-扩展是否已经安装上" class="headerlink" title="检查redis 扩展是否已经安装上"></a>检查redis 扩展是否已经安装上</h1><p>root@517b9c67507a:/tmp# php -m | grep redis<br>redis<br>root@517b9c67507a:/tmp#<br>docker-php-ext-configure<br>docker-php-ext-configure 一般都是需要跟 docker-php-ext-install搭配使用的。它的作用就是，当你安装扩展的时候，需要自定义配置时，就可以使用它来帮你做到。</p><p>案例</p><p>FROM php:7.1-fpm<br>RUN apt-get update <br>    # 相关依赖必须手动安装<br>    &amp;&amp; apt-get install -y <br>        libfreetype6-dev <br>        libjpeg62-turbo-dev <br>        libmcrypt-dev <br>        libpng-dev <br>    # 安装扩展<br>    &amp;&amp; docker-php-ext-install -j$(nproc) iconv mcrypt <br>    # 如果安装的扩展需要自定义配置时<br>    &amp;&amp; docker-php-ext-configure gd –with-freetype-dir=/usr/include/ –with-jpeg-dir=/usr/include/ <br>    &amp;&amp; docker-php-ext-install -j$(nproc) gd</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ext </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>架构优化</title>
+      <link href="/2019/11/30/php/jiagouyouhua/"/>
+      <url>/2019/11/30/php/jiagouyouhua/</url>
+      
+        <content type="html"><![CDATA[<p>反向代理和CDN加速网站响应<br>使用反向代理和CDN加速网站响应：CDN 和反向代理的基本原理都是缓存，区别在于：</p><p>CDN部署在网络提供商的机房；</p><p>反向代理则部署在网站的中心机房；</p><p>使用 CDN 和反向代理的目的都是尽早返回数据给用户，一方面加快用户访问速度，另一方面也减轻后端服务器的负载压力。</p><p>使用反向代理和 CDN 加速网站响应</p><p>优点：减轻应用负载压力，异地缓存有效解决不同地方用户访问过慢的问题；<br>缺点：成本大幅增加，架构进一步复杂化，也维护难度进一步增大，静态文件缓存更新失效问题；<br>技术点：CDN、反向代理方案；</p><p>使用NoSQL和搜索引擎<br>到这里，已经基本做到了DB层面和应用层面的横向扩展了，可以开始关注一些其它方面，例如：站内搜索的精准度，对DB的依赖，开始引入全文索引、NoSQL。</p><p>NoSQL和搜索引擎都是源自互联网的技术手段，对可伸缩的分布式特性具有更好的支持。应用服务器则通过一个统一数据访问模块访问各种数据，减轻应用程序管理诸多数据源的麻烦。</p><p>使用NoSQL和搜索引擎</p><p>优点：降低DB依赖；<br>缺点：单点问题，谈不上高可用；<br>技术点：NoSQL、搜索引擎、分布式；</p><p>到目前为止，一个能够承载日均百万级访问量的中型网站架构基本介绍完了。</p><p>如何保证高可用<br>在做扩展满足了基本的性能需求后，我们会逐渐关注“可用性”（也就是我们通常听别人吹牛时说的SLA、几个9）。如何保证真正“高可用”，也是个难题。</p><p>对关键应用/服务，做集群冗余负载，这也是保证高可用比较常用的手段：</p><p>文件系统、数据库系统集群；</p><p>静态内容服务器集群；</p><p>CDN服务器集群；</p><p>反向代理服务器集群；</p><p>负载均衡调度器集群；</p><p>分布式NoSQL服务器集群；</p><p>搜索引擎服务器集群；</p><p>分布式缓存服务器集群；</p><p>分布式Session服务器集群；</p><p>使用集群冗余负载 保证高可用</p><p>优点：集群负载，保证高可用；<br>缺点：数据一致性、数据有状态问题；<br>技术点：负载调度器、集群方案；</p><p>截止目前为止，都没有怎么去改动应用程序的架构，或者说通俗点，都不怎么需要大面积的修改代码。</p><p>如果上面那些手段都用光了，还是支撑不住怎么办？不停的加机器也不是办法啊？</p><p>应用垂直拆分<br>随着业务越来越复杂，网站的功能越来越多，虽然部署层面是采用的集群，但是应用程序架构层面还是“集中式”的，这样会导致很多耦合，不便于开发、维护，而且容易“一荣俱损”。所以，通常会把网站拆分出不同的子站点来单独宿主。</p><p>通过分而治之的手段将整个网站业务分成不同的产品线，如首页、商铺、订单、卖家、买家等拆分成不同的产品线，分归不同的业务团队负责。各个应用之间可以通过建立一个超链接建立关系，也可以通过消息队列进行数据分发。</p><p>应用垂直拆分（分压，解耦）</p><p>优点：降低耦合、分压；<br>缺点：应用架构复杂；<br>技术点：业务抽取拆分；</p><p>业务垂直分库<br>应用都拆了，由于单个数据库的连接，QPS，TPS，I/O处理能力都非常有限，DB层面也可以去做垂直分库操作。</p><p>业务垂直分库 分压 解耦</p><p>优点：降低DB耦合、分压DB；<br>缺点：数据访问模块复杂；<br>技术点：业务抽取拆分；</p><p>分布式服务化<br>拆分应用和DB之后，其实还是会有很多问题。不同的站点，里面可能会有相同逻辑和功能的代码。当然，对于一些基础的功能我们可以封装DLL或者Jar包去到处提供引用，但是这种强依赖也很容易造成一些问题（版本问题、依赖关系等处理起来非常麻烦）。</p><p>既然每一个应用系统都需要执行许多相通的业务操作，比如用户管理、商品管理等，那么可以将这些共用的业务提取出来，独立部署。这样，传说中的SOA的价值就得到体现了。</p><p>分布式服务化（解耦，去重复）</p><p>优点：服务统一管理，提供重用度；<br>缺点：应用架构更复杂；<br>技术点：业务抽取拆分、服务化技术方案；</p><p>消息队列<br>应用、服务之间还是会出现一些依赖问题，这时候，高吞吐量的解耦利器出现了。</p><p>消息队列（服务间异步解耦 高吞吐量）</p><p>优点：提高吞吐量、应用、服务之间解耦；<br>缺点：存在消息消费延迟问题；<br>技术点：消息队列技术方案；</p><p>分库分表<br>*后，再介绍一个大型互联网公司都用的绝技–分库分表。个人经验，不是业务发展和各方面非常迫切，不要轻易走这一步。</p><p>因为分库分表谁都会干，关键是拆完之后怎么办。目前，市面上还没有完全开源免费的方案，能让你一劳永逸地解决数据库拆分问题。</p><p>分库分表：</p><p>横向拆分；</p><p>纵向拆分；</p><p>分布式数据库访问层；</p><p>数据库中间件（代理）；</p><p>网站架构总结<br>上面讲述了在网站业务发展的不同阶段，会面临不同的问题，针对不同的问题，会选择不同的架构。大型网站架构就是在不同阶段时解决不同问题的过程中慢慢演进来的。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>linux安装git</title>
+      <link href="/2019/11/12/linux/gitanzhuang/"/>
+      <url>/2019/11/12/linux/gitanzhuang/</url>
+      
+        <content type="html"><![CDATA[<p>简单粗暴直接命令执行</p><p>yum -y install git</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>mac下全局安装composer</title>
+      <link href="/2019/11/10/linux/composer/"/>
+      <url>/2019/11/10/linux/composer/</url>
+      
+        <content type="html"><![CDATA[<p>安装前需确保系统PHP版本在5.3以上,在终端中执行以下命令下载Composer可执行文件：</p><p>curl -sS <a href="https://getcomposer.org/installer" target="_blank" rel="noopener">https://getcomposer.org/installer</a> | php</p><p>此操作会下载最新版本到当前的工作目录中。然后在当前路径下就可以操作了，如查看Composer版本：</p><p>php composer.phar –version //Composer version 1.4.2 2017-05-17 08:17:52</p><p>如果下载失败也不用纠结了，直接去手动下载合适的版本<a href="https://getcomposer.org/download/，结果的一样的。" target="_blank" rel="noopener">https://getcomposer.org/download/，结果的一样的。</a></p><p>这应该算是局部安装了，当跳出当前目录还是无法正常使用，这肯定不是我们所期望的。如果要想全局生效需把composer.phar移到系统/usr/local/bin/目录下：</p><p>mv composer.phar /usr/local/bin/composer</p><p>然后在全部就可以使用composer,再也不用每次都输入长长的php composer.phar了。至此算是安装完毕。</p><p>//版本更新，如果有则更新到最新版本<br>composer selfupdate</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> composer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Docker的LNMP一键安装</title>
+      <link href="/2019/11/09/docker/start/"/>
+      <url>/2019/11/09/docker/start/</url>
+      
+        <content type="html"><![CDATA[<h1 id="DNMP-PLUS"><a href="#DNMP-PLUS" class="headerlink" title="DNMP PLUS"></a>DNMP PLUS</h1><p><strong>dnmp</strong> = <code>Docker</code> + <code>Nginx</code> + <code>MySQL</code> + <code>PHP</code> + <code>Redis</code> + <code>MongDB</code></p><p><strong>plus</strong> = <code>xhgui</code> + <code>xhprof</code> + <code>tideways</code></p><p><strong>dnmp-plus</strong> = <code>PHPer 的一键安装开发环境</code> + <code>PHP 非侵入式监控平台（优化系统性能、定位 Bug 的神器）</code></p><hr><p><a href="https://travis-ci.org/guanguans/dnmp-plus" target="_blank" rel="noopener"><img src="https://travis-ci.org/guanguans/dnmp-plus.svg?branch=master" alt="Build Status"></a></p><p>简体中文 | <a href="README-EN.md">English</a></p><p><strong><a href="https://github.com/guanguans/dnmp-plus" target="_blank" rel="noopener">dnmp-plus</a></strong> 在 <a href="https://github.com/yeszao" target="_blank" rel="noopener">yeszao</a> 的 <a href="https://github.com/yeszao/dnmp" target="_blank" rel="noopener">DNMP</a> 基础上新增：</p><ul><li><a href="https://github.com/phacility/xhprof" target="_blank" rel="noopener">PHP xhprof 扩展</a> - Facebook 开发的 PHP 性能追踪及分析工具</li><li><a href="https://github.com/tideways/php-xhprof-extension" target="_blank" rel="noopener">PHP tideways 扩展</a> - xhprof 的分支，支持 PHP7</li><li>PHP mongodb 扩展</li><li>MongoDB 服务</li><li>Mongo Express - MongoDB 服务管理系统</li><li><a href="https://github.com/laynefyc/xhgui-branch" target="_blank" rel="noopener">xhgui</a> - xhprof 分析数据数据的 GUI 系统</li></ul><p><img src="docs/dnmp-plus.png" alt=""></p><hr><h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">├── .github                     Github 配置目录</span><br><span class="line">├── conf                        配置文件目录</span><br><span class="line">│   ├── conf.d                  Nginx 用户站点配置目录</span><br><span class="line">│   ├── mysql.cnf               MySQL 用户配置文件</span><br><span class="line">│   ├── nginx.conf              Nginx 默认配置文件</span><br><span class="line">│   ├── php-fpm.conf            PHP-FPM 配置文件</span><br><span class="line">│   ├── php.ini                 PHP 配置文件</span><br><span class="line">│   ├── redis.conf              Redis 配置文件</span><br><span class="line">├── docs                        文档目录</span><br><span class="line">├── extensions                  PHP 扩展源码包</span><br><span class="line">├── <span class="built_in">log</span>                         日志目录</span><br><span class="line">├── mongo                       MongoDB 数据目录</span><br><span class="line">├── mysql                       MySQL 数据目录</span><br><span class="line">├── www                         PHP 代码目录</span><br><span class="line">├── Dockerfile                  PHP 镜像构建文件</span><br><span class="line">├── docker-compose-sample.yml   Docker 服务配置示例文件</span><br><span class="line">├── env.smaple                  环境配置示例文件</span><br><span class="line">└── travis-build.sh             Travis CI 构建脚本</span><br></pre></td></tr></table></figure><h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><ul><li>Docker</li><li>Docker-compose</li><li>Git</li></ul><h2 id="快速使用"><a href="#快速使用" class="headerlink" title="快速使用"></a>快速使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/guanguans/dnmp-plus.git --recursive</span><br><span class="line">$ <span class="built_in">cd</span> dnmp-plus</span><br><span class="line">$ cp env.sample .env</span><br><span class="line">$ cp docker-compose-sample.yml docker-compose.yml</span><br><span class="line"><span class="comment"># 服务选项：nginx、php72、php56、mysql、mongo、redis、phpmyadmin、phpredisadmin、mongo-express</span></span><br><span class="line">$ docker-compose up -d php72 nginx mysql mongo</span><br></pre></td></tr></table></figure><p>OK，你现在已经拥有了一个 dnmp-plus 开发环境，默认 web 根目录 <code>www/localhost/</code>，浏览器访问 <a href="http://localhost" target="_blank" rel="noopener">http://localhost</a></p><p><img src="docs/localhost.png" alt=""></p><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 服务选项：nginx、php72、php56、mysql、mongo、redis、phpmyadmin、phpredisadmin、mongo-express</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建并且启动容器</span></span><br><span class="line">$ docker-compose up 服务1 服务2 ...</span><br><span class="line"><span class="comment"># 创建并且启动所有容器</span></span><br><span class="line">$ docker-compose up</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建并且已后台运行的方式启动容器</span></span><br><span class="line">$ docker-compose up -d 服务1 服务2 ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动服务</span></span><br><span class="line">$ docker-compose start 服务1 服务2 ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止服务</span></span><br><span class="line">$ docker-compose stop 服务1 服务2 ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启服务</span></span><br><span class="line">$ docker-compose restart 服务1 服务2 ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建或者重新构建服务</span></span><br><span class="line">$ docker-compose build 服务1 服务2 ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入命令行容器</span></span><br><span class="line">$ docker-compose <span class="built_in">exec</span> 服务 bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除并且停止容器</span></span><br><span class="line">$ docker-compose rm 服务1 服务2 ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止并删除容器，网络，图像和挂载卷</span></span><br><span class="line">$ docker-compose down 服务1 服务2 ...</span><br></pre></td></tr></table></figure><h2 id="xhgui-使用，可以参考-https-github-com-guanguans-guanguans-github-io-issues-9"><a href="#xhgui-使用，可以参考-https-github-com-guanguans-guanguans-github-io-issues-9" class="headerlink" title="xhgui 使用，可以参考  https://github.com/guanguans/guanguans.github.io/issues/9"></a>xhgui 使用，可以参考  <a href="https://github.com/guanguans/guanguans.github.io/issues/9" target="_blank" rel="noopener">https://github.com/guanguans/guanguans.github.io/issues/9</a></h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> www/xhgui-branch</span><br><span class="line">$ composer install</span><br></pre></td></tr></table></figure><h3 id="修改-xhgui-branch-配置文件-www-xhgui-branch-config-config-default-php"><a href="#修改-xhgui-branch-配置文件-www-xhgui-branch-config-config-default-php" class="headerlink" title="修改 xhgui-branch 配置文件 www/xhgui-branch/config/config.default.php"></a>修改 xhgui-branch 配置文件 <code>www/xhgui-branch/config/config.default.php</code></h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">array</span>(</span><br><span class="line">    ...</span><br><span class="line">    <span class="string">'debug'</span>        =&gt; <span class="keyword">true</span>, <span class="comment">// 改为true，便于调试</span></span><br><span class="line">    <span class="string">'mode'</span>         =&gt; <span class="string">'development'</span>,</span><br><span class="line">    ...</span><br><span class="line">    <span class="string">'extension'</span>    =&gt; <span class="string">'tideways'</span>, <span class="comment">// 改为支持 PHP7 的 tideways</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="string">'save.handler'</span> =&gt; <span class="string">'mongodb'</span>,</span><br><span class="line">    <span class="string">'db.host'</span>      =&gt; <span class="string">'mongodb://mongo:27017'</span>, <span class="comment">// 127.0.0.1 改为 mongo</span></span><br><span class="line">    ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure><h3 id="hosts-文件中增加"><a href="#hosts-文件中增加" class="headerlink" title="hosts 文件中增加"></a>hosts 文件中增加</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1             xhgui.test</span><br></pre></td></tr></table></figure><h3 id="浏览器访问-http-xhgui-test"><a href="#浏览器访问-http-xhgui-test" class="headerlink" title="浏览器访问 http://xhgui.test"></a>浏览器访问 <a href="http://xhgui.test" target="_blank" rel="noopener">http://xhgui.test</a></h3><p><img src="docs/xhgui1.png" alt=""></p><h3 id="在要分析项目-nginx-配置文件中修改，以默认的-localhost-配置-conf-conf-d-localhost-conf-为例"><a href="#在要分析项目-nginx-配置文件中修改，以默认的-localhost-配置-conf-conf-d-localhost-conf-为例" class="headerlink" title="在要分析项目 nginx 配置文件中修改，以默认的 localhost 配置 conf/conf.d/localhost.conf 为例"></a>在要分析项目 nginx 配置文件中修改，以默认的 localhost 配置 <code>conf/conf.d/localhost.conf</code> 为例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">    fastcgi_pass   php72:9000;</span><br><span class="line">    fastcgi_index  index.php;</span><br><span class="line">    include        fastcgi_params;</span><br><span class="line">    fastcgi_param  PATH_INFO $fastcgi_path_info;</span><br><span class="line">    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</span><br><span class="line">    # 在执行主程序之前运行我们指定的PHP脚本</span><br><span class="line">    fastcgi_param  PHP_VALUE &quot;auto_prepend_file&#x3D;&#x2F;var&#x2F;www&#x2F;html&#x2F;xhgui-branch&#x2F;external&#x2F;header.php&quot;; </span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">### 重启 nginx</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96; bash</span><br><span class="line">$ docker-compose restart nginx</span><br></pre></td></tr></table></figure><h3 id="浏览器访问-http-localhost，再访问-http-xhgui-test，此时已经有了内容，愉快的查看项目的性能追踪及分析吧"><a href="#浏览器访问-http-localhost，再访问-http-xhgui-test，此时已经有了内容，愉快的查看项目的性能追踪及分析吧" class="headerlink" title="浏览器访问 http://localhost，再访问 http://xhgui.test，此时已经有了内容，愉快的查看项目的性能追踪及分析吧"></a>浏览器访问 <a href="http://localhost" target="_blank" rel="noopener">http://localhost</a>，再访问 <a href="http://xhgui.test" target="_blank" rel="noopener">http://xhgui.test</a>，此时已经有了内容，愉快的查看项目的性能追踪及分析吧</h3><p><img src="docs/xhgui2.png" alt=""></p><p><img src="docs/xhgui3.png" alt=""></p><h2 id="PHP-和扩展"><a href="#PHP-和扩展" class="headerlink" title="PHP 和扩展"></a>PHP 和扩展</h2><h3 id="切换-Nginx-使用的-PHP-版本"><a href="#切换-Nginx-使用的-PHP-版本" class="headerlink" title="切换 Nginx 使用的 PHP 版本"></a>切换 Nginx 使用的 PHP 版本</h3><p>默认同时创建 <code>PHP5.6</code> 和 <code>PHP7.2</code> 2 个 PHP 版本的容器，切换 PHP 仅需修改相应站点 Nginx 配置的 <code>fastcgi_pass</code> 选项，例如，示例的 <a href="http://localhost" target="_blank" rel="noopener">http://localhost</a> 用的是 PHP7.2，Nginx 配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastcgi_pass   php72:9000;</span><br></pre></td></tr></table></figure><p>要改用 PHP5.6，修改为：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastcgi_pass   php56:9000;</span><br></pre></td></tr></table></figure><p>重启 Nginx 生效</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose restart nginx</span><br></pre></td></tr></table></figure><h3 id="安装-PHP-扩展"><a href="#安装-PHP-扩展" class="headerlink" title="安装 PHP 扩展"></a>安装 PHP 扩展</h3><p>PHP 的很多功能都是通过扩展实现，而安装扩展是一个略费时间的过程，<br>所以，除 PHP 内置扩展外，在 <code>env.sample</code> 文件中我们仅默认安装少量扩展，<br>如果要安装更多扩展，请打开你的 <code>.env</code> 文件修改如下的 PHP 配置，<br>增加需要的 PHP 扩展：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PHP72_EXTENSIONS=pdo_mysql,opcache,redis,xdebug,mongodb,tideways</span><br><span class="line">PHP56_EXTENSIONS=opcache,redis,xdebug,mongodb,xhprof</span><br></pre></td></tr></table></figure><p>然后重新构建 PHP 镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build php72</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure><h2 id="使用-Log"><a href="#使用-Log" class="headerlink" title="使用 Log"></a>使用 Log</h2><p>Log 文件生成的位置依赖于 conf 下各 log 配置的值。</p><h3 id="Nginx-日志"><a href="#Nginx-日志" class="headerlink" title="Nginx 日志"></a>Nginx 日志</h3><p>Nginx 日志是我们用得最多的日志，所以我们单独放在根目录 <code>log</code> 下。<code>log</code> 会目录映射 Nginx 容器的 <code>/var/log/nginx</code> 目录，所以在 Nginx 配置文件中，需要输出 log 的位置，我们需要配置到 <code>/var/log/nginx</code> 目录，如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;nginx.localhost.error.log  warn;</span><br></pre></td></tr></table></figure><h3 id="MySQL-日志"><a href="#MySQL-日志" class="headerlink" title="MySQL 日志"></a>MySQL 日志</h3><p>因为 MySQL 容器中的 MySQL 使用的是 <code>mysql</code> 用户启动，它无法自行在 <code>/var/log</code> 下的增加日志文件。所以，我们把 MySQL 的日志放在与 data 一样的目录，即项目的<code>mysql</code>目录下，对应容器中的 <code>/var/lib/mysql/</code> 目录。</p><p>mysql.conf 中的日志文件的配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">slow-query-log-file     &#x3D; &#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql.slow.log</span><br><span class="line">log-error               &#x3D; &#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql.error.log</span><br></pre></td></tr></table></figure><h2 id="数据库管理"><a href="#数据库管理" class="headerlink" title="数据库管理"></a>数据库管理</h2><ul><li>默认 phpMyAdmin 地址：<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a></li><li>默认 phpRedisAdmin 地址：<a href="http://localhost:8081" target="_blank" rel="noopener">http://localhost:8081</a></li><li>默认 Mongo Express 地址：<a href="http://localhost:8082" target="_blank" rel="noopener">http://localhost:8082</a></li></ul><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul><li><a href="https://github.com/yeszao/dnmp" target="_blank" rel="noopener">https://github.com/yeszao/dnmp</a>，yeszao</li></ul><h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p><a href="LICENSE">MIT</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>http响应状态码大全</title>
+      <link href="/2019/11/09/php/code/"/>
+      <url>/2019/11/09/php/code/</url>
+      
+        <content type="html"><![CDATA[<p>http状态返回代码 1xx（临时响应）<br>表示临时响应并需要请求者继续执行操作的状态代码。<br>http状态返回代码 代码   说明<br>100   （继续） 请求者应当继续提出请求。 服务器返回此代码表示已收到请求的第一部分，正在等待其余部分。<br>101   （切换协议） 请求者已要求服务器切换协议，服务器已确认并准备切换。<br>http状态返回代码 2xx （成功）<br>表示成功处理了请求的状态代码。<br>http状态返回代码 代码   说明<br>200   （成功）  服务器已成功处理了请求。 通常，这表示服务器提供了请求的网页。<br>201   （已创建）  请求成功并且服务器创建了新的资源。<br>202   （已接受）  服务器已接受请求，但尚未处理。<br>203   （非授权信息）  服务器已成功处理了请求，但返回的信息可能来自另一来源。<br>204   （无内容）  服务器成功处理了请求，但没有返回任何内容。<br>205   （重置内容） 服务器成功处理了请求，但没有返回任何内容。<br>206   （部分内容）  服务器成功处理了部分 GET 请求。<br>http状态返回代码 3xx （重定向）<br>表示要完成请求，需要进一步操作。 通常，这些状态代码用来重定向。<br>http状态返回代码 代码   说明<br>300   （多种选择）  针对请求，服务器可执行多种操作。 服务器可根据请求者 (user agent) 选择一项操作，或提供操作列表供请求者选择。<br>301   （永久移动）  请求的网页已永久移动到新位置。 服务器返回此响应（对 GET 或 HEAD 请求的响应）时，会自动将请求者转到新位置。<br>302   （临时移动）  服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。<br>303   （查看其他位置） 请求者应当对不同的位置使用单独的 GET 请求来检索响应时，服务器返回此代码。<br>304   （未修改） 自从上次请求后，请求的网页未修改过。 服务器返回此响应时，不会返回网页内容。<br>305   （使用代理） 请求者只能使用代理访问请求的网页。 如果服务器返回此响应，还表示请求者应使用代理。<br>307   （临时重定向）  服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。<br>http状态返回代码 4xx（请求错误）<br>这些状态代码表示请求可能出错，妨碍了服务器的处理。<br>http状态返回代码 代码   说明<br>400   （错误请求） 服务器不理解请求的语法。<br>401   （未授权） 请求要求身份验证。 对于需要登录的网页，服务器可能返回此响应。<br>403   （禁止） 服务器拒绝请求。<br>404   （未找到） 服务器找不到请求的网页。<br>405   （方法禁用） 禁用请求中指定的方法。<br>406   （不接受） 无法使用请求的内容特性响应请求的网页。<br>407   （需要代理授权） 此状态代码与 401（未授权）类似，但指定请求者应当授权使用代理。<br>408   （请求超时）  服务器等候请求时发生超时。<br>409   （冲突）  服务器在完成请求时发生冲突。 服务器必须在响应中包含有关冲突的信息。<br>410   （已删除）  如果请求的资源已永久删除，服务器就会返回此响应。<br>411   （需要有效长度） 服务器不接受不含有效内容长度标头字段的请求。<br>412   （未满足前提条件） 服务器未满足请求者在请求中设置的其中一个前提条件。<br>413   （请求实体过大） 服务器无法处理请求，因为请求实体过大，超出服务器的处理能力。<br>414   （请求的 URI 过长） 请求的 URI（通常为网址）过长，服务器无法处理。<br>415   （不支持的媒体类型） 请求的格式不受请求页面的支持。<br>416   （请求范围不符合要求） 如果页面无法提供请求的范围，则服务器会返回此状态代码。<br>417   （未满足期望值） 服务器未满足”期望”请求标头字段的要求。<br>http状态返回代码 5xx（服务器错误）<br>这些状态代码表示服务器在尝试处理请求时发生内部错误。 这些错误可能是服务器本身的错误，而不是请求出错。<br>http状态返回代码 代码   说明<br>500   （服务器内部错误）  服务器遇到错误，无法完成请求。<br>501   （尚未实施） 服务器不具备完成请求的功能。 例如，服务器无法识别请求方法时可能会返回此代码。<br>502   （错误网关） 服务器作为网关或代理，从上游服务器收到无效响应。<br>503   （服务不可用） 服务器目前无法使用（由于超载或停机维护）。 通常，这只是暂时状态。<br>504   （网关超时）  服务器作为网关或代理，但是没有及时从上游服务器收到请求。<br>505   （HTTP 版本不受支持） 服务器不支持请求中所用的 HTTP 协议版本。  </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>防止SQL注入</title>
+      <link href="/2019/11/03/mysql/sql/"/>
+      <url>/2019/11/03/mysql/sql/</url>
+      
+        <content type="html"><![CDATA[<p>1、开启配置文件中的magic_quotes_gpc和magic_quotes_runtime设置</p><p>2、执行sql语句时使用addslashes进行sql语句转换</p><p>3、Sql语句书写尽量不要省略小引号和单引号</p><p>4、过滤掉sql语句中的一些关键字：update、insert、delete、select、*</p><p>5、提高数据库表和字段的命名技巧，对一些重要的字段根据程序的特点命名，取不易被猜到的。</p><p>6、Php配置文件中设置register_globals为off，关闭全局变量注册</p><p>7、控制错误信息，不要再浏览器上输出错误信息，将错误信息写到日志文件中。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>大型网站电商网站架构案例和技术架构的示例</title>
+      <link href="/2019/11/02/jiagou/shop/"/>
+      <url>/2019/11/02/jiagou/shop/</url>
+      
+        <content type="html"><![CDATA[<p>大型网站架构是一个系列文档，欢迎大家关注。本次分享主题：电商网站架构案例。从电商网站的需求，到单机架构，逐步演变为常用的，可供参考的分布式架构的原型。除具备功能需求外，还具备一定的高性能，高可用，可伸缩，可扩展等非功能质量需求（架构目标）。</p><p>根据实际需要，进行改造，扩展，支持千万PV，是没问题的。</p><p>本次分享大纲<br>电商案例的原因<br>电商网站需求<br>网站初级架构<br>系统容量估算<br>网站架构分析<br>网站架构优化<br>架构总结<br>电商网站案例，一共有三篇本篇主要说明网站的需求，网站初始架构，系统容量估算方法。</p><p>一、电商案例的原因<br>分布式大型网站，目前看主要有几类1.大型门户，比如网易，新浪等；2.SNS网站，比如校内，开心网等；3.电商网站：比如阿里巴巴，京东商城，国美在线，汽车之家等。大型门户一般是新闻类信息，可以使用CDN，静态化等方式优化，开心网等交互性比较多，可能会引入更多的NOSQL，分布式缓存，使用高性能的通信框架等。电商网站具备以上两类的特点，比如产品详情可以采用CDN，静态化，交互性高的需要采用NOSQL等技术。因此，我们采用电商网站作为案例，进行分析。</p><p>二、电商网站需求<br>客户需求：</p><p>建立一个全品类的电子商务网站（B2C），用户可以在线购买商品，可以在线支付，也可以货到付款；<br>用户购买时可以在线与客服沟通；<br>用户收到商品后，可以给商品打分，评价；<br>目前有成熟的进销存系统；需要与网站对接；<br>希望能够支持3<del>5年，业务的发展；<br>预计3</del>5年用户数达到1000万；<br>定期举办双11，双12,三八男人节等活动；<br>其他的功能参考京东或国美在线等网站。<br>客户就是客户，不会告诉你具体要什么，只会告诉你他想要什么，我们很多时候要引导，挖掘客户的需求。好在提供了明确的参考网站。因此，下一步要进行大量的分析，结合行业，以及参考网站，给客户提供方案。</p><p>其他的略<del>~</del></p><p>需求功能矩阵</p><p>需求管理传统的做法，会使用用例图或模块图（需求列表）进行需求的描述。这样做常常忽视掉一个很重要的需求（非功能需求），因此推荐大家使用需求功能矩阵，进行需求描述。</p><p>本电商网站的需求矩阵如下：<br><img src="https://img-blog.csdnimg.cn/20191223232351194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>图片存储的要求（海量小图片）用户可以在线购买商品会员管理，购物车，结算功能良好购物体验（可用性，性能）在线支付或货到付款多种在线支付方式支付过程要安全，数据加密（安全性）多种支付接口灵活切换（灵活性，扩展性）可以在线与客服沟通在线客服功能可靠性：即时通讯商品打分评价商品评论 目前有成熟的进销存系统对接进销存属于约束条件对接时要考虑数据一致性，鲁棒性支持3<del>5年，业务的发展 属于约束条件伸缩性，可扩展性3</del>5年用户数达到1000万 约束条件举办双11，双12,三八男人节等活动活动管理，秒杀突增访问流量（可伸缩）实时性要求（高性能）参考京东或国美在线 参考条件</p><p>以上是对电商网站需求的简单举例，目的是说明（1）需求分析的时候，要全面，大型分布式系统重点考虑非功能需求；（2）描述一个简单的电商需求场景，使大家对下一步的分析设计有个依据。</p><p>三、网站初级架构<br>一般网站，刚开始的做法，是三台服务器，一台部署应用，一台部署数据库，一台部署NFS文件系统。</p><p>这是前几年比较传统的做法，之前见到一个网站10万多会员，垂直服装设计门户，N多图片。使用了一台服务器部署了应用，数据库以及图片存储。出现了很多性能问题。</p><p>如下图：</p><p>但是，目前主流的网站架构已经发生了翻天覆地的变化。一般都会采用集群的方式，进行高可用设计。至少是下面这个样子。</p><p>（1 使用集群对应用服务器进行冗余，实现高可用；（负载均衡设备可与应用一块部署）</p><p>使用数据库主备模式，实现数据备份和高可用；</p><p>四、系统容量预估<br>预估步骤：</p><p>注册用户数-日均UV量-每日的PV量-每天的并发量；<br>峰值预估：平常量的2<del>3倍；<br>根据并发量（并发，事务数），存储容量计算系统容量。<br>客户需求：3</del>5年用户数达到1000万注册用户；</p><p>每秒并发数预估：</p><p>每天的UV为200万（二八原则）；<br>每日每天点击浏览30次；<br>PV量：200<em>30=6000万；<br>集中访问量：24</em>0.2=4.8小时会有6000万<em>0.8=4800万（二八原则）；<br>每分并发量：4.8</em>60=288分钟，每分钟访问4800/288=16.7万（约等于）；<br>每秒并发量：16.7万/60=2780（约等于）；<br>假设：高峰期为平常值的三倍，则每秒的并发数可以达到8340次。<br>1毫秒=1.3次访问；<br>没好好学数学后悔了吧？！（不知道以上算是否有错误，呵呵~~）</p><p>服务器预估：（以tomcat服务器举例）</p><p>按一台web服务器，支持每秒300个并发计算。平常需要10台服务器（约等于）；[tomcat默认配置是150]<br>高峰期：需要30台服务器；<br>容量预估：70/90原则</p><p>系统CPU一般维持在70%左右的水平，高峰期达到90%的水平，是不浪费资源，并比较稳定的。内存，IO类似。</p><p>以上预估仅供参考，因为服务器配置，业务逻辑复杂度等都有影响。在此CPU，硬盘，网络等不再进行评估。</p><p>五、网站架构分析</p><p>根据以上预估，有几个问题：</p><p>需要部署大量的服务器，高峰期计算，可能要部署30台Web服务器。并且这三十台服务器，只有秒杀，活动时才会用到，存在大量的浪费。<br>所有的应用部署在同一台服务器，应用之间耦合严重。需要进行垂直切分和水平切分。<br>大量应用存在冗余代码<br>服务器SESSION同步耗费大量内存和网络带宽<br>数据需要频繁访问数据库，数据库访问压力巨大。<br>大型网站一般需要做以下架构优化（优化是架构设计时，就要考虑的，一般从架构/代码级别解决，调优主要是简单参数的调整，比如JVM调优；如果调优涉及大量代码改造，就不是调优了，属于重构）：</p><p>业务拆分<br>应用集群部署（分布式部署，集群部署和负载均衡）<br>多级缓存<br>单点登录（分布式Session）<br>数据库集群（读写分离，分库分表）<br>服务化<br>消息队列<br>其他技术<br>六、网站架构优化<br>6.1业务拆分<br>根据业务属性进行垂直切分，划分为产品子系统，购物子系统，支付子系统，评论子系统，客服子系统，接口子系统（对接如进销存，短信等外部系统）。</p><p>根据业务子系统进行等级定义，可分为核心系统和非核心系统。核心系统：产品子系统，购物子系统，支付子系统；非核心：评论子系统，客服子系统，接口子系统。</p><p>业务拆分作用：提升为子系统可由专门的团队和部门负责，专业的人做专业的事，解决模块之间耦合以及扩展性问题；每个子系统单独部署，避免集中部署导致一个应用挂了，全部应用不可用的问题。</p><p>等级定义作用：用于流量突发时，对关键应用进行保护，实现优雅降级；保护关键应用不受到影响。</p><p>拆分后的架构图：<br><img src="https://img-blog.csdnimg.cn/20191223232613939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>参考部署方案2</p><p><img src="https://img-blog.csdnimg.cn/20191223232625298.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如上图每个应用单独部署<br>核心系统和非核心系统组合部署<br>6.2应用集群部署（分布式，集群，负载均衡）<br>分布式部署：将业务拆分后的应用单独部署，应用直接通过RPC进行远程通信；</p><p>集群部署：电商网站的高可用要求，每个应用至少部署两台服务器进行集群部署；</p><p>负载均衡：是高可用系统必须的，一般应用通过负载均衡实现高可用，分布式服务通过内置的负载均衡实现高可用，关系型数据库通过主备方式实现高可用。</p><p>集群部署后架构图：<br><img src="https://img-blog.csdnimg.cn/20191223232737929.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>6.3 多级缓存<br>缓存按照存放的位置一般可分为两类本地缓存和分布式缓存。本案例采用二级缓存的方式，进行缓存的设计。一级缓存为本地缓存，二级缓存为分布式缓存。（还有页面缓存，片段缓存等，那是更细粒度的划分）</p><p>一级缓存，缓存数据字典，和常用热点数据等基本不可变/有规则变化的信息，二级缓存缓存需要的所有缓存。当一级缓存过期或不可用时，访问二级缓存的数据。如果二级缓存也没有，则访问数据库。</p><p>缓存的比例，一般1:4，即可考虑使用缓存。（理论上是1:2即可）。</p><p><img src="https://img-blog.csdnimg.cn/20191223232805687.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>根据业务特性可使用以下缓存过期策略：</p><p>缓存自动过期；<br>缓存触发过期；<br>6.4单点登录（分布式Session）<br>系统分割为多个子系统，独立部署后，不可避免的会遇到会话管理的问题。一般可采用Session同步，Cookies，分布式Session方式。电商网站一般采用分布式Session实现。</p><p>再进一步可以根据分布式Session，建立完善的单点登录或账户管理系统。</p><p><img src="https://img-blog.csdnimg.cn/20191223232946574.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>流程说明</p><p>用户第一次登录时，将会话信息（用户Id和用户信息），比如以用户Id为Key，写入分布式Session；<br>用户再次登录时，获取分布式Session，是否有会话信息，如果没有则调到登录页；<br>一般采用Cache中间件实现，建议使用Redis，因此它有持久化功能，方便分布式Session宕机后，可以从持久化存储中加载会话信息；<br>存入会话时，可以设置会话保持的时间，比如15分钟，超过后自动超时；<br>结合Cache中间件，实现的分布式Session，可以很好的模拟Session会话。</p><p>6.5数据库集群（读写分离，分库分表）<br>大型网站需要存储海量的数据，为达到海量数据存储，高可用，高性能一般采用冗余的方式进行系统设计。一般有两种方式读写分离和分库分表。</p><p>读写分离：一般解决读比例远大于写比例的场景，可采用一主一备，一主多备或多主多备方式。</p><p>本案例在业务拆分的基础上，结合分库分表和读写分离。如下图：</p><p><img src="https://img-blog.csdnimg.cn/20191223233007527.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>业务拆分后：每个子系统需要单独的库；<br>如果单独的库太大，可以根据业务特性，进行再次分库，比如商品分类库，产品库；<br>分库后，如果表中有数据量很大的，则进行分表，一般可以按照Id，时间等进行分表；（高级的用法是一致性Hash）<br>在分库，分表的基础上，进行读写分离；<br>相关中间件可参考Cobar（阿里，目前已不在维护），TDDL（阿里），Atlas（奇虎360），MyCat（在Cobar基础上，国内很多牛人，号称国内第一开源项目）。</p><p>分库分表后序列的问题，JOIN，事务的问题，会在分库分表主题分享中，介绍。</p><p>6.6服务化<br>将多个子系统公用的功能/模块，进行抽取，作为公用服务使用。比如本案例的会员子系统就可以抽取为公用的服务。</p><p><img src="https://img-blog.csdnimg.cn/20191223233022308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>6.7消息队列<br>消息队列可以解决子系统/模块之间的耦合，实现异步，高可用，高性能的系统。是分布式系统的标准配置。本案例中，消息队列主要应用在购物，配送环节。</p><p>用户下单后，写入消息队列，后直接返回客户端；<br>库存子系统：读取消息队列信息，完成减库存；<br>配送子系统：读取消息队列信息，进行配送；</p><p><img src="https://img-blog.csdnimg.cn/20191223233036104.png" alt="在这里插入图片描述"><br>目前使用较多的MQ有Active MQ,Rabbit MQ,Zero MQ，MS MQ等，需要根据具体的业务场景进行选择。建议可以研究下Rabbit MQ。</p><p>6.8其他架构（技术）<br>除了以上介绍的业务拆分，应用集群，多级缓存，单点登录，数据库集群，服务化，消息队列外。还有CDN，反向代理，分布式文件系统，大数据处理等系统。</p><p>此处不详细介绍，大家可以问度娘/Google，有机会的话也可以分享给大家。</p><p>七、架构总结</p><p><img src="https://img-blog.csdnimg.cn/20191223233056650.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>以上是本次分享的架构总结，其中细节可参考前面分享的内容。其中还有很多可以优化和细化的地方，因为是案例分享，主要针对重要部分做了介绍，工作中需要大家根据具体的业务场景进行架构设计。</p><p>以上是电商网站架构案例的分享一共有三篇，从电商网站的需求，到单机架构，逐步演变为常用的，可供参考的分布式架构的原型。除具备功能需求外，还具备一定的高性能，高可用，可伸缩，可扩展等非功能质量需求（架构目标）。</p><p>2.网站技术架构示例<br>最近我在阅读 2 本关于大型网站架构的书：《大型网站技术架构——核心原理与案例分析》李智慧、《大型网站系统与 Java 中间件实践》曾宪杰。</p><p>　　我期望从这些书中学习到大型网站是如何做架构的，这个过程会遇到什么问题。当看完这 2 本书后，我总结出两个大问题：</p><p>　　1. 网站技术架构为什么会演进？换个说法就是为什么网站会变大？</p><p>　　2. 演进的过程会遇到什么问题？或者说为了演进，会遇到什么问题？</p><p>　　网站技术架构为什么会演进</p><p>　　我个人总结出来我们的技术架构演进的两种驱动力，驱动着我们为什么演进网站的技术架构：</p><p>　　1. 内在驱动力：我们期望把当前的业务做得更好，开发更多新业务</p><p>　　2. 外在驱动力：用户量的上升、用户种类的多样化</p><p>　　这两种驱动力不是独立的，更多时候是并行的。我想淘宝就是两种驱动力并行驱动的结果。</p><p>　　演进的原因很简单。但是在什么时机我们就应该演进网站的技术架构了，以及如何演进？面对这些问题，说实话，我没有任何经验，再说现实中每家企业当时都面临的问题都不一样，所以，我很难从经验中总结出什么是演进的时机。</p><p>　　但是我可以从另一个角度切入这个问题：研究网站内外结构，找到这些结构可能出现的问题点，知道或者预见到问题点了，你当然就知道应该怎么演进了。类似于你了解了 PC 机的结构，你也就知道什么时候要加内存了，什么时候要加硬盘了。</p><p>　　那么我们先看看网站的外部结构：</p><p><img src="https://img-blog.csdnimg.cn/20191223233115180.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>　　外部结构中，我们可以看由以下几个部分构成：</p><p>　　U：代表用户群。当用户群变了，我们的网站如何演进？用户群的分析，我目前能知道的维度有：数量，种类，地理位置（区域）。</p><p>　　N：代表网络环境。网络环境在每个地区都不同。你可以想像我们为什么需要 CDN。当我们期望每个区域的用户都能得到好的体验，我们的网站如何演进？</p><p>　　S：代表安全。就是我们要安全到什么程度？这与网站当前所处阶段及你网站的性质有关。</p><p>　　C：代表我们的网站。属于内部结构</p><p>　　网站的内部结构：</p><p><img src="https://img-blog.csdnimg.cn/20191223233126266.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　内部结构的组成：</p><p>　　A：应用服务。</p><p>　　D：数据服务</p><p>　　总结下来就是我们在考虑网站是否应该演进了或者如何演进时，这些组成部分为我们提供了考虑问题的基准。</p><p>　　那么我们为什么不一开始就把网站设计成“大型”的。李智慧在后记里写到：“不要企图去设计一个大型网站”，“原因是互联网发展运行有其自己的规律，短暂的互联网历史已经一再证明这种企图行不通”。还说了：“大型网站不是设计出来的，而是逐步演化出来的”。对于最后这句话，我需要提醒下：“不是设计出来的”并不代表“随意设计”。</p><p>　　对于“大型网站的设计”，我个人的看法是现在我们的有“云”了，计算是可以买的，只要我们的设计能适应“云”，我是不是就可以一开始就设计大型网站了？</p><p>　　演进的过程会遇到什么问题</p><p>　　- 最初</p><p>　　从一个小网站说起。一台服务器也就足够了。</p><p><img src="https://img-blog.csdnimg.cn/20191223233143429.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>　　- 数据服务与应用服务分离</p><p>　　越来越多的用户代表着越来越多的数据，一台服务器已经满足不了。我们将数据服务和应用服务分离，给应用服务器配置更好的 CPU，内存。而给数据服务器配置更好更大的硬盘。</p><p><img src="https://img-blog.csdnimg.cn/2019122323315249.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>　　- 使用缓存</p><p>　　因为 80% 的业务访问都集中在 20% 的数据上，如果我们能将这部分数据缓存下来，性能一下子就上来了。而缓存又分为两种：本地缓存和远程分布式缓存。具体使用哪种？还是两种都用，我目前不知道。</p><p><img src="https://img-blog.csdnimg.cn/20191223233331869.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　这里有一个问题，书没有提到：应该缓存哪些数据？应该有一些原则的吧。</p><p>　　- 使用服务器集群</p><p>　　当这台服务器的处理能力达到上限时，它就会成为瓶颈。虽然你是可以通过购买更强大的硬件，但总会有上限。这时，我们就需要服务器的集群。这时，就必须加个新东西：负载均衡调度服务器。</p><p><img src="https://img-blog.csdnimg.cn/20191223233342938.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">　　但是，使用服务器集群时，需要考虑一个问题：Session 的管理问题。Session 的管理有以下几种方式：</p><p>　　Session Sticky：打个比方就是如果我们每次吃饭都要保证我们用的是自己的碗筷，而只要我们在一家饭店里存着我们的碗筷，只要我们每次去这家饭店吃饭就好了。</p><p><img src="https://img-blog.csdnimg.cn/20191223233649852.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>　　这种方式的问题：</p><p>　　1. 一台服务器重启，上面的 session 都没了</p><p>　　2. 负载均衡器成了有状态的机器，要实现容灾会有麻烦</p><p>　　Session 复制：就像我们在所有的饭店里都存一份自己的碗筷。不适合做大规模集群，适合机器不多的情况<br><img src="https://img-blog.csdnimg.cn/20191223233702523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>　　这种方案的问题：</p><p>　　1. 应用服务器间带宽问题</p><p>　　2. 大量用户在线时，占用内存过多</p><p>　　基于 Cookie：类似于每次吃饭都把自己的碗筷带上</p><p><img src="https://img-blog.csdnimg.cn/20191223233713556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>　　这种方案的问题：</p><p>　　1. Cookie 的长度限制</p><p>　　2. 安全性</p><p>　　3. 数据中心外部带宽的消耗</p><p>　　4. 性能影响，服务器处理每次的请求的内容又多了</p><p>　　Session 服务器：同样可以是集群的。这种方式适用于 session 数量及 web 服务器数量大的情况</p><p><img src="https://img-blog.csdnimg.cn/20191223233721691.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　这种方案需要考虑的是：</p><p>　　1. 保证 session 服务器的可用性</p><p>　　2. 我们在写应用时需要做调整，我目前不知道应用服务器能否将这部分逻辑透明化</p><p>　　- 数据库读写分离</p><p>　　数据库的一部分读（未缓存、缓存过期）及所有的写操作都还需要经过数据库。当用户量达到一定量，数据库将会成为瓶颈。这边我们使用数据库提供的热备功能，将所有的读操作引入 slave 服务器。注意：读写分离解决的是读压力大的问题。<br><img src="https://img-blog.csdnimg.cn/20191223233735211.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>　　因为数据库的读写分离了，所以，我们的应用程序也得做相应的变化。我们实现一个数据访问模块使上层写代码的人不知道读写分离的存在。这里，我很想知道如果我使用 ORM 模型时，如何实现读写的分离？</p><p>　　数据库读写分离会遇到如下问题：</p><p>数据复制问题： 考虑时延、数据库的支持、复制条件支持。不要忘了，分机房后，这个更是问题。<br>应用对于数据源的路由问题<br>　　- 使用反向代理和 CDN 加速网站响应</p><p>　　使用 CDN 可以很好的解决不同的地区的访问速度问题，反向代理则在服务器机房中缓存用户资源：</p><p><img src="https://img-blog.csdnimg.cn/20191223233747708.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　- 使用分布式文件系统</p><p><img src="https://img-blog.csdnimg.cn/20191223233755114.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　- 数据库专库专用：数据垂直拆分。</p><p>　　这样可以解决部分数据写的问题</p><p><img src="https://img-blog.csdnimg.cn/20191223233928202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>　　垂直拆分数据库时，会遇到的问题：</p><p>跨业务的事务<br>应用的配置项多了<br>　　关于事务的问题，有两种办法：</p><p>使用分布式事务<br>去掉事务或不追求强事务<br>　　- 某个业务的数据表的数据量或者更新量达到了单个数据库的瓶颈：数据水平拆分</p><p>　　将同一个表的数据拆分到两个数据库中</p><p><img src="https://img-blog.csdnimg.cn/20191223233937572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>　　数据水平拆分会遇到的问题：</p><p>SQL 的路由问题，需要知道某个 User 在哪个数据库上。<br>主键的策略会有不同。<br>查询时的性能问题，如分页问题</p><p>使用搜索引擎：解决数据查询问题<br>部分场景可使用 NoSQL 提高性能<br>开发数据统一访问模块：解决上层应用开发的数据源问题<br><img src="https://img-blog.csdnimg.cn/20191223233948981.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>　　- 业务拆分及应用拆分</p><p>　　网站的业务日益复杂，建立一个独立的大型应用来完成这所有的业务变得不实际。从管理角度来，也不方便管理。然而，业务的拆分很难找到一种通用的模式，这是一个企业管理问题和技术问题的混合问题。同时和每个企业的具体情况有关。</p><p>　　但是从这两本书来看，最终架构都走向服务化，也就是 SOA。而如何实现 SOA，是另一个很大的话题，不是本篇文章的范畴。</p><p>　　我从程立 08 年的演讲中截个图来说明 SOA 后的架构大概是怎样的：</p><p><img src="https://img-blog.csdnimg.cn/20191223233958822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>　　- 非功能性问题</p><p>　　   – 安全性问题、监控问题</p><p>　　– 发布问题：新的架构意味着新的发布方式</p><p>　　– 分机房</p><p>　– 这两本书都没有说分机房的问题。我没有经验，可是也可以猜到如果要分机房了，所有上面的问题都可能要重新考虑。</p><p>　　– 组织架构的变化 </p><p>　　我们的技术架构的变化，势必会引起我们的组织架构的变化，反之亦然。</p><p>　　这部分看似不应该由我们来管，但是，我觉得，我们技术人员也要参与一部分的组织架构的设计。举个例子，组织架构的设计会涉及绩效，而绩效有时很像一个国家的法律。如果一个国家的法律不健全，会发生什么？你懂的。</p><p>　　同时，我们还必须考虑人员对新架构的学习成本。</p><p>　　这部分我目前在看相关的书籍，还没有一个系统的认识。</p><p>　　总结：</p><p>　　- 关于演进的顺序</p><p>　　在现实中，技术架构的演进不一定就是按文章从头到尾这样列下来的，所以，要视具体情况来下决定。</p><p>　　- 关于传统演进与现代有“云”环境下的演进</p><p>　　很可惜，只有李智慧谈到云，而且只点了一下——“现在越来越多人的网站从建立之初就是搭建在大型网站提供的云计算服务基础之上，所需的一切资源：计算、存储、网络都可以按需购买线性伸缩，不需要自己一点一点地拼凑各种资源，综合使用各种技术方案逐步去完善自己的网站架构”。</p><p>　　因为我用“云”的时间也不长，还不能总结出有云架构与传统的无云架构在演进的时候有什么不同。</p><p>　　说回传统的架构演进，我自己总结和思考的结果是：</p><p>　　在对网站进行架构调整时，可以从两大的维度考虑：数据服务和应用服务。而这个调整的过程中，需要分清当前哪个点是瓶颈，需要知道哪个点优化的优先级最高。同时，最重要的一点：我们虽然作为技术人员，也应该去学习业务知识，这样我们在考虑问题时分清哪些是业务问题，哪些是技术问题，分清后才能对症下药。你要知道有些问题用技术手段并不比用业务手段更有效。12306 的分时卖票就是一个典型例子。</p><p>来源： <a href="http://blog.csdn.net/he90227/article/details/50800546" target="_blank" rel="noopener">http://blog.csdn.net/he90227/article/details/50800546</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 架构 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 架构 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>laravel-admin 安装</title>
+      <link href="/2019/09/29/laravel/laravel-admin-set/"/>
+      <url>/2019/09/29/laravel/laravel-admin-set/</url>
+      
+        <content type="html"><![CDATA[<h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>很多开发过程中，框架各种各样，主流的框架比如laravel。目前有需求搭建一个后台管理系统这样方便操作管理资料，借此展开简述一下</p><h3 id="安装环境：Ubuntu16-04"><a href="#安装环境：Ubuntu16-04" class="headerlink" title="安装环境：Ubuntu16.04"></a>安装环境：Ubuntu16.04</h3><p>一：前提 </p><p>php环境 php&gt;7.1</p><p>composer</p><p>nodejs</p><p>二: 安装laravel</p><p>composer create-project –prefer-dist laravel/laravel cms</p><p>三：安装laravel admin</p><p>doc地址：<a href="http://laravel-admin.org/docs/#/zh/installation" target="_blank" rel="noopener">http://laravel-admin.org/docs/#/zh/installation</a></p><p>首先确保安装好了laravel，并且数据库连接设置正确。<br>composer require encore/laravel-admin “1.5.*”<br>然后运行下面的命令来发布资源：</p><p>php artisan vendor:publish –provider=”Encore\Admin\AdminServiceProvider”<br>在该命令会生成配置文件config/admin.php，可以在里面修改安装的地址、数据库连接、以及表名，建议都是用默认配置不修改。</p><p>然后运行下面的命令完成安装：</p><p>php artisan admin:install</p><p>在运行install时，可能会报mysql1071错误，mysql支持数据库表单一键值的最大长度不能超过767字节，超出这个长度即报错</p><p>解决： 找到app/Provides/AppServiceProvides.php</p><p>引入命名： </p><p>use Illuminate\Support\Facades\Schema;<br>限制长度</p><p>public function boot()<br>{<br>    //<br>    Schema::defaultStringLength(191);<br>}<br>到此，laravel admin 安装完毕</p><p>进入后台： 侧边栏有index和admin选项，里面包括管理员管理（Users）、权限管理（Roles、Perimession）、后台菜单管理（Menu）、操作日志（Operation Log）</p><p>在首页是由用到的一下插件和环境信息</p><p>四： 开始搭建后台</p><p>1： 首先按照laravel config，这是没个后台都需要用到的网站配置管理，我们可以使用laravel admin为我们提供的现成的</p><p><a href="http://laravel-admin.org/docs/#/zh/extension-config" target="_blank" rel="noopener">http://laravel-admin.org/docs/#/zh/extension-config</a></p><p><a href="http://laravel-admin.org/docs/#/zh/extension-config" target="_blank" rel="noopener">http://laravel-admin.org/docs/#/zh/extension-config</a></p><p>php artisan migrate</p><p>同样在app/Providers/AppServiceProvider.php的boot中添加Config::load()</p><p>public function boot()<br>    {<br>        //<br>        Schema::defaultStringLength(191);<br>        Config::load();<br>    }<br>最后运行命令导入菜单和权限（也可以手动添加）<br>php artisan admin:import config</p><p>这样一个网站配置管理就搞定了</p><p>2： 帮助工具</p><p>laravel admin 提供了脚手架，可以帮助我们快速搭建后台</p><p><a href="http://laravel-admin.org/docs/#/zh/extension-helpers" target="_blank" rel="noopener">http://laravel-admin.org/docs/#/zh/extension-helpers</a></p><p>composer require laravel-admin-ext/helpers</p><p>php artisan admin:import helpers<br>注意：Ubuntu16.04  数据库配置192.168.10.10</p><h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p>文档：<br><a href="https://laravel-admin.org/docs/zh/" target="_blank" rel="noopener">https://laravel-admin.org/docs/zh/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> laravel </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mac 怎么通过自带终端连接linux服务器</title>
+      <link href="/2019/09/17/tool/Mac/linux/"/>
+      <url>/2019/09/17/tool/Mac/linux/</url>
+      
+        <content type="html"><![CDATA[<p>简单来说，就两步骤</p><p>· 打开Mac终端，切换到root权限下</p><pre><code>切换root权限： sudo -i </code></pre><p>·通过ssh命令连接linux服务器</p><pre><code>ssh root@127.0.0.1root是账户名，@后面的是连接的ip地址</code></pre><p>然后根据提示输入密码即可成功</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mac </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>mac 下host操作管理</title>
+      <link href="/2019/09/10/tool/Mac/host/"/>
+      <url>/2019/09/10/tool/Mac/host/</url>
+      
+        <content type="html"><![CDATA[<p>前言：很多开发者使用Mac比较多，开发过程中本地就需要配置项目的域名执行，大概两种操作，这里主要阐述工具管理使用。<br><strong>一、直接自带操作管理</strong></p><ol><li>打开控制命令管理工具</li><li><code>vim /etc/hosts</code></li><li>修改</li><li><code>wq</code> 保存推出即可</li></ol><p><strong>二、工具管理01：Gas Mask</strong></p><p><img src="https://img-blog.csdnimg.cn/20191222135505379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191222135645397.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下载地址：<a href="https://www.macupdate.com/app/mac/29949/gas-mask/download" target="_blank" rel="noopener">https://www.macupdate.com/app/mac/29949/gas-mask/download</a><br><strong>二、工具管理02：SwitchHosts</strong><br><img src="https://img-blog.csdnimg.cn/20191222134525589.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191222135558735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下载地址：<a href="https://oldj.github.io/SwitchHosts/" target="_blank" rel="noopener">https://oldj.github.io/SwitchHosts/</a></p><p> <em>备注：可以关注博客持续更新其他新技术：<a href="https://chaofavip.github.io">hechaofa</a></em></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mac </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> host </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>百度网盘（破解svip）下载Mac</title>
+      <link href="/2019/07/20/tool/baidu/"/>
+      <url>/2019/07/20/tool/baidu/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://github.com/CodeTips/BaiduNetdiskPlugin-macOS" target="_blank" rel="noopener">https://github.com/CodeTips/BaiduNetdiskPlugin-macOS</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mac </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mac </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Git常用命令速查表</title>
+      <link href="/2019/05/20/linux/git/"/>
+      <url>/2019/05/20/linux/git/</url>
+      
+        <content type="html"><![CDATA[<p>用户信息配置</p><h2 id="全局配置用户名字和邮箱"><a href="#全局配置用户名字和邮箱" class="headerlink" title="全局配置用户名字和邮箱"></a>全局配置用户名字和邮箱</h2><p>git congfig user.name “xxxx” –global<br>git config user.email “<a href="mailto:xxx@xx.com">xxx@xx.com</a>“ -global</p><h2 id="查看不同作用域的配置信息"><a href="#查看不同作用域的配置信息" class="headerlink" title="查看不同作用域的配置信息"></a>查看不同作用域的配置信息</h2><p>git config –list –local<br>git config –list –global<br>git config –list –system<br>复制代码<br>初始化仓库</p><h2 id="在已存在的项目初始化仓库"><a href="#在已存在的项目初始化仓库" class="headerlink" title="在已存在的项目初始化仓库"></a>在已存在的项目初始化仓库</h2><p>cd <project-path><br>git init</p><h2 id="新建项目并初始化仓库"><a href="#新建项目并初始化仓库" class="headerlink" title="新建项目并初始化仓库"></a>新建项目并初始化仓库</h2><p>git init <project-path><br>复制代码<br>提交修改</p><h2 id="查看git状态"><a href="#查看git状态" class="headerlink" title="查看git状态"></a>查看git状态</h2><p>git status</p><h2 id="提交某个文件的修改"><a href="#提交某个文件的修改" class="headerlink" title="提交某个文件的修改"></a>提交某个文件的修改</h2><p>git add <file-name></p><h2 id="提交已经跟踪的所有修改"><a href="#提交已经跟踪的所有修改" class="headerlink" title="提交已经跟踪的所有修改"></a>提交已经跟踪的所有修改</h2><p>git add -u</p><h2 id="提交所有修改"><a href="#提交所有修改" class="headerlink" title="提交所有修改"></a>提交所有修改</h2><p>git add –all<br>git add .</p><h2 id="颗粒化提交修改"><a href="#颗粒化提交修改" class="headerlink" title="颗粒化提交修改"></a>颗粒化提交修改</h2><p>git add -p</p><h2 id="提交修改到仓库"><a href="#提交修改到仓库" class="headerlink" title="提交修改到仓库"></a>提交修改到仓库</h2><p>git commit -m “<message>“</p><h2 id="直接提交所有的已跟踪的修改到仓库"><a href="#直接提交所有的已跟踪的修改到仓库" class="headerlink" title="直接提交所有的已跟踪的修改到仓库"></a>直接提交所有的已跟踪的修改到仓库</h2><p>git commit -a -m “<message>“<br>git commit -am “<message>“</p><h2 id="修改上一次提交"><a href="#修改上一次提交" class="headerlink" title="修改上一次提交"></a>修改上一次提交</h2><p>git commit –amend<br>git commit –amend –no-edit<br>复制代码<br>查看提交历史</p><h2 id="查看工作区和暂存区之间的区别"><a href="#查看工作区和暂存区之间的区别" class="headerlink" title="查看工作区和暂存区之间的区别"></a>查看工作区和暂存区之间的区别</h2><p>git diff</p><h2 id="查看某个文件工作区和暂存区之间的区别"><a href="#查看某个文件工作区和暂存区之间的区别" class="headerlink" title="查看某个文件工作区和暂存区之间的区别"></a>查看某个文件工作区和暂存区之间的区别</h2><p>git diff – <file-name></p><h2 id="用于查看暂存区和上一个提交之间的区别"><a href="#用于查看暂存区和上一个提交之间的区别" class="headerlink" title="用于查看暂存区和上一个提交之间的区别"></a>用于查看暂存区和上一个提交之间的区别</h2><p>git diff –cached</p><h2 id="用于展示工作区和上一次提交之间的区别"><a href="#用于展示工作区和上一次提交之间的区别" class="headerlink" title="用于展示工作区和上一次提交之间的区别"></a>用于展示工作区和上一次提交之间的区别</h2><p>git diff HEAD</p><h2 id="用于展示两个提交之间的区别"><a href="#用于展示两个提交之间的区别" class="headerlink" title="用于展示两个提交之间的区别"></a>用于展示两个提交之间的区别</h2><p>git diff <commit-id> <commit-id></p><h2 id="用于查看所有的提交"><a href="#用于查看所有的提交" class="headerlink" title="用于查看所有的提交"></a>用于查看所有的提交</h2><p>git log</p><h2 id="用于查看最近n次提交"><a href="#用于查看最近n次提交" class="headerlink" title="用于查看最近n次提交"></a>用于查看最近n次提交</h2><p>git log -<number></p><h2 id="用于展示每次提交log以及每次的改动"><a href="#用于展示每次提交log以及每次的改动" class="headerlink" title="用于展示每次提交log以及每次的改动"></a>用于展示每次提交log以及每次的改动</h2><p>git log -p</p><h2 id="用于展示每次提交log以及每次的改动的简要统计"><a href="#用于展示每次提交log以及每次的改动的简要统计" class="headerlink" title="用于展示每次提交log以及每次的改动的简要统计"></a>用于展示每次提交log以及每次的改动的简要统计</h2><p>git log –stat</p><h2 id="用于展示一行简略信息"><a href="#用于展示一行简略信息" class="headerlink" title="用于展示一行简略信息"></a>用于展示一行简略信息</h2><p>git log –oneline</p><h2 id="用简单图形展示"><a href="#用简单图形展示" class="headerlink" title="用简单图形展示"></a>用简单图形展示</h2><p>git log –graph</p><h2 id="用于展示上一个提交的修改"><a href="#用于展示上一个提交的修改" class="headerlink" title="用于展示上一个提交的修改"></a>用于展示上一个提交的修改</h2><p>git show</p><h2 id="用于展示特定提交的修改"><a href="#用于展示特定提交的修改" class="headerlink" title="用于展示特定提交的修改"></a>用于展示特定提交的修改</h2><p>git show <commit-id></p><h2 id="用于展示特定提交的修改的文件名"><a href="#用于展示特定提交的修改的文件名" class="headerlink" title="用于展示特定提交的修改的文件名"></a>用于展示特定提交的修改的文件名</h2><p>git show –name-only <commit-id></p><h2 id="打印最近操作所对应的commit-id"><a href="#打印最近操作所对应的commit-id" class="headerlink" title="打印最近操作所对应的commit id"></a>打印最近操作所对应的commit id</h2><p>git reflog<br>复制代码<br>文件删除&amp;安全重命名&amp;忽略</p><h2 id="从工作区删除文件，并且从仓库中移除对某个文件的跟踪"><a href="#从工作区删除文件，并且从仓库中移除对某个文件的跟踪" class="headerlink" title="从工作区删除文件，并且从仓库中移除对某个文件的跟踪"></a>从工作区删除文件，并且从仓库中移除对某个文件的跟踪</h2><p>git rm <file-name></p><h2 id="只移除对该文件的跟踪，但是依旧在工作区保留文件"><a href="#只移除对该文件的跟踪，但是依旧在工作区保留文件" class="headerlink" title="只移除对该文件的跟踪，但是依旧在工作区保留文件"></a>只移除对该文件的跟踪，但是依旧在工作区保留文件</h2><p>git rm –cached <file-name></p><h2 id="安全重命名"><a href="#安全重命名" class="headerlink" title="安全重命名"></a>安全重命名</h2><p>git mv <old-name> <new-name></p><h2 id="删除未跟踪并且未被-gitignore忽略的文件"><a href="#删除未跟踪并且未被-gitignore忽略的文件" class="headerlink" title="删除未跟踪并且未被.gitignore忽略的文件"></a>删除未跟踪并且未被.gitignore忽略的文件</h2><p>git clean</p><h2 id="查看哪些文件将会被删除，但是不会真正删除"><a href="#查看哪些文件将会被删除，但是不会真正删除" class="headerlink" title="查看哪些文件将会被删除，但是不会真正删除"></a>查看哪些文件将会被删除，但是不会真正删除</h2><p>git clean -n<br>复制代码<br>撤销修改，代码回滚</p><h2 id="撤销工作区某个文件修改"><a href="#撤销工作区某个文件修改" class="headerlink" title="撤销工作区某个文件修改"></a>撤销工作区某个文件修改</h2><p>git checkout <file-name></p><h2 id="撤销所有文件"><a href="#撤销所有文件" class="headerlink" title="撤销所有文件"></a>撤销所有文件</h2><p>git checkout .</p><h2 id="恢复某个commit的指定文件到暂存区和工作区"><a href="#恢复某个commit的指定文件到暂存区和工作区" class="headerlink" title="恢复某个commit的指定文件到暂存区和工作区"></a>恢复某个commit的指定文件到暂存区和工作区</h2><p>git checkout <commit-id> <file-name></p><h2 id="撤销当前暂存区的修改"><a href="#撤销当前暂存区的修改" class="headerlink" title="撤销当前暂存区的修改"></a>撤销当前暂存区的修改</h2><p>git reset <file-name></p><h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><h2 id="只移动仓库中HEAD指针的位置，工作区和暂存区的修改都不变"><a href="#只移动仓库中HEAD指针的位置，工作区和暂存区的修改都不变" class="headerlink" title="只移动仓库中HEAD指针的位置，工作区和暂存区的修改都不变"></a>只移动仓库中<code>HEAD</code>指针的位置，工作区和暂存区的修改都不变</h2><p>git reset –soft <commit-id></p><h2 id="移动HEAD指针的位置，并使用回退的到版本重置暂存区，工作区的修改保持不变"><a href="#移动HEAD指针的位置，并使用回退的到版本重置暂存区，工作区的修改保持不变" class="headerlink" title="移动HEAD指针的位置，并使用回退的到版本重置暂存区，工作区的修改保持不变"></a>移动<code>HEAD</code>指针的位置，并使用回退的到版本重置暂存区，工作区的修改保持不变</h2><p>git reset –mixed <commit-id></p><h2 id="移动HEAD指针位置，并使用回退的到版本重置工作区和暂存区，保持与指定的提交一致"><a href="#移动HEAD指针位置，并使用回退的到版本重置工作区和暂存区，保持与指定的提交一致" class="headerlink" title="移动HEAD指针位置，并使用回退的到版本重置工作区和暂存区，保持与指定的提交一致"></a>移动<code>HEAD</code>指针位置，并使用回退的到版本重置工作区和暂存区，保持与指定的提交一致</h2><p>git reset –hard <commit-id></p><h2 id="重置修改"><a href="#重置修改" class="headerlink" title="重置修改"></a>重置修改</h2><h2 id="新建一个提交重置目标提交"><a href="#新建一个提交重置目标提交" class="headerlink" title="新建一个提交重置目标提交"></a>新建一个提交重置目标提交</h2><p>git revert <commit-id></p><h2 id="重置目标提交，但是不会新建提交，而是修改工作区和暂存区"><a href="#重置目标提交，但是不会新建提交，而是修改工作区和暂存区" class="headerlink" title="重置目标提交，但是不会新建提交，而是修改工作区和暂存区"></a>重置目标提交，但是不会新建提交，而是修改工作区和暂存区</h2><p>git revert -n <commit-id></p><h2 id="重置多个提交（不包括start-id，但是包括end-id）"><a href="#重置多个提交（不包括start-id，但是包括end-id）" class="headerlink" title="重置多个提交（不包括start-id，但是包括end-id）"></a>重置多个提交（不包括start-id，但是包括end-id）</h2><p>git revet <start-id>…<end-id></p><h2 id="在revert遇到冲突并解决冲突后，继续执行撤销操作"><a href="#在revert遇到冲突并解决冲突后，继续执行撤销操作" class="headerlink" title="在revert遇到冲突并解决冲突后，继续执行撤销操作"></a>在revert遇到冲突并解决冲突后，继续执行撤销操作</h2><p>git revert –continue</p><h2 id="终止revert，但保留当前的结果"><a href="#终止revert，但保留当前的结果" class="headerlink" title="终止revert，但保留当前的结果"></a>终止revert，但保留当前的结果</h2><p>git revert –quit</p><h2 id="撤销revert"><a href="#撤销revert" class="headerlink" title="撤销revert"></a>撤销revert</h2><p>git revert –abort<br>复制代码<br>分支</p><h2 id="列出本地所有分支"><a href="#列出本地所有分支" class="headerlink" title="列出本地所有分支"></a>列出本地所有分支</h2><p>git branch</p><h2 id="列出所有远程分支（后文会讲解什么是远程分支）"><a href="#列出所有远程分支（后文会讲解什么是远程分支）" class="headerlink" title="列出所有远程分支（后文会讲解什么是远程分支）"></a>列出所有远程分支（后文会讲解什么是远程分支）</h2><p>git branch -r</p><h2 id="列出所有本地和远程分支"><a href="#列出所有本地和远程分支" class="headerlink" title="列出所有本地和远程分支"></a>列出所有本地和远程分支</h2><p>git branch -a</p><h2 id="查看分支的详细信息"><a href="#查看分支的详细信息" class="headerlink" title="查看分支的详细信息"></a>查看分支的详细信息</h2><p>git branch -v</p><h2 id="新建分支"><a href="#新建分支" class="headerlink" title="新建分支"></a>新建分支</h2><p>git branch <branch-name></p><h2 id="新建分支并切换分支"><a href="#新建分支并切换分支" class="headerlink" title="新建分支并切换分支"></a>新建分支并切换分支</h2><p>git checkout -b <branch-name></p><h2 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2><p>git checkout <branch-name></p><h2 id="切换到上一个分支"><a href="#切换到上一个分支" class="headerlink" title="切换到上一个分支"></a>切换到上一个分支</h2><p>git checkout -</p><h2 id="删除分支-针对已经合并过的分支"><a href="#删除分支-针对已经合并过的分支" class="headerlink" title="删除分支(针对已经合并过的分支)"></a>删除分支(针对已经合并过的分支)</h2><p>git branch -d <branch-name></p><h2 id="删除分支-不管是否合并"><a href="#删除分支-不管是否合并" class="headerlink" title="删除分支(不管是否合并)"></a>删除分支(不管是否合并)</h2><p>git branch -D <branch-name></p><h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><p>git merge <branch-name></p><h2 id="不使用fast-forward模式合并"><a href="#不使用fast-forward模式合并" class="headerlink" title="不使用fast-forward模式合并"></a>不使用fast-forward模式合并</h2><p>git merge –no-ff <branch-name></p><h2 id="挑选一个commit合并到当前分支"><a href="#挑选一个commit合并到当前分支" class="headerlink" title="挑选一个commit合并到当前分支"></a>挑选一个commit合并到当前分支</h2><p>git cherry-pick <commit-id></p><h2 id="挑选指定分支的最新提交"><a href="#挑选指定分支的最新提交" class="headerlink" title="挑选指定分支的最新提交"></a>挑选指定分支的最新提交</h2><p>git cherry-pick <branch-name></p><h2 id="挑选连续多个提交（左开右闭，不包括start-commit）"><a href="#挑选连续多个提交（左开右闭，不包括start-commit）" class="headerlink" title="挑选连续多个提交（左开右闭，不包括start-commit）"></a>挑选连续多个提交（左开右闭，不包括start-commit）</h2><p>git cherry-pick <start-comm-id>…<end-commit-id><br>挑选连续多个提交（左闭右闭，包括start-commit）<br>git cherry-pick <start-commid-id>^…<end-commit-id></p><h2 id="在解决冲突后，继续执行下一个cherry-pick"><a href="#在解决冲突后，继续执行下一个cherry-pick" class="headerlink" title="在解决冲突后，继续执行下一个cherry-pick"></a>在解决冲突后，继续执行下一个cherry-pick</h2><p>git cherry-pick –continue</p><h2 id="退出操作，保留当前进度"><a href="#退出操作，保留当前进度" class="headerlink" title="退出操作，保留当前进度"></a>退出操作，保留当前进度</h2><p>git cherry-pick –quit</p><h2 id="撤销本次操作"><a href="#撤销本次操作" class="headerlink" title="撤销本次操作"></a>撤销本次操作</h2><p>git cherry-pick –abort<br>复制代码<br>打上Tag</p><h2 id="查看所有tag"><a href="#查看所有tag" class="headerlink" title="查看所有tag"></a>查看所有tag</h2><p>git tag</p><h2 id="筛选相应的tag"><a href="#筛选相应的tag" class="headerlink" title="筛选相应的tag"></a>筛选相应的tag</h2><p>git tag -l <tag-name></p><h2 id="查看某个commit上所有的tag"><a href="#查看某个commit上所有的tag" class="headerlink" title="查看某个commit上所有的tag"></a>查看某个commit上所有的tag</h2><p>git tag –points-at <commit-id></p><h2 id="查看某一个tag"><a href="#查看某一个tag" class="headerlink" title="查看某一个tag"></a>查看某一个tag</h2><p>git show <tag-name></p><h2 id="查看所有tag以及它们分别对应的commit"><a href="#查看所有tag以及它们分别对应的commit" class="headerlink" title="查看所有tag以及它们分别对应的commit"></a>查看所有tag以及它们分别对应的commit</h2><p>git show-ref –tags</p><h2 id="新建tag"><a href="#新建tag" class="headerlink" title="新建tag"></a>新建tag</h2><p>git tag <tag-name></p><h2 id="在指定的提交新建tag"><a href="#在指定的提交新建tag" class="headerlink" title="在指定的提交新建tag"></a>在指定的提交新建tag</h2><p>git tag <tag-name> <commit-id></p><h2 id="添加一个tag和message"><a href="#添加一个tag和message" class="headerlink" title="添加一个tag和message"></a>添加一个tag和message</h2><p>git tag -a <tag-name> -m <message></p><h2 id="删除tag"><a href="#删除tag" class="headerlink" title="删除tag"></a>删除tag</h2><p>git tag -d <tag-name><br>复制代码<br>紧急加塞，使用stash</p><h2 id="新建stash"><a href="#新建stash" class="headerlink" title="新建stash"></a>新建stash</h2><p>git stash</p><h2 id="指定你想要的messge信息"><a href="#指定你想要的messge信息" class="headerlink" title="指定你想要的messge信息"></a>指定你想要的messge信息</h2><p>git stash save <message></p><h2 id="将未跟踪的文件也加入暂存"><a href="#将未跟踪的文件也加入暂存" class="headerlink" title="将未跟踪的文件也加入暂存"></a>将未跟踪的文件也加入暂存</h2><p>git stash -u</p><h2 id="将所有文件加入暂存（即使该文件被git忽略）"><a href="#将所有文件加入暂存（即使该文件被git忽略）" class="headerlink" title="将所有文件加入暂存（即使该文件被git忽略）"></a>将所有文件加入暂存（即使该文件被git忽略）</h2><p>git stash -a</p><h2 id="查看暂存的历史"><a href="#查看暂存的历史" class="headerlink" title="查看暂存的历史"></a>查看暂存的历史</h2><p>git stash list</p><h2 id="查看某一个次特定的暂存"><a href="#查看某一个次特定的暂存" class="headerlink" title="查看某一个次特定的暂存"></a>查看某一个次特定的暂存</h2><p>git show stash@{<number>}</p><h2 id="取出最近的暂存"><a href="#取出最近的暂存" class="headerlink" title="取出最近的暂存"></a>取出最近的暂存</h2><p>git stash apply</p><h2 id="取出目标暂存"><a href="#取出目标暂存" class="headerlink" title="取出目标暂存"></a>取出目标暂存</h2><p>git stash apply <number></p><h2 id="取出最近暂存，并删除该暂存的记录"><a href="#取出最近暂存，并删除该暂存的记录" class="headerlink" title="取出最近暂存，并删除该暂存的记录"></a>取出最近暂存，并删除该暂存的记录</h2><p>git stash pop</p><h2 id="删除最近暂存"><a href="#删除最近暂存" class="headerlink" title="删除最近暂存"></a>删除最近暂存</h2><p>git stash drop</p><h2 id="删除目标暂存"><a href="#删除目标暂存" class="headerlink" title="删除目标暂存"></a>删除目标暂存</h2><p>git stash drop <number></p><h2 id="清空历史"><a href="#清空历史" class="headerlink" title="清空历史"></a>清空历史</h2><p>git stash clear<br>复制代码<br>变基</p><h2 id="合并分支-1"><a href="#合并分支-1" class="headerlink" title="合并分支"></a>合并分支</h2><p>git rebase <branch-name></p><h2 id="可以交互式的操作到commi-id为止的提交（不包括commit-id所指向提交）的所有提交"><a href="#可以交互式的操作到commi-id为止的提交（不包括commit-id所指向提交）的所有提交" class="headerlink" title="可以交互式的操作到commi-id为止的提交（不包括commit-id所指向提交）的所有提交"></a>可以交互式的操作到commi-id为止的提交（不包括commit-id所指向提交）的所有提交</h2><p>git rebase -i &lt;commit-id<br>复制代码<br>远程仓库</p><h2 id="拉取代码，并使用默认的远端仓库的名字"><a href="#拉取代码，并使用默认的远端仓库的名字" class="headerlink" title="拉取代码，并使用默认的远端仓库的名字"></a>拉取代码，并使用默认的远端仓库的名字</h2><p>git clone <url></p><h2 id="拉取代码，自定义本地仓库名字"><a href="#拉取代码，自定义本地仓库名字" class="headerlink" title="拉取代码，自定义本地仓库名字"></a>拉取代码，自定义本地仓库名字</h2><p>git clone <url> <new-name></p><h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><p>git remote add <remote-name> <remote-url></p><h2 id="查看远端仓库信息"><a href="#查看远端仓库信息" class="headerlink" title="查看远端仓库信息"></a>查看远端仓库信息</h2><p>git remote -v</p><h2 id="删除远程仓库"><a href="#删除远程仓库" class="headerlink" title="删除远程仓库"></a>删除远程仓库</h2><p>git remote remove <remote-name></p><h2 id="重命名远程操作名字"><a href="#重命名远程操作名字" class="headerlink" title="重命名远程操作名字"></a>重命名远程操作名字</h2><p>git remote rename <old-remote-name> <new-remote-name></p><h2 id="推送分支到特定的远程仓库，如果只有一个远程仓库可以省略，第一次推送需要加入-u参数"><a href="#推送分支到特定的远程仓库，如果只有一个远程仓库可以省略，第一次推送需要加入-u参数" class="headerlink" title="推送分支到特定的远程仓库，如果只有一个远程仓库可以省略，第一次推送需要加入-u参数"></a>推送分支到特定的远程仓库，如果只有一个远程仓库可以省略，第一次推送需要加入<code>-u</code>参数</h2><p>git push <remote-name> <branch-name></p><h2 id="推送指定tag到远端"><a href="#推送指定tag到远端" class="headerlink" title="推送指定tag到远端"></a>推送指定tag到远端</h2><p>git push <remote-name> <tag-name></p><h2 id="推送所有tag到远端"><a href="#推送所有tag到远端" class="headerlink" title="推送所有tag到远端"></a>推送所有tag到远端</h2><p>git push <remote-name> –tags</p><h2 id="拉取更新"><a href="#拉取更新" class="headerlink" title="拉取更新"></a>拉取更新</h2><p>git fetch</p><h2 id="获取远端仓库更新，并自动合并到本地分支（相当于git-fetch-amp-amp-git-merge）"><a href="#获取远端仓库更新，并自动合并到本地分支（相当于git-fetch-amp-amp-git-merge）" class="headerlink" title="获取远端仓库更新，并自动合并到本地分支（相当于git fetch &amp;&amp; git merge）"></a>获取远端仓库更新，并自动合并到本地分支（相当于<code>git fetch &amp;&amp; git merge</code>）</h2><p>git pull</p><h2 id="使用rebase方式拉取更新"><a href="#使用rebase方式拉取更新" class="headerlink" title="使用rebase方式拉取更新"></a>使用rebase方式拉取更新</h2><p>git pull –rebase<br>复制代码</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>搜索网站</title>
+      <link href="/2019/04/29/tool/find/"/>
+      <url>/2019/04/29/tool/find/</url>
+      
+        <content type="html"><![CDATA[<p><strong>谷歌搜索引擎镜像网站</strong></p><p>1、<a href="https://start.lenovo.com/（" target="_blank" rel="noopener">https://start.lenovo.com/（</a> 非原版 ,谷歌加强驱动 )</p><p>2、<a href="https://g.91gg.xyz/（" target="_blank" rel="noopener">https://g.91gg.xyz/（</a> 原版 ,无广告 )</p><p>3、<a href="https://go.wonen.tech/" target="_blank" rel="noopener">https://go.wonen.tech/</a> （ 原版 ,无广告 )</p><p>4、<a href="http://so.baohua.me/" target="_blank" rel="noopener">http://so.baohua.me/</a> （ 原版 ,无广告 )</p><p>5、<a href="https://4.zhmj114.com/" target="_blank" rel="noopener">https://4.zhmj114.com/</a> （ 原版 ,无广告 )</p><p>6、<a href="https://g2.nuist.top/" target="_blank" rel="noopener">https://g2.nuist.top/</a> （ 原版 ,无无广告，访问需要验证 )</p><p>7、<a href="https://g.kuriko.moe/" target="_blank" rel="noopener">https://g.kuriko.moe/</a> （ 原版 ,无广告，把域名复制到浏览器打开 )</p><p>8、<a href="https://2.scmor.website/" target="_blank" rel="noopener">https://2.scmor.website/</a> （ 原版 ,有广告 )</p><p>9、<a href="https://yy1.ggss.site/（" target="_blank" rel="noopener">https://yy1.ggss.site/（</a> 原版 ,有广告 )</p><p>10、<a href="https://d2.aigg.men/（" target="_blank" rel="noopener">https://d2.aigg.men/（</a> 原版 ,有广告 )</p><p>11、<a href="http://search.mysearch.com/（" target="_blank" rel="noopener">http://search.mysearch.com/（</a> 非原版 ,谷歌加强驱动 )</p><p>12、<a href="http://www.ceek.jp（" target="_blank" rel="noopener">http://www.ceek.jp（</a> 非原版 ,可选择谷歌搜索 )</p><p>13、<a href="https://yy2.ggss.site/（原版" target="_blank" rel="noopener">https://yy2.ggss.site/（原版</a> ,有广告 )</p><p>14、<a href="http://starter..-1.elb.amazonaws.com/" target="_blank" rel="noopener">http://starter..-1.elb.amazonaws.com/</a> (非原版)</p><p>15、<a href="https://busca.uol.com.br" target="_blank" rel="noopener">https://busca.uol.com.br</a> (非原版，谷歌自定义搜索)</p><p>16、<a href="https://www.startpage.com/" target="_blank" rel="noopener">https://www.startpage.com/</a> (非原版，谷歌自定义搜索)</p><p>17、<a href="https://bird.so/" target="_blank" rel="noopener">https://bird.so/</a> （非原版）</p><p>18、<a href="https://fireball.com" target="_blank" rel="noopener">https://fireball.com</a> （非原版）</p><p>19、<a href="https://www.enow.com" target="_blank" rel="noopener">https://www.enow.com</a> （非原版）</p><p>20、<a href="https://www.aolsearch.com" target="_blank" rel="noopener">https://www.aolsearch.com</a> （非原版)</p><p>21、<a href="http://rryy.org/（无广告，搜索体验良好）" target="_blank" rel="noopener">http://rryy.org/（无广告，搜索体验良好）</a></p><p>22、<a href="http://search.mysearch.com/" target="_blank" rel="noopener">http://search.mysearch.com/</a> （无广告，搜索体验良好）</p><p>23、<a href="http://guge.suanfazu.com/" target="_blank" rel="noopener">http://guge.suanfazu.com/</a> （无广告，搜索体验良好）</p><p>24、<a href="http://www.looksmart.com" target="_blank" rel="noopener">http://www.looksmart.com</a> （无广告，搜索体验良好）</p><p>25、<a href="http://googlebridge.com/" target="_blank" rel="noopener">http://googlebridge.com/</a> （无广告，体验良好）</p><p>26、<a href="https://www.hotbot.com" target="_blank" rel="noopener">https://www.hotbot.com</a> （无广告，体验良好）</p><p>27、<a href="https://fireball.com" target="_blank" rel="noopener">https://fireball.com</a> （无广告，体验良好）</p><p>28、<a href="http://arianna.libero.it" target="_blank" rel="noopener">http://arianna.libero.it</a> （无广告，体验良好）</p><p>29、<a href="http://tinygoo.herokuapp.com" target="_blank" rel="noopener">http://tinygoo.herokuapp.com</a> （无广告，体验良好）</p><p>30、<a href="http://www.gycc.com/" target="_blank" rel="noopener">http://www.gycc.com/</a> （无广告，体验良好）</p><p>31、<a href="http://www.dogpile.com/" target="_blank" rel="noopener">http://www.dogpile.com/</a> （无广告，体验良好）</p><p>32、<a href="https://so.mezw.com/（无广告，体验良好）" target="_blank" rel="noopener">https://so.mezw.com/（无广告，体验良好）</a></p><p>33、<a href="https://pashanhu.space" target="_blank" rel="noopener">https://pashanhu.space</a> （无广告，体验良好）</p><p>34、<a href="http://www.gfsoso.me/" target="_blank" rel="noopener">http://www.gfsoso.me/</a> （有广告，体验一般）</p><p><strong>谷歌学术镜像网站</strong></p><p>1、<a href="https://xue.glgoo.net/" target="_blank" rel="noopener">https://xue.glgoo.net/</a></p><p>2、<a href="https://xues.glgoo.com/" target="_blank" rel="noopener">https://xues.glgoo.com/</a></p><p>3、<a href="http://so.hiqq.com.cn/" target="_blank" rel="noopener">http://so.hiqq.com.cn/</a></p><p>4、<a href="https://d2.aigg.men/extdomains/scholar.google.com/" target="_blank" rel="noopener">https://d2.aigg.men/extdomains/scholar.google.com/</a></p><p>5、<a href="https://xs.glgoo.top/scholar/" target="_blank" rel="noopener">https://xs.glgoo.top/scholar/</a></p><p><strong>其它替代品</strong></p><p>1、<a href="https://www.qwant.com" target="_blank" rel="noopener">https://www.qwant.com</a> （qwant搜索引擎，法国的一款搜索引擎）</p><p>2、<a href="https://nova.rambler.ru" target="_blank" rel="noopener">https://nova.rambler.ru</a> （俄罗斯的一款搜索引擎，由谷歌驱动）</p><p>3、<a href="https://sg.search.yahoo.com/" target="_blank" rel="noopener">https://sg.search.yahoo.com/</a> （雅虎）</p><p>4、<a href="https://search.avira.com/" target="_blank" rel="noopener">https://search.avira.com/</a> （德国的一款搜索引擎）</p><p>5、<a href="https://www.ecosia.org/" target="_blank" rel="noopener">https://www.ecosia.org/</a> （德国的一款搜索引擎，具有公益性）</p><p>6、<a href="https://suche.gmx.net" target="_blank" rel="noopener">https://suche.gmx.net</a> （德国的一款搜索引擎）</p><p>7、<a href="https://duckduckgo.com" target="_blank" rel="noopener">https://duckduckgo.com</a> （美国的一款搜索引擎）</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> tool </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>压测认识</title>
+      <link href="/2019/03/02/tool/yace/"/>
+      <url>/2019/03/02/tool/yace/</url>
+      
+        <content type="html"><![CDATA[<h3 id="一、压测定义"><a href="#一、压测定义" class="headerlink" title="一、压测定义"></a>一、压测定义</h3><p>压测，即压力测试，是确立系统稳定性的一种测试方法，通常在系统正常运作范围之外进行，以考察其功能极限和隐患；同时也是一个试图确定应用在高于正常负载的情况下稳定性的过程。</p><h3 id="二、压测类型"><a href="#二、压测类型" class="headerlink" title="二、压测类型"></a>二、压测类型</h3><ul><li>功能压测</li><li>性能压测（目前）<h3 id="三、为啥需要压测"><a href="#三、为啥需要压测" class="headerlink" title="三、为啥需要压测"></a>三、为啥需要压测</h3>举例：从09年的淘宝双十一大促导致多家合作银行后台系统接连宕机，到春运期间12306购票难，再到之前聚美优品促销活动刚开始就遭秒杀。根据Amazon统计，每慢100毫秒，交易额下降1%。这些事件和统计数据为大家敲响了警钟，也客观说明了性能压测对于企业应用的重要性。</li></ul><p>从具体的作用上讲，性能压测可以用于新系统上线支持、技术升级验证、业务峰值稳定性保障、站点容量规划以及性能瓶颈探测。</p><ol><li><p>新系统上线支持<br>在新系统上线前，通过执行性能压测能够对系统的负载能力有较为清晰的认知，从而结合预估的潜在用户数量保障系统上线后的用户体验。</p></li><li><p>技术升级验证<br>在系统重构过程中，通过性能压测验证对比，可以有效验证新技术的高效性，指导系统重构。</p></li><li><p>业务峰值稳定性保障<br>在业务峰值到来前，通过充分的性能压测，确保大促活动等峰值业务稳定性，保障峰值业务不受损。</p></li><li><p>站点容量规划<br>通过性能压测实现对站点精细化的容量规划，指导分布式系统机器资源分配。</p></li><li><p>性能瓶颈探测<br>通过性能压测探测系统中的性能瓶颈点，进行针对性优化，从而提升系统性能。</p></li></ol><p>综上所述，性能压测伴随着系统开发、重构、上线到优化的生命周期，因此有效的性能压测对系统的稳定性具有重要的指导意义，是系统生命周期中不可或缺的一部分。</p><h3 id="四、性能压测概念"><a href="#四、性能压测概念" class="headerlink" title="四、性能压测概念"></a>四、性能压测概念</h3><ul><li>性能压测是通过自动化的测试工具模拟多种正常、峰值以及异常负载条件来对系统的各项性能指标进行测试。</li></ul><ul><li><p>从测试目的上性能压测又可以划分为负载测试、压力测试、并发测试、配置测试以及可靠性测试。</p></li><li><p>负载测试是测试当负载逐渐增加时，系统各项性能指标的变化情况。</p></li><li><p>压力测试是通过确定一个系统的瓶颈或者不能接受的性能点，来获得系统能提供的最大服务级别的测试。</p></li><li><p>并发测试通过模拟用户并发访问，测试多用户并发访问同一个软件、同一个模块或者数据记录时是否存在死锁等性能问题。</p></li><li><p>配置测试是通过对被测系统的软/硬件环境的调整，了解各种不同方法对软件系统的性能影响的程度，从而找到系统各项资源的最优分配原则。<br>可靠性测试是在给系统加载一定业务压力的情况下，使系统运行一段时间，以此检测系统是否稳定。<br>总的来说，性能压测是在对系统性能有一定程度了解的前提下，在确定的环境下针对压测需求进行的一种测试。</p></li></ul><h4 id="性能测试包括负载测试、压力测试、基准测试等。"><a href="#性能测试包括负载测试、压力测试、基准测试等。" class="headerlink" title="性能测试包括负载测试、压力测试、基准测试等。"></a>性能测试包括负载测试、压力测试、基准测试等。</h4><ol><li><p>负载测试<br>通过测试系统在资源超负荷情况下的表现，以发现设计上的错误或验证系统的负载能力。</p></li><li><p>压力测试<br>也称为强度测试、负载测试。压力测试是模拟实际应用的软硬件环境及用户使用过程的系统负荷，长时间或超大负荷地运行测试软件，来测试被测系统的性能、可靠性、稳定性等</p></li><li><p>基准测试</p></li></ol><h4 id="性能测试做什么？"><a href="#性能测试做什么？" class="headerlink" title="性能测试做什么？"></a>性能测试做什么？</h4><p>性能测试是通过使用各种工具，来模拟各种可控与不可控的请求。通过模拟生产运行的业务以及使用场景的组合形成多种性能测试点，测试系统的性能是否能够满足生产性能要求。在特定条件下运行验证系统承受能力。通过各项性能指标来判断系统是否达到生产需求，及时对系统做出风险评估。发现问题、解决问题，回馈用户高质量的体验</p><h4 id="性能测试怎么做？"><a href="#性能测试怎么做？" class="headerlink" title="性能测试怎么做？"></a>性能测试怎么做？</h4><p>我们系统的性能测试利用市面上测试工具进行性能测试。这种测试方法可以捕获部分问题，但很难模拟业务场景组合。而且测试工具五花八门，不利于搜集测试性能结果。我们现在进行的性能测试开发，利用统一的性能测试工具Jmeter做为核心。利用influxDB数据库做数据收集，Grafana做性能数据展示平台。搭建完整的性能测试平台，开放统一的性能测试通道，建立通一的性能指标收集平台。平台根据我们自己的业务要求建立性能测试计划，推出不同的业务模板。通过平台接口可进行合理的性能测试。我们可根据不同业务展示不同的性能图形。有利于测试人员及时定位问题</p><h3 id="五、如何选取性能压测工具"><a href="#五、如何选取性能压测工具" class="headerlink" title="五、如何选取性能压测工具"></a>五、如何选取性能压测工具</h3><p>在选取合适的性能压测工具之前，我们需要先先了解执行一次完整的性能压测所需要的步骤：</p><ol><li><p>确定性能压测目标：性能压测目标可能源于项目计划、业务方需求等</p></li><li><p>确定性能压测环境：为了尽可能发挥性能压测作用，性能压测环境应当尽可能同线上环境一致</p></li><li><p>确定性能压测通过标准：针对性能压测目标以及选取的性能压测环境，制定性能压测通过标准，对于不同于线上环境的性能压测环境，通过标准也应当适度放宽</p></li><li><p>设计性能压测：编排压测链路，构造性能压测数据，尽可能模拟真实的请求链路以及请求负载</p></li><li><p>执行性能压测：借助性能压测工具，按照设计执行性能压测</p></li><li><p>分析性能压测结果报告：分析解读性能压测结果报告，判定性能压测是否达到预期目标，若不满足，要基于性能压测结果报告分析原因</p></li></ol><p>由上述步骤可知，一次成功的性能压测涉及到多个环节，从场景设计到施压再到分析，缺一不可。工欲善其事，必先利其器，而一款合适的性能工具意味着我们能够在尽可能短的时间内完成一次合理的性能压测，达到事半功倍的效果。</p><p>工具选型对比<br>在论述了性能压测必要性之后，如何选取性能压测工具成为一个重要的议题？本文选取了市场上主流性能压测工具：（ab）Apache Bench、LoadRunner、JMeter、阿里云PTS，并从多个方面出发分析了各个工具的优缺点，汇总后的优缺点如下表所示：</p><table><thead><tr><th align="center">压测工具</th><th align="center">Apache Bench（ab）</th><th align="center">LoadRunner</th><th align="center">JMeter</th><th align="center">PTS</th></tr></thead><tbody><tr><td align="center">学习成本</td><td align="center">低</td><td align="center">高</td><td align="center">高</td><td align="center">低</td></tr><tr><td align="center">安装部署成本</td><td align="center">低</td><td align="center">高</td><td align="center">高</td><td align="center">低</td></tr><tr><td align="center">是否免费</td><td align="center">是</td><td align="center">否</td><td align="center">是</td><td align="center">否</td></tr><tr><td align="center">是否支持多协议</td><td align="center">否</td><td align="center">是</td><td align="center">是</td><td align="center">是</td></tr><tr><td align="center">压测结果是否能够图形化展示</td><td align="center">否</td><td align="center">是</td><td align="center">是</td><td align="center">是</td></tr><tr><td align="center">是否支持TPS模式</td><td align="center">否</td><td align="center">否</td><td align="center">否</td><td align="center">是</td></tr><tr><td align="center">是否有链路、场景编排管理支持</td><td align="center">否</td><td align="center">是</td><td align="center">是</td><td align="center">是</td></tr><tr><td align="center">是否支持场景录制</td><td align="center">否</td><td align="center">是</td><td align="center">是</td><td align="center">是</td></tr><tr><td align="center">生态环境强弱</td><td align="center">弱</td><td align="center">弱</td><td align="center">弱</td><td align="center">强</td></tr><tr><td align="center">监控指标是否完备</td><td align="center">否</td><td align="center">否</td><td align="center">否</td><td align="center">是</td></tr><tr><td align="center">是否原生支持流量地域定制</td><td align="center">否</td><td align="center">否</td><td align="center">否</td><td align="center">是</td></tr><tr><td align="center">### 总结</td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center">目前采用jmeter和loadrunner主导检查测试反馈。</td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 压测 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vi编辑</title>
+      <link href="/2018/07/20/tool/vi/"/>
+      <url>/2018/07/20/tool/vi/</url>
+      
+        <content type="html"><![CDATA[<ol><li><p>命名模式—–&gt;编辑模式<br> a：光标向后移动一位<br> i：光标、内容没有变化<br> o：向下起新行进入编辑模式<br> s：删除光标当前的字符进入编辑模式</p></li><li><p>尾行模式操作<br> :q      退出编辑<br> :w      对修改后的文档进行保存<br> :wq     保存并退出<br> :q!     强制退出，不保存修改<br> :w!     强制保存(对文件没有写权限，要进行修改保存的措施)<br> :wq!    强制保存并退出</p><p> :set number 或 nu       //设置行号<br> :set nonumber 或 nonu  //取消行号</p></li><li><p>命令模式操作<br> 1) 光标移动</p><pre><code>① 字符级移动    &quot;上下左右&quot;键移动    h左  j下   k上   l右② 单词级移动    w: 下个单词的首字母    b: 上个(本)单词的首字母    e: 下个(本)单词的尾字母③ 行级    $:  行尾    0:  行首④ 段落    {：上个(本)段落首部    }：下个(本)段落尾部⑤ 屏幕级(不翻屏)    H: 屏幕首部    L: 屏幕尾部⑥ 文档级    G:      文档尾部    1G:     文档首部    n+G:    文档的第n行</code></pre><p> 2) 内容删除</p><pre><code>dd:     删除光标所在行n+dd:   当前行算在内，向下删除n行x:      删除光标所在的当前字符c+w     从当前位置删除至单词尾部，并“进入编辑模式”d+光标移动区域： 删除光标经过的内容    d+e   //从当前位置删除至单词的结尾    d+$   //从当前位置删除至当前行的结尾    d+}   //从当前位置删除到当前段落的结尾    d+nG   //从当前行删除到第n行</code></pre><p> 3) 内容复制</p><pre><code>yy:     复制光标所在行n+yy:   当前行算在内，向下复制n行p       对“复制、删除”的内容进行粘贴操作y+光标移动区域： 复制光标经过的内容    y+e    //从当前位置复制至单词的结尾    y+$    //从当前位置复制至当前行的结尾    y+}    //从当前位置复制到当前段落的结尾    y+nG   //从当前行复制到第n行</code></pre><p> 4) 快捷操作</p><pre><code>r+字符      快速替换单个字符u           撤销undo.           点，重复执行上一次命令J           大写J，合并两行</code></pre><p>备注：可以关注博客持续更新其他新技术：<a href="https://chaofavip.github.io">hechaofa</a></p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vim </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>算法课堂1</title>
+      <link href="/2018/03/20/suanfa/suanfa01/"/>
+      <url>/2018/03/20/suanfa/suanfa01/</url>
+      
+        <content type="html"><![CDATA[<p><strong>1、冒泡排序</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$len = count($arr);</span><br><span class="line">$n = count($arr) <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; $len; $i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>($j = <span class="number">0</span>;$j &lt; $n; $j++;)&#123;</span><br><span class="line">        <span class="keyword">if</span>($arr[$j] &gt; $arr[$j+ <span class="number">1</span> ])&#123;</span><br><span class="line">            $tmp = $arr[$j];</span><br><span class="line">            $arr[$j] = $arr[$j +<span class="number">1</span>];</span><br><span class="line">            $arr[$j + <span class="number">1</span>] = $tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><p><strong>2、插入排序</strong></p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insert_sort</span><span class="params">($arr)</span></span>&#123;</span><br><span class="line">    $len = count($arr);</span><br><span class="line">    <span class="keyword">for</span>($i = <span class="number">0</span>;$i &lt; $len;$i++)&#123;</span><br><span class="line">        $temp = $arr[$i];</span><br><span class="line">           <span class="keyword">for</span>($j = $i - <span class="number">1</span>; $j &gt;= <span class="number">0</span>; $j--)&#123;</span><br><span class="line">                <span class="keyword">if</span>($temp &lt; $arr[$j])&#123;</span><br><span class="line">                $arr[$j + <span class="number">1</span>] =$arr[$j];</span><br><span class="line">                $arr[$j] = $temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><em>递归：程序调用自身的编程技巧称为递归</em></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>jq</title>
+      <link href="/2017/11/09/jq/tu/"/>
+      <url>/2017/11/09/jq/tu/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20191224000044442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> jq </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>redis基础操作</title>
+      <link href="/2017/10/09/redis/jichu/"/>
+      <url>/2017/10/09/redis/jichu/</url>
+      
+        <content type="html"><![CDATA[<p>1.1key键操作<br>1：exists key 　　　　　　     测试指定key是否存在</p><p>2：del key1 key2 —keyN      删除给定的key</p><p>3：type  key 　　　　　　　　返回给定key的value类型</p><p>4：keys　pattern　　　　　　返回匹配指定模式的所有key</p><p>5：rename oldkey newkey 　 改名字</p><p>6：dbsize　　　　　　　　　　返回当前数据库的key数量</p><p>7：expire key seconds 　　    为key指定过期时间</p><p>8：ttl key 　　　　　　　　　  返回key的剩余过期秒数</p><p>9：select db-index　　　　　　选择数据库</p><p>10 move key db-index            将key从当前数据库移动到指定的数据库</p><p>11：flushdb 　　　　　　　　　 删除当前数据库中所有的key</p><p>12：flushall　　　　　　　　　　删除所有数据库中的所有key</p><p>1.2：string类型操作<br>string是redis最基本的类型，一般我们可以用来保存序列化的对象或者一些图片的二进制字符串</p><p>1：set key value　　　　　　　　　　设置key对应的值为string类型的value</p><p>2：mset key1 value1 key2 value2　 一次性设置多个key的值</p><p>3：mget key1 key2 —-keyN           一次获取多个key的值</p><p>4：incr key 　　　　　　　　　　　　对key的值做加加操作，并返回新的值</p><p>5：decr key 　　　　　　　　　　　　同上，但是做的是减减操作</p><p>6：incrby key integer　　　　　　　　同incr，加指定值</p><p>7：decrby key integer　　　　　　　　同decr，减指定值</p><p>8：append key value 　　　　　　　　给指定key的字符串值追加value</p><p>9：substr key　start  end                 内容截取，内容下标从0开始，截取的内容包括start和end位置</p><p>1.3： List链表类型操作<br>list类型其实是一个双向的链表，通过push，pop操作从链表的头部或者尾部添加删除元素，这使得list既可以用作栈，也可以用作队列。一般我们使用它来获取最新的信息，可以存储n条，如果有新纪录加进来，就删除旧的信息</p><p>lpush key string 　　　　　　　　在key对应的list的头部添加字符串元素</p><p>rpop key　　　　　　　　　　　　从list的尾部删除元素，并返回删除元素</p><p>llen key 　　　　　　　　　　　　对应list的长度，key不存在返回0，如果key对应类型不是list返回错误</p><p>lrange key start end　　　　　　返回指定区间内的元素，下标从0开始</p><p>rpush key string                       同上，在尾部添加</p><p>lpop key  　　　　　　　　　　　 从list的头部删除元素，并返回删除元素</p><p>ltrin key start end 　　　　　　　截取list，保留指定区间内元素</p><p>1.4： set集合类型操作<br>set其实相当于string类型的无序集合</p><p>关于set集合类型除了基本的添加，删除操作，其他有用的操作还包含集合的并集，交集，差集，一般可以用来实现好友推荐功能</p><p>1：sadd key member 　　　　　 添加一个string元素到key对应的set集合中，成功就返回1,如果元素已经在集合中，返回0，key对应的set不存在返回错误</p><p>2：srem key member [member]  从key对应set中移除给定元素，成功就返回1</p><p>3：scard key 　　　　　　　　　　 返回set的元素个数</p><p>4：sismember key member 　　　判断member是否在set中</p><p>5：sinter key1 key2 key3 —keyN  返回所有给定key的交集</p><p>6：sunion key1 key2 –keyN          返回所有给定key的并集</p><p>7：sdiff key1 key2 –keyN             返回所有给定key的差集</p><p>8：smembers key 　　　　　　　　返回key对应set的所有元素</p><p>1.5 sort set 排序集合类型<br>元素有排序功能，不存在多个相同的元素，和set一样，sorted set 也是string类型元素的集合，不同的每个元素都会关联一个权，通过权值来进行排序</p><p>1：zdd key 权 值                     给key的set sort排序集合的key添加元素</p><p>2：zrevrange  key start end      获取由高到低的各个元素值</p><p>3：zscore key value 　　　　　　获取元素的权信息</p><p>4：zrank key value　　　　　　　　　　 获取元素的排名序号</p><p>5：zcard key 　　　　　　　　　　获取集合的个数</p><p>6：zremrangebyrank key 0 0    删除一个权最小的旧元素</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> redis </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> redis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>设计模式</title>
+      <link href="/2017/07/20/design/design/"/>
+      <url>/2017/07/20/design/design/</url>
+      
+        <content type="html"><![CDATA[<h2 id="单例模式（重点！）"><a href="#单例模式（重点！）" class="headerlink" title="单例模式（重点！）"></a><strong>单例模式（重点！）</strong></h2><p>单例：单个实例。</p><p>如果一个类的一个对象，可以完成全部功能。（例如MySQLDB数据库操作类）。</p><p>此时，如果实例化多个对象，就会造成额外的浪费资源。</p><p>如何设计，才能使得程序在任何地方都可以得到对象，而且是同一对象呢？</p><p>单例的设计思路：<strong>私有化构造方法</strong><br>如何限制用户来得到类的对象？</p><p>私有化构造方法后，类外的实例化工作，就不能调用构造方法，从而导致new的操作失败！</p><p> <img src="https://img-blog.csdnimg.cn/20191221224614674.png" alt="在这里插入图片描述"></p><p>公共的静态的获得对象的方法<br>如何实例化对象？</p><p>私有的构造方法，不能在类外调用，但是可以在类内调用。</p><p>“可见在类内实例化是可行的”</p><p>如何在类内执行实例化呢？</p><p>提供一个公共的静态方法，通过类调用进入到类内，从而执行实例化操作得到对象。</p><p><img src="https://img-blog.csdnimg.cn/20191221224646256.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p><strong>私有的静态属性</strong><br>实现getInstance的单例逻辑，先判断，再决定是否实例化对象。</p><p>如何实现判断当前是否已经有对象？</p><p>将实例化好的对象存于该类的静态属性中，判断是否已经存了。</p><p> <img src="https://img-blog.csdnimg.cn/20191221224724544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>私有化克隆__clone方法<br>对象还可以通过克隆的形式来得到，如何防止克隆？</p><p> <img src="https://img-blog.csdnimg.cn/20191221224744765.png" alt="在这里插入图片描述"></p><p>架构上的单例<br>项目设计上实现单例效果！</p><p> <img src="https://img-blog.csdnimg.cn/2019122122481995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>针对其他类：</p><p> <img src="https://img-blog.csdnimg.cn/20191221224828732.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p><strong>优点：</strong></p><ol><li>灵活，通用，没有限制死。</li><li>缺点：没有完全限制单例效果。</li></ol><h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a><strong>工厂模式</strong></h2><p>功能上：如果一个类的主要功能，是用于生产特定的对象。那么该类可以称之为一个工厂，或者依据工厂模式设计的类。</p><p>典型的实现是：工厂模式中的方法几乎都是静态方法。</p><p> <img src="https://img-blog.csdnimg.cn/20191221224855766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>上面方法括号里的$class_name是一个参数，代表“类名”。</p><p>Tip：不是必须是静态的，而是由于类的主要作用不是实例化本类的对象，而是用于执行生成其他类的对象。</p><p>工厂模式何时用？？？</p><p>直接实例化不能达到要求，需要额外的代码来配合，才能得到想要的对象。此时需要工厂代码。</p><p>例如：</p><p>单例效果。</p><p>需要在运行时才能确定实例化哪个类。</p><p>使用地方1：处理日志系统：</p><p>存在下列的类：Log_DB（用来将日志存于数据库）, Log_File(用来将日志存于文件的类), Log_Memory（用来将日志存于内存）</p><p> <img src="https://img-blog.csdnimg.cn/20191221224911193.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>实际中，上面的相关功能类：</p><p>需要使用接口（抽象类）技术，限定要存在一致的操作才可以：</p><p><img src="https://img-blog.csdnimg.cn/2019122122492227.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p> 备注：可以关注博客持续更新其他新技术：<a href="https://chaofavip.github.io">hechaofa</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 设计模式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux常用命令</title>
+      <link href="/2017/05/20/linux/mingling/"/>
+      <url>/2017/05/20/linux/mingling/</url>
+      
+        <content type="html"><![CDATA[<p>1.查看当前目录下对应的文件信息<br>    &gt; ls       //list列出当前目录下的文件信息<br>    &gt; ls -l  或 ll //list list以详细信息形式 列出当前目录下的文件信息<br>    &gt; ls -a    //list all 列出当前目录的全部文件(包括隐藏文件)<br>    &gt; ls -al   //以详细信息形式 列出当前目录的”全部”文件(包括隐藏文件)</p><pre><code>&gt; ls  目录 //查看指定目录的文件信息&gt; ls -li   //显示当前目录详细的文件信息，并显示“索引编号”</code></pre><ol start="2"><li><p>查看当前操作位置</p><blockquote><p>pwd    //查看当前操作位置</p></blockquote></li><li><p>目录切换</p><blockquote><p>cd 目录<br>cd ..   //向上级目录切换<br>cd etc  //切换到etc目录</p></blockquote><blockquote><p>cd      //切换到当前操作用户的家目录<br>cd ~    //效果同上指令</p></blockquote></li><li><p>用户切换</p><blockquote><p>su -       //切换为超级管理员root用户(账号和权限都是root)<br>su - root  //与上边指令效果一直<br>su root    //账号是root，权限是普通权限<br>exit    //退回到之前的账号<br>su  普通用户 //切到账号为具体普通用户</p></blockquote><blockquote><p>$  普通用户操作</p><h1 id="root用户操作"><a href="#root用户操作" class="headerlink" title="root用户操作"></a>root用户操作</h1></blockquote><p> //多次使用su指令会使得用户出现叠加效果<br> //需要输入多次exit指令退回到之前的用户<br> shuhua—&gt;root—&gt;shuhua—&gt;root</p></li><li><p>查看当前用户是谁</p><blockquote><p>whoami    //查看正在操作用户信息<br>who am i  //查看登录系统用户信息</p></blockquote></li><li><p>操作窗口切换</p><blockquote><h1 id="init-3-桌面模式切换到命名模式"><a href="#init-3-桌面模式切换到命名模式" class="headerlink" title="init 3    //桌面模式切换到命名模式"></a>init 3    //桌面模式切换到命名模式</h1><h1 id="init-5-命名模式切换到桌面模式"><a href="#init-5-命名模式切换到桌面模式" class="headerlink" title="init 5    //命名模式切换到桌面模式"></a>init 5    //命名模式切换到桌面模式</h1></blockquote></li><li><p>目录操作<br> ① 创建目录 make directory</p><blockquote><p>mkdir  目录名称<br>mkdir -p  newdir/newdir/newdir  (-p)  //递归方式创建多级目录<br> mkdir dir/dir/newdir  无需-p参数<br> mkdir -p dir/newdir/newdir  需要-p参数<br> 规律：新的目录超过两个或以上就需要-p参数</p></blockquote><p> ② 移动目录 move</p><blockquote><p>mv  dir1  dir2   //把dir1移动到dir2目录下<br>mv  dir1/dir2  dir3  //dir2移动到dir3的下边</p></blockquote><p> ③ 改名字 </p><blockquote><p>mv  dir1  dir2  //把dir1的名字改为dir2<br>mv  dir1/dir2  dir3/newdir  //dir2移动到dir3下并改名字为newdir</p></blockquote><p> mv  dir1  dir2<br> dir2是存在的目录—-&gt;就是移动操作</p><pre><code>不存在的目录----&gt;就是改名字操作</code></pre><p> 本质：mv是“移动、改名字”的合并指令</p><blockquote><p>mv dir1  dir2         //dir1移动到dir2下并改名字为原名<br>mv dir1  dir2/newdir  //dir1移动到dir2下并改名字为newdir<br>mv dir1/dir2  dir3/dir4  //dir2移动到dir4下并改名字为原名</p></blockquote><p> ④. 复制目录copy</p><blockquote><p>cp  file  dir      //把file文件复制到dir目录里边<br>cp  dir1  dir2 -R  //recursive递归复制，复制目录设置统一参数-R<br>cp  dir1/dir2  dir3  -R //dir2复制到dir3下一份<br>cp (-R) filename  dir/newname  //filename文件复制到dir下并改名字为newname</p></blockquote><p> ⑤ 删除文件 remove directory/file</p><blockquote><p>rm  filename  //删除文件<br>rm  -r  dir   //recursive通过递归方式删除一个目录<br>rm  -rf  filename  //force 递归、强制删除任何文件<br>rm  -rf  /    //kill you by yourself<br>rmdir  dir    //删除目录,删除单级目录</p></blockquote></li><li><p>文件操作<br> ① 查看内容</p><blockquote><p>cat  file    //输出文件内容到终端<br>more file    //逐行向下查看文件内容，q退出，不支持回看<br>less file    //上下左右 键查看文档的各个部分内容，支持回看 q退出<br>head -n file  //查看文件的前n行内容<br>tail -n file  //查看文件的最末尾n行内容<br>wc  file      //计算文件行数<br> ② 创建文件<br>touch  file   //创建一个新文件<br>touch  dir/file  //给指定目录创建一个新文件</p></blockquote><p> ③ 给文件追加内容</p><blockquote><p>echo 内容 &gt;  file   //把内容追加到指定文件file里边</p><pre><code>//覆盖写方式追加</code></pre><p>echo 内容 &gt;&gt; file   //把内容追加到指定文件file里边</p><pre><code>//纯内容追加，原内容保留</code></pre><p> 文件不存在会自动创建</p></blockquote></li><li><p>用户user操作(创建add、修改mod、删除del)<br> 对应文件：/etc/passwd<br> ① 创建用户</p><blockquote><h1 id="useradd-username"><a href="#useradd-username" class="headerlink" title="useradd  username"></a>useradd  username</h1><h1 id="useradd-g-组编号-username-指定编号创建用户信息"><a href="#useradd-g-组编号-username-指定编号创建用户信息" class="headerlink" title="useradd  -g 组编号 username   //指定编号创建用户信息"></a>useradd  -g 组编号 username   //指定编号创建用户信息</h1><h1 id="useradd-g-组编号-u-用户编号-d-家目录-username"><a href="#useradd-g-组编号-u-用户编号-d-家目录-username" class="headerlink" title="useradd  -g 组编号  -u 用户编号   -d 家目录  username"></a>useradd  -g 组编号  -u 用户编号   -d 家目录  username</h1><p> //家目录 会自动创建<br> ② 修改用户</p><h1 id="usermod-g-组编号-username-修改用户组编号"><a href="#usermod-g-组编号-username-修改用户组编号" class="headerlink" title="usermod  -g 组编号  username   //修改用户组编号"></a>usermod  -g 组编号  username   //修改用户组编号</h1><h1 id="usermod-g-组编号-u-用户编号-d-家目录-l-newname-username"><a href="#usermod-g-组编号-u-用户编号-d-家目录-l-newname-username" class="headerlink" title="usermod  -g 组编号 -u  用户编号  -d 家目录  -l newname  username"></a>usermod  -g 组编号 -u  用户编号  -d 家目录  -l newname  username</h1><p> //如果修改 家目录，需要手动创建之<br> ③ 删除用户</p><h1 id="userdel-username-只删除用户信息"><a href="#userdel-username-只删除用户信息" class="headerlink" title="userdel  username      //只删除用户信息"></a>userdel  username      //只删除用户信息</h1><h1 id="userdel-r-username-用户信息-和-家目录都删除"><a href="#userdel-r-username-用户信息-和-家目录都删除" class="headerlink" title="userdel -r  username   //用户信息 和 家目录都删除"></a>userdel -r  username   //用户信息 和 家目录都删除</h1></blockquote></li></ol><ol start="10"><li><p>组group操作(创建、修改、删除)<br>对应文件：/etc/group<br>① 创建组</p><blockquote><p>groupadd  groupname<br>② 修改组<br>groupmod -n  newname  groupname<br>③ 删除组(该组下没有对应的用户信息才允许删除)<br>groupdel groupname</p></blockquote></li><li><p>查看指令的使用参数</p><blockquote><p>man 指令</p></blockquote></li><li><p>权限设置<br>① 字母相对方式设置权限<br>u主人权限，g同组权限，o其他组权限<br>+:增加权限<br>-:减少权限</p><blockquote><p>chmod u+rwx  filename  //给文件主人增加读、写、执行权限<br>chmod u+x  filename  //给文件主人增加执行权限<br>chmod u+rw  filename  //给文件主人增加读、写权限<br>chmod u+r,g+wx,o+w  filename  //同时给文件的主人、同组用户、其他组用户增加权限<br>chmod u+r,o+w  filename  //同时给文件的主人、其他组用户增加权限</p></blockquote><blockquote><p>chmod u-wx  filename   //给文件主人删除写、执行权限<br>chmod u-wx,o-rx  filename   //同时删除文件主人、其他组用户权限</p></blockquote><blockquote><p>chmod u+rw,u-x,o+wx,g-x,g+w  filename  //增加、删除权限可以同时操作</p></blockquote><p>② 数字绝对方式设置权限<br>read:4<br>write:2<br>execute:1</p><p>0:没有权限<br>1：执行<br>2：写<br>3：写、执行<br>4：读<br>5：读、执行<br>6：读、写<br>7：读、写、执行</p><p>chmod ABC filename      //A(user)B(group)C(other)代表三个数字</p><blockquote><p>chmod 764  filename   //主人(rwx)同组(rw)其他(r)</p></blockquote><p>字母相对、数字绝对设置权限的选取：<br>① 权限变动较少，使用字母相对方式<br>② 权限变动较多，使用数字绝对方式</p></li><li><p>管道使用</p><blockquote><p>cat passwd | head -5   //利用管道查看passwd文件的前5行内容<br>ls -l | wc     //查看当前目录全部的文件数目<br>ls -l | head -6  //查看当前目录前5个文件信息<br>管道可以使用多个<br>ls -l | head -6 | tail -5   //查看当前目录前5个文件信息,去除第一个文件<br>ls -l | head -21 | tail -5  //查看当前目录第16-20个文件信息<br>grep var passwd | head -3 //只显示有var字样的前3行内容<br>grep var passwd | wc      //计算passwd文件里边有“多少行”出现var字样</p></blockquote></li><li><p>查找内容<br>grep  内容  文件<br>在指定的文件里边查找需要的内容，会把内容所在行的信息都输出出来</p><blockquote><p>grep  login  ./passwd    //在passwd里边搜索login字样。会输出login所在行信息</p></blockquote></li><li><p>文件查找指令<br>find  查找目录  选项 选项值 [ 选项 选项值 选项 选项值 ]</p><blockquote><p>find  /  -name  passwd   //在根目录下查找名字为passwd的文件</p><pre><code>(遍历系统的全部目录查找，效率极低)</code></pre><p>find  ./ -maxdepth 1 -name “<em>y</em>“    //查找名字里边有y字样的文件,查找深度为1层<br>find  / -maxdepth 4 -mindepth 3 -name  passwd  //在3-4个目录层次之间 查找名字为passwd文件</p></blockquote><blockquote><p>find  ./  -size 10c     //在当前目录查找文件大小为10字节<br>find  ./  -size +4k     //查找大于4k大小的文件<br>find  ./  -size -100c     //查找小于100字节大小的文件</p></blockquote><p>选项：</p><pre><code>-name  通过文件名字查找-maxdepth n  限制查找目录的最深层级-mindepth n  限制查找目录的最浅层级-size  通过文件大小查找    单位：       默认512字节       数字c 字节       数字k 千字节    范围：        + 大于某范围        - 小于某范围-perm  通过文件权限查找    &gt; find  ./  -perm 765-type  通过文件类型(f文件/d目录)查找    &gt; find  ./  -type f    &gt; find  ./  -type d-user   通过文件主人查找-nouser 找到没有主人的文件 -group  通过文件组别查找-nogroup  找到没有组别的文件 </code></pre></li><li><p>修改文件主人、组别<br>change owner</p><blockquote><p>chown 主人.组别  filename<br>chown  主人  filename<br>chown  .组别  filename<br>chown -R 主人.组别 dir  //递归修改当前目录全部的文件的属组<br>chmod -R 777  dirname   //递归方式设置文件权限</p></blockquote></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Ubuntu16.04 swoole扩展安装注意！！！</title>
+      <link href="/2017/03/27/linux/ubuntu_swoole/"/>
+      <url>/2017/03/27/linux/ubuntu_swoole/</url>
+      
+        <content type="html"><![CDATA[<p>前言：目前很多项目估计常常会用到swoole扩展，如个人使用Ubuntu虚拟机安装扩展，这里总结一下遇到的问题；</p><p>一、先保证服务器时间同步当前地区时间，如北京时间；</p><p>1、设定时区</p><p>如：设定时区：dpkg-reconfigure tzdata；</p><p>选择Asia -&gt; 再选择Shanghai -&gt; OK</p><p>2、检查是否同步</p><p>如：date   //执行命令  下面是效果显示</p><p>二、安装swoole  扩展</p><p>1、php  -m  查看当前是否已经安装过；</p><p>2、安装步骤；</p><p>1.1、下载swoole扩展包，解压，并cd  到解压后的目录;</p><p>1.2、根据目前个人使用的php 版本  执行：如phpize7.1（注意这个目录所在位置）；</p><p>1.3、再次执行：./configure –with-php-config=/usr/bin/php-config7.1    (这步操作比较重要，如果不指定，估计安装会失败)；</p><p>1.4、执行安装 ：make &amp;&amp; make install;</p><p>1.5、打开php.ini 增加swoole扩展 (注意php版本)；</p><p>1.6、php.ini里面添加：extension=swoole.so;</p><p>1.7、重启一下php  执行php -m   查看是否安装成功。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Ubuntu </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Ubuntu16.04安装并搭建定时脚本cron</title>
+      <link href="/2017/03/20/linux/ubuntu_cron/"/>
+      <url>/2017/03/20/linux/ubuntu_cron/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Ubuntu16-04安装并搭建定时脚本cron"><a href="#Ubuntu16-04安装并搭建定时脚本cron" class="headerlink" title="Ubuntu16.04安装并搭建定时脚本cron"></a>Ubuntu16.04安装并搭建定时脚本cron</h2><p>一 、安装使用</p><p>1.安装cron</p><p>sudo apt-get install cron</p><p>2.启动cron</p><p>sudo service cron start</p><p>3.创建一个文件：</p><p>例如： 用户名(test)+cron</p><p>文件测试内容：*/1 * * * * date &gt;&gt; /home/www/time.log</p><p>然后crontab testcron，testcron为文件名   </p><p>重启命令： service cron restart</p><p>查看目录下 的/home/www/time.log 是否在打印时间，有打印说明配置成功</p><p>到此已经成功啦！！</p><p>.列出crontab文件</p><p>为了列出crontab文件，可以用：</p><p>$ crontab -l</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Ubuntu </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>swoole安装（centos7）</title>
+      <link href="/2017/03/02/linux/swoole_set/"/>
+      <url>/2017/03/02/linux/swoole_set/</url>
+      
+        <content type="html"><![CDATA[<h2 id="swool安装（centos7）"><a href="#swool安装（centos7）" class="headerlink" title="swool安装（centos7）"></a>swool安装（centos7）</h2><p>1：获取swoole</p><p><a href="https://github.com/swoole/swoole-src/releases" target="_blank" rel="noopener">https://github.com/swoole/swoole-src/releases</a><br><a href="http://pecl.php.net/package/swoole" target="_blank" rel="noopener">http://pecl.php.net/package/swoole</a><br><a href="http://git.oschina.net/swoole/swoole" target="_blank" rel="noopener">http://git.oschina.net/swoole/swoole</a><br>2：解包并用phpize编译扩展<br>/usr/local/webserver/php7/bin/phpize</p><p>红色字体部分是你的php安装路径</p><p>3：编译</p><p>/usr/local/php/bin/phpize<br>./configure –with-php-config=/usr/local/php/bin/php-config<br>+++++++++++++++++++++++++<br>ubuntu 16.04</p><p>phpize7.1<br>./configure –with-php-config=/usr/bin/php-config7.1</p><p>++++++++++++++++++++++</p><p>./configure –with-php-config=/usr/local/webserver/php7/bin/php-config(例子)</p><p>红色字体部分为你的php安装路径</p><p>4：安装</p><p>make &amp;&amp; make install</p><p>5：打开php.ini增加swoole扩展</p><p>extension=swoole.so</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>手把手教你购买使用Vultr服务器</title>
+      <link href="/2017/02/20/tool/tizi/"/>
+      <url>/2017/02/20/tool/tizi/</url>
+      
+        <content type="html"><![CDATA[<p>摘要：Vultr是一家美国的服务器厂商,这个VPS服务商是按小时收费的。这意味着,架设一台VPS的成本几乎为零。不想用美国的了,关机销毁然后再换到全球任何一个地区无压力。新手入门强烈推荐,点击这里打开注册,点击右上角的注册按钮即可注册。注册好账号来到你的登录界面:1).第一步开启VPS1.png2).选择一个你喜欢的服务器地区,推荐日本,毕竟离得近嘛2.png3).选择服务器系统3.png4).选择套餐,最便宜的2.5刀一个月的没了,选第二个。4.png5).点击deploynow</p><p>Vultr是一家美国的服务器厂商,这个VPS服务商是按小时收费的。这意味着,架设一台VPS的成本几乎为零。不想用美国的了,关机销毁然后再换到全球任何一个地区无压力。新手入门强烈推荐,点击这里打开注册,点击右上角的注册按钮即可注册。<br>注册好账号来到你的登录界面:</p><p>1).第一步开启VPS</p><p>1.<img src="https://img-blog.csdnimg.cn/20191221082841561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>2).选择一个你喜欢的服务器地区,推荐日本,毕竟离得近嘛</p><p><img src="https://img-blog.csdnimg.cn/20191221082918611.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="手把手教你购买使用Vultr服务器2.png"> </p><p>3).选择服务器系统 </p><p><img src="https://img-blog.csdnimg.cn/20191221082930716.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="手把手教你购买使用Vultr服务器3.png"> </p><p>4).选择套餐,最便宜的2.5刀一个月的没了,选第二个。</p><p><img src="https://img-blog.csdnimg.cn/20191221082955523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="手把手教你购买使用Vultr服务器4.png"> </p><p>5).点击deploy now<br><img src="https://img-blog.csdnimg.cn/20191221083037532.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="手把手教你购买使用Vultr服务器5.png"> </p><p>6).看到他正在安装系统</p><p><img src="https://img-blog.csdnimg.cn/20191221083051222.png" alt="手把手教你购买使用Vultr服务器6.png"><br>7).安装完了,正在启动</p><p><img src="https://img-blog.csdnimg.cn/20191221083104836.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="手把手教你购买使用Vultr服务器7.png"> </p><p>8).开启成功</p><p><img src="https://img-blog.csdnimg.cn/20191221083122434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="手把手教你购买使用Vultr服务器8.png"><br>9).黄色字体忽略,是告诉你现在服务器刚开启成功~</p><p><img src="https://img-blog.csdnimg.cn/20191221083219479.png" alt="手把手教你购买使用Vultr服务器9.png"><br>接下来 ?<br>记住你的服务器IP,拷贝密码,开始服务器的基础配置,参考这里服务器的基础配置</p><p>手把手教你购买使用Vultr服务器</p><p>创建完成后,开始ssh连接服务器.CentOs自带ssh,默认端口号为22<br>a. 有一点需要注意,如果端口号被限制,则无法访问,默认的22端口是开放的.(不需要修改端口号请略过)<br> b. 点击新建的实例,如下界面,如果配置了防火墙(策略组),则需要把端口号放开,允许访问!!!</p><p><img src="https://img-blog.csdnimg.cn/20191221083347951.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> c. 关于防火墙,点击servers - firewall,进入</p><p><img src="https://img-blog.csdnimg.cn/20191221083359478.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p> d. 选择一个防火墙组,没有的话点击 Add Firewall Group</p><p><img src="https://img-blog.csdnimg.cn/20191221083416665.png" alt="在这里插入图片描述"><br>f. 选择一个防火墙组<br>            按步骤,1-2-3- 4 点击加号确定</p><p><img src="https://img-blog.csdnimg.cn/20191221083429186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p> 最后回到b步骤选择刚刚创建的策略组.</p><p>备注：以上操作供参考，实际上操作下来也会深有感触！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> tool </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PHP代码优化技巧大盘点</title>
+      <link href="/2016/09/30/php/youhua/"/>
+      <url>/2016/09/30/php/youhua/</url>
+      
+        <content type="html"><![CDATA[<p>PHP优化的目的是花最少的代价换来最快的运行速度与最容易维护的代码。本文给大家提供全面的优化技巧。</p><p>　　1、echo比print快。</p><p>　　2、使用echo的多重参数代替字符串连接。</p><p>　　3、在执行for循环之前确定最大循环数，不要每循环一次都计算最大值，最好运用foreach代替。</p><p>　　4、对global变量，应该用完就unset()掉。</p><p>　　5、用单引号代替双引号来包含字符串，这样做会更快一些。因为PHP会在双引号包围的字符串中搜寻变量，单引号则不会。</p><p>　　6、函数代替正则表达式完成相同功能。</p><p>　　7、当执行变量$i的递增或递减时，$i++会比++$i慢一些。这种差异是PHP特有的，并不适用于其他语言，++$i更快是因为它只需要3条指令(opcodes)，$i++则需要4条指令。后置递增实际上会产生一个临时变量，这个临时变量随后被递增。而前置递增直接在原值上递增。</p><p>　　8、使用选择分支语句（switch case）好于使用多个if，else if语句。</p><p>　　9、利用var_dump进行PHP代码调试。如果你在寻找php调试技术，我必须说var_dump应该是你要找的目标，在显示php信息方面这个命令可以满足你的所有需要，而调试代码的多数情况与得到PHP中的数值有关。</p><p>　　10、在包含文件时使用完整路径，解析操作系统路径所需的时间会更少。</p><p>　　11、动辄创建全局数值是一种糟糕的做法，不过有时候实际情况的确又需要这么做。对于数据库表或数据库连接信息使用全局数值是一个不错的想法，但不要在你的PHP代码中频繁使用全局数值。另外，更好的一种做法是把你的全局变量存放在一个config.php文件中。</p><p>　　12、如果你想知道脚本开始执行的时刻，使用$_SERVER[‘REQUEST_TIME’]要好于time()。</p><p>　　13、打开apache的mod_deflate模块。</p><p>　　14、用@屏蔽错误消息的做法非常低效。</p><p>　　15、尽量采用大量的PHP内置函数。</p><p>　　16、递增一个未预定义的局部变量要比递增一个预定义的局部变量慢9至10倍。</p><p>　　17、派生类中的方法运行起来要快于在基类中定义的同样的方法。</p><p>　　18、仅定义一个局部变量而没在函数中调用它，同样会减慢速度（其程度相当于递增一个局部变量）</p><p>　　19、Apache解析一个PHP脚本的时间要比解析一个静态HTML页面慢2至10倍。尽量多用静态HTML页面，少用脚本。</p><p>　　20、正如之前提到的，任何php网站中最重要的部分有99%的可能是数据库。因此，你需要非常熟悉如何正确的使用sql，学会关联表和更多高级的数据库技术。</p><p>　　21、调用带有一个参数的空函数，其花费的时间相当于执行7至8次的局部变量递增操作。</p><p>　　22、当操作字符串并需要检验其长度是否满足某种要求时，你想当然地会使用strlen()函数。此函数执行起来相当快，因为它不做任何计算，只返回zval结构（C的内置数据结构，用于存储PHP变量）中存储的已知字符串长度。</p><p>　　23、并不是所有情况都必须使用面向对象开发，面向对象往往开销很大，每个方法和对象调用都会消耗很多内存。</p><p>　　24、除非脚本可以缓存，否则每次调用时都会重新编译一次。引入一套PHP缓存机制通常可以提升25%至100%的性能，以免除编译开销。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>php核心</title>
+      <link href="/2016/06/13/php/study/"/>
+      <url>/2016/06/13/php/study/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20191224000825149.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>面向对象</title>
+      <link href="/2016/06/13/php/duixiang/"/>
+      <url>/2016/06/13/php/duixiang/</url>
+      
+        <content type="html"><![CDATA[<p>学习开发过程中，大概总结如下<br><img src="https://img-blog.csdnimg.cn/20191224000406351.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>设计原则</title>
+      <link href="/2016/04/29/php/phpdesign/"/>
+      <url>/2016/04/29/php/phpdesign/</url>
+      
+        <content type="html"><![CDATA[<p><strong>1、开闭原则</strong><br>里面包含得特征：<br>a、开：可扩展性强；b、闭：封装得类和方法公用性强<br><strong>2、里氏代换原则</strong><br>子类可以扩展父类的功能，但不能改变父类原有的功能<br>它包含以下4层含义：<br>1、子类可以实现父类的抽象方法，但不能覆盖父类的非抽象方法。<br>2、子类中可以增加自己特有的方法。<br>3、当子类的方法重载父类的方法时，方法的前置条件（即方法的形参）要比父类方法的输入参数更宽松。<br>4、当子类的方法实现父类的抽象方法时，方法的后置条件（即方法的返回值）要比父类更严格。<br><strong>3、接口隔离原则</strong><br>一个类对另外一个类的依赖性应当是建立在最小的接口上的</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>php单词整理</title>
+      <link href="/2016/04/05/php/word/"/>
+      <url>/2016/04/05/php/word/</url>
+      
+        <content type="html"><![CDATA[<p>————————————–html单词————————————</p><p>html超文本标记语言<br>head 头部<br>font 字体 字形<br>i(italic) 倾斜，斜体字<br>big 大的，字体加大<br>hr 水平线<br>Pre（predefined）预定义<br>h5标题5<br>Div（division）区隔标记<br>circle 空心圆，圈<br>dt(Define title定义的标题<br>dl(Definition list)定义清单<br>dd(definition description)定义内容<br>table 表格<br>background 背景<br>Cellpadding补白，是指单元格内文字与边框的距离<br>Href (hypertext reference) 链接地址，超文本引用<br>a (anchor)锚; 链接<br>http 服务程序所用的协议;<br>(hypertext transfer protoco)<br>description描述<br>Get地址栏传递 得到; 抓住<br>Maxlength最大长度<br>radio 单选按钮<br>无线电; 收音机<br>Selected选择<br>Submit提交<br>Xhtml<br>可扩展超文本标记语言<br>strict严格<br>frame框架<br>iframe浮动框架<br>aside侧边栏 到旁边<br>week周类型<br>Url统一资源定义器<br>uniform resource location<br>controls控制<br>hyper超<br>title标题<br>Color 颜色<br>Sub (subscript)下标 脚注<br>Small 小的，字体缩细<br>align对齐 水平对齐，排列<br>P（paragraph）段落<br>h1 标题1<br>h6标题6<br>ul (unordered list)无序列表<br>ol( ordered list)有序列表<br>marquee 滚动<br>scrollamount<br>Src 图片路径<br>(sample return container)<br>tr  行<br>cellspacing 单元格间距<br>rules 规则 合并单元格边框线<br>target 目标<br>mailto 邮件地址<br>content内容<br>author作者<br>Post 邮政 邮件<br>Readonly只读<br>Checked被选中 核对<br>textarea文本区域<br>reset重置 复位<br>DTD 文档类型定义<br>(document type definition)<br>object对象<br>poly多变型<br>borderframe框架的边框<br>footer页脚 网页的尾部<br>month月类型<br>list列表<br>source源<br>text文本<br>body 主体， 身体<br>face 字体，面容<br>em 倾斜，全身<br>left 左对齐 左边<br>Center 居中<br>Divide 划分 分离<br>h2标题2<br>nbsp 空格<br>Li 清单项目<br>disc 实心圆 圆盘<br>Height 高度<br>Loop 循环<br>Img （image）图片<br>td 单元格<br>rowspan合并行<br>all所有<br>self 自身<br>name 名字<br>charset字符集<br>form表单 形式<br>input输入<br>Disabled禁用<br>checkbox复选框<br>cols列<br>button按钮<br>embed嵌入<br>transitional过渡<br>coords坐标<br>href<br>email邮箱<br>time 时间类型<br>datalist数据列表<br>video视频<br>markup标记<br>b（bold）粗体，黑体字<br>size<br>u(underline)下划线<br>br（barter rabbet）换行<br>Right 右对齐<br>noshade 无阴影<br>h3标题3<br>span 跨度<br>Type 类型<br>Start 开始，起点<br>Direction 方向<br>Down 向下<br>Border 边框<br>bordercolor 边框的颜色<br>valign 垂直对齐方式<br>blank 空白，新的窗口打开<br>parent 父亲<br>meta 元数据<br>refresh刷新<br>action功能 行动<br>text文本<br>password密码<br>select选择<br>rows行<br>image图像<br>noframes 元素可为那些不支持框架的<br>frameset框架集<br>map地图<br>Scrolling滚动<br>article定义文章的内容<br>number数值<br>audio音频<br>language语言<br>Strong 粗体，强壮<br>Sup(superscript)上标<br>Width 宽度<br>times 乘，乘以<br>division除法<br>h4标题4<br>Square 方形，平方<br>Up 向上 在上面<br>Alt 说明<br>bcolor 背景颜色<br>colspan合并单元格<br>top 顶<br>middle中间<br>equiv 相等的等价物;<br>keywords关键词<br>method方法<br>Value价值<br>Name名称<br>option选项<br>hidden隐藏<br>file文件<br>shape形状<br>rect矩形<br>frameset框架集<br>section部分<br>date日期类型<br>range滑动条<br>autoplay自动播放</p><p>—————————-css部分———————————–</p><p>Css(cascading  style sheet)  （级联样式表）<br>a:active 单击鼠标左键<br>italic（倾斜）<br>word-spacing  单词和单词之间的距离<br>underline下划线<br>Font-size文字的大小<br>Background-color:背景颜色<br>Background-attachment :背景附件<br>attachment附件，附属物<br>Border-top-style:上边框的线型<br>Border-top-color:上边框的颜色<br>clear清除浮动，明白的; 清晰的<br>overflow溢出<br>normal正常<br>id标识符<br>Font-family字体<br>letter-spacing 字母和字母之间的距离<br>Line-through (删除线)<br>text-indent:首行缩进<br>Background-image：背景图片<br>scroll滚动<br>List-style-type:列表样式<br>solid实线 实心的<br>border-collapse:collapse; 合并表格的边框<br>float浮动 （使）漂浮; 自由浮动<br>static静态 静止的<br>Import 输入; 进口<br>Class 类<br>Font-style:文字是否倾斜<br>overline(上划线)<br>line-height:行高<br>Background-repeat:背景图片是否平铺<br>Repeat 重复; 复述<br>List列表<br>dashed虚线<br>collapse折叠<br>display显示<br>fixed固定 不变的<br>Link 链接<br>A:Visited 访问过的<br>Font-weight:文字加粗方式<br>none(无)<br>text-align:文本的水平对齐方法<br>Background背景; 底色<br>Background-position:背景图片的定位<br>position位置，方位;<br>none无  没有一个<br>padding填充<br>inline内联<br>absolute绝对的<br>stylesheet<br>A:hover 鼠标移上链接上<br>repeat-x横向平铺<br>Text-decoration:文本修饰线<br>bold加粗<br>repeat-y纵向平铺<br>no-repeat不平铺<br>Border-top-width:上边框的宽度<br>dotted点状线<br>margin外边距 边缘，范围<br>block块<br>relative相对</p><p>———————————js部分——————————–</p><p>javascript：<br>var：定义变量<br>if：如果<br>else：否则<br>switch：切换<br>for：<br>while：当…的时候<br>do：做<br>break：中断<br>continue：继续<br>function：函数，功能<br>return：返回<br>number：数字<br>int：整数<br>float：浮点数<br>string：字符串<br>bool：布尔<br>boolean：布尔<br>typeof：类型<br>null：空，空值<br>array：数组<br>length：长度<br>concat：连接<br>join：串联<br>pop：弹出<br>push：压入<br>reverse：反转<br>sort：排序<br>slice：切片，划分<br>splice：铰接，粘接<br>charAt：获取某位置字符<br>indexOf：判断某字符的首次位置<br>lastIndexOf：判断某字符的最后一次位置<br>replace：替换<br>split：分割<br>substr：截取字符串<br>substring：截取字符串<br>toLowerCase：转换为小写<br>toUpperCase：转换为大写<br>random：随机<br>round：取整<br>ceil：向上取整<br>floor：向下取整<br>abs：取绝对值<br>max：最大值<br>min：最小值<br>pow：幂运算<br>sqrt：取开方<br>new：新建<br>date：日期<br>time：时间<br>year：年<br>month：月<br>hour：时<br>minute：分<br>second：秒<br>millisecond：毫秒<br>status：状态<br>alert：警告<br>confirm：确认<br>prompt：提示，提示符<br>open：打开<br>setInterval：设置反复性定时器<br>setTimeout：设置一次性定时器<br>clear：清除<br>close：关闭<br>replace：替换<br>back：后退<br>go：走<br>width：<br>height：高度<br>appName：程序名<br>appCodeName：程序代号<br>appVersion：程序版本<br>appAgent：程序代理<br>clientX：<br>clientY：<br>srcElement：源对象，事件源<br>cancel：取消<br>bubble：冒泡<br>keyCode：键值<br>this：这个，当前<br>onload：在装载时<br>onclick：在点击时<br>ondblclick：在双击时<br>onmouseover：在鼠标进入时<br>onmouseout：在鼠标离开时<br>onmousemove：在鼠标移动时<br>onmousedown：在鼠标按下时<br>onmouseup：在鼠标抬起时<br>onkeydown：在按键按下时<br>onkeyup在按键抬起时<br>onkeypress：在按键时<br>onsubmit：在提交时<br>onchange：在改变时<br>onfocus：在获得焦点时<br>onblur：在失去焦点时<br>document：文档<br>write：写入<br>getElementById：通过ID获取对象<br>getElementsByName<br>element：元素，对象<br>option：选项<br>attribute：属性<br>child：孩子，下级<br>parent：父母，上级<br>node：节点<br>first：第一个<br>last：最后一个<br>next：下一个<br>previous：上一个<br>create：创建<br>append：附加</p><p>———————————PHP部分——————————–</p><p>PHP：PHP is HyperText Proprocessor<br>hosts：hosts文件<br>DNS：Domain Name Server域名服务器<br>load：装载<br>Module：模块<br>LoadModule：装载模块<br>File：文件<br>Match：匹配<br>FilesMatch：文件匹配<br>AddType：添加类型<br>application：应用程序<br>Info：Information，信息<br>Ini：Initiate，初始化<br>Dir：Directory目录<br>Time：时间<br>zone：时区<br>timezone：时区<br>extension：扩展<br>Option：选项<br>Order：顺序<br>Allow：允许<br>Deny：拒绝<br>Override：覆盖<br>Index：索引，标识，首页<br>DirectoryIndex：目录默认页<br>Server：服务器<br>Alias：昵称，别名<br>ServerAlias：服务器别名<br>VirtualHost：虚拟主机<br>ServerName：服务器名<br>Root：根，根目录<br>DocumentRoot：文档根目录<br>Short_open_tag：短标记<br>isset：是否设置<br>unset：取消设置<br>echo：输出<br>get<br>post<br>request：需要，要求，请求<br>global：全球的，整体的<br>method：方式，方式<br>location：地址，网址<br>request_order：请求顺序<br>remote：远端的<br>self：自身的<br>define：定义<br>constant：常量<br>version：版本<br>dir：目录<br>file：文件<br>line：行<br>int：整数<br>float：浮点<br>string：字符串<br>bool：boolean，布尔<br>array：数组<br>object：对象<br>null：空<br>resource：资源<br>dec：decimal，十进制<br>bin：binary，二进制<br>oct：octal，八进制<br>hex：hexadecimal，十六进制<br>double：双重的，两倍的<br>real：实数<br>key：键，关键<br>value：值<br>var_dump：显示数据信息<br>gettype：获取类型<br>settype：设置类型<br>empty：空的<br>if：如果<br>else：否则<br>break：退出<br>continue：继续<br>while：当…时<br>foreach：对…的每一个（进行遍历）<br>switch：转换，切换<br>die：死，停止<br>exit：退出<br>sleep：睡觉<br>include：包含<br>require：要求<br>once：一次<br>return：返回<br>error：错误<br>warning：警告<br>notice：提示<br>strict：严格的<br>user：用户<br>trigger：触发，引发<br>display：显示<br>on：打开<br>off：关闭<br>log：日志，记录<br>report：报告<br>parameter：形参<br>argument：实参<br>function：函数<br>call：调用<br>exists：存在<br>print：打印<br>trim：修剪，调整<br>implode：崩溃，瓦解<br>explode：爆炸，爆发，激增<br>substr：截取子字符串<br>strchr：<br>strrchr：<br>replace：替换<br>strtolower：转换为小写<br>strtoupper：转换为大写<br>position：位置<br>slash：斜线，反斜杠<br>time：时间<br>microtime：微型时间<br>date：日期<br>strtotime：字符转换为时间<br>diff：different，不同的，差异的<br>max：最大<br>min：最小<br>round：圆的，完整的，使成为整数<br>rand：random，随机的<br>abs：absolute，绝对的<br>ceil：向上取整<br>floor：向下取整<br>each：每一个<br>list：列表，列出来<br>current：现在的，当前<br>key：键，键名，关键<br>next：下一个，后一个<br>prev：previous上一个，前一个<br>reset：恢复，重置<br>end：结尾，最后，终止<br>pop：popup，弹出，取出，发射<br>push：推入，挤压，压入<br>shift：移动，改变，换挡，轮班，转换<br>slice：切开，割<br>splice：接合，衔接，拼接<br>sort：排序<br>shuffle：打乱<br>count：数量，计数<br>reverse：反转<br>merge：合并，融合，兼并<br>sum：总和，求和<br>range：范围<br>new：新的，创建<br>class：类<br>public：公开的<br>protected：受保护的<br>private：私有的<br>this：自己，这个<br>static：静态的<br>self：自身，自己的<br>parent：父母的，<br>construct：构造，建造，构建<br>destruct：毁灭，摧毁<br>extend：扩展，延伸<br>final：最后的<br>abstract：抽象的<br>interface：接口<br>implement：实现，实施，执行<br>tostring：转换为字符串<br>invoke：援引，引起，求助，调用<br>instance：实例<br>Model：模型<br>View：视图<br>Controller：控制器<br>PDO：PHP Data Object，php数据对象<br>query：查询<br>exec：execute，执行<br>close：关闭<br>lastinsertid：最后的插入id<br>attribute：属性<br>errorcode：错误代号<br>errorinfo：错误信息<br>errmode：错误模式<br>exception：异常<br>rowcount：行数<br>columncount：列数<br>fetch：取出，取得<br>prepare：准备<br>execute：执行<br>session：会话<br>cookie：<br>setcookie：设置cookie<br>lifetime：生命周期<br>path：路径<br>domain：域名<br>secure：安全<br>maxlifetime：最大生命周期<br>probability：可能性<br>divisor：除数，分母<br>handler：处理器<br>save：保存，存储<br>auto_start：自动开始<br>image：图片<br>truecolor：真彩色<br>allocate：分配<br>fill：填充<br>size：尺寸<br>mime：多用途的网际邮件扩展协议<br>destroy：毁灭<br>copy：拷贝<br>resample：取样<br>mkdir：创建目录<br>opendir：打开目录<br>readdir：读取目录<br>closedir：关闭目录<br>rename：重命名<br>unlink：删除目录或文件<br>realpath：完整路径<br>BaseName：基本文件名<br>DirName：目录名<br>file_get_contents：获得文件内容<br>file_put_contents：写入文件内容<br>fopen：打开文件<br>ftell：获取文件指针位置<br>fseek：设置文件指针位置<br>fread：读取文件内容<br>fgetc：读取一个字符<br>fgets：读取一行或本行中指定长度的字符<br>fwrite：写入文件内容<br>fclose：关闭文件<br>filemtime：文件最后修改时间<br>filesize：文件大小<br>file_exists：文件是否存在<br>accept：接收，接受<br>accept-language：可接受语言<br>encoding：编码<br>user-agent：用户代理（信息）<br>connection：连接<br>keep-alive：保持活动状态<br>found：已发现，已找到<br>forbidden：禁止<br>internal：内部的<br>content-type：内容类型<br>socket：套接字</p><p>——————————-MYSQL部分—————————–</p><p>sql: struct query language<br>mysql:<br>host：主机<br>user：用户<br>password:密码<br>data：数据<br>database：数据库<br>table：表<br>column：列<br>field：列<br>row：行<br>port：端口<br>quit：取消，退出<br>exit：退出<br>charset：字符集，字符编码<br>collate：排序规则<br>collation：排序规则<br>delimiter：分隔符<br>create：创建<br>drop：落下，放弃，停止<br>exists：存在<br>int类型<br>tinyint类型<br>smallint类型<br>mediumnint类型<br>biging类型<br>unsigned无符号的<br>zerofill 填充0<br>float：单精度浮点类型<br>double：双精度浮点类型<br>decimal：十进位类型，小数类型<br>numeric：数字<br>fixed：固定类型<br>char：定长字符类型<br>varchar：变长字符类型<br>binary：二进制类型<br>enum：列举类型<br>set：多选类型<br>bit：比特类型<br>primary key：主键<br>unique key：唯一键<br>auto_increment：自增长<br>default：默认值<br>comment：评论，说明<br>index：索引<br>key：索引<br>foreign key：外键<br>fulltext key 全文索引<br>constraint约束<br>engine 存储引擎<br>alter 改变<br>show 显示<br>describe 描述<br>rename 重命名<br>view 视图<br>insert 插入<br>value 值<br>replace 替换<br>select 选择<br>load 装载<br>delete 删除<br>from 从…<br>order 顺序<br>limit 限制<br>truncate<br>query 查询<br>distinct 区分的<br>where 哪里<br>group 组<br>as 作为<br>in 在…里面<br>like 像…一样<br>count 数量，计数<br>avg 平均<br>max 最大<br>min 最小<br>sum 总和<br>asc 升序的<br>desc 降序的<br>join 连接<br>inner 内部的<br>cross 交叉的<br>left：左边<br>right：右边<br>outer 外面的<br>in：在…里面<br>any：任意一个<br>all：全部<br>some：其中一部分<br>union：联合的<br>identify：确认，识别<br>grant：授予<br>revoke：撤销，取消，废除<br>privilege：权限<br>start：开始<br>transaction：事务<br>autocommit：自动提交<br>begin：开始<br>end：结束<br>commit：托付，承诺，保证<br>rollback：回滚<br>case：在…情形<br>loop：循环<br>while：当…的时候<br>repeat：重复<br>leave：离开<br>declare：声明<br>call：调用<br>procedure：存储过程<br>trigger：触发器</p><p>——————————ThinkPHP———————————–</p><p>controller    控制器<br>model        模型<br>view        视图<br>namespace    命名空间<br>use        使用<br>route        路由<br>rule        规则<br>assign        分配<br>display        显示<br>convention    惯例<br>common        共有的<br>config        配置<br>role        角色<br>base        基础的，基于<br>access        访问<br>control        控制<br>authority    权限</p><p>——————————JavaScript巩固加强—————————-<br>document    文档<br>object        对象<br>undefined    未定义<br>number        数字<br>boolean        布尔<br>string        字符串<br>null        空<br>true        真<br>false        假<br>console        控制台<br>array        数组<br>integer        整形<br>float        浮点数<br>function    函数<br>if        如果<br>else        其他<br>switch        开关<br>case        事件<br>length        长度<br>sort        排序<br>push        推<br>callee        被召唤<br>element        元素<br>sibling        堂兄弟，表兄弟<br>node        节点<br>parent        父亲<br>attribute    属性<br>append        追加<br>clone        克隆<br>event        事件<br>listener    侦听<br>attach        贴上、附上<br>detach        分离，拆开<br>offset        位移<br>propagation    传播，传输<br>bubble        水泡，冒泡<br>prevent        阻止<br>call        调用<br>apply        应用<br>prototype    原型<br>match        匹配<br>pattern        模式</p><p>——————————AJAX技术—————————-</p><p>asynchronous    异步的<br>ajax        一门异步传输数据的技术<br>open        打开<br>send        发送<br>state        状态<br>json        一种数据格式<br>progress    进展<br>[Jquery]<br>jQuery        一个开源的js脚本库<br>first        第一个<br>last        最后一个<br>even        偶数<br>odd        奇数<br>equal        相等<br>contains    包含<br>empty        空<br>parent        父级<br>toggle        交替<br>width        宽度<br>height        高度<br>text        文本<br>each        每一个，用来遍历数组和对象<br>filter        过滤<br>find        发现<br>next        下一个<br>bind        绑定<br>show        显示<br>hide        隐藏<br>animate        动画</p><p>——————————linux(LAMP)——————————</p><p>clear        清除<br>exit        退出<br>more        更多<br>less        更少<br>tail        尾巴<br>kill        杀死<br>service        服务<br>make        制作<br>install        安装</p><p>Redis       内存缓存数据库<br>exists      测试指定 key 是否存在<br>del         删除给定 key<br>type        返回给定 key 的 value 类型<br>keys        返回匹配指定模式的所有 key<br>randomkey   返回从当前数据库中随机选择的一个 key<br>rename      改名字<br>dbsize      返回当前数据库的 key 数量<br>expire      为 key 指定过期时间<br>ttl         返回 key 的剩余过期秒数<br>select      选择数据库<br>move        将 key 从当前数据库移动到指定数据库<br>flushdb     删除当前数据库中所有 key<br>flushall    删除所有数据库中的所有 key</p><p>set         设置 key 对应的值为 string 类型的 value<br>mset        一次设置多个 key 的值<br>mget        一次获取多个 key 的值<br>incr        对 key 的值做加加操作,并返回新的值<br>decr        同上，但是做的是减减操作<br>incrby      同 incr，加指定值<br>decrby      同 decr，减指定值<br>append      给指定 key 的字符串值追加 value<br>substr      返回截取过的 key 的字符串值</p><p>lpush       在 key 对应 list 的头部添加字符串元素<br>rpush       同上，在尾部添加<br>llen        对应 list 的长度<br>lrange      返回指定区间内的元素<br>ltrim       截取 list<br>lset        设置 list 中指定下标的元素值<br>lrem        从 key 对应 list 中删除 count 个和 value 相同的元素<br>lpop        从 list 的头部删除元素，并返回删除元素<br>rpop        从 list 的尾部删除元素，并返回删除元素</p><p>sadd        添加一个 string 元素到 key 对应的 set 集合中<br>srem         从 key 对应 set 中移除给定元素，成功返回 1<br>smove       从 p1 对应 set 中移除 member 并添加到 p2 对应 set 中<br>scard       返回 set 的元素个数<br>sismember   判断 member 是否在 set 中<br>sinter      返回所有给定 key 的交集<br>sinterstore 同 sinter，但是会同时将交集存到 p1 下<br>sunion      返回所有给定 key 的并集<br>sunionstore 同 sunion，并同时保存并集到 p1 下<br>sdiff       返回所有给定 key 的差集<br>sdiffstore  同 sdiff，并同时保存差集到 dstkey 下<br>smembers     返回 key 对应 set 的所有元素，结果是无序的</p><p>zadd        添加元素到集合，元素在集合中存在则更新对应 score<br>zrem        删除指定元素，1 表示成功，如果元素不存在返回 0<br>zincrby     按照 incr 幅度增加对应 member 的 score 值，返回 score 值<br>zrank       返回指定元素在集合中的排名（下标）,集合中元素是按 score 从小到大排序的<br>zrevrank    同上,但是集合中元素是按 score 从大到小排序<br>zrange      类似 lrange 操作从集合中去指定区间的元素。返回的是有序结果<br>zrevrange   同上，返回结果是按 score 逆序的<br>zrangebyscore    返回集合中 score 在给定区间的元素<br>zcount           返回集合中 score 在给定区间的数量<br>zcard            返回集合中元素个数<br>zscore           返回给定元素对应的 score<br>zremrangebyrank  删除集合中排名在给定区间的元素<br>zremrangebyscore 删除集合中 score 在给定区间的元素</p><p>——————————SVN科目——————————</p><p>SVN         subversion  子级版本(子级源代码版本控制管理软件)<br>commit      提交<br>update      更新<br>checkout    检出<br>revision    修订版本<br>create      创建<br>delete      删除</p><p>[memcache]<br>memcache    内存缓存技术<br>start       开始<br>stop        停止<br>restart     重启<br>install     安装<br>uninstall   卸载<br>set         设置<br>del         删除<br>get         获取<br>serialize   序列化<br>unserialize   反序列化<br>connect     连接<br>decrement   减少<br>increment   增加<br>delete      删除<br>telnet      远程连接协议</p><p>——————————mysql优化——————————<br>myisam      存储引擎的一种<br>innodb      存储引擎的一种<br>engine      引擎<br>myisampack  压缩工具名称<br>myisamchk   重建索引工具名称<br>unpack      解压缩<br>select      查询<br>alter       修改数据表<br>unique      唯一<br>fulltext    全文<br>explain     阐述说明，执行计划<br>substring   字符串截取函数<br>variable    可变的<br>partition   分区<br>key         分区的一种<br>hash        分区的一种<br>range       分区的一种<br>list        分区的一种</p><p>——————————纯静态——————————<br>ob_start    开启缓冲区<br>ob_get_contents();  获取<br>ob_get_clean();     获取后清空<br>ob_get_flush();     获取刷新<br>ob_clean()          删除缓冲区内容<br>ob_get_clean();     获取并删除缓冲区内容<br>ob_end_clean();     清空并关闭缓冲区<br>ob_flush()          数据向下推送<br>ob_get_flush();     获取内容并推送内容<br>ob_end_flush();     推送内容并关闭缓冲区<br>ob_end_clean();     清空关闭<br>ob_end_flush();     刷新关闭<br>inlink              删除文件</p><p>[伪静态]<br>rewrite             重写<br>override            推翻、撤销<br>htaccess            伪静态规则定义文件名称</p><p>——————————终极项目——————————</p><p>layout      布局<br>ueditor     富文本编辑器<br>XSS         跨站脚本攻击技术<br>(Cross Site Scripting)<br>htmlpurifier    指定标签内容过滤器<br>verify      查证、验证<br>RBAC        role-base-access-control    基于角色的用户访问权限控制<br>cart        购物车<br>comment     评论<br>reply       回复<br>page        分页<br>sphinx      全文检索技术<br>CoreSeek    中文分词全文检索技术</p><p>nginx       网站服务器软件<br>lvs/haproxy 负载均衡<br>squid/varnish   反向代理(缓存服务器)<br>heartbeat/keepalived    高可用服务器<br>clone       复制</p><p>mongoDB     no-sql数据库产品</p><p>——————————微信——————————</p><p>QRCode (Quick Response Code) QR Code码是由日本Denso公司于1994年9月研制的一种矩阵二维码符号，它具有一维条码及其它二维条码所具有的信息容量大、可靠性高、可表示汉字及图象多种文字信息、保密防伪性强等优点。<br>access n. 入口，出口; 接近，进入; 增长; 爆发<br>token n. 代币; 象征; 记号<br>video  n. 磁带录像; 录像磁带; 录像机，电视; （指方法）录像<br>multimedia  n. 多媒体<br>recognition n. 认识，识别; 承认，认可; 褒奖; 酬劳<br>voice n. 嗓音; （动词的）语态; 呼声，发言权; 歌唱才能<br>location n. 位置，场所; 定位; 外景（拍摄地）<br>scale n. 规模; 比例（尺）; 鱼鳞; 级别<br>label n. 标签; 称标记，符号<br>title n. 标题; 头衔; [体]冠军; [影视]字幕<br>description n. 描述; 形容; 种类; 类型<br>signature  n. 签名; 署名; 识别标志<br>nonce n. 现时，目前<br>event  n. 事件，大事; 活动，经历; 结果; 运动项目<br>subscribe vt.&amp; vi. 认捐，捐赠; 签署，题词，署名; 认购; 订阅，订购<br>unsubscribe n. [医]注销，注销账户; 取消订阅<br>ticket n. 票，入场券; 标签; 传票，交通违规的通知单<br>latitude  n.  纬度; 范围; [天]黄纬<br>longitude n. 经度，经线; [天]黄经<br>precision n. 精确度，准确（性）; [语]精确<br>click n. 喀哒声; 爪，掣子; [计]（鼠标）点击; [语言学]吸气音<br>nickname n. 绰号; 诨名; 昵称<br>account n. 账，账目; 存款; 记述，报告; 理由<br>digest     vt.&amp; vi.消化; 整理<br>        vt. 吸收; 领悟; 玩味<br>        vi. 消化; 吸收食物; [化学]加热<br>        n. 文摘; 摘要; 法律汇编; 罗马法典</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>递归，阶乘</title>
+      <link href="/2016/03/29/php/digui/"/>
+      <url>/2016/03/29/php/digui/</url>
+      
+        <content type="html"><![CDATA[<p>1、以最快的速度求n的阶乘！<br>代码：</p><p>&lt;?php</p><p>//阶乘</p><p>function f($n){</p><p>if($n == 1){</p><p>return 1;</p><p>}else</p><p>return f($n-1)*$n;</p><p>}</p><p>//echo f(10);</p><p>echo f($_GET[‘n’]);</p><p>2、如何用循环的方法改写斐波那契数列！<br>代码：</p><p>&lt;?php</p><p>function f($a,$b,$n){</p><p>//前两项已知</p><p>$before1 = $a;</p><p>$before2 = $b;</p><p>if($n == 1){</p><p>return $a;</p><p>}</p><p>if($n ==2){</p><p>return $b;</p><p>}</p><p>//从第三项开始，求到第n项</p><p>for($i=3;$i&lt;=$n;$i++){</p><p>$sum = $before1 + $before2;</p><p>$before2 = $before1;</p><p>$before1 = $sum;</p><p>}</p><p>return $sum;</p><p>}</p><p>echo f(1,1,$_GET[‘n’]);</p><p>3、递归调用<br>斐波那契数列：前两项已知，从第三项开始，每一项都是前两项之和！</p><p>1    1    2    3    5    8……思考：如何求得第n项的值？</p><p>1    (n&lt;=2)</p><p>f(n)=</p><p>f(n-1) + f(n-2)   (n&gt;=3)</p><p>递归的两个要点：</p><p>1， 递归的出口：就是指什么时候停止递归调用</p><p>2， 递归点：就是指什么时候开始使用递归调用</p><p>对于上面的问题：当n=1或n=2的时候，停止调用自己，也就是递归的出口</p><p>当n&gt;=3的时候，开始使用递归</p><p>在写递归调用的时候，注意，先写递归的出口，再写递归点！</p><p>代码：</p><p>/**</p><p>*斐波拉契数列</p><p>*@param int   $n  数列的项数</p><p>*@return int $s    数列的最后一项的值</p><p>*/</p><p>function f($n){</p><p>if($n ==1 || $n ==2){</p><p>return 1;</p><p>}</p><p>$s = f($n-1)+f($n-2);</p><p>return $s;</p><p>}</p><p>//调用并输出</p><p>echo f($_GET[‘n’]);</p><p>//echo f(30);</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>冒泡排序</title>
+      <link href="/2016/03/22/php/maopao/"/>
+      <url>/2016/03/22/php/maopao/</url>
+      
+        <content type="html"><![CDATA[<h2 id="冒泡排序："><a href="#冒泡排序：" class="headerlink" title="冒泡排序："></a>冒泡排序：</h2><p>1、基本算法思想：<br>l依次比较相邻的两个元素，消除逆序（逆序是数学上的概念，是成对出现的，比如50,30就是一对逆序，所谓的消除逆序，就是大的放后面，小的放前面）</p><p>l这样，一轮比较下来，最大的那个数一对是在最后面！</p><p>l然后，再继续新的一轮的比较，注意，刚才一轮后的最大值不再参与比较，这样，这一轮参与比较的数值就比上一轮少一个，如此反复，直到最后只剩下两个数值比较为止！</p><p>所以：应该是一个双重循环，外层控制轮数，内层控制每轮比较的次数！</p><p>2、示例代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">echo &#39;&lt;pre&gt;&#39;;</span><br><span class="line"></span><br><span class="line">function maopao($arr)&#123;</span><br><span class="line"></span><br><span class="line">for($i&#x3D;1,$len&#x3D;count($arr);$i&lt;$len;$i++)&#123;</span><br><span class="line"></span><br><span class="line">for($k&#x3D;0;$k&lt;$len-$i;$k++)&#123;</span><br><span class="line"></span><br><span class="line">if($arr[$k]&gt;$arr[$k+1])&#123;</span><br><span class="line"></span><br><span class="line">$tem &#x3D; $arr[$k];</span><br><span class="line"></span><br><span class="line">$arr[$k] &#x3D; $arr[$k+1];</span><br><span class="line"></span><br><span class="line">$arr[$k+1] &#x3D; $tem;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return $arr;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$arr1 &#x3D; array(78,90,67,45,23,12,34,54,32);</span><br><span class="line"></span><br><span class="line">var_dump(maopao($arr1));</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ajax认知</title>
+      <link href="/2016/03/10/php/zajax/"/>
+      <url>/2016/03/10/php/zajax/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一-ajax简介"><a href="#一-ajax简介" class="headerlink" title="一.ajax简介"></a>一.ajax简介</h2><h3 id="1-什么是ajax"><a href="#1-什么是ajax" class="headerlink" title="1.什么是ajax?"></a>1.什么是ajax?</h3><p>l lasynchronous    代表异步  synchronous同步</p><p>l ljavascript     核心技术</p><p>l land        </p><p>l lxml :      主要用来保存数据和传输数据</p><p>直接翻译:异步的JavaScript和xml</p><p>其实就是可以与我们的服务器进行异步或者同步交互的一门技术</p><p>同步交互:指一个时间段内只能有一个进程在执行.</p><p>异步交互:指一个时间段内可以有多个进程在执行.</p><p>最大特点:无刷新(用户体验非常好)</p><h3 id="2-ajax的发展史"><a href="#2-ajax的发展史" class="headerlink" title="2.ajax的发展史"></a>2.ajax的发展史</h3><p>1999年，微软公司发布IE5浏览器的时候嵌入的一种技术。起初名字是XMLHttp</p><p>直到2005年Ajax才开始流行使用，该年google公司发布了一个邮箱产品gmail，内部的gtalk聊天工具有使用ajax技术,同时使得向来不被人们重视的javascript语言得到的大家的青睐.</p><h3 id="3-ajax技术是许多旧技术的集合"><a href="#3-ajax技术是许多旧技术的集合" class="headerlink" title="3.ajax技术是许多旧技术的集合"></a>3.ajax技术是许多旧技术的集合</h3><p>包括html、css、javascript、xml、dom,XMLHttpRequest对象(ajax对象),</p><p>其中XMLHttpRequest是ajax的官方的名称。</p><h3 id="4-ajax对象的常用方法和属性"><a href="#4-ajax对象的常用方法和属性" class="headerlink" title="4.ajax对象的常用方法和属性"></a>4.ajax对象的常用方法和属性</h3><p>ajax请求也是走http协议</p><p>常用方法:</p><p>l open(method,url,[async]) :建立http连接</p><p>method:请求方式,get和post</p><p>url:请求的网址</p><p>[async]:是否异步,两个值一个true(异步)false(同步),  默认为true,异步        </p><p>l setRequestHeader(header,value)  :设置请求头</p><p>header:请求头</p><p>value:请求头信息</p><p>l send(content) :发送http请求</p><p> content:请求的参数,如果get请求参数直接写null,post请求需要把请求字符串写入到参数中,请求形式 键1=值1&amp; 键2=值2  name=zhangsan&amp;age=18</p><p>常用属性:</p><p>readyState : ajax对象的状态,有五个值0,1,2,3,4   </p><p>0:初始化对象,没调用open()方法</p><p>1:已调用open()方法</p><p>2:已调用send()方法</p><p>3:开始接收服务器返回来的数据,但不完整</p><p>4:数据接收完成,请求成功.  </p><p>onreadystatechange  :ajax对象状态改变的事件,可以感知1,2,3,4</p><p>status:响应状态码  200 -ok,   304-读取本地缓存, 404-服务器找不到页面   </p><p>responseText:接收服务器返回字符串的形式数据.  </p><p>responseXML :接收服务器返回来的xml数据.(后台需要组装xml数据返回 )</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ajax </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>php发展史和一些其他知识</title>
+      <link href="/2016/03/01/php/develop/"/>
+      <url>/2016/03/01/php/develop/</url>
+      
+        <content type="html"><![CDATA[<p>PHP发展史（了解）<br>php的原始含义：Personal Home Page！个人网页</p><p>最开始是由加拿大的一哥们自己开发了一个脚本，用户记录有多少人访问他的在线简历！很受欢迎！于是他就开始开发自己的工具集！</p><p>php现在含义：Hypertext Preprocessor  超文本预处理语言！</p><p>说明php是在服务器上预先处理好的，将结果返回给浏览器！</p><p>PHP的功能与特点<br>l php主要是用来做web服务器开发，用户实现用户的各种请求，也可以用来软件开发（不常见）</p><p>l php是开源软件，能够在所有的操作系统上稳定运行！</p><p>l php入门比较简单，语法类似于c语言！能够实现面向过程和面向对象并用！</p><p>l php运行效率高，消耗系统的资源比较少</p><p>l php支持多种主流的数据库，mssql、Oracle、mysql、sybase、DB2，但是和Mysql是“黄金搭档”</p><p>Mvc的思想：<br>所谓的mvc思想，就是在显示与逻辑相分离的基础之上，再把逻辑中所有数据处理模块提取出来，在需要的功能上进行调度即可！</p><p>M：Model，模型，项目中的数据处理单元</p><p>V：View，视图，项目中用于展示数据的单元（模板）</p><p>C：controller，控制器，项目中负责某个功能整体流程调度的单元！</p><p>此时，浏览器只需要和C控制器进行交互，而模型M和模型V都被控制器所调用！并且模型M和视图V之间不存在任何的交互！</p><p>项目流程简介<br>需求分析<br>了解客户的真实需求是什么？</p><p>另外，还往往要进行一次可信性分析！</p><p>设计<br>怎么去做，具体的算法是什么！</p><p>编码实现<br>敲代码，一般有两个方向：</p><p>二次开发<br>是指在一个成熟的产品之上，完成自己特定项目的业务逻辑，比如：</p><p>论坛：discuz，phpwind</p><p>cms：内容管理系统，dedecms（织梦），帝国，新云（asp）</p><p>社交：ThinkSNS，Ucenter Home</p><p>电商：ecshop，ecmall，shopex</p><p>二次开发的特点：前期投入的成本非常的低，如果是商业目的，需要购买授权！</p><p>基于框架的开发<br>什么是框架？</p><p>只规范了结构和基础的功能（各个项目共同的功能），比如：文件管理，数据库的操作等！</p><p>但是没有实现任何常规的业务逻辑！</p><p>比如：ZendFramework  ThinkPHP  YII  CI等</p><p>框架开发的特点：业务逻辑是从0开始，但是基础代码功能并不是从0开始，而是从框架开始，省掉了做底层代码开发的时间！</p><p>最后有一个代码的优化！</p><p>测试<br>目的是尽可能的发现已知的错误或者漏洞</p><p>发布<br>开始运营</p><p>维护升级</p><p>数据库的概念<br>简单来说，数据库就是存储数据的仓库，我们现在的笔记就是一个数据库！</p><p>但是，光有数据库还不行，当数据越来越多的时候，我们还需要对数据库进行管理，我们称之为数据库管理系统！</p><p>数据库系统 = 数据库 + 数据库管理系统 + 数据库管理员</p><p>DataBase System(DBS) = DataBase(DB) + DataBase Management System(DBMS) + DataBase Administrator(DBA)</p><p>数据库：对大量信息进行管理的有效解决方案，安装数据结构来组织、存储和管理数据的库！</p><p>通常一个web项目（网站）会使用一个数据库来存储其所有的动态数据！</p><p>SQL<br>是一种关系型数据库操作语言，也是一种数据库编程语言！</p><p>SQL：Structure Query Language！结构化查询语言！</p><p>根据对数据库不同的操作对象（或操作层次），SQL又可以分成不同的操作语言：</p><p>所以，数据库的第一种操作语言就是DDL</p><p>DDL：Data Definition Language，数据定义语言</p><p>主要是用来定义和维护数据库的各种对象（比如，库，表等），也可以说操作的层次是在数据库和表的逻辑结构和存在结构上面，并没有对表中的实际数据进行任何的操作！</p><p>DDL主要的操作关键字：create，drop，alter等</p><p>DML：Data Manipulation Language，数据操作语言</p><p>主要就是对表中的记录进行增删改查操作！</p><p>注意：其中“查询”部分，又叫作DQL：Data Query Language，数据查询语言！select</p><p>DCL：Data Control Language，数据控制语言</p><p>主要是对数据库进行统一的管理和统一的控制，比如并发控制，存取控制，安全控制等，具体的有数据库的权限管理，数据的备份与恢复等！</p><p>数据库操作<br>创建数据库<br>语法形式：</p><p>create  database  数据库名[数据库选项];</p><p>其中，数据库选项主要有两个：一个是字符集，一个是校对规则（以后学）</p><p>注意：sql语句需要语句结束符分号；来结束！</p><p>创建数据库名的命名规则<br>1， 数据库名是否区分大小写取决于当前的操作系统！（windows下不区分，linux下面就区分），我们的原则是，就认为区分大小写！而且数据库名要见名知意！推荐使用下划线方式！</p><p>2， 原则上，数据库名可以使用任意的字符，甚至是中文，但是一些特殊的符号，比如：纯数字、特殊符号、mysql内部的关键字、中文等；这些特殊的符号应该使用标识符限定符反引号来包裹，反引号就是键盘上左上角，波浪线</p><p>删除数据库<br>语法形式是：</p><p>drop  database  数据库名；</p><p>注意：删除数据库一定要慎重，因为整个数据库文件夹都会被删除，其中包括里面所有的数据表，而且过程一般不可逆！</p><p>修改数据库<br>注意：数据库的名字不可修改！只能修改数据库的库选项信息！</p><p>语法如下：</p><p>alter database 数据库名[库选项]</p><p>查看数据库<br>查看当前有哪些数据库：</p><p>语法是：</p><p>show  databases;</p><p>查看数据库的创建语句：</p><p>语法是：</p><p>show create database 数据库名；</p><p>思考：如果现在就需要修改数据的名字，应该怎么办？</p><p>有两种方法：</p><p>1， 直接修改目录下原数据库的文件夹名，但是要谨慎，因为有的时候不是所有的数据库下的表都放在同一个地方！</p><p>把当前的数据先导出，创建一个新的数据库，把以前的数据导入进来，再删除以前的数据库！</p><p>数据表操作<br>每一个数据表都属于一个具体的数据库，所以，在操作表之前，应该选择默认的数据库！</p><p>use 库名</p><p>创建数据表<br>创建表的语法：</p><p>create  table  表名（字段名1  字段1类型[，字段名2  字段2类型……]）[表选项]</p><p>需要注意的是：</p><p>1， 每个字段都必须规定数据类型，字段名和字段数据类型之间以空格分隔；</p><p>2， 字段与字段之间用逗号分隔，但最后一个字段不能有逗号，</p><p>3， 表选择其实就是规定表的字符集和存储引擎（暂时用默认，后面讲）</p><p>4， 表名的命名规则和库名基本是一样的，也就是说，如果有特殊字符做表名，一样要用反引号包裹起来！</p><p>查看数据表<br>语法是：</p><p>show tables;</p><p>查看表的创建语句：</p><p>show  create  table 表名；</p><p>当数据比较多的时候，可以使用\G来代替语句结束符；看起来更加有条理性</p><p>另外，还可以查看表的结构：</p><p>也就是表的字段的类型、属性</p><p>语法是：</p><p>describe 表名；  或</p><p>desc 表名；</p><p>删除数据表<br>语法是：</p><p>drop table 表名；</p><p>drop table if exists 表名</p><p>加上if exists之后，即使删除一个不存在的表，既不执行也不会报错！</p><p>修改数据表<br>修改表名<br>语法如下：</p><p>rename table 旧表名 to 新表名;</p><p>注意：可以为多个表进行重命名，中间以逗号隔开！</p><p>修改列定义<br>又可以分成很多种操作，常见的有：增加字段，删除字段，重命名字段，修改字段数据类型！</p><p>关键字：</p><p>增加：add</p><p>删除：drop</p><p>重命名：change</p><p>修改：modify</p><p>上面的四个关键字都是子命令，还有一个上级的命令的关键字是：alter</p><p>基本的语法形式就是：</p><p>alter  table 表名……</p><p>数据操作<br>插入数据<br>语法：</p><p>insert  into 表名（字段列表） values （值列表）;</p><p>注意：</p><p>1， 字段列表可以是该表的全部字段，也可以是部分字段（也就是只插入了部分数据，其他的默认为null，表示什么都没有）</p><p>2， 字段列表和值列表应该是一一对应的！</p><p>3， 当为全部字段插入数据的时候，字段列表可以省略！但是，插入数据的顺序必须与表中字段的顺序保持一致！为了避免出错，强烈建议写上！</p><p>4， 可以一次插入多条记录，中间以逗号隔开！</p><p>查询数据<br>语法：</p><p>select   */字段列表 from  表名[查询条件];</p><p>注意：查询条件是用where关键字，如果省略查询条件，相当于查询所有的数据，也就是相当于where 1</p><p>删除数据<br>语法：</p><p>delete  from  表名[删除条件];</p><p>注意：</p><p>在实际的应用中，删除条件往往是必须的，如果没有删除条件，相当于删除了整个数据表的全部数据！这个过程一般也是不可逆！</p><p>修改数据</p><p>update  表名  set  字段1=新值1，字段2=新值2，……[修改条件]</p><p>外键<br>删除外键的语法：</p><p>alter  table 表名 drop foreign key 外键名;</p><p>增加外键的语法：</p><p>alter  table 表名 add foreign key 外键定义;</p><p>外键定义的完整语法：</p><p>Foreign Key (外键字段） references 主表名 (关联字段) [主表记录删除时的动作] [主表记录更新时的动作]</p><p>其他数据操作<br>数据的操作也叫作crud</p><p>C：create</p><p>R：read</p><p>U：update</p><p>D：delete</p><p>插入数据<br>标准语法：</p><p>insert into 表名[字段列表] values （值列表）</p><p>蠕虫复制<br>思考：如何以最快的速度向数据表中插入200万条数据？</p><p>含义：就是在已有的数据的基础之上，将原来的数据进行复制，插入到对应的表中！</p><p>语法规则：</p><p>insert into 表名 select *|字段列表 from 表名;</p><p>蠕虫的作用：</p><p>1， 可以快速的将一个表的数据全部复制到另一个表中！</p><p>2， 短期内为表产生大量的数据，为了测试数据库的压力以及效率！</p><p>主键重复<br>方案1：如果主键冲突，就直接更新！</p><p>使用如下的语法：</p><p>insert into 表名[字段列表]  values （值列表） on duplicate key update 字段1=值1，字段2=值2……;</p><p>作用：即使主键已经存在，也要插入成功！</p><p>方案二：如果主键冲突，直接删除原纪录再插入！</p><p>语法是：</p><p>replace into 表名[字段列表] values （值列表）</p><p>作用：先判断有没有冲突，如果没有冲突就直接插入（新增），如果有冲突，就删除原纪录再次插入（更新）！</p><p>修改数据<br>标准语法：</p><p>update 表名 set 字段1=值1，字段2=值2……where 条件;</p><p>修改数据还可以加上limit子句：</p><p>update 表名 set 字段1=值1，字段2=值2……where 条件 limit数据量；</p><p>意思就是只更新前多少多少条符合条件的记录！</p><p>删除数据<br>基本语法：</p><p>delete from 表名 where 删除条件</p><p>加上limit子句：</p><p>delete from 表名 where 删除条件 limit 数据量；</p><p>但是，用delete语句不会重置自增长！</p><p>还有一个删除数据表数据的语法：</p><p>truncate 表名；</p><p>truncate的作用：</p><p>相当于先把该表给drop掉，再按以前的表结构重新create一次！</p><p>查询数据<br>查询数据是业务逻辑中使用的最多的也是最复杂的！</p><p>关于查询数据，其实才刚刚开始！</p><p>以前的语法：</p><p>select *|字段列表 from 表名 where 查询条件；</p><p>比较完整的比较：</p><p>select  [select选项]  */字段列表[as 字段别名]  from 数据源 [where 子句][group by子句][having 子句][order by子句][limit 子句];</p><p>注意：</p><p>1， from后面的子句往往称为：五子句，也叫作查询五子句，也叫作五子查询</p><p>2， 五子查询的选项可以都没有，但是，如果有的话，就必须按照上面顺序写！</p><p>select选项<br>是指系统在查询出数据后，要不要去除重复的记录！有两个选项：</p><p>all：也是默认值，保留所有的查询结果！</p><p>distinct：去重，去掉重复的记录，这里的重复是指所有的字段都相同，完全一样！</p><p>所以，在实际的运用中，这个选项基本不用，因为几乎所有的表都有一个主键！</p><p>别名<br>所谓的别名，就是给字段或其他表达式等标识符起一个名字！基本语法是：</p><p>字段|表达式|表名|子查询结果 [as] 别名</p><p>这里的as可以省略，但是为了增加可读性，强烈建议写上！</p><p>为什么要有别名？</p><p>第一， 如果出现多表查询的时候，往往不同的表会有相同的字段名，如果要使用同名的字段，就必须给其中的一个或者两个起上别名，否则不好区分！</p><p>第二， 通常都要给一个表达式起一个别名，代表该表达式的含义！</p><p>虚拟表<br>查询语句比较完整的比较：</p><p>select  [select选项]  */字段列表[as 字段别名]  from 数据源 [where 子句][group by子句][having 子句][order by子句][limit 子句];</p><p>group by子句<br>也称之为分组统计查询语句！</p><p>语法<br>group by 字段1[字段2……]</p><p>order by子句<br>根据某个字段进行排序，有升序和降序之分！</p><p>语法<br>order by 字段1 [asc|desc ]</p><p>默认为asc，也就是升序！可以省略！</p><p>当然，排序的规则要按照校对集</p><p>多字段排序</p><p>order by 字段1 [asc|desc ], 字段2 [asc|desc ]……</p><p>limit子句<br>limit就是限制的意思，所以，limit子句的作用就是限制查询记录的条数！</p><p>语法<br>limit offset,length</p><p>在项目中，如果要用到分页效果，就应该使用limit子句！</p><p>limit ($pageNum-1)* $rowPerPage,$rowPerPage</p><p>表单传值<br>web表单主要用来在网页中发送数据到服务器，比如：用户注册，用户登录等</p><p>表单传值有两种：get和post</p><p>submit不算是表单内容的一部分，可以理解为form的一部分！</p><p>有两件事情需要注意：</p><p>1， 无论是单选框还是复选框，除了要有name属性，还要有value值</p><p>2， 复选框中name属性，一定要加上中括号[]，否则，只保留最后一个被选中的值，因为前面的全部被覆盖了！</p><p>http协议<br>http：HyperText  Transfer Protocol 超文本传输协议！</p><p>http协议的特点<br>一般的协议只支持b/s模型！</p><p>1， http协议也支持c/s模型</p><p>2， 灵活，可以利用http协议传递任意类型的数据</p><p>3， 无连接请求：每次连接只能处理一个请求，浏览器向服务器发起一次请求后，只能从服务器那里得到一次响应！</p><p>4， 无状态：也叫作无记忆功能，意思是同一个浏览器向同一个服务器发起多次请求的时候，服务器不能识别该浏览器！</p><p>http协议分成了两个部分：</p><p>http请求：浏览器向服务器索要数据</p><p>http响应：服务器向浏览器反馈数据</p><p>不管是请求还是响应，其实http协议都是由一个一个的简单协议项组成的（也就是事先的一种约定）</p><p>形式如下：</p><p>协议名：协议内容（协议值）</p><p>每一个协议项都独占一行！</p><p>http请求<br>http请求包含了四个部分：</p><p>请求行</p><p>请求头</p><p>空行</p><p>请求数据</p><p>请求行<br>单独的占用一行，分为三个部分：</p><p>请求方式 请求路径 协议版本    三个部分之间用空格隔开，比如：</p><p>GET  /index.index  HTTP/1.1     协议的版本是1.1  以前是1.0</p><p>请求头<br>请求头就是所有当前需要用到的协议项的集合，每个协议项都要独占一行，比如：</p><p>host：<a href="http://www.itcast.cn" target="_blank" rel="noopener">www.itcast.cn</a></p><p>常见的协议项有：</p><p>host：当前url中所要请求的服务器的主机名（域名）</p><p>accept-encoding：是浏览器发给服务器,声明浏览器支持的压缩类型  比如gzip</p><p>accept_charset：表示，浏览器支持的字符集</p><p>referer：表示，此次请求来自哪个网址</p><p>accept-language：可以接收的语言类型，cn，en等</p><p>cookie：如果之前当前请求的服务器在浏览器端设置了数据（cookie），那么当前浏览器再次请求该服务器的时候，就会把对应的数据带过去</p><p>user-agent：用户代理，当前发起请求的浏览器的内核信息</p><p>accept：表示浏览器可以接收的数据类型，text/html，image/img</p><p>content-length（post）：只有post提交的时候才会有的请求头，显示的是当前要提交的数据的长度（字节）</p><p>if-modified-since（get）：表示，在客户端向服务器请求某个资源文件时，询问此资源文件是否被修改过</p><p>content-type（post）：用于定义网络文件的类型和网页的编码，决定浏览器将以什么形式、什么编码读取这个文件</p><p>空行<br>用来分离请求头和请求数据，请求头到此结束</p><p>请求数据<br>只有post提交的时候才会有请求数据</p><p>查看http协议<br>httpwatch：专业查看整个http请求和响应的过程</p><p>firefox下面的插件：firebug</p><p>http响应<br>也分成了四个部分：</p><p>状态行（响应行） </p><p>响应头</p><p>空行</p><p>响应主体</p><p>状态行<br>独占一行  分成三个部分： 协议版本  状态码  状态描述，比如：</p><p>HTTP/1.1   200  OK</p><p>响应头<br>也是名：值形式，常见的有：</p><p>server：服务器主机信息</p><p>date：响应时间</p><p>last-modified：文件最后修改时间（对应请求中：if-modified-since）</p><p>content-length：响应主体的长度（字节）</p><p>content-type：响应内容的数据类型：text/html，image/png等</p><p>location：重定向，浏览器遇到这个选项，就立马跳转（不会解析后面的内容）</p><p>refresh：重定向（刷新），浏览器遇到这个选项就会准备跳转，刷新一般有时间限制，时间到了才跳转，浏览器会继续向下解析</p><p>content-encodeing：文件编码格式</p><p>cache-control：缓存控制，no-cached不要缓存</p><p>空行<br>用来分隔响应头和响应主体</p><p>响应主体<br>html代码（内容）</p><p>状态码<br>1XX：代表http请求尚未成功</p><p>2XX：请求没有问题，同时服务器响应也没有问题</p><p>3XX：重定向，服务器要求浏览器重新发起请求</p><p>4XX：请求错误，服务器不能正常响应（一般会做一个404的友好页面！给出友好的提示！）</p><p>5XX：服务器错误，不能正常响应！</p><p>php模拟http响应<br>php模拟响应，其实就是通过header函数修改http协议，常见的有跳转，刷新和下载</p><p>跳转<br>意思就是浏览器请求到当前的文件之后，直接跳转到其他的位置</p><p>对应的http协议项：Location，具体的语法形式是：</p><p>header(‘location:新的url或uri’);</p><p>其中，如果是路径uri，浏览器会自动在前面绑定之前的域名，比如：</p><p>原来的域名是<a href="http://www.php17.com/model/show.php" target="_blank" rel="noopener">www.php17.com/model/show.php</a>   uri是：/model/register.php   相当于跳转到了：<a href="http://www.php17.com/model/register.php" target="_blank" rel="noopener">www.php17.com/model/register.php</a></p><p>也就是站内跳转</p><p>一旦遇到location就立即跳转！后面的代码不执行了！</p><p>刷新<br>刷新的本质还是跳转，不过刷新是告诉浏览器在多长时间之后进行刷新，可以刷新自己，也可以去请求其他的脚本，具体的语法是：</p><p>header(‘refresh:刷新等待的时间;url=刷新要请求的目标脚本或其他网址’);</p><p>注意：在刷新等待的时候，后面的代码会继续执行！</p><p>下载<br>下载可以通过a标签实现！</p><p>注意：使用a标签下载文件，只能下载那些浏览器无法解析的文件！</p><p>1， 告诉浏览器不要解析</p><p>content-type:application/octet-stream</p><p>2,指导浏览器如何保存文件</p><p>content-disposition:attachment;filename</p><p>字符串函数<br>strlen<br>获取字符串的长度，这里的长度指的是字节的长度！</p><p>substr<br>sub在这里是截取的意思</p><p>substr就是字符串截取函数，应该有三个参数</p><p>从指定字符串的指定起始位置开始，截取指定长度的字符串！</p><p>三个指定，应该有三个参数！</p><p>注意：字符串的起始位置是0！</p><p>如果不指定第三个参数，默认就是截取到最后！</p><p>strtolower<br>把字符串全部小写</p><p>strtoupper<br>将字符串全部大写</p><p>ucfirst<br>首字母大写</p><p>lcfirst<br>首字母小写</p><p>strrev<br>rev是reverse的意思，也就是反转</p><p>该函数的功能就是把字符串反转</p><p>strpos<br>pos是position的意思，也就是位置</p><p>所以，该函数的功能是查找并返回指定字符串中指定字符的起始位置！</p><p>所以，应该有两个参数！</p><p>strrpos<br>多出了一个r是reverse的意思，函数的功能从右往左查找并返回指定字符串的指定字符的起始位置！</p><p>注意：起始编号还是从左往右从0开始！</p><p>strchr<br>也是字符串截取函数，截取指定位置开始以后的全部字符串！</p><p>还有一个别名strstr</p><p>strrchr<br>也是字符串截取函数，截取从右往左指定位置开始以后的全部字符串！</p><p>trim<br>去除字符串的左右的空格！</p><p>数学函数<br>abs<br>取绝对值</p><p>floor<br>向下取整  </p><p>ceil<br>向上取整，得到一个比当前数值大的最小整数</p><p>round<br>四舍五入，有两个参数，第一个是数值本身，第二个精确的小数的位数，如果不写第二个参数，默认的是0，也就是得到了一个整数</p><p>rand和mt_rand<br>都是获得一个指定区间的随机整数，只是mt_rand的效率更高！</p><p>注意是闭区间！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
