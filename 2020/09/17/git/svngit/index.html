@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Mac切换PHP版本 | Hechaofa</title>
-  <meta name="keywords" content=" php ">
-  <meta name="description" content="Mac切换PHP版本 | Hechaofa">
+  <title>SVN与Git优缺点比较 | Hechaofa</title>
+  <meta name="keywords" content=" git ">
+  <meta name="description" content="SVN与Git优缺点比较 | Hechaofa">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="SVN与Git优缺点比较(属面试常问提)1．SVN优缺点优点：1、 管理方便，逻辑明确，符合一般人思维习惯。2、 易于管理，集中式服务器更能保证安全性。3、 代码一致性非常高。4、 适合开发人数不多的项目开发。缺点：1、 服务器压力太大，数据库容量暴增。2、 如果不能连接到服务器上，基本上不可以工作，看上面第二步，如果服务器不能连接上，就不能提交，还原，对比等等。3、 不适合开源开发（开发人数非常">
 <meta property="og:type" content="article">
@@ -807,9 +807,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-docker/php" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-git/svngit" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Mac切换PHP版本</h1>
+        <h1 class="article-title">SVN与Git优缺点比较</h1>
     
     <div class="article-meta">
         
@@ -817,26 +817,26 @@
         
         <span class="book">
             
-                <a  data-rel="Mac">Mac</a>
+                <a  data-rel="git">git</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color4">php</a>
+            <a class="color4">git</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-01-07 22:15:53'>2019-12-29 19:09</time>
+        创建时间:<time class="date" title='更新时间: 2020-09-17 18:34:45'>2020-09-17 18:09</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:326</span>
+        <span>字数:348</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -871,10 +871,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前言：很多开发者一般使用Mac电脑办公比较多，比如一个PHP开发者往往很需要PHP环境的搭载变成，如果我不想用默认的PHP版本，Mac下怎么方便操作使用呢？</p>
-<p>这里准备的工具：brew</p>
-<p>1、检查PHP版本<br>php  -v<br>2、安装PHP7.2版本<br>brew install php72<br>3、定义环境变量<br>vim  ~/.zshrc<br>export PATH=”/usr/local/opt/php@7.2/bin:$PATH”<br>source  ~/.zshrc<br>4、服务启动<br>cd /usr/local/opt/php@7.2/sbin<br>php-fpm -y /usr/local/etc/php/7.2/php-fpm.conf<br>brew services start <a href="mailto:php@7.2">php@7.2</a><br>5、服务检查<br>php  -v<br>6、完成</p>
-<p>常用操作命令：<br>$ brew –help #简洁命令帮助<br>$ man brew #完整命令帮助<br>$ brew install git #安装软件包(这里是示例安装的Git版本控制)<br>$ brew uninstall git #卸载软件包<br>$ brew search git #搜索软件包<br>$ brew list #显示已经安装的所有软件包<br>$ brew update #同步远程最新更新情况，对本机已经安装并有更新的软件用*标明<br>$ brew outdated #查看已安装的哪些软件包需要更新<br>$ brew upgrade git #更新单个软件包<br>$ brew info git #查看软件包信息<br>$ brew home git #访问软件包官方站<br>$ brew cleanup #清理所有已安装软件包的历史老版本<br>$ brew cleanup git #清理单个已安装软件包的历史版本</p>
+        <p>SVN与Git优缺点比较(属面试常问提)<br>1．SVN优缺点<br>优点：<br>1、 管理方便，逻辑明确，符合一般人思维习惯。<br>2、 易于管理，集中式服务器更能保证安全性。<br>3、 代码一致性非常高。<br>4、 适合开发人数不多的项目开发。<br>缺点：<br>1、 服务器压力太大，数据库容量暴增。<br>2、 如果不能连接到服务器上，基本上不可以工作，看上面第二步，如果服务器不能连接上，就不能提交，还原，对比等等。<br>3、 不适合开源开发（开发人数非常非常多，但是Google app engine就是用svn的）。但是一般集中式管理的有非常明确的权限管理机制（例如分支访问限制），可以实现分层管理，从而很好的解决开发人数众多的问题。</p>
+<p>2．Git优缺点<br>优点：<br>1、适合分布式开发，强调个体。<br>2、公共服务器压力和数据量都不会太大。<br>3、速度快、灵活。<br>4、任意两个开发者之间可以很容易的解决冲突。<br>5、离线工作。<br>缺点：<br>1、学习周期相对而言比较长。<br>2、不符合常规思维。<br>3、代码保密性差，一旦开发者把整个库克隆下来就可以完全公开所有代码和版本信息。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 chaofa_vip@126.com </span>
@@ -888,12 +886,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Mac切换PHP版本</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">326</span></p>
+    <p><span class="copy-title">文章标题:</span>SVN与Git优缺点比较</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">348</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Hechaofa">Hechaofa</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-12-29, 19:09:47</p>
-    <p><span class="copy-title">最后更新:</span>2020-01-07, 22:15:53</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/29/docker/php/" title="Mac切换PHP版本">https://chaofavip.github.io/2019/12/29/docker/php/</a>
+    <p><span class="copy-title">发布时间:</span>2020-09-17, 18:09:47</p>
+    <p><span class="copy-title">最后更新:</span>2020-09-17, 18:34:45</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/09/17/git/svngit/" title="SVN与Git优缺点比较">https://chaofavip.github.io/2020/09/17/git/svngit/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
