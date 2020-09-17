@@ -79,6 +79,56 @@
     
     
     <entry>
+      <title>创业之路</title>
+      <link href="/2020/09/04/company/chuangye/"/>
+      <url>/2020/09/04/company/chuangye/</url>
+      
+        <content type="html"><![CDATA[<p>虽然今年的疫情如此情况下，4月来自朋友几个呼唤，毅然不容的出去创业了。本身是一个小白创业，很多东西都不懂，只懂技术这块并且还是不够深入。但是趁着一股热，出去创业。到目前为止项目是从0-1开发完成，并且已经上线。但是这次仍然是失败的，但是心不甘。如果有第二次创业机会还会继续。<br>心得，通过这次创业收获对技术管理并且学习不少整个公司组织架构需要哪些东西整合等等，也是给自己不少经验。同时也是从另一方面来说，切记勿要一股脑就搞创业，创业基本80%以上是失败的，只有很少数才能真正上岸成功。除非一方面有资金资源，有强大的背景。另一方面产品的确能够一下子拓展市场并得到市场很好的反馈，不然很难生存。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 创业 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 公司 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Sql优化</title>
+      <link href="/2020/09/03/mysql/youhua/"/>
+      <url>/2020/09/03/mysql/youhua/</url>
+      
+        <content type="html"><![CDATA[<h2 id="sql语句应该考虑哪些安全性？"><a href="#sql语句应该考虑哪些安全性？" class="headerlink" title="sql语句应该考虑哪些安全性？"></a>sql语句应该考虑哪些安全性？</h2><p>（1）防止sql注入，对特殊字符进行转义，过滤或者使用预编译sql语句绑定；<br>（2）使用最小权限原则，特别是不要使用root账户，微不同的动作或者操作建立不同的账户；<br>（3）当sql出错时，不要把数据库出错的信息暴露到客户端。</p><h2 id="sql查询时候怎么优化？"><a href="#sql查询时候怎么优化？" class="headerlink" title="sql查询时候怎么优化？"></a>sql查询时候怎么优化？</h2><p>1.对查询进行优化，应尽量避免全表扫描，首先应考虑在 where 及 order by<br>涉及的列上建立索  </p><p>2.应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：引。</p><p>select id from t where num is null</p><p>可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：</p><p>select id from t where num=0</p><p>3.应尽量避免在 where<br>子句中使用!=或&lt;&gt;操作符，否则将引擎放弃使用索引而进行全表扫描。</p><p>4.应尽量避免在 where 子句中使用 or<br>来连接条件，否则将导致引擎放弃使用索引而进行全表扫描，如：</p><p>select id from t where num=10 or num=20</p><p>可以这样查询：</p><p>select id from t where num=10</p><p>union all</p><p>select id from t where num=20</p><p>5.in 和 not in 也要慎用，否则会导致全表扫描，如：</p><p>select id from t where num in(1,2,3)<br>对于连续的数值，能用 between 就不要用 in 了：</p><p>select id from t where num between 1 and 3</p><p>6.下面的查询也将导致全表扫描：</p><p>select id from t where name like ‘%abc%’</p><p>若要提高效率，可以考虑全文检索。</p><p>7.如果在 where<br>子句中使用参数，也会导致全表扫描。因为SQL只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推迟到运行时；它必须在编译时进行选择。然而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：</p><p>select id from t where num=@num</p><p>可以改为强制查询使用索引：</p><p>select id from t with(index(索引名)) where num=@num</p><p>8.应尽量避免在 where 子句中对字段进行表达式操作，这将导致引擎放弃使用索引而进行全表扫描。如：</p><p>select id from t where num/2=100</p><p>应改为:</p><p>select id from t where num=100*2</p><p>9.应尽量避免在where子句中对字段进行函数操作，这将导致引擎放弃使用索引而进行全表扫描。如：</p><p>select id from t where<br>substring(name,1,3)=’abc’–name以abc开头的id</p><p>select id from t where<br>datediff(day,createdate,’2005-11-30’)=0–‘2005-11-30’生成的id</p><p>应改为:</p><p>select id from t where name like ‘abc%’</p><p>select id from t where createdate&gt;=’2005-11-30’<br>and createdate&lt;’2005-12-1’</p><p>10.不要在 where<br>子句中的“=”左边进行函数、算术运算或其他表达式运算，否则系统将可能无法正确使用索引。</p><p>11.在使用索引字段作为条件时，如果该索引是复合索引，那么必须使用到该索引中的第一个字段作为条件时才能保证系统使用该索引，否则该索引将不会被使用，并且应尽可能的让字段顺序与索引顺序相一致。</p><p>12.不要写一些没有意义的查询，如需要生成一个空表结构：</p><p>select col1,col2 into #t from t where 1=0</p><p>这类代码不会返回任何结果集，但是会消耗系统资源的，应改成这样：</p><p>create table #t(…)</p><p>13.很多时候用 exists 代替 in 是一个好的选择：</p><p>select num from a where num in(select num from b)</p><p>用下面的语句替换：</p><p>select num from a where exists(select 1 from b where<br>num=a.num)</p><p>14.并不是所有索引对查询都有效，SQL是根据表中数据来进行查询优化的，当索引列有大量数据重复时，SQL查询可能不会去利用索引，如一表中有字段sex，male、female几乎各一半，那么即使在sex上建了索引也对查询效率起不了作用。</p><p>15.索引并不是越多越好，索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及<br>update 的效率，因为 insert 或 update<br>时有可能会重建索引，所以怎样建索引需要慎重考虑，视具体情况而定。一个表的索引数最好不要超过6个，若太多则应考虑一些不常使用到的列上建的索引是否有必要。</p><p>16.应尽可能的避免更新 clustered 索引数据列，因为 clustered<br>索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新 clustered<br>索引数据列，那么需要考虑是否应将该索引建为 clustered 索引。</p><p>17.尽量使用数字型字段，若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。</p><p>18.尽可能的使用 varchar/nvarchar 代替 char/nchar<br>，因为首先变长字段存储空间小，可以节省存储空间，其次对于查询来说，在一个相对较小的字段内搜索效率显然要高些。</p><p>19.任何地方都不要使用 select * from t<br>，用具体的字段列表代替“*”，不要返回用不到的任何字段。</p><p>20.尽量使用表变量来代替临时表。如果表变量包含大量数据，请注意索引非常有限（只有主键索引）。</p><p>21.避免频繁创建和删除临时表，以减少系统表资源的消耗。</p><p>22.临时表并不是不可使用，适当地使用它们可以使某些例程更有效，例如，当需要重复引用大型表或常用表中的某个数据集时。但是，对于一次性事件，最好使用导出表。</p><p>23.在新建临时表时，如果一次性插入数据量很大，那么可以使用 select into 代替 create<br>table，避免造成大量 log ，以提高速度；如果数据量不大，为了缓和系统表的资源，应先create table，然后insert。</p><p>24.如果使用到了临时表，在存储过程的最后务必将所有的临时表显式删除，先 truncate table<br>，然后 drop table ，这样可以避免系统表的较长时间锁定。</p><p>25.尽量避免使用游标，因为游标的效率较差，如果游标操作的数据超过1万行，那么就应该考虑改写。</p><p>26.使用基于游标的方法或临时表方法之前，应先寻找基于集的解决方案来解决问题，基于集的方法通常更有效。</p><p>27.与临时表一样，游标并不是不可使用。对小型数据集使用 FAST_FORWARD<br>游标通常要优于其他逐行处理方法，尤其是在必须引用几个表才能获得所需的数据时。在结果集中包括“合计”的例程通常要比使用游标执行的速度快。如果开发时间允许，基于游标的方法和基于集的方法都可以尝试一下，看哪一种方法的效果更好。</p><p>28.在所有的存储过程和触发器的开始处设置 SET NOCOUNT ON ，在结束时设置 SET<br>NOCOUNT OFF 。无需在执行存储过程和触发器的每个语句后向客户端发送 DONE_IN_PROC 消息。</p><p>29.尽量避免大事务操作，提高系统并发能力。</p><p>30.尽量避免向客户端返回大数据量，若数据量过大，应该考虑相应需求是否合理。</p><h2 id="MySQL-Query-语句优化的基本思路和原则"><a href="#MySQL-Query-语句优化的基本思路和原则" class="headerlink" title="MySQL Query 语句优化的基本思路和原则"></a>MySQL Query 语句优化的基本思路和原则</h2><p>优化需要优化的 Query；<br>定位优化对象的性能瓶颈；<br>明确优化目标；<br>从 Explaing 入手；<br>多使用 Profile；<br>永远用小结果集推动大的结果集；<br>尽可能在索引中完成排序；<br>只取自己需要的 Columns；<br>仅仅使用最有效的过滤条件；<br>尽可能避免复杂的 Join 和子查询。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>基础面试js</title>
       <link href="/2020/07/13/web/mianshi01/"/>
       <url>/2020/07/13/web/mianshi01/</url>
@@ -105,8 +155,8 @@
     
     <entry>
       <title>MacBook 终端中的bogon的解决办法</title>
-      <link href="/2020/03/10/tool/Mac/bogon/"/>
-      <url>/2020/03/10/tool/Mac/bogon/</url>
+      <link href="/2020/03/10/Mac/bogon/"/>
+      <url>/2020/03/10/Mac/bogon/</url>
       
         <content type="html"><![CDATA[<p>打开终端，输入：</p><p>sudo hostname your-desired-host-name即可</p><p>例如：想把主机bogon改回，ABC，那么就可以输入：<br>sudo hostname ABC<br>之后可以用hostname指令查看当前的主机名<br>sudo hostname<br>重启终端即可看见修改后的结果</p>]]></content>
       
@@ -354,6 +404,31 @@
     
     
     <entry>
+      <title>Mac下搭建Apache+PHP+MySql运行环境</title>
+      <link href="/2019/11/17/Mac/start/"/>
+      <url>/2019/11/17/Mac/start/</url>
+      
+        <content type="html"><![CDATA[<p>Mac下搭建Apache+PHP+MySql运行环境<br>前言</p><p>　　我们在Mac上搭建Apache+PHP+MySql环境是非常方便的，因为Mac预装的有Apache和PHP，我们可以直接使用。但是稍微费劲一点的是Mac没有预装Mysql，这个需要我们自力更生。好了，废话就不多说了，接下来让我们愉快的学习一下在Mac上怎么搭建Apache+PHP+MySql的运行环境吧^_^</p><p>Apache</p><p>　　首先，让我们来看一下是怎么开启Apache服务的</p><p>　　打开Mac的终端，输入下面一条命令，开启Apache服务（因为sudo是系统管理命令，所以需要输入你的Mac密码）：</p><p>　　　　</p><p>1<br>sudo apachectl start</p><p> 　　其次，让我们查看一下Apache服务是否开启成功，在浏览器中输入localhost:80（80是默认端口），如果浏览器中显示 It Works！则证明Apache服务开启成功。</p><p>　　PS：上面也说了 Apache服务端口号 默认是80，如果我想换个端口该怎么办呢，不要捉急，往下看⬇️</p><p>　　　　Apache服务的默认安装路径是/etc/apache2，一版情况下/etc目录在Finder下是不可直接找到的，在Finder下使用快捷键 command+shift+g，然后输入/etc 回车，就会看到apache2目录。</p><p>　　　　　　　　<br>　　　　找到并打开httpd.conf，搜索Listen80，修改成你想要的端口号即可（注：对配置文件修改过后要一定要重启Apache服务）</p><p>　　　　　　 </p><p>　　　　另外，Apache服务部署路径在 /Library/WebServer/Documents 目录下，使用快捷键command+shift+g后输入/L等待1秒钟后回车，进入Library（资源库），倒数第二个WebSever文件夹下的Documents目录就是Apache服务的部署路径，我们的项目需要放在此目录下</p><p>　　　　</p><p>　　　　如果想要修改默认部署路径，可以在/etc/apache2目录下找到并打开httpd.conf文件，找到 DocumentRoot ，更改路径即可。</p><p>　　　　（详情请参考：<a href="https://www.cnblogs.com/xiaovw/p/9843829.html）" target="_blank" rel="noopener">https://www.cnblogs.com/xiaovw/p/9843829.html）</a></p><p>　　　　最后，提供几个和Apache服务有关的常用命令。</p><p>1、启动Apache服务  sudo apachectl start<br>2、重启Apache服务  sudo apachectl restart<br>3、停止Apache服务  sudo apachectl stop<br>4、查看Apache服务  sudo apachectl -v</p><p>　　配置PHP　　 </p><p>　　　　因为Mac自带的有PHP，所以我们启动php非常方便，只需要在在Apache服务中配置一下即可直接使用。具体方法如下：</p><p>　　　　首先，在/ect/apache2目录下找到并打开httpd.conf文件</p><p>　　　　其次，搜索LoadModule php，找到LoadModule php的所在行，把前面的#号去掉，保存后重启Apache服务即可（我的是PHP7，有的人可能是PHP5，没毛病···）。</p><p>　　　　最后，让我们在Apache服务的部署路径（/Library/WebServer/Documents）下新建一个index.php测试程序，看一下效果吧。</p><p>　　　　这是index.php文件里面的内容。</p><p>　　　　 </p><p>　　　　在浏览器中输入如下网址即可查看到PHP的信息</p><p>　　　　 <a href="http://localhost/info.php" target="_blank" rel="noopener">http://localhost/info.php</a> </p><p>　　　　</p><p>　　MySql的安装</p><p>　　　　因为Mac没有自带的mysql，所以需要我们去手动安装，在浏览器中输入如下网址课之间进入MySQL的官网下载macOS服务。</p><p>　　　　 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">http://dev.mysql.com/downloads/mysql/</a> </p><p>　　　　　</p><p>　　　　这个时候执行下面的命令，在终端中查看MySQL的版本信息</p><p> 　　　　mysql –version </p><p>　　　　会报错，报错信息为： zsh: command not found: mysql ，这是因为该命令默认访问/usr/local/bin/mysql 路径下的mysql，所以我们需要建立一个软连接即可，可以在终端中使用如下命令：</p><p> 　　　　sudo ln -fs /usr/local/mysql/bin/mysql /usr/local/bin/mysql </p><p>　　　　这个时候再次利用安装MySQL时给出的用户和密码登录MySQL服务，在终端输入如下命令后回车，需要输入MySQL密码：</p><p>　　　　 mysql -u root -p  </p><p>　　　　此时已经进入了MySQL服务，退出的命令为quit（exit也可以）</p><p>　　</p><p>　　　　MySQl服务的启动与停止</p><p>　　　　第一种方法：使用终端命令</p><p>启动MySQL服务 sudo /usr/local/mysql/support-files/mysql.server start</p><p>停止MySQL服务 sudo /usr/local/mysql/support-files/mysql.server stop<br>　　　　第二种方法：在系统偏好设置中有一个有MySQL选项，可以在这里手动启动与停止MySQL服务，但是我Mac的上MySQL由于版本兼容问题，系统偏好设置的MySQL服务无法加载出来（我的Mac版本为10.13.4）。</p><p>　　　　</p><p>　　　　安装MySQl图形化管理工具Workbench</p><p>　　　　下载网址：<a href="https://dev.mysql.com/downloads/workbench/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/workbench/</a></p><p>　　　　</p><p>　　　　下载完成后安装，安装完成后要建立本地连接（password是MySQl的密码）</p><p>　　　　</p><p>　　　　最后一步，测试连接，到此为止MySQL图形化管理工具安装并连接本地MySQL成功。</p><p>　　　　</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mac </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux安装git</title>
       <link href="/2019/11/12/linux/gitanzhuang/"/>
       <url>/2019/11/12/linux/gitanzhuang/</url>
@@ -530,8 +605,8 @@
     
     <entry>
       <title>Mac 怎么通过自带终端连接linux服务器</title>
-      <link href="/2019/09/17/tool/Mac/linux/"/>
-      <url>/2019/09/17/tool/Mac/linux/</url>
+      <link href="/2019/09/17/Mac/linux/"/>
+      <url>/2019/09/17/Mac/linux/</url>
       
         <content type="html"><![CDATA[<p>简单来说，就两步骤</p><p>· 打开Mac终端，切换到root权限下</p><pre><code>切换root权限： sudo -i </code></pre><p>·通过ssh命令连接linux服务器</p><pre><code>ssh root@127.0.0.1root是账户名，@后面的是连接的ip地址</code></pre><p>然后根据提示输入密码即可成功</p>]]></content>
       
@@ -555,8 +630,8 @@
     
     <entry>
       <title>mac 下host操作管理</title>
-      <link href="/2019/09/10/tool/Mac/host/"/>
-      <url>/2019/09/10/tool/Mac/host/</url>
+      <link href="/2019/09/10/Mac/host/"/>
+      <url>/2019/09/10/Mac/host/</url>
       
         <content type="html"><![CDATA[<p>前言：很多开发者使用Mac比较多，开发过程中本地就需要配置项目的域名执行，大概两种操作，这里主要阐述工具管理使用。<br><strong>一、直接自带操作管理</strong></p><ol><li>打开控制命令管理工具</li><li><code>vim /etc/hosts</code></li><li>修改</li><li><code>wq</code> 保存推出即可</li></ol><p><strong>二、工具管理01：Gas Mask</strong></p><p><img src="https://img-blog.csdnimg.cn/20191222135505379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191222135645397.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下载地址：<a href="https://www.macupdate.com/app/mac/29949/gas-mask/download" target="_blank" rel="noopener">https://www.macupdate.com/app/mac/29949/gas-mask/download</a><br><strong>二、工具管理02：SwitchHosts</strong><br><img src="https://img-blog.csdnimg.cn/20191222134525589.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191222135558735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下载地址：<a href="https://oldj.github.io/SwitchHosts/" target="_blank" rel="noopener">https://oldj.github.io/SwitchHosts/</a></p><p> <em>备注：可以关注博客持续更新其他新技术：<a href="https://chaofavip.github.io">hechaofa</a></em></p>]]></content>
       
@@ -584,6 +659,31 @@
       <url>/2019/07/20/tool/baidu/</url>
       
         <content type="html"><![CDATA[<p><a href="https://github.com/CodeTips/BaiduNetdiskPlugin-macOS" target="_blank" rel="noopener">https://github.com/CodeTips/BaiduNetdiskPlugin-macOS</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mac </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mac </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>百度网盘（破解svip）下载Mac</title>
+      <link href="/2019/07/20/tool/zipkin/"/>
+      <url>/2019/07/20/tool/zipkin/</url>
+      
+        <content type="html"><![CDATA[<p>安装zipkin</p><p>cd /usr/local/src/ wget -O zipkin.jar ‘<a href="https://search.maven.org/remote_content?g=io.zipkin.java&amp;a=zipkin-server&amp;v=LATEST&amp;c=exec&#39;" target="_blank" rel="noopener">https://search.maven.org/remote_content?g=io.zipkin.java&amp;a=zipkin-server&amp;v=LATEST&amp;c=exec&#39;</a> </p><p>启动<br>java -jar zipkin.jar</p><p><a href="http://tracing-analysis-dc-hz.aliyuncs.com/adapt_fzi0qteick@05697a22301281e_fzi0qteick@53df7ad2afe8301/api/v2/spans" target="_blank" rel="noopener">http://tracing-analysis-dc-hz.aliyuncs.com/adapt_fzi0qteick@05697a22301281e_fzi0qteick@53df7ad2afe8301/api/v2/spans</a></p><p>ZipKin的原理的介绍</p><p>　　结构概述      </p><p>　　跟踪器（Tracers）存在在你的应用程序中生存，记录时间和关于操作的元数据。他们经常使用库，因此他们的使用对用户是透明的。例如，当它收到一个请求并发送一个响应时，一个感应器（instrumented ）的web服务器记录。所收集的跟踪数据称为Span。</p><p>　　在生产过程中，instrumention是安全的，并且没有太多的开销。由于这个原因，他们只在带内（in-band）传播id，告诉接收方有一个正在进行中的跟踪。完成的跨度被报告给Zipkin的“外带（out-of-band）”，类似于应用程序如何异步地报告指标。</p><p>　　例如，当一个操作被跟踪，它需要发出一个传出的http请求时，会添加几个头来传播IDs。header不用于发送诸如操作名称之类的细节。</p><p>　　将数据发送给Zipkin的应用程序的一种组件被称为Reporter。记者(Reporters)通过几个传输器(transports )中的一个传输跟踪数据到Zipkin收集器(collectors)，这些收集器将跟踪数据保存到存储（storage）中。稍后，通过API查询存储，以向UI提供数据。   </p><p>　　下面是一个描述这个流程的图表:</p><p>　　Zipkin architecture</p><p>本地启动<br>去到安装目录<br>执行下面命令，看到后面那个图就说明启动成功</p><p>本地访问<br><a href="http://192.168.10.10:9411/zipkin/" target="_blank" rel="noopener">http://192.168.10.10:9411/zipkin/</a></p><p>效果：</p>]]></content>
       
       
       <categories>
@@ -671,6 +771,81 @@
         <tags>
             
             <tag> 压测 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Jenkins代表部署</title>
+      <link href="/2018/12/12/code/bushu/"/>
+      <url>/2018/12/12/code/bushu/</url>
+      
+        <content type="html"><![CDATA[<p>系统环境：</p><p>Distributor ID: Ubuntu<br>Description:    Ubuntu 16.04.2 LTS<br>Release:        16.04<br>Codename:       xenial<br>当前 docker 版本：Docker version 18.09.0<br>当前 docker-compose 版本：docker-compose version 1.23.2</p><p>docker-compose.yml<br>version: ‘3’<br>services:<br>  docker_jenkins:<br>    restart: always<br>    image: jenkins/jenkins:lts<br>    container_name: docker_jenkins<br>    ports:<br>      - ‘8080:8080’<br>      - ‘50000:50000’<br>    volumes:<br>      - ./data/:/var/jenkins_home<br>      - /var/run/docker.sock:/var/run/docker.sock<br>      - /usr/bin/docker:/usr/bin/docker<br>      - /usr/lib/x86_64-linux-gnu/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7<br>创建 data 目录并设置权限<br>mkdir ./data<br>sudo chown -R 1000 ./data //把当前目录的拥有者赋值给uid 1000<br>若已启动则需要重建下服务<br>构建Jenkins服务<br>docker-compose up -d</p><p>…访问 <a href="http://ip:8080" target="_blank" rel="noopener">http://ip:8080</a> 进行初始化…</p><p>jenkins在docker中安装后查看登录令牌<br>使用命令 docker logs 容器名称/容器ID 查看访问日志，即可查看到登录令牌</p><p>若未设置账户，如何查看admin的密码<br>一不小心，未创建新的账户，可通过查看挂载目录下的 /secrets/initialAdminPassword 中的 Key 作为密码登录<br>账户：admin<br>密码：cat ./data/secrets/initialAdminPassword</p><p>docker build 无权限的解决办法<br>在 docker-compose.yml 已将主机 docker 映射到容器内，故使用 docker -v 已经能够查看到版本号</p><ul><li>docker -v<br>Docker version 18.09.0, build 4d60db4</li><li>docker build -t test/test.admin.vue:v3 .<br>Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.39/build?buildargs=%7B%7D&amp;cachefrom=%5B%5D&amp;cgroupparent=&amp;cpuperiod=0&amp;cpuquota=0&amp;cpusetcpus=&amp;cpusetmems=&amp;cpushares=0&amp;dockerfile=Dockerfile&amp;labels=%7B%7D&amp;memory=0&amp;memswap=0&amp;networkmode=default&amp;rm=1&amp;session=c0j8whn50ubpyukeblzkng7cq&amp;shmsize=0&amp;t=test%2Ftest.admin.vue%3Av3&amp;target=&amp;ulimits=null&amp;version=1: dial unix /var/run/docker.sock: connect: permission denied<br>Build step ‘Execute shell’ marked build as failure<br>但是当使用 docker build -t . 命令的时候依旧无法执行，提示无权限(permission denied)<br>这个问题之前将Jenkins直接装在linux主机的时候也遇到过，在shell脚本输入框顶部加上 #!/bin/bash -ilex 即可<br>如果依旧不行，可执行(赋予读写执行权限)：sudo chmod 777 /var/run/docker.sock 注：服务器重启后可能权限会失效</li></ul><p>#!/bin/bash -ilex</p><ul><li>docker -v<br>Docker version 18.09.0, build 4d60db4</li><li>export DOCKER_IMAGE_NAME=test/test.admin.vue:v3</li><li>docker build -t test/test.admin.vue:v3 .<br>关于 docker 镜像的构建<br>注册阿里云账号，并申请阿里云的容器镜像服务，创建命名空间(公/私有，可自动创建仓库)，设置下 Registry 登录密码，随便新建一个仓库，查看仓库详情可查看推送 docker 的相关信息<br>创建好账号信息后，即可在 Jenkins 中构建推送。<br>可参考以下脚本，脚本环境变量说明<br>DOCKER_IMAGE_NAME：镜像名称(命名空间/镜像名:版本号)<br>DOCKER_CLOUD_URL： 镜像源<br>ALIYUN_USERNAME：阿里云用户名<br>ALIYUN_USERPWD：阿里云 Docker Registry 密码</li></ul><p>#!/bin/bash -ilex<br>docker -v<br>echo ‘打包镜像’<br>export DOCKER_IMAGE_NAME=test/$JOB_NAME:v$BUILD_NUMBER<br>docker build -t $DOCKER_IMAGE_NAME .</p><p>echo ‘推送镜像’<br>export DOCKER_CLOUD_URL=registry.cn-hangzhou.aliyuncs.com</p><p>docker login –username=$ALIYUN_USERNAME –password=$ALIYUN_USERPWD $DOCKER_CLOUD_URL</p><p>docker tag $DOCKER_IMAGE_NAME $DOCKER_CLOUD_URL/$DOCKER_IMAGE_NAME<br>docker push $DOCKER_CLOUD_URL/$DOCKER_IMAGE_NAME</p><p>echo ‘删除镜像’<br>docker rmi $DOCKER_IMAGE_NAME<br>docker rmi $DOCKER_CLOUD_URL/$DOCKER_IMAGE_NAME<br>参考<br><a href="https://github.com/jenkinsci/docker/blob/master/README.md" target="_blank" rel="noopener">https://github.com/jenkinsci/docker/blob/master/README.md</a><br><a href="https://www.cnblogs.com/leolztang/p/6934694.html" target="_blank" rel="noopener">https://www.cnblogs.com/leolztang/p/6934694.html</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 架构 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 代码部署 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>awk运算</title>
+      <link href="/2018/11/10/linux/awk/"/>
+      <url>/2018/11/10/linux/awk/</url>
+      
+        <content type="html"><![CDATA[<p>个人日记整理</p><p><a href="https://ee4e9571.wiz03.com/wapp/pages/view/share/s/3KjFlN2YwAp_2pD4xe1RaPKO1lLCqP2vXA-R2RU7cz06ANz5" target="_blank" rel="noopener">https://ee4e9571.wiz03.com/wapp/pages/view/share/s/3KjFlN2YwAp_2pD4xe1RaPKO1lLCqP2vXA-R2RU7cz06ANz5</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> awk </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mac中Composer的安装和使用</title>
+      <link href="/2018/08/10/Mac/composer/"/>
+      <url>/2018/08/10/Mac/composer/</url>
+      
+        <content type="html"><![CDATA[<p>Composer 是 PHP5.3以上 的一个依赖管理工具。你可以在自己的项目中声明所依赖的外部工具库（libraries），Composer 会安装这些依赖的库文件。它仅仅是一个依赖关系的管理，如同在iOS开发中Swift 和 Objective-C工程中使用的CocoaPods一样。</p><p>安装composer<br>安装前需确保系统PHP版本在5.3以上,在终端中执行以下命令下载Composer可执行文件：</p><p>curl -sS <a href="https://getcomposer.org/installer|" target="_blank" rel="noopener">https://getcomposer.org/installer|</a> php<br>此操作会下载最新版本到当前的工作目录中。然后在当前路径下就可以操作了，如查看Composer版本：</p><p>php composer.phar –version //Composer version 1.4.2 2017-05-17 08:17:52</p><p>如果下载失败也不用纠结了，直接去手动下载合适的版本<a href="https://getcomposer.org/download/，结果的一样的。" target="_blank" rel="noopener">https://getcomposer.org/download/，结果的一样的。</a></p><p>这应该算是局部安装了，当跳出当前目录还是无法正常使用，这肯定不是我们所期望的。如果要想全局生效需把composer.phar移到系统/usr/local/bin/目录下：</p><p>mv composer.phar /usr/local/bin/composer<br>然后在全部就可以使用composer,再也不用每次都输入长长的php composer.phar了。至此算是安装完毕。</p><p>//版本更新，如果有则更新到最新版本<br>composer selfupdate<br>更新完后会提示<br>Use composer self-update –rollback to return to version 1.4.1可以回退到上一版本。</p><p>使用composer<br>在我们的项目目录下创建文件composer.json添加所需要的依赖库的信息，例如需要”monolog/monolog”，”phpmailer/phpmailer”这两个库，json格式如下：</p><p>{<br>    “require”: {<br>        “monolog/monolog”: “1.0.*”,<br>        “phpmailer/phpmailer”: “~5.2”<br>    }<br>}</p><p>然后在终端执行：</p><p>composer install<br>composer根据json配置开始下载所依赖的库文件，安装完毕后（若无）会生成一个composer.lock文件，如果你熟悉cocoapods的话应该知道也有个文件Podfile.lock。</p><p>composer.lock作用锁定当前的配置文件，如果已存在，在下次执行install操作时会自动读取composer.lock中的信息，即使你已经修该了composer.json文件此时也不会生效。</p><p>composer update<br>此操作会直接从composer.json文件读取信息，下载库文件，然后同步更新composer.lock。此时这个操作可以看作先删除composer.lock文件，然后在执行install命令操作。</p><p>composer update monolog/monolog<br>指定某一个库的更新，其他的没有影响。</p><p>以上为compose的简单使用，有了它再使用第三方库操作起来是不是感觉很简单、很方便。</p><p>关于composer.json文件<br>以上我们使用的.json文件就一个require属性，其实composer还支持其他很多属性供我们添加一些其他配置信息。部分属性如下：</p><p>name<br>description<br>version<br>type<br>keywords<br>homepage<br>time<br>license<br>authors<br>…</p><p>具体属性代表的意义及支持的全部属性参看<a href="https://getcomposer.org/doc/04-schema.md" target="_blank" rel="noopener">https://getcomposer.org/doc/04-schema.md</a></p><p>一般情况下我们的项目工程中一个require属性就可以了，这里这个composer.json文件为了便于区分暂且称之为A.json。当我们下载了其他第三方库时可发现其目录下也有个composer.json(称之为B.json)或composer.lock。<br>B.json以monolog/monolog为例composer.json文件配置如下：</p><p>{<br>  “name”: “monolog/monolog”,<br>  “description”: “Logging for PHP 5.3”,<br>  “keywords”: [“log”,”logging”],<br>  “homepage”: “<a href="http://github.com/Seldaek/monolog&quot;" target="_blank" rel="noopener">http://github.com/Seldaek/monolog&quot;</a>,<br>  “type”: “library”,<br>  “license”: “MIT”,<br>  “authors”: [<br>    {<br>      “name”: “Jordi Boggiano”,<br>      “email”: “<a href="mailto:j.boggiano@seld.be">j.boggiano@seld.be</a>“,<br>      “homepage”: “<a href="http://seld.be&quot;" target="_blank" rel="noopener">http://seld.be&quot;</a><br>    }<br>  ],<br>  “require”: {<br>    “php”: “&gt;=5.3.0”<br>  },<br>  “autoload”: {<br>    “psr-0”: {“Monolog”: “src/“}<br>  }<br>}</p><p>这两个json文件肯定是不同的，在我们执行操作的时候都是用的A.json。B.json 属于第三方库本身的配置文件，和项目的配置依赖没有关系，B.json在我们要制作自己的库文件然后发布供别人下载使用时是必须的，通过它别人才能找到我们发布的库，这里暂且不谈。只需要记住只有根目录下的composer.json才是真正的项目依赖配置文件。</p><p>关于镜像<br>Composer在安装或更新的时候可能会出现失败或无法访问的情况，这是由于访问的外部网络可能被墙了。所以为Composer配置了一个国内提供的镜像，终端中执行:</p><p>composer config -g repo.packagist composer <a href="https://packagist.phpcomposer.com" target="_blank" rel="noopener">https://packagist.phpcomposer.com</a><br>以后每次的下载或更新都是访问的国内服务器了，具体Packagist / Composer 镜像参看phpcomposer</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mac </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> composer </tag>
             
         </tags>
       
@@ -771,6 +946,31 @@
         <tags>
             
             <tag> redis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>git 版本管理</title>
+      <link href="/2017/09/17/git/guanli/"/>
+      <url>/2017/09/17/git/guanli/</url>
+      
+        <content type="html"><![CDATA[<p>若想使用好版本管理，得须明白什么是版本，版本的基础概念请前往文章: <a href="http://blog.linghit.com/blog/3" target="_blank" rel="noopener">软件开发中的”版本”</a>。</p><p><strong>版本发布后，严禁在生产服务器修改文件及代码，如有发现，会记录在案。</strong></p><h4 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h4><p>一般来说，日常使用只要记住下图6个命令，就可以了。但是熟练使用，恐怕要记住60～100个命令。</p><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png" alt="flow"></p><p>下面是我整理的常用 Git 命令清单。几个专用名词的译名如下。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Workspace：工作区</span><br><span class="line">Index &#x2F; Stage：暂存区</span><br><span class="line">Repository：仓库区（或本地仓库）</span><br><span class="line">Remote：远程仓库</span><br></pre></td></tr></table></figure><h4 id="一、新建代码库"><a href="#一、新建代码库" class="headerlink" title="一、新建代码库"></a>一、新建代码库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 在当前目录新建一个Git代码库</span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"># 新建一个目录，将其初始化为Git代码库</span><br><span class="line">$ git init [project-name]</span><br><span class="line"></span><br><span class="line"># 下载一个项目和它的整个代码历史</span><br><span class="line">$ git clone [url]</span><br></pre></td></tr></table></figure><h4 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h4><p>Git的设置文件为 <code>.gitconfig</code>，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 显示当前的Git配置</span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"># 编辑Git配置文件</span><br><span class="line">$ git config -e [--global]</span><br><span class="line"></span><br><span class="line"># 设置提交代码时的用户信息</span><br><span class="line">$ git config [--global] user.name &quot;[name]&quot;</span><br><span class="line">$ git config [--global] user.email &quot;[email address]&quot;</span><br></pre></td></tr></table></figure><h4 id="三、增加-删除文件"><a href="#三、增加-删除文件" class="headerlink" title="三、增加/删除文件"></a>三、增加/删除文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 添加指定文件到暂存区</span><br><span class="line">$ git add [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"># 添加指定目录到暂存区，包括子目录</span><br><span class="line">$ git add [dir]</span><br><span class="line"></span><br><span class="line"># 添加当前目录的所有文件到暂存区</span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"># 添加每个变化前，都会要求确认</span><br><span class="line"># 对于同一个文件的多处变化，可以实现分次提交</span><br><span class="line">$ git add -p</span><br><span class="line"></span><br><span class="line"># 删除工作区文件，并且将这次删除放入暂存区</span><br><span class="line">$ git rm [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"># 停止追踪指定文件，但该文件会保留在工作区</span><br><span class="line">$ git rm --cached [file]</span><br><span class="line"></span><br><span class="line"># 改名文件，并且将这个改名放入暂存区</span><br><span class="line">$ git mv [file-original] [file-renamed]</span><br></pre></td></tr></table></figure><h4 id="四、代码提交"><a href="#四、代码提交" class="headerlink" title="四、代码提交"></a>四、代码提交</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 提交暂存区到仓库区</span><br><span class="line">$ git commit -m [message]</span><br><span class="line"></span><br><span class="line"># 提交暂存区的指定文件到仓库区</span><br><span class="line">$ git commit [file1] [file2] ... -m [message]</span><br><span class="line"></span><br><span class="line"># 提交工作区自上次commit之后的变化，直接到仓库区</span><br><span class="line">$ git commit -a</span><br><span class="line"></span><br><span class="line"># 提交时显示所有diff信息</span><br><span class="line">$ git commit -v</span><br><span class="line"></span><br><span class="line"># 使用一次新的commit，替代上一次提交</span><br><span class="line"># 如果代码没有任何新变化，则用来改写上一次commit的提交信息</span><br><span class="line">$ git commit --amend -m [message]</span><br><span class="line"></span><br><span class="line"># 重做上一次commit，并包括指定文件的新变化</span><br><span class="line">$ git commit --amend [file1] [file2] ...</span><br></pre></td></tr></table></figure><h4 id="五、分支"><a href="#五、分支" class="headerlink" title="五、分支"></a>五、分支</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 列出所有本地分支</span><br><span class="line">$ git branch</span><br><span class="line"></span><br><span class="line"># 列出所有远程分支</span><br><span class="line">$ git branch -r</span><br><span class="line"></span><br><span class="line"># 列出所有本地分支和远程分支</span><br><span class="line">$ git branch -a</span><br><span class="line"></span><br><span class="line"># 新建一个分支，但依然停留在当前分支</span><br><span class="line">$ git branch [branch-name]</span><br><span class="line"></span><br><span class="line"># 新建一个分支，并切换到该分支</span><br><span class="line">$ git checkout -b [branch]</span><br><span class="line"></span><br><span class="line"># 新建一个分支，指向指定commit</span><br><span class="line">$ git branch [branch] [commit]</span><br><span class="line"></span><br><span class="line"># 新建一个分支，与指定的远程分支建立追踪关系</span><br><span class="line">$ git branch --track [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"># 切换到指定分支，并更新工作区</span><br><span class="line">$ git checkout [branch-name]</span><br><span class="line"></span><br><span class="line"># 切换到上一个分支</span><br><span class="line">$ git checkout -</span><br><span class="line"></span><br><span class="line"># 建立追踪关系，在现有分支与指定的远程分支之间</span><br><span class="line">$ git branch --set-upstream [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"># 合并指定分支到当前分支</span><br><span class="line">$ git merge [branch]</span><br><span class="line"></span><br><span class="line"># 选择一个commit，合并进当前分支</span><br><span class="line">$ git cherry-pick [commit]</span><br><span class="line"></span><br><span class="line"># 删除分支</span><br><span class="line">$ git branch -d [branch-name]</span><br><span class="line"></span><br><span class="line"># 删除远程分支</span><br><span class="line">$ git push origin --delete [branch-name]</span><br><span class="line">$ git branch -dr [remote&#x2F;branch]</span><br></pre></td></tr></table></figure><h4 id="六、标签"><a href="#六、标签" class="headerlink" title="六、标签"></a>六、标签</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 列出所有tag</span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"># 新建一个tag在当前commit</span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"># 新建一个tag在指定commit</span><br><span class="line">$ git tag [tag] [commit]</span><br><span class="line"></span><br><span class="line"># 删除本地tag</span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"># 删除远程tag</span><br><span class="line">$ git push origin :refs&#x2F;tags&#x2F;[tagName]</span><br><span class="line"></span><br><span class="line"># 查看tag信息</span><br><span class="line">$ git show [tag]</span><br><span class="line"></span><br><span class="line"># 提交指定tag</span><br><span class="line">$ git push [remote] [tag]</span><br><span class="line"></span><br><span class="line"># 提交所有tag</span><br><span class="line">$ git push [remote] --tags</span><br><span class="line"></span><br><span class="line"># 新建一个分支，指向某个tag</span><br><span class="line">$ git checkout -b [branch] [tag]</span><br></pre></td></tr></table></figure><h4 id="七、查看信息"><a href="#七、查看信息" class="headerlink" title="七、查看信息"></a>七、查看信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"># 显示有变更的文件</span><br><span class="line">$ git status</span><br><span class="line"></span><br><span class="line"># 显示当前分支的版本历史</span><br><span class="line">$ git log</span><br><span class="line"></span><br><span class="line"># 显示commit历史，以及每次commit发生变更的文件</span><br><span class="line">$ git log --stat</span><br><span class="line"></span><br><span class="line"># 搜索提交历史，根据关键词</span><br><span class="line">$ git log -S [keyword]</span><br><span class="line"></span><br><span class="line"># 显示某个commit之后的所有变动，每个commit占据一行</span><br><span class="line">$ git log [tag] HEAD --pretty&#x3D;format:%s</span><br><span class="line"></span><br><span class="line"># 显示某个commit之后的所有变动，其&quot;提交说明&quot;必须符合搜索条件</span><br><span class="line">$ git log [tag] HEAD --grep feature</span><br><span class="line"></span><br><span class="line"># 显示某个文件的版本历史，包括文件改名</span><br><span class="line">$ git log --follow [file]</span><br><span class="line">$ git whatchanged [file]</span><br><span class="line"></span><br><span class="line"># 显示指定文件相关的每一次diff</span><br><span class="line">$ git log -p [file]</span><br><span class="line"></span><br><span class="line"># 显示过去5次提交</span><br><span class="line">$ git log -5 --pretty --oneline</span><br><span class="line"></span><br><span class="line"># 显示所有提交过的用户，按提交次数排序</span><br><span class="line">$ git shortlog -sn</span><br><span class="line"></span><br><span class="line"># 显示指定文件是什么人在什么时间修改过</span><br><span class="line">$ git blame [file]</span><br><span class="line"></span><br><span class="line"># 显示暂存区和工作区的差异</span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"># 显示暂存区和上一个commit的差异</span><br><span class="line">$ git diff --cached [file]</span><br><span class="line"></span><br><span class="line"># 显示工作区与当前分支最新commit之间的差异</span><br><span class="line">$ git diff HEAD</span><br><span class="line"></span><br><span class="line"># 显示两次提交之间的差异</span><br><span class="line">$ git diff [first-branch]...[second-branch]</span><br><span class="line"></span><br><span class="line"># 显示今天你写了多少行代码</span><br><span class="line">$ git diff --shortstat &quot;@&#123;0 day ago&#125;&quot;</span><br><span class="line"></span><br><span class="line"># 显示某次提交的元数据和内容变化</span><br><span class="line">$ git show [commit]</span><br><span class="line"></span><br><span class="line"># 显示某次提交发生变化的文件</span><br><span class="line">$ git show --name-only [commit]</span><br><span class="line"></span><br><span class="line"># 显示某次提交时，某个文件的内容</span><br><span class="line">$ git show [commit]:[filename]</span><br><span class="line"></span><br><span class="line"># 显示当前分支的最近几次提交</span><br><span class="line">$ git reflog</span><br></pre></td></tr></table></figure><h4 id="八、远程同步"><a href="#八、远程同步" class="headerlink" title="八、远程同步"></a>八、远程同步</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 下载远程仓库的所有变动</span><br><span class="line">$ git fetch [remote]</span><br><span class="line"></span><br><span class="line"># 显示所有远程仓库</span><br><span class="line">$ git remote -v</span><br><span class="line"></span><br><span class="line"># 显示某个远程仓库的信息</span><br><span class="line">$ git remote show [remote]</span><br><span class="line"></span><br><span class="line"># 增加一个新的远程仓库，并命名</span><br><span class="line">$ git remote add [shortname] [url]</span><br><span class="line"></span><br><span class="line"># 取回远程仓库的变化，并与本地分支合并</span><br><span class="line">$ git pull [remote] [branch]</span><br><span class="line"></span><br><span class="line"># 上传本地指定分支到远程仓库</span><br><span class="line">$ git push [remote] [branch]</span><br><span class="line"></span><br><span class="line"># 强行推送当前分支到远程仓库，即使有冲突</span><br><span class="line">$ git push [remote] --force</span><br><span class="line"></span><br><span class="line"># 推送所有分支到远程仓库</span><br><span class="line">$ git push [remote] --all</span><br></pre></td></tr></table></figure><h4 id="九、撤销"><a href="#九、撤销" class="headerlink" title="九、撤销"></a>九、撤销</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"># 恢复暂存区的指定文件到工作区</span><br><span class="line">$ git checkout [file]</span><br><span class="line"></span><br><span class="line"># 恢复某个commit的指定文件到暂存区和工作区</span><br><span class="line">$ git checkout [commit] [file]</span><br><span class="line"></span><br><span class="line"># 恢复暂存区的所有文件到工作区</span><br><span class="line">$ git checkout .</span><br><span class="line"></span><br><span class="line"># 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变</span><br><span class="line">$ git reset [file]</span><br><span class="line"></span><br><span class="line"># 重置暂存区与工作区，与上一次commit保持一致</span><br><span class="line">$ git reset --hard</span><br><span class="line"></span><br><span class="line"># 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</span><br><span class="line">$ git reset [commit]</span><br><span class="line"></span><br><span class="line"># 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</span><br><span class="line">$ git reset --hard [commit]</span><br><span class="line"></span><br><span class="line"># 重置当前HEAD为指定commit，但保持暂存区和工作区不变</span><br><span class="line">$ git reset --keep [commit]</span><br><span class="line"></span><br><span class="line"># 新建一个commit，用来撤销指定commit</span><br><span class="line"># 后者的所有变化都将被前者抵消，并且应用到当前分支</span><br><span class="line">$ git revert [commit]</span><br><span class="line"></span><br><span class="line"># 暂时将未提交的变化移除，稍后再移入</span><br><span class="line">$ git stash</span><br><span class="line">$ git stash pop</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
             
         </tags>
       

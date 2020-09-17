@@ -2,20 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>mac 下host操作管理 | Hechaofa</title>
-  <meta name="keywords" content=" host ">
-  <meta name="description" content="mac 下host操作管理 | Hechaofa">
+  <title>Jenkins代表部署 | Hechaofa</title>
+  <meta name="keywords" content=" 代码部署 ">
+  <meta name="description" content="Jenkins代表部署 | Hechaofa">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="个人名言：喜欢在知识的海洋中遨游，更喜欢生活！ qq：1297814479 email:chaofa_vip@126.com">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="https://chaofavip.github.io/about/index.html">
+<meta name="description" content="一、背景随着公司业务增长，如果每天1000多万笔订单的话，3个月将有约10亿的订单量，之前数据库采用单库单表的形式已经不满足于业务需求，数据库改造迫在眉睫。 二、订单数据如何划分我们可以将订单数据划分成两大类型：分别是热数据和冷数据。 热数据：3个月内的订单数据，查询实时性较高; 冷数据A：3个月 ~ 12个月前的订单数据，查询频率不高; 冷数据B：1年前的订单数据，几乎不会查询，只有偶尔的查询需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10亿级订单系统分库分表设计思路">
+<meta property="og:url" content="https://chaofavip.github.io/2020/09/11/mysql/fenbiao/index.html">
 <meta property="og:site_name" content="Hechaofa">
-<meta property="og:description" content="个人名言：喜欢在知识的海洋中遨游，更喜欢生活！ qq：1297814479 email:chaofa_vip@126.com">
+<meta property="og:description" content="一、背景随着公司业务增长，如果每天1000多万笔订单的话，3个月将有约10亿的订单量，之前数据库采用单库单表的形式已经不满足于业务需求，数据库改造迫在眉睫。 二、订单数据如何划分我们可以将订单数据划分成两大类型：分别是热数据和冷数据。 热数据：3个月内的订单数据，查询实时性较高; 冷数据A：3个月 ~ 12个月前的订单数据，查询频率不高; 冷数据B：1年前的订单数据，几乎不会查询，只有偶尔的查询需">
 <meta property="og:locale" content="zh">
-<meta property="article:published_time" content="2019-12-17T15:56:40.000Z">
-<meta property="article:modified_time" content="2019-12-18T15:00:19.240Z">
+<meta property="article:published_time" content="2020-09-11T02:09:47.000Z">
+<meta property="article:modified_time" content="2020-09-11T11:46:18.764Z">
 <meta property="article:author" content="Hechaofa">
+<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
 
 
@@ -135,11 +136,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(46)</small></div></li>
+    <li><div class="all active">全部文章<small>(54)</small></div></li>
     
         
             
-            <li><div data-rel="支付">支付<small>(1)</small></div>
+            <li><div data-rel="Mac">Mac<small>(8)</small></div>
                 
             </li>
             
@@ -147,7 +148,7 @@
     
         
             
-            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+            <li><div data-rel="架构">架构<small>(3)</small></div>
                 
             </li>
             
@@ -163,7 +164,7 @@
     
         
             
-            <li><div data-rel="Mac">Mac<small>(5)</small></div>
+            <li><div data-rel="git">git<small>(2)</small></div>
                 
             </li>
             
@@ -171,7 +172,7 @@
     
         
             
-            <li><div data-rel="git">git<small>(1)</small></div>
+            <li><div data-rel="支付">支付<small>(1)</small></div>
                 
             </li>
             
@@ -179,7 +180,7 @@
     
         
             
-            <li><div data-rel="前端">前端<small>(2)</small></div>
+            <li><div data-rel="创业">创业<small>(1)</small></div>
                 
             </li>
             
@@ -195,7 +196,15 @@
     
         
             
-            <li><div data-rel="架构">架构<small>(2)</small></div>
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(5)</small></div>
                 
             </li>
             
@@ -211,7 +220,15 @@
     
         
             
-            <li><div data-rel="Linux">Linux<small>(4)</small></div>
+            <li><div data-rel="数据库">数据库<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Mysql">Mysql<small>(2)</small></div>
                 
             </li>
             
@@ -227,7 +244,7 @@
     
         
             
-            <li><div data-rel="Mysql">Mysql<small>(1)</small></div>
+            <li><div data-rel="前端">前端<small>(2)</small></div>
                 
             </li>
             
@@ -235,7 +252,7 @@
     
         
             
-            <li><div data-rel="数据库">数据库<small>(1)</small></div>
+            <li><div data-rel="工具">工具<small>(5)</small></div>
                 
             </li>
             
@@ -257,14 +274,6 @@
             
         
     
-        
-            
-            <li><div data-rel="工具">工具<small>(5)</small></div>
-                
-            </li>
-            
-        
-    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -272,8 +281,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="46">
-<input type="hidden" id="yelog_site_word_count" value="43.8k">
+<input type="hidden" id="yelog_site_posts_number" value="54">
+<input type="hidden" id="yelog_site_word_count" value="51.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -313,43 +322,15 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a class="color2">alipay</a>
+        <a class="color1">bogon</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color4">php</a>
+        <a class="color5">host</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color1">redis</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color2">docker</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color4">git</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color4">ext</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color3">jq</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color3">监控</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color3">架构</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color3">laravel</a>
+        <a class="color1">linux</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -357,15 +338,51 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color2">Ubuntu</a>
+        <a class="color5">代码部署</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color1">mysql</a>
+        <a class="color4">ext</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color4">数据库</a>
+        <a class="color4">git</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">alipay</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">公司</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">监控</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">php</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">架构</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">awk</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">redis</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">laravel</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -373,19 +390,19 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color3">正则</a>
+        <a class="color4">数据库</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color5">ajax</a>
+        <a class="color1">mysql</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color3">算法</a>
+        <a class="color2">Ubuntu</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color5">tool</a>
+        <a class="color3">jq</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -397,23 +414,27 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a class="color5">tool</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">ajax</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">正则</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a class="color4">vim</a>
     </li>
     
     <li class="article-tag-list-item">
         <a class="color3">面试</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color5">host</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color1">bogon</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color1">linux</a>
     </li>
     
     <div class="clearfix"></div>
@@ -450,6 +471,22 @@
             <span class="post-date" title="2020-09-10 10:09:47">2020/09/10</span>
         </a>
         
+        <a  class="创业 "
+           href="/2020/09/04/company/chuangye/"
+           data-tag="公司"
+           data-author="" >
+            <span class="post-title" title="创业之路">创业之路</span>
+            <span class="post-date" title="2020-09-04 10:09:47">2020/09/04</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2020/09/03/mysql/youhua/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="Sql优化">Sql优化</span>
+            <span class="post-date" title="2020-09-03 10:09:47">2020/09/03</span>
+        </a>
+        
         <a  class="前端 "
            href="/2020/07/13/web/mianshi01/"
            data-tag="面试"
@@ -459,7 +496,7 @@
         </a>
         
         <a  class="Mac "
-           href="/2020/03/10/tool/Mac/bogon/"
+           href="/2020/03/10/Mac/bogon/"
            data-tag="bogon"
            data-author="" >
             <span class="post-title" title="MacBook 终端中的bogon的解决办法">MacBook 终端中的bogon的解决办法</span>
@@ -538,6 +575,14 @@
             <span class="post-date" title="2019-11-30 14:09:47">2019/11/30</span>
         </a>
         
+        <a  class="Mac "
+           href="/2019/11/17/Mac/start/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="Mac下搭建Apache+PHP+MySql运行环境">Mac下搭建Apache+PHP+MySql运行环境</span>
+            <span class="post-date" title="2019-11-17 10:13:47">2019/11/17</span>
+        </a>
+        
         <a  class="Linux "
            href="/2019/11/12/linux/gitanzhuang/"
            data-tag="git"
@@ -595,7 +640,7 @@
         </a>
         
         <a  class="Mac "
-           href="/2019/09/17/tool/Mac/linux/"
+           href="/2019/09/17/Mac/linux/"
            data-tag="linux"
            data-author="" >
             <span class="post-title" title="Mac 怎么通过自带终端连接linux服务器">Mac 怎么通过自带终端连接linux服务器</span>
@@ -603,7 +648,7 @@
         </a>
         
         <a  class="Mac "
-           href="/2019/09/10/tool/Mac/host/"
+           href="/2019/09/10/Mac/host/"
            data-tag="host"
            data-author="" >
             <span class="post-title" title="mac 下host操作管理">mac 下host操作管理</span>
@@ -612,6 +657,14 @@
         
         <a  class="Mac "
            href="/2019/07/20/tool/baidu/"
+           data-tag="mac"
+           data-author="" >
+            <span class="post-title" title="百度网盘（破解svip）下载Mac">百度网盘（破解svip）下载Mac</span>
+            <span class="post-date" title="2019-07-20 10:13:47">2019/07/20</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2019/07/20/tool/zipkin/"
            data-tag="mac"
            data-author="" >
             <span class="post-title" title="百度网盘（破解svip）下载Mac">百度网盘（破解svip）下载Mac</span>
@@ -640,6 +693,30 @@
            data-author="" >
             <span class="post-title" title="压测认识">压测认识</span>
             <span class="post-date" title="2019-03-02 02:13:47">2019/03/02</span>
+        </a>
+        
+        <a  class="架构 "
+           href="/2018/12/12/code/bushu/"
+           data-tag="代码部署"
+           data-author="" >
+            <span class="post-title" title="Jenkins代表部署">Jenkins代表部署</span>
+            <span class="post-date" title="2018-12-12 10:09:47">2018/12/12</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/2018/11/10/linux/awk/"
+           data-tag="awk"
+           data-author="" >
+            <span class="post-title" title="awk运算">awk运算</span>
+            <span class="post-date" title="2018-11-10 10:09:47">2018/11/10</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2018/08/10/Mac/composer/"
+           data-tag="composer"
+           data-author="" >
+            <span class="post-title" title="Mac中Composer的安装和使用">Mac中Composer的安装和使用</span>
+            <span class="post-date" title="2018-08-10 10:13:47">2018/08/10</span>
         </a>
         
         <a  class="工具 "
@@ -672,6 +749,14 @@
            data-author="" >
             <span class="post-title" title="redis基础操作">redis基础操作</span>
             <span class="post-date" title="2017-10-09 09:09:47">2017/10/09</span>
+        </a>
+        
+        <a  class="git "
+           href="/2017/09/17/git/guanli/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="git 版本管理">git 版本管理</span>
+            <span class="post-date" title="2017-09-17 18:09:47">2017/09/17</span>
         </a>
         
         <a  class="设计模式 "
@@ -806,9 +891,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-tool/Mac/host" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-code/bushu" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">mac 下host操作管理</h1>
+        <h1 class="article-title">Jenkins代表部署</h1>
     
     <div class="article-meta">
         
@@ -816,26 +901,26 @@
         
         <span class="book">
             
-                <a  data-rel="Mac">Mac</a>
+                <a  data-rel="架构">架构</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a class="color5">host</a>
+            <a class="color5">代码部署</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-12-22 13:58:26'>2019-09-10 10:13</time>
+        创建时间:<time class="date" title='更新时间: 2020-09-17 20:29:22'>2018-12-12 10:09</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:137</span>
+        <span>字数:748</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -870,16 +955,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前言：很多开发者使用Mac比较多，开发过程中本地就需要配置项目的域名执行，大概两种操作，这里主要阐述工具管理使用。<br><strong>一、直接自带操作管理</strong></p>
-<ol>
-<li>打开控制命令管理工具</li>
-<li><code>vim /etc/hosts</code></li>
-<li>修改</li>
-<li><code>wq</code> 保存推出即可</li>
-</ol>
-<p><strong>二、工具管理01：Gas Mask</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20191222135505379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191222135645397.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下载地址：<a href="https://www.macupdate.com/app/mac/29949/gas-mask/download" target="_blank" rel="noopener">https://www.macupdate.com/app/mac/29949/gas-mask/download</a><br><strong>二、工具管理02：SwitchHosts</strong><br><img src="https://img-blog.csdnimg.cn/20191222134525589.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191222135558735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoYW9mYXZpcA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下载地址：<a href="https://oldj.github.io/SwitchHosts/" target="_blank" rel="noopener">https://oldj.github.io/SwitchHosts/</a></p>
-<p> <em>备注：可以关注博客持续更新其他新技术：<a href="https://chaofavip.github.io">hechaofa</a></em></p>
+        <p>系统环境：</p>
+<p>Distributor ID: Ubuntu<br>Description:    Ubuntu 16.04.2 LTS<br>Release:        16.04<br>Codename:       xenial<br>当前 docker 版本：Docker version 18.09.0<br>当前 docker-compose 版本：docker-compose version 1.23.2</p>
+<p>docker-compose.yml<br>version: ‘3’<br>services:<br>  docker_jenkins:<br>    restart: always<br>    image: jenkins/jenkins:lts<br>    container_name: docker_jenkins<br>    ports:<br>      - ‘8080:8080’<br>      - ‘50000:50000’<br>    volumes:<br>      - ./data/:/var/jenkins_home<br>      - /var/run/docker.sock:/var/run/docker.sock<br>      - /usr/bin/docker:/usr/bin/docker<br>      - /usr/lib/x86_64-linux-gnu/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7<br>创建 data 目录并设置权限<br>mkdir ./data<br>sudo chown -R 1000 ./data //把当前目录的拥有者赋值给uid 1000<br>若已启动则需要重建下服务<br>构建Jenkins服务<br>docker-compose up -d</p>
+<p>…访问 <a href="http://ip:8080" target="_blank" rel="noopener">http://ip:8080</a> 进行初始化…</p>
+<p>jenkins在docker中安装后查看登录令牌<br>使用命令 docker logs 容器名称/容器ID 查看访问日志，即可查看到登录令牌</p>
+<p>若未设置账户，如何查看admin的密码<br>一不小心，未创建新的账户，可通过查看挂载目录下的 /secrets/initialAdminPassword 中的 Key 作为密码登录<br>账户：admin<br>密码：cat ./data/secrets/initialAdminPassword</p>
+<p>docker build 无权限的解决办法<br>在 docker-compose.yml 已将主机 docker 映射到容器内，故使用 docker -v 已经能够查看到版本号</p>
+<ul>
+<li>docker -v<br>Docker version 18.09.0, build 4d60db4</li>
+<li>docker build -t test/test.admin.vue:v3 .<br>Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.39/build?buildargs=%7B%7D&amp;cachefrom=%5B%5D&amp;cgroupparent=&amp;cpuperiod=0&amp;cpuquota=0&amp;cpusetcpus=&amp;cpusetmems=&amp;cpushares=0&amp;dockerfile=Dockerfile&amp;labels=%7B%7D&amp;memory=0&amp;memswap=0&amp;networkmode=default&amp;rm=1&amp;session=c0j8whn50ubpyukeblzkng7cq&amp;shmsize=0&amp;t=test%2Ftest.admin.vue%3Av3&amp;target=&amp;ulimits=null&amp;version=1: dial unix /var/run/docker.sock: connect: permission denied<br>Build step ‘Execute shell’ marked build as failure<br>但是当使用 docker build -t . 命令的时候依旧无法执行，提示无权限(permission denied)<br>这个问题之前将Jenkins直接装在linux主机的时候也遇到过，在shell脚本输入框顶部加上 #!/bin/bash -ilex 即可<br>如果依旧不行，可执行(赋予读写执行权限)：sudo chmod 777 /var/run/docker.sock 注：服务器重启后可能权限会失效</li>
+</ul>
+<p>#!/bin/bash -ilex</p>
+<ul>
+<li>docker -v<br>Docker version 18.09.0, build 4d60db4</li>
+<li>export DOCKER_IMAGE_NAME=test/test.admin.vue:v3</li>
+<li>docker build -t test/test.admin.vue:v3 .<br>关于 docker 镜像的构建<br>注册阿里云账号，并申请阿里云的容器镜像服务，创建命名空间(公/私有，可自动创建仓库)，设置下 Registry 登录密码，随便新建一个仓库，查看仓库详情可查看推送 docker 的相关信息<br>创建好账号信息后，即可在 Jenkins 中构建推送。<br>可参考以下脚本，脚本环境变量说明<br>DOCKER_IMAGE_NAME：镜像名称(命名空间/镜像名:版本号)<br>DOCKER_CLOUD_URL： 镜像源<br>ALIYUN_USERNAME：阿里云用户名<br>ALIYUN_USERPWD：阿里云 Docker Registry 密码</li>
+</ul>
+<p>#!/bin/bash -ilex<br>docker -v<br>echo ‘打包镜像’<br>export DOCKER_IMAGE_NAME=test/$JOB_NAME:v$BUILD_NUMBER<br>docker build -t $DOCKER_IMAGE_NAME .</p>
+<p>echo ‘推送镜像’<br>export DOCKER_CLOUD_URL=registry.cn-hangzhou.aliyuncs.com</p>
+<p>docker login –username=$ALIYUN_USERNAME –password=$ALIYUN_USERPWD $DOCKER_CLOUD_URL</p>
+<p>docker tag $DOCKER_IMAGE_NAME $DOCKER_CLOUD_URL/$DOCKER_IMAGE_NAME<br>docker push $DOCKER_CLOUD_URL/$DOCKER_IMAGE_NAME</p>
+<p>echo ‘删除镜像’<br>docker rmi $DOCKER_IMAGE_NAME<br>docker rmi $DOCKER_CLOUD_URL/$DOCKER_IMAGE_NAME<br>参考<br><a href="https://github.com/jenkinsci/docker/blob/master/README.md" target="_blank" rel="noopener">https://github.com/jenkinsci/docker/blob/master/README.md</a><br><a href="https://www.cnblogs.com/leolztang/p/6934694.html" target="_blank" rel="noopener">https://www.cnblogs.com/leolztang/p/6934694.html</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 chaofa_vip@126.com </span>
@@ -893,12 +990,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>mac 下host操作管理</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">137</span></p>
+    <p><span class="copy-title">文章标题:</span>Jenkins代表部署</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">748</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Hechaofa">Hechaofa</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-09-10, 10:13:47</p>
-    <p><span class="copy-title">最后更新:</span>2019-12-22, 13:58:26</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/10/tool/Mac/host/" title="mac 下host操作管理">https://chaofavip.github.io/2019/09/10/tool/Mac/host/</a>
+    <p><span class="copy-title">发布时间:</span>2018-12-12, 10:09:47</p>
+    <p><span class="copy-title">最后更新:</span>2020-09-17, 20:29:22</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2018/12/12/code/bushu/" title="Jenkins代表部署">https://chaofavip.github.io/2018/12/12/code/bushu/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -960,7 +1057,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#alipay','#php','#redis','#docker','#git','#ext','#jq','#监控','#架构','#laravel','#composer','#Ubuntu','#mysql','#数据库','#Linux','#正则','#ajax','#算法','#tool','#mac','#压测','#vim','#面试','#host','#bogon','#linux',],
+            'data': ['#bogon','#host','#linux','#composer','#代码部署','#ext','#git','#alipay','#docker','#公司','#监控','#php','#架构','#awk','#redis','#laravel','#Linux','#数据库','#mysql','#Ubuntu','#jq','#mac','#压测','#tool','#算法','#ajax','#正则','#vim','#面试',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
