@@ -4,6 +4,81 @@
   
     
     <entry>
+      <title>索引的建立原则</title>
+      <link href="/2020/09/27/mysql/suoyin/"/>
+      <url>/2020/09/27/mysql/suoyin/</url>
+      
+        <content type="html"><![CDATA[<p>1.能创建唯一索引就创建唯一索引</p><p>2.为经常需要排序、分组和联合操作的字段建立索引</p><p>3.为常作为查询条件的字段建立索引<br>    如果某个字段经常用来做查询条件，那么该字段的查询速度会影响整个表的查询速度。<br>    因此，为这样的字段建立索引，可以提高整个表的查询速度。</p><p>4.尽量使用前缀来索引<br>    如果索引字段的值很长，最好使用值的前缀来索引。<br>        例如，TEXT和BLOG类型的字段，进行全文检索，会很浪费时间。如果只检索字段的前面的若干个字符，这样可以提高检索速度。</p><p>5.限制索引的数目<br>    索引的数目不是越多越好。每个索引都需要占用磁盘空间，索引越多，需要的磁盘空间就越大。<br>    修改表时，对索引的重构和更新很麻烦。越多的索引，会使更新表变得很浪费时间。</p><p>6.删除不再使用或者很少使用的索引<br>    表中的数据被大量更新，或者数据的使用方式被改变后，原有的一些索引可能不再需要。数据库管理员应当定期找出这些索引，将它们删除，从而减少索引对更新操作的影响。</p><pre><code>MySQL索引管理</code></pre><p>一 、功能</p><ol><li><p>索引的功能就是加速查找</p></li><li><p>mysql中的primary key，unique，联合唯一也都是索引，这些索引除了加速查找以外，还有约束的功能</p></li></ol><p>二 、MySQL常用的索引</p><p>普通索引INDEX：加速查找</p><p>唯一索引： -主键索引PRIMARY KEY：加速查找+约束（不为空、不能重复） -唯一索引UNIQUE:加速查找+约束（不能重复）</p><p>联合索引： -PRIMARY KEY(id,name):联合主键索引 -UNIQUE(id,name):联合唯一索引 -INDEX(id,name):联合普通索引</p><p>三 、索引的两大类型hash与btree</p><p>#我们可以在创建上述索引的时候，为其指定索引类型，分两类<br>hash类型的索引：查询单条快，范围查询慢<br>btree类型的索引：b+树，层数越多，数据量指数级增长（我们就用它，因为innodb默认支持它）</p><p>#不同的存储引擎支持的索引类型也不一样<br>InnoDB 支持事务，支持行级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；<br>MyISAM 不支持事务，支持表级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；<br>Memory 不支持事务，支持表级别锁定，支持 B-tree、Hash 等索引，不支持 Full-text 索引；<br>NDB 支持事务，支持行级别锁定，支持 Hash 索引，不支持 B-tree、Full-text 等索引；<br>Archive 不支持事务，支持表级别锁定，不支持 B-tree、Hash、Full-text 等索引；</p><p>四 、创建/删除索引的语法</p><p>#方法一：创建表时<br> 　　CREATE TABLE 表名 (<br> 字段名1 数据类型 [完整性约束条件…],<br> 字段名2 数据类型 [完整性约束条件…],<br> [UNIQUE | FULLTEXT | SPATIAL ] INDEX | KEY<br> [索引名] (字段名[(长度)] [ASC |DESC])<br> );</p><p>#方法二：CREATE在已存在的表上创建索引<br> CREATE [UNIQUE | FULLTEXT | SPATIAL ] INDEX 索引名<br> ON 表名 (字段名[(长度)] [ASC |DESC]) ;</p><p>#方法三：ALTER TABLE在已存在的表上创建索引<br> ALTER TABLE 表名 ADD [UNIQUE | FULLTEXT | SPATIAL ] INDEX<br> 索引名 (字段名[(长度)] [ASC |DESC]) ;</p><p>#删除索引：DROP INDEX 索引名 ON 表名字;</p><p>#方式一<br>create table t1(<br> id int,<br> name char,<br> age int,<br> sex enum(‘male’,’female’),<br> unique key uni_id(id),<br> index ix_name(name) #index没有key<br>);</p><p>#方式二<br>create index ix_age on t1(age);</p><p>#方式三<br>alter table t1 add index ix_sex(sex);</p><p>#查看<br>mysql&gt; show create table t1;<br>| t1 | CREATE TABLE <code>t1</code> (<br> <code>id</code> int(11) DEFAULT NULL,<br> <code>name</code> char(1) DEFAULT NULL,<br> <code>age</code> int(11) DEFAULT NULL,<br> <code>sex</code> enum(‘male’,’female’) DEFAULT NULL,<br> UNIQUE KEY <code>uni_id</code> (<code>id</code>),<br> KEY <code>ix_name</code> (<code>name</code>),<br> KEY <code>ix_age</code> (<code>age</code>),<br> KEY <code>ix_sex</code> (<code>sex</code>)<br>) ENGINE=InnoDB DEFAULT CHARSET=latin1</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 索引 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MySQL索引管理</title>
+      <link href="/2020/09/20/mysql/suoyinyuanli/"/>
+      <url>/2020/09/20/mysql/suoyinyuanli/</url>
+      
+        <content type="html"><![CDATA[<p>一 、功能</p><ol><li><p>索引的功能就是加速查找</p></li><li><p>mysql中的primary key，unique，联合唯一也都是索引，这些索引除了加速查找以外，还有约束的功能</p></li></ol><p>二 、MySQL常用的索引</p><p>普通索引INDEX：加速查找</p><p>唯一索引： -主键索引PRIMARY KEY：加速查找+约束（不为空、不能重复） -唯一索引UNIQUE:加速查找+约束（不能重复）</p><p>联合索引： -PRIMARY KEY(id,name):联合主键索引 -UNIQUE(id,name):联合唯一索引 -INDEX(id,name):联合普通索引</p><p>三 、索引的两大类型hash与btree</p><p>#我们可以在创建上述索引的时候，为其指定索引类型，分两类<br>hash类型的索引：查询单条快，范围查询慢<br>btree类型的索引：b+树，层数越多，数据量指数级增长（我们就用它，因为innodb默认支持它）</p><p>#不同的存储引擎支持的索引类型也不一样<br>InnoDB 支持事务，支持行级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；<br>MyISAM 不支持事务，支持表级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；<br>Memory 不支持事务，支持表级别锁定，支持 B-tree、Hash 等索引，不支持 Full-text 索引；<br>NDB 支持事务，支持行级别锁定，支持 Hash 索引，不支持 B-tree、Full-text 等索引；<br>Archive 不支持事务，支持表级别锁定，不支持 B-tree、Hash、Full-text 等索引；</p><p>四 、创建/删除索引的语法</p><p>#方法一：创建表时<br> 　　CREATE TABLE 表名 (<br> 字段名1 数据类型 [完整性约束条件…],<br> 字段名2 数据类型 [完整性约束条件…],<br> [UNIQUE | FULLTEXT | SPATIAL ] INDEX | KEY<br> [索引名] (字段名[(长度)] [ASC |DESC])<br> );</p><p>#方法二：CREATE在已存在的表上创建索引<br> CREATE [UNIQUE | FULLTEXT | SPATIAL ] INDEX 索引名<br> ON 表名 (字段名[(长度)] [ASC |DESC]) ;</p><p>#方法三：ALTER TABLE在已存在的表上创建索引<br> ALTER TABLE 表名 ADD [UNIQUE | FULLTEXT | SPATIAL ] INDEX<br> 索引名 (字段名[(长度)] [ASC |DESC]) ;</p><p>#删除索引：DROP INDEX 索引名 ON 表名字;</p><p>#方式一<br>create table t1(<br> id int,<br> name char,<br> age int,<br> sex enum(‘male’,’female’),<br> unique key uni_id(id),<br> index ix_name(name) #index没有key<br>);</p><p>#方式二<br>create index ix_age on t1(age);</p><p>#方式三<br>alter table t1 add index ix_sex(sex);</p><p>#查看<br>mysql&gt; show create table t1;<br>| t1 | CREATE TABLE <code>t1</code> (<br> <code>id</code> int(11) DEFAULT NULL,<br> <code>name</code> char(1) DEFAULT NULL,<br> <code>age</code> int(11) DEFAULT NULL,<br> <code>sex</code> enum(‘male’,’female’) DEFAULT NULL,<br> UNIQUE KEY <code>uni_id</code> (<code>id</code>),<br> KEY <code>ix_name</code> (<code>name</code>),<br> KEY <code>ix_age</code> (<code>age</code>),<br> KEY <code>ix_sex</code> (<code>sex</code>)<br>) ENGINE=InnoDB DEFAULT CHARSET=latin1</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 索引 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PHP-高并发和大流量的解决方案</title>
+      <link href="/2020/09/18/php/gaobingfa/"/>
+      <url>/2020/09/18/php/gaobingfa/</url>
+      
+        <content type="html"><![CDATA[<p>一  高并发的概念<br>在互联网时代，并发，高并发通常是指并发访问。也就是在某个时间点，有多少个访问同时到来。</p><p>二  高并发架构相关概念<br>1、QPS (每秒查询率) : 每秒钟请求或者查询的数量，在互联网领域，指每秒响应请求数(指HTTP请求)</p><p>2、PV（Page View）：综合浏览量，即页面浏览量或者点击量，一个访客在24小时内访问的页面数量</p><p>–注：同一个人浏览你的网站的同一页面，只记做一次pv</p><p>3、吞吐量（fetches/sec） ：单位时间内处理的请求数量 （通常由QPS和并发数决定）</p><p>4、响应时间：从请求发出到收到响应花费的时间</p><p>5、独立访客（UV）：一定时间范围内，相同访客多次访问网站，只计算为1个独立访客</p><p>6、带宽：计算带宽需关注两个指标，峰值流量和页面的平均大小</p><p>7、日网站带宽： PV/统计时间（换算到秒） * 平均页面大小（kb）* 8</p><p>三 需要注意点：<br>1、QPS不等于并发连接数（QPS是每秒HTTP请求数量，并发连接数是系统同时处理的请求数量）</p><p>2、峰值每秒请求数（QPS）= （总PV数<em>80%）/ （六小时秒数</em>20%）【代表80%的访问量都集中在20%的时间内】</p><p>3、压力测试： 测试能承受的最大并发数 以及测试最大承受的QPS值</p><p>4、常用的性能测试工具【ab，wrk，httpload，Web Bench，Siege，Apache JMeter】</p><p>四 优化<br>1、当QPS小于50时</p><p>优化方案:为一般小型网站,不用考虑优化</p><p>2、当QPS达到100时,遇到数据查询瓶颈</p><p>优化方案: 数据库缓存层,数据库的负载均衡</p><p>3、当QPS达到800时, 遇到带宽瓶颈</p><p>优化方案:CDN加速,负载均衡</p><p>4、当QPS达到1000时</p><p>优化方案: 做html静态缓存</p><p>5、当QPS达到2000时</p><p>优化方案: 做业务分离,分布式存储</p><p>五、高并发解决方案案例:<br>1、流量优化  </p><p>防盗链处理(去除恶意请求)</p><p>2、前端优化</p><p>(1) 减少HTTP请求[将css,js等合并]</p><p>(2) 添加异步请求(先不将所有数据都展示给用户,用户触发某个事件,才会异步请求数据)</p><p>(3) 启用浏览器缓存和文件压缩</p><p>(4) CDN加速</p><p>(5) 建立独立的图片服务器(减少I/O)</p><p>3、服务端优化</p><p>(1) 页面静态化</p><p>(2) 并发处理</p><p>(3) 队列处理</p><p>4、数据库优化</p><p>(1) 数据库缓存</p><p>(2) 分库分表,分区</p><p>(3) 读写分离</p><p>(4) 负载均衡</p><p>5、web服务器优化</p><p>(1) nginx反向代理实现负载均衡</p><p>(2) lvs实现负载均衡</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SVN与Git优缺点比较</title>
       <link href="/2020/09/17/git/svngit/"/>
       <url>/2020/09/17/git/svngit/</url>
@@ -246,6 +321,31 @@
         <tags>
             
             <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PHP学习路线</title>
+      <link href="/2019/12/25/php/developRoad/"/>
+      <url>/2019/12/25/php/developRoad/</url>
+      
+        <content type="html"><![CDATA[<h1 id="PHP-学习路线图"><a href="#PHP-学习路线图" class="headerlink" title="PHP 学习路线图"></a>PHP 学习路线图</h1><p>PHP 学习的关键是：多看代码，多写代码，多总结。</p><h2 id="HTML5-和-CSS"><a href="#HTML5-和-CSS" class="headerlink" title="HTML5 和 CSS"></a>HTML5 和 CSS</h2><blockquote><p>推荐书籍《HTML5+CSS3 从入门到精通》·李东博</p></blockquote><ul><li>HTML 标签</li><li>CSS 样式</li><li>Javascript 脚本</li></ul><h2 id="PHP-基础"><a href="#PHP-基础" class="headerlink" title="PHP 基础"></a>PHP 基础</h2><blockquote><p>推荐书籍《PHP 编程》·Kevin Tatroe，Peter MacIntyre，Rasmus Lerdorf</p></blockquote><ul><li>变量</li><li>数组</li><li>循环控制</li><li>函数</li><li>Cookie 和 Session</li><li>JSON 和 XML</li><li>AJAX</li><li>文件读写</li><li>上传和下载</li><li>图片处理</li><li>RESTful</li></ul><h2 id="WEB-服务器"><a href="#WEB-服务器" class="headerlink" title="WEB 服务器"></a>WEB 服务器</h2><blockquote><p>推荐书籍《鸟哥的 Linux 私房菜基础篇》·鸟哥</p></blockquote><ul><li>Linux 基础</li><li>LNMP 安装</li><li>PHP-FPM 配置</li></ul><h2 id="PHP-MySQL-操作"><a href="#PHP-MySQL-操作" class="headerlink" title="PHP MySQL 操作"></a>PHP MySQL 操作</h2><blockquote><p>推荐书籍《PHP 和 MySQL Web 开发》·Luke Welling</p></blockquote><ul><li>增查改删操作</li><li>表单处理</li><li>MySQLi 和 PDO 扩展</li></ul><h2 id="PHP-面向对象和设计模式"><a href="#PHP-面向对象和设计模式" class="headerlink" title="PHP 面向对象和设计模式"></a>PHP 面向对象和设计模式</h2><blockquote><p>推荐书籍《深入 PHP：面向对象、模式与实践》·Matt Zandstra</p></blockquote><ul><li>类和对象的关系</li><li>继承、封装、多态</li><li>性状</li><li>面向对象设计原则</li><li>类 UML 关系</li><li>设计模式</li></ul><h2 id="代码编写和规范"><a href="#代码编写和规范" class="headerlink" title="代码编写和规范"></a>代码编写和规范</h2><blockquote><p>推荐书籍《代码整洁之道》·Robert C. Martin</p></blockquote><ul><li>PHP-FIG PSR1~4 规范</li><li>phpStorm 集成开发环境</li><li>Git 版本控制</li><li>Github 代码仓库</li></ul><h2 id="MVC-框架"><a href="#MVC-框架" class="headerlink" title="MVC 框架"></a>MVC 框架</h2><ul><li>单一入口</li><li>MVC 职责划分</li><li>PHP 框架 ThinkPHP5+Yii2+Laravel</li></ul><h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><ul><li>Composer</li><li>组件</li></ul><h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><blockquote><p>推荐书籍《Nginx 高性能 Web 服务器详解》·苗泽，《大型网站技术架构 核心原理与案例分析》·李智慧</p></blockquote><ul><li>Nginx 配置优化</li><li>负载均衡</li><li>反向代理</li><li>集群</li><li>CDN</li></ul><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><blockquote><p>推荐书籍《高性能 MySQL》·Baron Schwartz，Peter Zaitsev，Vadim Tkachenko</p></blockquote><ul><li>ORM</li><li>索引和全文索引</li><li>锁机制</li><li>分表</li><li>集群</li><li>Redis 缓存</li></ul><h2 id="PHP-高级"><a href="#PHP-高级" class="headerlink" title="PHP 高级"></a>PHP 高级</h2><blockquote><p>推荐书籍《Modern PHP》·Josh Lockhart</p></blockquote><ul><li>Opcache</li><li>xDebug 调试和分析</li><li>Xhprof + Xhgui 性能分析</li><li>PHPUnit 单元测试</li><li>Docker LNMP 环境部署</li><li>持续集成</li></ul><h2 id="原文连接"><a href="#原文连接" class="headerlink" title="原文连接"></a>原文连接</h2><ul><li><a href="https://github.com/yeszao/phproad/blob/master/README.md" target="_blank" rel="noopener">phproad</a>, by yeszao</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
             
         </tags>
       
@@ -821,6 +921,31 @@
         <tags>
             
             <tag> awk </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>zookeeper安装教程</title>
+      <link href="/2018/09/13/tool/zookeeper/"/>
+      <url>/2018/09/13/tool/zookeeper/</url>
+      
+        <content type="html"><![CDATA[<p>前言：<br>zookeeper依赖于Java环境<br>准备工作<br>    zookeeper包，Java的jdk<br>安装步骤<br>一、java安装<br>Ubuntu 16.04下Java环境安装与配置</p><p>1、下载jdk8<br>登录网址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a><br>选择对应jdk版本下载</p><p>2、解压<br>tar -zxvf jdk-8u144-linux-x64.tar.gz</p><p>3、然后将文件夹jdk1.8.0_144移动到目录/opt下<br>sudo mv jdk1.8.0_144 /opt/</p><p>4、修改环境变量<br>sudo vi ~/.bashrc<br>在最末尾添加如下配置：</p><p>#set Java environment<br>export JAVA_HOME=/opt/jdk1.8.0_144<br>export JRE_HOME=${JAVA_HOME}/jre<br>export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib<br>export PATH=${JAVA_HOME}/bin:$PATH<br> 注意：不能空行</p><p>5、保存并退出，使用source命令使之生效</p><p>source ~/.bashrc</p><p>6、查看安装情况<br>java -version</p><p>配置环境变量<br><a href="https://blog.csdn.net/gaoanchen/article/details/77692451" target="_blank" rel="noopener">https://blog.csdn.net/gaoanchen/article/details/77692451</a><br>二、zookeeper<br>环境搭建<br>Ubuntu 14.04.5 LTS<br>zookeeper-3.4.6<br>jdk1.7.0_76<br>安装<br>下载zookeeper包，由于apache官方网络慢，我们选择从华科大的镜像地址进行下载<br>wget <a href="http://mirrors.hust.edu.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz" target="_blank" rel="noopener">http://mirrors.hust.edu.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz</a><br>1<br>解压zookeeper到/usr/local<br>tar -xzvf zookeeper-3.4.6.tar.gz -C /usr/local<br>cd /usr/local/zookeeper-3.4.6<br>1<br>2<br>拷贝一份zookeeper的配置文件，zoo_sample.cfg =&gt; zoo.cfg<br>cd conf<br>cp zoo_sample.cfg zoo.cfg<br>1<br>2<br>变更zoo.cfg配置<br>vi zoo.cfg<br>1<br>主要更改zookeeper的数据存放地址和日志地址</p><p>dataDir=/HD/logs/zookeeper<br>dataLogDir=/HD/logs/zookeeper<br>1<br>2</p><h1 id="The-number-of-milliseconds-of-each-tick"><a href="#The-number-of-milliseconds-of-each-tick" class="headerlink" title="The number of milliseconds of each tick"></a>The number of milliseconds of each tick</h1><p>tickTime=2000</p><h1 id="The-number-of-ticks-that-the-initial"><a href="#The-number-of-ticks-that-the-initial" class="headerlink" title="The number of ticks that the initial"></a>The number of ticks that the initial</h1><h1 id="synchronization-phase-can-take"><a href="#synchronization-phase-can-take" class="headerlink" title="synchronization phase can take"></a>synchronization phase can take</h1><p>initLimit=10</p><h1 id="The-number-of-ticks-that-can-pass-between"><a href="#The-number-of-ticks-that-can-pass-between" class="headerlink" title="The number of ticks that can pass between"></a>The number of ticks that can pass between</h1><h1 id="sending-a-request-and-getting-an-acknowledgement"><a href="#sending-a-request-and-getting-an-acknowledgement" class="headerlink" title="sending a request and getting an acknowledgement"></a>sending a request and getting an acknowledgement</h1><p>syncLimit=5</p><h1 id="the-directory-where-the-snapshot-is-stored"><a href="#the-directory-where-the-snapshot-is-stored" class="headerlink" title="the directory where the snapshot is stored."></a>the directory where the snapshot is stored.</h1><h1 id="do-not-use-tmp-for-storage-tmp-here-is-just"><a href="#do-not-use-tmp-for-storage-tmp-here-is-just" class="headerlink" title="do not use /tmp for storage, /tmp here is just"></a>do not use /tmp for storage, /tmp here is just</h1><h1 id="example-sakes"><a href="#example-sakes" class="headerlink" title="example sakes."></a>example sakes.</h1><p>dataDir=/HD/logs/zookeeper<br>dataLogDir=/HD/logs/zookeeper</p><h1 id="the-port-at-which-the-clients-will-connect"><a href="#the-port-at-which-the-clients-will-connect" class="headerlink" title="the port at which the clients will connect"></a>the port at which the clients will connect</h1><p>clientPort=2181</p><h1 id="the-maximum-number-of-client-connections"><a href="#the-maximum-number-of-client-connections" class="headerlink" title="the maximum number of client connections."></a>the maximum number of client connections.</h1><h1 id="increase-this-if-you-need-to-handle-more-clients"><a href="#increase-this-if-you-need-to-handle-more-clients" class="headerlink" title="increase this if you need to handle more clients"></a>increase this if you need to handle more clients</h1><p>#maxClientCnxns=60<br>#</p><h1 id="Be-sure-to-read-the-maintenance-section-of-the"><a href="#Be-sure-to-read-the-maintenance-section-of-the" class="headerlink" title="Be sure to read the maintenance section of the"></a>Be sure to read the maintenance section of the</h1><h1 id="administrator-guide-before-turning-on-autopurge"><a href="#administrator-guide-before-turning-on-autopurge" class="headerlink" title="administrator guide before turning on autopurge."></a>administrator guide before turning on autopurge.</h1><p>#</p><h1 id="http-zookeeper-apache-org-doc-current-zookeeperAdmin-html-sc-maintenance"><a href="#http-zookeeper-apache-org-doc-current-zookeeperAdmin-html-sc-maintenance" class="headerlink" title="http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance"></a><a href="http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance" target="_blank" rel="noopener">http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</a></h1><p>#</p><h1 id="The-number-of-snapshots-to-retain-in-dataDir"><a href="#The-number-of-snapshots-to-retain-in-dataDir" class="headerlink" title="The number of snapshots to retain in dataDir"></a>The number of snapshots to retain in dataDir</h1><p>#autopurge.snapRetainCount=3</p><h1 id="Purge-task-interval-in-hours"><a href="#Purge-task-interval-in-hours" class="headerlink" title="Purge task interval in hours"></a>Purge task interval in hours</h1><h1 id="Set-to-“0”-to-disable-auto-purge-feature"><a href="#Set-to-“0”-to-disable-auto-purge-feature" class="headerlink" title="Set to “0” to disable auto purge feature"></a>Set to “0” to disable auto purge feature</h1><p>#autopurge.purgeInterval=1</p><p>启动zookeeper<br>cd ../bin</p><p>sh zkServer.sh start //启动<br>sh zkServer.sh status //检查状态<br>sh zkServer.sh stop //停止</p><p>检查zookeeper启动状态<br>ps -ef|grep zookeeper<br>1<br>遇到的问题<br><a href="mailto:root@127.0.0.1">root@127.0.0.1</a>:/usr/local/zookeeper-3.4.6# sh bin/zkServer.sh start<br>JMX enabled by default<br>bin/zkServer.sh: 95: /usr/local/zookeeper-3.4.6/bin/zkEnv.sh: Syntax error: “(“ unexpected (expecting “fi”)</p><p>百度得到的答案是Ubuntu的默认shell有问题，把dash改成bash就可以了</p><p><a href="mailto:root@127.0.0.1">root@127.0.0.1</a>:~# cd /bin/<br><a href="mailto:root@127.0.0.1">root@127.0.0.1</a>:/bin# ls -l /bin/sh<br>lrwxrwxrwx 1 root root 4 Dec 23 22:30 /bin/sh -&gt; dash(默认)<br><a href="mailto:root@127.0.0.1">root@127.0.0.1</a>:/bin# ln -sf bash /bin/sh<br><a href="mailto:root@127.0.0.1">root@127.0.0.1</a>:/bin# ls -l /bin/sh<br>lrwxrwxrwx 1 root root 4 Dec 23 22:37 /bin/sh -&gt; bash</p><p>重启解决</p><p>三、root权限更新</p><p>一、Ubuntu的<br>默认root密码是随机的，即每次开机都有一个新的root密码。我们可以在终端输入命令 sudo passwd，然后输入当前用户的密码，enter，</p><p>二、终端会提示我们输入新的密码并确认，此时的密码就是root新密码。修改成功后，输入命令 su root，再输入新的密码就ok了</p><p>三 、分析没有默认的，因为你还没给root设置密码，第一个 user 是在 admin 组 ，所以他可以给 root 设置密码 , so<br>sudo passwd root<br>[sudo] password for you ：—&gt; 输入你的密码，不会显示 </p><p>Enter new UNIX password: </p><p>— &gt; 设置root 密码<br>Retype new UNIX password: </p><h1 id="–-gt-重复"><a href="#–-gt-重复" class="headerlink" title="–&gt; 重复"></a>–&gt; 重复</h1><p>用安装时建立的用户登陆后在Shell执行<br>sudo passwd root回车Password:</p><p>后输入刚建立的用户密码回车<br>Enter new UNIX password:</p><p>这时输入要设置的root密码两次就会看到 </p><h1 id="password-updated-successfully了！"><a href="#password-updated-successfully了！" class="headerlink" title="password updated successfully了！"></a>password updated successfully了！</h1><p>安装后可以到用户和组里面去改，随便改的。要在登录时用root的话，可以在“登录界面”里改，让管理员登录系统的选项就可以了</p><p>来源： <a href="https://blog.csdn.net/zrxx01/article/details/80521256" target="_blank" rel="noopener">https://blog.csdn.net/zrxx01/article/details/80521256</a></p><p><a href="https://www.cnblogs.com/freescience/p/7272070.html" target="_blank" rel="noopener">https://www.cnblogs.com/freescience/p/7272070.html</a></p><p><a href="http://rayfuxk.iteye.com/blog/2279596" target="_blank" rel="noopener">http://rayfuxk.iteye.com/blog/2279596</a></p><p><a href="http://www.mamicode.com/info-detail-2243059.html" target="_blank" rel="noopener">http://www.mamicode.com/info-detail-2243059.html</a></p><p><a href="https://blog.csdn.net/u011404265/article/details/72869920" target="_blank" rel="noopener">https://blog.csdn.net/u011404265/article/details/72869920</a><br><a href="https://blog.csdn.net/sunxiaoju/article/details/51994559" target="_blank" rel="noopener">https://blog.csdn.net/sunxiaoju/article/details/51994559</a><br><a href="https://www.linuxidc.com/Linux/2017-02/140908.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2017-02/140908.htm</a><br><a href="https://www.linuxidc.com/Linux/2017-02/140138.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2017-02/140138.htm</a><br><a href="http://www.mamicode.com/info-detail-2243059.html" target="_blank" rel="noopener">http://www.mamicode.com/info-detail-2243059.html</a><br><a href="https://blog.csdn.net/wangyonglin1123/article/details/44959585" target="_blank" rel="noopener">https://blog.csdn.net/wangyonglin1123/article/details/44959585</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> zookeeper </tag>
             
         </tags>
       
