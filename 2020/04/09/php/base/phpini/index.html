@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>phpini中文详解 | Hechaofa</title>
+  <meta name="keywords" content=" php ">
+  <meta name="description" content="phpini中文详解 | Hechaofa">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="个人名言：喜欢在知识的海洋中遨游，更喜欢生活！ qq：1297814479 email:chaofa_vip@126.com">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="https://chaofavip.github.io/about/index.html">
+<meta property="og:site_name" content="Hechaofa">
+<meta property="og:description" content="个人名言：喜欢在知识的海洋中遨游，更喜欢生活！ qq：1297814479 email:chaofa_vip@126.com">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2019-12-17T15:56:40.000Z">
+<meta property="article:modified_time" content="2019-12-18T15:00:19.240Z">
+<meta property="article:author" content="Hechaofa">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="https://blog-cdn.hechaofa.com/bbc0b949f466d20b190074ee040df24.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="https://blog-cdn.hechaofa.com/bbc0b949f466d20b190074ee040df24.jpg" />
+</a>
+<div class="author">
+    <span>Hechaofa</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/chaofavip" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/6e39d2c3fa52" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/chaofavip" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:chaofa_vip@126.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1297814479&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(63)</small></div></li>
+    
+        
+            
+            <li><div data-rel="支付">支付<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Mac">Mac<small>(8)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="docker">docker<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="创业">创业<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="架构">架构<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="php">php<small>(21)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="git">git<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="监控">监控<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Ubuntu">Ubuntu<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Mysql">Mysql<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数据库">数据库<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="redis">redis<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="工具">工具<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="前端">前端<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="63">
+<input type="hidden" id="yelog_site_word_count" value="62.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://www.cnblogs.com/weihui-vip/">微慧</a></li>
+            
+            <li><a target="_blank" href="https://www.jianshu.com/u/6e39d2c3fa52">Charles_ed65</a></li>
+            
+            <li><a target="_blank" href="https://blog.csdn.net/chaofavip">chaofavip</a></li>
+            
+            <li><a target="_blank" href="https://segmentfault.com/u/nidaye_5df270ab7e088">泥大爷</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color2">alipay</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">composer</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">host</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">bogon</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">php</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">redis</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ext</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">公司</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">代码部署</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">laravel</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">git</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">架构</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">监控</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">awk</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Ubuntu</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">索引</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">数据库</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">mac</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">tool</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">jq</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">压测</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">vim</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">zookeeper</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">算法</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">面试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">正则</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">学习</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">hyperf</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">ajax</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="创业 "
+           href="/2020/09/04/company/chuangye/"
+           data-tag="公司"
+           data-author="" >
+            <span class="post-title" title="创业之路">创业之路</span>
+            <span class="post-date" title="2020-09-04 10:09:47">2020/09/04</span>
+        </a>
+        
+        <a  class="php "
+           href="/2020/10/14/php/algorithm/paixu/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="PHP 二维数组根据某个字段排序">PHP 二维数组根据某个字段排序</span>
+            <span class="post-date" title="2020-10-14 17:54:47">2020/10/14</span>
+        </a>
+        
+        <a  class="php "
+           href="/2020/09/30/php/hyperf/good/"
+           data-tag="hyperf"
+           data-author="" >
+            <span class="post-title" title="Hyperf  特点">Hyperf  特点</span>
+            <span class="post-date" title="2020-09-30 15:49:47">2020/09/30</span>
+        </a>
+        
+        <a  class="php "
+           href="/2020/09/28/php/hyperf/create/"
+           data-tag="hyperf"
+           data-author="" >
+            <span class="post-title" title="Hyperf  docker部署">Hyperf  docker部署</span>
+            <span class="post-date" title="2020-09-28 14:09:47">2020/09/28</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2020/09/27/mysql/suoyin/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="索引的建立原则">索引的建立原则</span>
+            <span class="post-date" title="2020-09-27 10:45:47">2020/09/27</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2020/09/20/mysql/suoyinyuanli/"
+           data-tag="索引"
+           data-author="" >
+            <span class="post-title" title="MySQL索引管理">MySQL索引管理</span>
+            <span class="post-date" title="2020-09-20 10:40:47">2020/09/20</span>
+        </a>
+        
+        <a  class="php "
+           href="/2020/09/18/php/change/gaobingfa/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="PHP-高并发和大流量的解决方案">PHP-高并发和大流量的解决方案</span>
+            <span class="post-date" title="2020-09-18 01:13:47">2020/09/18</span>
+        </a>
+        
+        <a  class="git "
+           href="/2020/09/17/git/svngit/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="SVN与Git优缺点比较">SVN与Git优缺点比较</span>
+            <span class="post-date" title="2020-09-17 18:09:47">2020/09/17</span>
+        </a>
+        
+        <a  class="数据库 "
+           href="/2020/09/11/mysql/fenbiao/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="10亿级订单系统分库分表设计思路">10亿级订单系统分库分表设计思路</span>
+            <span class="post-date" title="2020-09-11 10:09:47">2020/09/11</span>
+        </a>
+        
+        <a  class="架构 "
+           href="/2020/09/10/jiagou/miaosha/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="秒杀">秒杀</span>
+            <span class="post-date" title="2020-09-10 10:09:47">2020/09/10</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2020/09/03/mysql/youhua/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="Sql优化">Sql优化</span>
+            <span class="post-date" title="2020-09-03 10:09:47">2020/09/03</span>
+        </a>
+        
+        <a  class="前端 "
+           href="/2020/07/13/web/mianshi01/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="基础面试js">基础面试js</span>
+            <span class="post-date" title="2020-07-13 13:09:47">2020/07/13</span>
+        </a>
+        
+        <a  class="php "
+           href="/2020/04/09/php/base/phpini/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="phpini中文详解">phpini中文详解</span>
+            <span class="post-date" title="2020-04-09 09:09:47">2020/04/09</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2020/03/10/Mac/bogon/"
+           data-tag="bogon"
+           data-author="" >
+            <span class="post-title" title="MacBook 终端中的bogon的解决办法">MacBook 终端中的bogon的解决办法</span>
+            <span class="post-date" title="2020-03-10 10:13:47">2020/03/10</span>
+        </a>
+        
+        <a  class="监控 "
+           href="/2020/01/03/jiankong/liaojie/"
+           data-tag="监控"
+           data-author="" >
+            <span class="post-title" title="监控认知了解">监控认知了解</span>
+            <span class="post-date" title="2020-01-03 22:10:47">2020/01/03</span>
+        </a>
+        
+        <a  class="支付 "
+           href="/2020/01/03/alipay/peizhi/"
+           data-tag="alipay"
+           data-author="" >
+            <span class="post-title" title="对接支付宝">对接支付宝</span>
+            <span class="post-date" title="2020-01-03 22:09:47">2020/01/03</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2019/12/29/docker/php/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="Mac切换PHP版本">Mac切换PHP版本</span>
+            <span class="post-date" title="2019-12-29 19:09:47">2019/12/29</span>
+        </a>
+        
+        <a  class="php "
+           href="/2019/12/25/php/study/developRoad/"
+           data-tag="学习"
+           data-author="" >
+            <span class="post-title" title="PHP学习路线">PHP学习路线</span>
+            <span class="post-date" title="2019-12-25 23:50:47">2019/12/25</span>
+        </a>
+        
+        <a  class="php "
+           href="/2019/12/22/php/base/zhengze/"
+           data-tag="正则"
+           data-author="" >
+            <span class="post-title" title="10个实用的PHP正则表达式">10个实用的PHP正则表达式</span>
+            <span class="post-date" title="2019-12-22 23:50:47">2019/12/22</span>
+        </a>
+        
+        <a  class="php "
+           href="/2019/12/22/php/base/hanshu/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php常用函数">php常用函数</span>
+            <span class="post-date" title="2019-12-22 23:13:47">2019/12/22</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2019/12/20/tool/composer/"
+           data-tag="composer"
+           data-author="" >
+            <span class="post-title" title="PHP包管理器Composer与自动加载规范">PHP包管理器Composer与自动加载规范</span>
+            <span class="post-date" title="2019-12-20 10:13:47">2019/12/20</span>
+        </a>
+        
+        <a  class="docker "
+           href="/2019/12/13/docker/redis/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="docker之安装redis扩展">docker之安装redis扩展</span>
+            <span class="post-date" title="2019-12-13 10:09:47">2019/12/13</span>
+        </a>
+        
+        <a  class="docker "
+           href="/2019/12/12/docker/kuozhan/"
+           data-tag="ext"
+           data-author="" >
+            <span class="post-title" title="docker之安装扩展细说">docker之安装扩展细说</span>
+            <span class="post-date" title="2019-12-12 10:09:47">2019/12/12</span>
+        </a>
+        
+        <a  class="php "
+           href="/2019/11/30/php/change/jiagouyouhua/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="架构优化">架构优化</span>
+            <span class="post-date" title="2019-11-30 14:09:47">2019/11/30</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2019/11/17/Mac/start/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="Mac下搭建Apache+PHP+MySql运行环境">Mac下搭建Apache+PHP+MySql运行环境</span>
+            <span class="post-date" title="2019-11-17 10:13:47">2019/11/17</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/2019/11/12/linux/gitanzhuang/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="linux安装git">linux安装git</span>
+            <span class="post-date" title="2019-11-12 10:09:47">2019/11/12</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/2019/11/10/linux/composer/"
+           data-tag="composer"
+           data-author="" >
+            <span class="post-title" title="mac下全局安装composer">mac下全局安装composer</span>
+            <span class="post-date" title="2019-11-10 10:09:47">2019/11/10</span>
+        </a>
+        
+        <a  class="docker "
+           href="/2019/11/09/docker/start/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="Docker的LNMP一键安装">Docker的LNMP一键安装</span>
+            <span class="post-date" title="2019-11-09 10:09:47">2019/11/09</span>
+        </a>
+        
+        <a  class="php "
+           href="/2019/11/09/php/base/code/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="http响应状态码大全">http响应状态码大全</span>
+            <span class="post-date" title="2019-11-09 09:09:47">2019/11/09</span>
+        </a>
+        
+        <a  class="Mysql "
+           href="/2019/11/03/mysql/sql/"
+           data-tag="mysql"
+           data-author="" >
+            <span class="post-title" title="防止SQL注入">防止SQL注入</span>
+            <span class="post-date" title="2019-11-03 10:09:47">2019/11/03</span>
+        </a>
+        
+        <a  class="架构 "
+           href="/2019/11/02/jiagou/shop/"
+           data-tag="架构"
+           data-author="" >
+            <span class="post-title" title="大型网站电商网站架构案例和技术架构的示例">大型网站电商网站架构案例和技术架构的示例</span>
+            <span class="post-date" title="2019-11-02 10:09:47">2019/11/02</span>
+        </a>
+        
+        <a  class="php "
+           href="/2019/09/29/laravel/laravel-admin-set/"
+           data-tag="laravel"
+           data-author="" >
+            <span class="post-title" title="laravel-admin 安装">laravel-admin 安装</span>
+            <span class="post-date" title="2019-09-29 20:10:47">2019/09/29</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2019/09/17/Mac/linux/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="Mac 怎么通过自带终端连接linux服务器">Mac 怎么通过自带终端连接linux服务器</span>
+            <span class="post-date" title="2019-09-17 10:13:47">2019/09/17</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2019/09/10/Mac/host/"
+           data-tag="host"
+           data-author="" >
+            <span class="post-title" title="mac 下host操作管理">mac 下host操作管理</span>
+            <span class="post-date" title="2019-09-10 10:13:47">2019/09/10</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2019/07/20/tool/baidu/"
+           data-tag="mac"
+           data-author="" >
+            <span class="post-title" title="百度网盘（破解svip）下载Mac">百度网盘（破解svip）下载Mac</span>
+            <span class="post-date" title="2019-07-20 10:13:47">2019/07/20</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2019/07/20/tool/zipkin/"
+           data-tag="mac"
+           data-author="" >
+            <span class="post-title" title="百度网盘（破解svip）下载Mac">百度网盘（破解svip）下载Mac</span>
+            <span class="post-date" title="2019-07-20 10:13:47">2019/07/20</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/2019/05/20/linux/git/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="Git常用命令速查表">Git常用命令速查表</span>
+            <span class="post-date" title="2019-05-20 08:00:47">2019/05/20</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2019/04/29/tool/find/"
+           data-tag="tool"
+           data-author="" >
+            <span class="post-title" title="搜索网站">搜索网站</span>
+            <span class="post-date" title="2019-04-29 11:50:47">2019/04/29</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2019/03/02/tool/yace/"
+           data-tag="压测"
+           data-author="" >
+            <span class="post-title" title="压测认识">压测认识</span>
+            <span class="post-date" title="2019-03-02 02:13:47">2019/03/02</span>
+        </a>
+        
+        <a  class="架构 "
+           href="/2018/12/12/code/bushu/"
+           data-tag="代码部署"
+           data-author="" >
+            <span class="post-title" title="Jenkins代表部署">Jenkins代表部署</span>
+            <span class="post-date" title="2018-12-12 10:09:47">2018/12/12</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/2018/11/10/linux/awk/"
+           data-tag="awk"
+           data-author="" >
+            <span class="post-title" title="awk运算">awk运算</span>
+            <span class="post-date" title="2018-11-10 10:09:47">2018/11/10</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/2018/09/13/tool/zookeeper/"
+           data-tag="zookeeper"
+           data-author="" >
+            <span class="post-title" title="zookeeper安装教程">zookeeper安装教程</span>
+            <span class="post-date" title="2018-09-13 10:13:47">2018/09/13</span>
+        </a>
+        
+        <a  class="Mac "
+           href="/2018/08/10/Mac/composer/"
+           data-tag="composer"
+           data-author="" >
+            <span class="post-title" title="Mac中Composer的安装和使用">Mac中Composer的安装和使用</span>
+            <span class="post-date" title="2018-08-10 10:13:47">2018/08/10</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2018/07/20/tool/vi/"
+           data-tag="vim"
+           data-author="" >
+            <span class="post-title" title="vi编辑">vi编辑</span>
+            <span class="post-date" title="2018-07-20 10:13:47">2018/07/20</span>
+        </a>
+        
+        <a  class="算法 "
+           href="/2018/03/20/suanfa/suanfa01/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="算法课堂1">算法课堂1</span>
+            <span class="post-date" title="2018-03-20 14:13:00">2018/03/20</span>
+        </a>
+        
+        <a  class="前端 "
+           href="/2017/11/09/jq/tu/"
+           data-tag="jq"
+           data-author="" >
+            <span class="post-title" title="jq">jq</span>
+            <span class="post-date" title="2017-11-09 09:09:47">2017/11/09</span>
+        </a>
+        
+        <a  class="redis "
+           href="/2017/10/09/redis/jichu/"
+           data-tag="redis"
+           data-author="" >
+            <span class="post-title" title="redis基础操作">redis基础操作</span>
+            <span class="post-date" title="2017-10-09 09:09:47">2017/10/09</span>
+        </a>
+        
+        <a  class="git "
+           href="/2017/09/17/git/guanli/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="git 版本管理">git 版本管理</span>
+            <span class="post-date" title="2017-09-17 18:09:47">2017/09/17</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/2017/07/20/design/design/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="设计模式">设计模式</span>
+            <span class="post-date" title="2017-07-20 11:13:47">2017/07/20</span>
+        </a>
+        
+        <a  class="Linux "
+           href="/2017/05/20/linux/mingling/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux常用命令">Linux常用命令</span>
+            <span class="post-date" title="2017-05-20 10:00:47">2017/05/20</span>
+        </a>
+        
+        <a  class="Ubuntu "
+           href="/2017/03/27/linux/ubuntu_swoole/"
+           data-tag="Ubuntu"
+           data-author="" >
+            <span class="post-title" title="Ubuntu16.04 swoole扩展安装注意！！！">Ubuntu16.04 swoole扩展安装注意！！！</span>
+            <span class="post-date" title="2017-03-27 10:13:47">2017/03/27</span>
+        </a>
+        
+        <a  class="Ubuntu "
+           href="/2017/03/20/linux/ubuntu_cron/"
+           data-tag="Ubuntu"
+           data-author="" >
+            <span class="post-title" title="Ubuntu16.04安装并搭建定时脚本cron">Ubuntu16.04安装并搭建定时脚本cron</span>
+            <span class="post-date" title="2017-03-20 15:13:47">2017/03/20</span>
+        </a>
+        
+        <a  class="php "
+           href="/2017/03/02/linux/swoole_set/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="swoole安装（centos7）">swoole安装（centos7）</span>
+            <span class="post-date" title="2017-03-02 09:13:47">2017/03/02</span>
+        </a>
+        
+        <a  class="工具 "
+           href="/2017/02/20/tool/tizi/"
+           data-tag="tool"
+           data-author="" >
+            <span class="post-title" title="手把手教你购买使用Vultr服务器">手把手教你购买使用Vultr服务器</span>
+            <span class="post-date" title="2017-02-20 10:13:08">2017/02/20</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/09/30/php/change/youhua/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="PHP代码优化技巧大盘点">PHP代码优化技巧大盘点</span>
+            <span class="post-date" title="2016-09-30 09:13:47">2016/09/30</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/06/13/php/study/study/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php核心">php核心</span>
+            <span class="post-date" title="2016-06-13 21:20:47">2016/06/13</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/06/13/php/base/duixiang/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="面向对象">面向对象</span>
+            <span class="post-date" title="2016-06-13 09:20:47">2016/06/13</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/04/29/php/design/phpdesign/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="设计原则">设计原则</span>
+            <span class="post-date" title="2016-04-29 13:13:47">2016/04/29</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/04/05/php/base/word/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php单词整理">php单词整理</span>
+            <span class="post-date" title="2016-04-05 11:13:00">2016/04/05</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/03/29/php/algorithm/digui/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="递归，阶乘">递归，阶乘</span>
+            <span class="post-date" title="2016-03-29 11:13:47">2016/03/29</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/03/22/php/algorithm/maopao/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="冒泡排序">冒泡排序</span>
+            <span class="post-date" title="2016-03-22 11:13:47">2016/03/22</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/03/10/php/study/zajax/"
+           data-tag="ajax"
+           data-author="" >
+            <span class="post-title" title="ajax认知">ajax认知</span>
+            <span class="post-date" title="2016-03-10 19:13:47">2016/03/10</span>
+        </a>
+        
+        <a  class="php "
+           href="/2016/03/01/php/study/develop/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php发展史和一些其他知识">php发展史和一些其他知识</span>
+            <span class="post-date" title="2016-03-01 10:13:47">2016/03/01</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-php/base/phpini" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">phpini中文详解</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="php">php</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color4">php</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-09-30 16:01:12'>2020-04-09 09:09</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[PHP]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br></pre></td><td class="code"><pre><span class="line">;;;;;;;;;;;;;;;;;;;</span><br><span class="line">; 关于 php.ini ;</span><br><span class="line">;;;;;;;;;;;;;;;;;;;</span><br><span class="line">; PHP 的初始化文件，普遍被称为 php.ini，负责配置 PHP 很多方面行为。</span><br><span class="line"></span><br><span class="line">; PHP 将在这些地方依次查找该文件：</span><br><span class="line">; 1. SAPI 模块指定位置。</span><br><span class="line">; 2. PHPRC 环境变量。</span><br><span class="line">; 3. 在 Windows 中是预定义注册表的键值。</span><br><span class="line">; 4. 当前工作路径（除了 CLI）</span><br><span class="line">; 5. web 服务器路径（对 SAPI 模块），或者是 PHP 的路径（除非在 Windows）</span><br><span class="line">; 6. 与 --with-config-file-path 编译时选项中的目录，或</span><br><span class="line">; Windows 目录(（C:\ Windows 或 C:\winnt）</span><br><span class="line">; 查看 PHP 文档以获得更多的特殊信息。</span><br><span class="line">; http:&#x2F;&#x2F;php.net&#x2F;configuration.file</span><br><span class="line"></span><br><span class="line">; 该文件的语法非常简单。空白字符和用分号&#39;;&#39;开始的行被简单地忽略（就象你可能</span><br><span class="line">; 猜到的一样）。 章节标题（例如 : [Foo]）也被简单地忽略，即使将来它们可能</span><br><span class="line">; 有某种的意义。</span><br><span class="line">;</span><br><span class="line">; 指示被指定使用如下语法：</span><br><span class="line">; 指示标识符 &#x3D; 值</span><br><span class="line">; directive &#x3D; value</span><br><span class="line">; 指示标识符 是 *大小写敏感的* - foo&#x3D;bar 不同于 FOO &#x3D; bar。</span><br><span class="line">;</span><br><span class="line">; 值可以是一个字符串，一个数字，一个 PHP 常量（如： E_ALL or M_PI）, INI 常量中的</span><br><span class="line">; 一个（On, Off, True, False, Yes, No and None），或是一个表达式</span><br><span class="line">; （如: E_ALL &amp; ~E_NOTICE）, 或是用引号括起来的字符串（&quot; foo&quot; ）。</span><br><span class="line">;</span><br><span class="line">; INI 文件的表达式被限制于位运算符和括号。</span><br><span class="line">; | bitwise OR</span><br><span class="line">; &amp; bitwise AND</span><br><span class="line">; ~ bitwise NOT</span><br><span class="line">; ! boolean NOT</span><br><span class="line">;</span><br><span class="line">; 布尔标志可用 1，On，True 或 Yes 这些值置于启用的状态。</span><br><span class="line">; 它们可用 0，Off，False 或 No 这些值置于关闭的状态。</span><br><span class="line">;</span><br><span class="line">; 一个空字符串可以用在等号后不写任何东西表示，或者用 None 关键字:</span><br><span class="line">;</span><br><span class="line">; foo &#x3D; ; 将foo置为空字符串</span><br><span class="line">; foo &#x3D; None ; 将 foo 置为空字符串</span><br><span class="line">; foo &#x3D; &quot; None&quot; ; 将 foo 置为字符串 &#39;None&#39;</span><br><span class="line">;</span><br><span class="line">; 如果你值设置中使用常量，而这些常量属于动态调入的扩展库（不是 PHP 的扩展，就是 Zend 的扩展），你仅可以调入这些扩展的行*之后*使用这些常量。</span><br><span class="line">;</span><br><span class="line">; 所有在 php.ini-dist 文件里设定的值与内建的默认值相同（这是说，如果 php.ini 没被使用或者你删掉了这些行，默认值与之相同）。</span><br><span class="line"></span><br><span class="line">;;;;;;;;;;;;;;;;;;;;</span><br><span class="line">; 语言选项 ;</span><br><span class="line">;;;;;;;;;;;;;;;;;;;;</span><br><span class="line"></span><br><span class="line">engine &#x3D; On</span><br><span class="line">; 使 PHP scripting language engine（PHP 脚本语言引擎）在 Apache下有效。</span><br><span class="line">short_open_tag &#x3D; On</span><br><span class="line">; 允许短开标志被识别。</span><br><span class="line">asp_tags &#x3D; Off</span><br><span class="line">; 允许 ASP 风格 标志</span><br><span class="line">precision &#x3D; 14</span><br><span class="line">; 浮点类型数显示时的有效位数</span><br><span class="line"></span><br><span class="line">y2k_compliance &#x3D; Off</span><br><span class="line">; 是否打开 2000 年适应 (可能在非 Y2K 适应的浏览器中导致问题)</span><br><span class="line"></span><br><span class="line">output_buffering &#x3D; Off</span><br><span class="line">; 输出缓存允许你甚至在输出正文内容之后发送 header（标头，包括 cookies）行</span><br><span class="line">; 其代价是输出层减慢一点点速度。你可以使用输出缓存在运行时打开输出缓存，</span><br><span class="line">; 或者在这里将指示设为 On 而使得所有文件的输出缓存打开。</span><br><span class="line">output_handler &#x3D; ; 你可以重定向你的脚本的所有输出到一个函数，</span><br><span class="line">; 那样做可能对处理或以日志记录它有用。</span><br><span class="line">; 例如若你将这个 output_handler 设为 &quot;ob_gzhandler&quot;  ,</span><br><span class="line">; 则输出会被透明地为支持 gzip 或 deflate 编码的浏览器压缩。</span><br><span class="line">; 设一个输出处理器自动地打开输出缓冲。</span><br><span class="line"></span><br><span class="line">implicit_flush &#x3D; Off</span><br><span class="line">; 强制flush（刷新）让 PHP 告诉输出层在每个输出块之后自动刷新自身数据。</span><br><span class="line">; 这等效于在每个 print() 或 echo() 调用和每个 HTML 块后调用 flush() 函数。</span><br><span class="line">; 打开这项设置会导致严重的运行时冲突，建议仅在 debug 过程中打开。</span><br><span class="line"></span><br><span class="line">allow_call_time_pass_reference &#x3D; On</span><br><span class="line">; 是否让强迫函数调用时按引用传递参数。这一方法遭到抗议，</span><br><span class="line">; 并可能在将来版本的 PHP&#x2F;Zend 里不再支持。</span><br><span class="line">; 受到鼓励的指定哪些参数按引用传递的方法是在函数声明里。</span><br><span class="line">; 你被鼓励尝试关闭这一选项并确认你的脚本仍能正常工作，以保证在将来版本的语言里</span><br><span class="line">; 它们仍能工作。（你将在每次使用该特点时得到一个警告，而参数将按值而不是按引用</span><br><span class="line">; 传递）。</span><br><span class="line"></span><br><span class="line">; Safe Mode 安全模式</span><br><span class="line">safe_mode &#x3D; Off</span><br><span class="line">safe_mode_exec_dir &#x3D;</span><br><span class="line">safe_mode_allowed_env_vars &#x3D; PHP_</span><br><span class="line">; 该指示包含用逗号分隔的前缀列表。安全模式中，用户仅可以替换</span><br><span class="line">; 以在此列出的前缀开头的环境变量的值。</span><br><span class="line">; 默认地，用户将仅能 设定以 PHP_ 开头的环境变量，（如: PHP_FOO &#x3D; BAR）。</span><br><span class="line">; 注意: 如果这一指示为空，PHP 将让用户更改任意环境变量!</span><br><span class="line"></span><br><span class="line">safe_mode_protected_env_vars &#x3D; LD_LIBRARY_PATH</span><br><span class="line">; 这条指示包含一个用逗号分隔的环境变量列表，那是最终用户将不能用 putenv() 更改的。</span><br><span class="line">; 这些变量甚至在 safe_mode_allowed_env_vars 设置为允许的情况下得到保护。</span><br><span class="line"></span><br><span class="line">disable_functions &#x3D;</span><br><span class="line">; 这条指示让你可以为了安全的原因让特定函数失效。</span><br><span class="line">; 它接受一个用逗号分隔的函数名列表。</span><br><span class="line">; 这条指示 *不受* 安全模式是否打开的影响。</span><br><span class="line"></span><br><span class="line">; 语法高亮模式的色彩。</span><br><span class="line">; 只要能被接受的东西就能工作。</span><br><span class="line"></span><br><span class="line">highlight.string &#x3D; #DD0000</span><br><span class="line">highlight.comment &#x3D; #FF8000</span><br><span class="line">highlight.keyword &#x3D; #007700</span><br><span class="line">highlight.bg &#x3D; #FFFFFF</span><br><span class="line">highlight.default &#x3D; #0000BB</span><br><span class="line">highlight.html &#x3D; #000000</span><br><span class="line"></span><br><span class="line">; Misc 杂项</span><br><span class="line">expose_php &#x3D; Off</span><br><span class="line">; 决定 PHP 是否标示它装在服务器上的事实（例如：加在它 — PHP— 给 Web 服务</span><br><span class="line">; 发送的信号上）。</span><br><span class="line">; （我个人的意见，在出现什么 power-by 的 header 的时候，把这关掉。）</span><br><span class="line">; 它不会有安全上的威胁, 但它使检查你的服务器上是否安装了 PHP 成为了可能。</span><br><span class="line"></span><br><span class="line">;;;;;;;;;;;;;;;;;;;</span><br><span class="line">; Resource Limits ;</span><br><span class="line">;;;;;;;;;;;;;;;;;;;</span><br><span class="line"></span><br><span class="line">max_execution_time &#x3D; 30 ; 每个脚本的最大执行时间，按秒计</span><br><span class="line">memory_limit &#x3D; 8388608 ; 一个脚本最大可使用的内存总量（这里是 8 MB）</span><br><span class="line"></span><br><span class="line">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><br><span class="line">; 出错控制和登记 ;</span><br><span class="line">; Error handling and logging ;</span><br><span class="line">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><br><span class="line"></span><br><span class="line">; 错误报告是按位的。或者将数字加起来得到想要的错误报告等级。</span><br><span class="line">; E_ALL - 所有的错误和警告</span><br><span class="line">; E_ERROR - 致命性运行时错</span><br><span class="line">; E_WARNING - 运行时警告（非致命性错）</span><br><span class="line">; E_PARSE - 编译时解析错误</span><br><span class="line">; E_NOTICE - 运行时提醒(这些经常是是你的代码的bug引起的，</span><br><span class="line">;也可能是有意的行为造成的。(如：基于未初始化的变量自动初始化为一个</span><br><span class="line">;空字符串的事实而使用一个未初始化的变量)</span><br><span class="line"></span><br><span class="line">; E_CORE_ERROR - 发生于PHP启动时初始化过程中的致命错误</span><br><span class="line">; E_CORE_WARNING - 发生于PHP启动时初始化过程中的警告(非致命性错)</span><br><span class="line">; E_COMPILE_ERROR - 编译时致命性错</span><br><span class="line">; E_COMPILE_WARNING - 编译时警告(非致命性错)</span><br><span class="line">; E_USER_ERROR - 用户产生的出错消息</span><br><span class="line">; E_USER_WARNING - 用户产生的警告消息</span><br><span class="line">; E_USER_NOTICE - 用户产生的提醒消息</span><br><span class="line">; 例子:</span><br><span class="line">; error_reporting &#x3D; E_ALL &amp; ~E_NOTICE ; 显示所有的错误，除了提醒</span><br><span class="line">; error_reporting &#x3D; E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR ; 仅显示错误</span><br><span class="line">error_reporting &#x3D; E_ALL &amp; ~E_NOTICE ; 显示所有的错误，除了提醒</span><br><span class="line">display_errors &#x3D; On ; 显示出错误信息(作为输出的一部分)</span><br><span class="line">; 在最终发布的 web 站点上，强烈建议你关掉这个特性，并使用</span><br><span class="line">; 错误日志代替（参看下面）。</span><br><span class="line">; 在最终发布的 web 站点继续让 display_errors 有效可能</span><br><span class="line">; 暴露一些有关安全的信息，例如你的 web 服务上的文件路径、</span><br><span class="line">; 你的数据库规划或别的信息。</span><br><span class="line">display_startup_errors &#x3D; Off ; 甚至当 display_erroes 打开了，发生于 PHP 的启动的步骤中</span><br><span class="line">; 的错误也不会被显示。</span><br><span class="line">; 强烈建议保持使 display_startup_errors 关闭，</span><br><span class="line">; 除了在改错过程中。</span><br><span class="line">log_errors &#x3D; Off ; 在日志文件里记录错误（服务器指定的日志，stderr标准错误输出，或 error_log (下面的））</span><br><span class="line">; 正如上面说明的那样，强烈建议你在最终发布的 web 站点以日志记录错误</span><br><span class="line">; 取代直接错误输出。</span><br><span class="line"></span><br><span class="line">track_errors &#x3D; Off ; 保存最近一个 错误&#x2F;警告 消息于变量 $php_errormsg (boolean)</span><br><span class="line">;error_prepend_string &#x3D; &quot; &quot; ; 于错误信息前输出的字符串</span><br><span class="line">;error_append_string &#x3D; &quot; &quot; ; 于错误信息后输出的字符串</span><br><span class="line">;error_log &#x3D; filename ; 记录错误日志于指定文件</span><br><span class="line">;error_log &#x3D; syslog ; 记录错误日志于系统日志 syslog (NT 下的事件日志, Windows 95 下无效)</span><br><span class="line">warn_plus_overloading &#x3D; Off ; 当将‘ +’ 用于字符串时警告</span><br><span class="line"></span><br><span class="line">;;;;;;;;;;;;;;;;;</span><br><span class="line">; 数据处理 ;</span><br><span class="line">; Data Handling ;</span><br><span class="line">;;;;;;;;;;;;;;;;;</span><br><span class="line"></span><br><span class="line">variables_order &#x3D; &quot; EGPCS&quot; ; 这条指示描述了 PHP 记录</span><br><span class="line">; GET, POST, Cookie, Environment and Built-in 这些变量的顺序。</span><br><span class="line">; （以 G, P, C, E &amp; S 代表，通常以 EGPCS 或 GPC 的方式引用）。</span><br><span class="line">; 按从左到右记录，新值取代旧值。</span><br><span class="line"></span><br><span class="line">register_globals &#x3D; On ; 是否将这些 EGPCS 变量注册为全局变量。</span><br><span class="line">; 若你不想让用户数据不在全局范围内混乱的话，你可能想关闭它。</span><br><span class="line">; 这和 track_vars 连起来用更有意义 — 这样你可以通过</span><br><span class="line">; $HTTP_*_VARS[] 数组访问所有的 GPC 变量。</span><br><span class="line"></span><br><span class="line">register_argc_argv &#x3D; On ; 这条指示告诉 PHP 是否声明 argv 和 argc 变量</span><br><span class="line">; （注：这里 argv 为数组, argc 为变量数）</span><br><span class="line">; （其中包含用 GET 方法传来的数据）。</span><br><span class="line">; 若你不想用这些变量，你应当关掉它以提高性能。</span><br><span class="line"></span><br><span class="line">track_vars &#x3D; On ; 使 $HTTP_*_VARS[] 数组有效，这里 在使用时用</span><br><span class="line">; ENV, POST, GET, COOKIE or SERVER 替换</span><br><span class="line">post_max_size &#x3D; 8M ; PHP 将接受的 POST 数据最大大小。</span><br><span class="line">gpc_order &#x3D; &quot; GPC&quot; ; 这条指示被人反对。用 variables_order 代替。</span><br><span class="line"></span><br><span class="line">; Magic quotes</span><br><span class="line">magic_quotes_gpc &#x3D; On ; 在输入的 GET&#x2F;POST&#x2F;Cookie 数据里使用魔术引用</span><br><span class="line">; （原文就这样，呵呵，所谓 magic quotes 应该是指用转义符加在引用性的控制字符上，如 ....）</span><br><span class="line">magic_quotes_runtime&#x3D; Off ; 对运行时产生的数据使用魔术引用，</span><br><span class="line">; 例如：用 SQL 查询得到的数据，用 exec() 函数得到的数据，等等</span><br><span class="line">magic_quotes_sybase &#x3D; Off ; 采用 Sybase 形式的魔术引用（用 &#39;&#39; 脱出 &#39; 而不用 &#39;）</span><br><span class="line"></span><br><span class="line">; 自动在 PHP 文档之前和之后添加文件</span><br><span class="line">auto_prepend_file &#x3D;</span><br><span class="line">auto_append_file &#x3D;</span><br><span class="line"></span><br><span class="line">; 象 4.04b4 一样，PHP 默认地总是在 “ Content-type:” 头标输出一个字符的编码方式。</span><br><span class="line">; 让输出字符集失效，只要设置为空。</span><br><span class="line">; PHP 的内建默认值是 text&#x2F;html</span><br><span class="line">default_mimetype &#x3D; &quot; text&#x2F;html&quot;</span><br><span class="line">;default_charset &#x3D; &quot; iso-8859-1&quot;</span><br><span class="line"></span><br><span class="line">;;;;;;;;;;;;;;;;;;;;;;;;;</span><br><span class="line">; 路径和目录 ;</span><br><span class="line">; Paths and Directories ;</span><br><span class="line">;;;;;;;;;;;;;;;;;;;;;;;;; </span><br><span class="line"></span><br><span class="line">include_path &#x3D; ; include 路径设置，UNIX: &quot; &#x2F;path1:&#x2F;path2&quot; Windows: &quot; \path1;\path2&quot;</span><br><span class="line">doc_root &#x3D; ; php 页面的根路径，仅在非空时有效</span><br><span class="line">user_dir &#x3D; ; 告知 php 在使用 &#x2F;~username 打开脚本时到哪个目录下去找，仅在非空时有效</span><br><span class="line">;upload_tmp_dir &#x3D; ; 存放用 HTTP 协议上载的文件的临时目录（在没指定时使用系统默认的）</span><br><span class="line">upload_max_filesize &#x3D; 2097152 ; 文件上载默认地限制为 2 Meg</span><br><span class="line">extension_dir &#x3D; c:\php\ ; 存放可加载的扩充库（模块）的目录</span><br><span class="line">enable_dl &#x3D; On ; 是否使 dl() 有效。</span><br><span class="line">; 在多线程的服务器上 dl() 函数*不能*很好地工作，</span><br><span class="line">; 例如 IIS or Zeus，并在其上默认为禁止</span><br><span class="line"></span><br><span class="line">;;;;;;;;;;;;;;;;</span><br><span class="line">; 文件上传 ;</span><br><span class="line">; File Uploads ;</span><br><span class="line">;;;;;;;;;;;;;;;;</span><br><span class="line"></span><br><span class="line">file_uploads &#x3D; On ; 是否允许 HTTP 方式文件上载</span><br><span class="line">;upload_tmp_dir &#x3D; ; 用于 HTTP 上载的文件的临时目录（未指定则使用系统默认）</span><br><span class="line">upload_max_filesize &#x3D; 2M ; 上载文件的最大许可大小</span><br><span class="line"></span><br><span class="line">; Fopen wrappers ;</span><br><span class="line"></span><br><span class="line">allow_url_fopen &#x3D; On ; 是否允许把 URLs 当作 http:.. 或把文件当作 ftp:...</span><br><span class="line"></span><br><span class="line">;;;;;;;;;;;;;;;;;;;;;;</span><br><span class="line">; 动态扩展 ;</span><br><span class="line">; Dynamic Extensions ;</span><br><span class="line">;;;;;;;;;;;;;;;;;;;;;;</span><br><span class="line"></span><br><span class="line">; 若你希望一个扩展库自动加载，用下面的语法：</span><br><span class="line">; extension&#x3D;modulename.extension</span><br><span class="line">; 例如，在 windows 上，</span><br><span class="line">; extension&#x3D;msql.dll</span><br><span class="line">; or 在 UNIX 下,</span><br><span class="line">; extension&#x3D;msql.so</span><br><span class="line">; 注意，这只应当是模块的名字，不需要目录信息放在里面。</span><br><span class="line">; 用上面的 extension_dir 指示指定扩展库的位置。</span><br><span class="line">;Windows 扩展</span><br><span class="line">;extension&#x3D;php_nsmail.dll</span><br><span class="line">extension&#x3D;php_calendar.dll</span><br><span class="line">;extension&#x3D;php_dbase.dll</span><br><span class="line">;extension&#x3D;php_filepro.dll</span><br><span class="line">extension&#x3D;php_gd.dll</span><br><span class="line">;extension&#x3D;php_dbm.dll</span><br><span class="line">;extension&#x3D;php_mssql.dll</span><br><span class="line">;extension&#x3D;php_zlib.dll</span><br><span class="line">;extension&#x3D;php_filepro.dll</span><br><span class="line">;extension&#x3D;php_imap4r2.dll</span><br><span class="line">;extension&#x3D;php_ldap.dll</span><br><span class="line">;extension&#x3D;php_crypt.dll</span><br><span class="line">;extension&#x3D;php_msql2.dll</span><br><span class="line">;extension&#x3D;php_odbc.dll</span><br><span class="line">; 注意， MySQL 的支持现在是内建的，因此，不需要用它的dll</span><br><span class="line"></span><br><span class="line">;;;;;;;;;;;;;;;;;;;</span><br><span class="line">; 模块设定 ;</span><br><span class="line">; Module Settings ;</span><br><span class="line">;;;;;;;;;;;;;;;;;;;</span><br><span class="line"></span><br><span class="line">[Syslog]</span><br><span class="line">define_syslog_variables &#x3D; Off ; 是否定义各种的系统日志变量</span><br><span class="line">; 如：$LOG_PID, $LOG_CRON, 等等。</span><br><span class="line">; 关掉它是个提高效率的好主意。</span><br><span class="line">; 运行时，你可以调用函数 define_syslog_variables()，来定义这些变量</span><br><span class="line">[mail function]</span><br><span class="line">SMTP &#x3D; localhost ;仅用于 win32 系统</span><br><span class="line">sendmail_from &#x3D; me@localhost.com ;仅用于 win32 系统</span><br><span class="line">;sendmail_path &#x3D; ;仅用于 unix, 也可支持参数（默认的是 &#39;sendmail -t -i&#39;）</span><br><span class="line"></span><br><span class="line">[Debugger]</span><br><span class="line">debugger.host &#x3D; localhost</span><br><span class="line">debugger.port &#x3D; 7869</span><br><span class="line">debugger.enabled &#x3D; False</span><br><span class="line"></span><br><span class="line">[Logging]</span><br><span class="line">; 这些配置指示用于示例的日志记录机制。</span><br><span class="line">; 看 examples&#x2F;README.logging 以得到更多的解释</span><br><span class="line">;logging.method &#x3D; db</span><br><span class="line">;logging.directory &#x3D; &#x2F;path&#x2F;to&#x2F;log&#x2F;directory</span><br><span class="line"></span><br><span class="line">[Java]</span><br><span class="line">;java.class.path &#x3D; .\php_java.jar</span><br><span class="line">;java.home &#x3D; c:\jdk</span><br><span class="line">;java.library &#x3D; c:\jdk\jre\bin\hotspot\jvm.dll</span><br><span class="line">;java.library.path &#x3D; .\</span><br><span class="line"></span><br><span class="line">[SQL]</span><br><span class="line">sql.safe_mode &#x3D; Off</span><br><span class="line"></span><br><span class="line">[ODBC]</span><br><span class="line">;uodbc.default_db &#x3D; Not yet implemented</span><br><span class="line">;uodbc.default_user &#x3D; Not yet implemented</span><br><span class="line">;uodbc.default_pw &#x3D; Not yet implemented</span><br><span class="line">uodbc.allow_persistent &#x3D; On ; 允许或禁止 持久连接</span><br><span class="line">uodbc.check_persistent &#x3D; On ; 在重用前检查连接是否还可用</span><br><span class="line">uodbc.max_persistent &#x3D; -1 ; 持久连接的最大数。-1 代表无限制</span><br><span class="line">uodbc.max_links &#x3D; -1 ; 连接的最大数目（持久和非持久）。-1 代表无限制</span><br><span class="line">uodbc.defaultlrl &#x3D; 4096 ; 控制 LONG 类型的字段。</span><br><span class="line">uodbc.defaultbinmode &#x3D; 1 ; 控制 二进制数据。</span><br><span class="line"></span><br><span class="line">[MySQL]</span><br><span class="line">mysql.allow_persistent &#x3D; On ; 允许或禁止 持久连接</span><br><span class="line">mysql.max_persistent &#x3D; -1 ; 持久连接的最大数。-1 代表无限制</span><br><span class="line">mysql.max_links &#x3D; -1 ; 连接的最大数目（持久和非持久）。-1 代表无限制</span><br><span class="line">mysql.default_port &#x3D; ; mysql_connect() 使用的默认端口，如不设置，mysql_connect()</span><br><span class="line">; 将使用变量 $MYSQL_TCP_PORT，或在 &#x2F;etc&#x2F;services 下的 mysql-tcp 条目(unix)，</span><br><span class="line">; 或在编译是定义的 MYSQL_PORT (按这样的顺序)</span><br><span class="line">; Win32 环境，将仅检查 MYSQL_PORT。</span><br><span class="line">mysql.default_socket &#x3D; ; 用于本地 MySql 连接的默认的套接字名。为空，使用 MYSQL 内建值</span><br><span class="line"></span><br><span class="line">mysql.default_host &#x3D; ; mysql_connect() 默认使用的主机（安全模式下无效）</span><br><span class="line">mysql.default_user &#x3D; ; mysql_connect() 默认使用的用户名（安全模式下无效）</span><br><span class="line">mysql.default_password &#x3D; ; mysql_connect() 默认使用的密码（安全模式下无效）</span><br><span class="line">; 注意，在这个文件下保存密码通常是一个坏主意</span><br><span class="line">; 任何可以使用PHP访问的用户可以运行</span><br><span class="line">; &#39;echo cfg_get_var(&quot; mysql.default_password&quot; )&#39; 来显示那个密码！</span><br><span class="line">; 而且当然地，任何有读该文件权力的用户也能看到那个密码。</span><br><span class="line"></span><br><span class="line">[mSQL]</span><br><span class="line">msql.allow_persistent &#x3D; On ; 允许或禁止 持久连接</span><br><span class="line">msql.max_persistent &#x3D; -1 ; 持久连接的最大数。-1 代表无限制</span><br><span class="line">msql.max_links &#x3D; -1 ; 连接的最大数目（持久和非持久）。-1 代表无限制</span><br><span class="line"></span><br><span class="line">[PostgresSQL]</span><br><span class="line">pgsql.allow_persistent &#x3D; On ; 允许或禁止 持久连接</span><br><span class="line">pgsql.max_persistent &#x3D; -1 ; 持久连接的最大数。-1 代表无限制</span><br><span class="line">pgsql.max_links &#x3D; -1 ; 连接的最大数目（持久和非持久）。-1 代表无限制</span><br><span class="line"></span><br><span class="line">[Sybase]</span><br><span class="line">sybase.allow_persistent &#x3D; On ; 允许或禁止 持久连接</span><br><span class="line">sybase.max_persistent &#x3D; -1 ; 持久连接的最大数。-1 代表无限制</span><br><span class="line">sybase.max_links &#x3D; -1 ; 连接的最大数目（持久和非持久）。-1 代表无限制</span><br><span class="line">;sybase.interface_file &#x3D; &quot; &#x2F;usr&#x2F;sybase&#x2F;interfaces&quot;</span><br><span class="line">sybase.min_error_severity &#x3D; 10 ; 显示的错误的最低严重性</span><br><span class="line">sybase.min_message_severity &#x3D; 10 ; 显示的消息的最低重要性</span><br><span class="line">sybase.compatability_mode &#x3D; Off ; 与旧版的 PHP 3.0 兼容的模式。若打开，这将导致 PHP 自动地</span><br><span class="line">; 把根据结果的 Sybase 类型赋予它们，</span><br><span class="line">; 而不是把它们全当成字符串。</span><br><span class="line">; 这个兼容模式不会永远留着，</span><br><span class="line">; 因此，将你的代码进行需要的修改，</span><br><span class="line">; 并将该项关闭。</span><br><span class="line"></span><br><span class="line">[Sybase-CT]</span><br><span class="line">sybct.allow_persistent &#x3D; On ; 允许或禁止 持久连接</span><br><span class="line">sybct.max_persistent &#x3D; -1 ; 持久连接的最大数。-1 代表无限制</span><br><span class="line">sybct.max_links &#x3D; -1 ; 连接的最大数目（持久和非持久）。-1 代表无限制</span><br><span class="line">sybct.min_server_severity &#x3D; 10 ; 显示的错误的最低严重性</span><br><span class="line">sybct.min_client_severity &#x3D; 10 ; 显示的消息的最低重要性</span><br><span class="line"></span><br><span class="line">[bcmath]</span><br><span class="line">bcmath.scale &#x3D; 0 ;</span><br><span class="line"></span><br><span class="line">[browscap]</span><br><span class="line">;browscap &#x3D; extra&#x2F;browscap.ini</span><br><span class="line">browscap &#x3D; C:\WIN\SYSTEM\inetsrv\browscap.ini</span><br><span class="line">[Informix]</span><br><span class="line">ifx.default_host &#x3D; ; ifx_connect() 默认使用的主机（安全模式下无效）</span><br><span class="line">ifx.default_user &#x3D; ; ifx_connect() 默认使用的用户名（安全模式下无效）</span><br><span class="line">ifx.default_password &#x3D; ; ifx_connect() 默认使用的密码（安全模式下无效）</span><br><span class="line">ifx.allow_persistent &#x3D; On ; 允许或禁止 持久连接</span><br><span class="line">ifx.max_persistent &#x3D; -1 ; 持久连接的最大数。-1 代表无限制</span><br><span class="line">ifx.max_links &#x3D; -1 ; 连接的最大数目（持久和非持久）。-1 代表无限制</span><br><span class="line">ifx.textasvarchar &#x3D; 0 ; 若打开，select 状态符返回一个 ‘ text blob’ 字段的内容，而不是它的 id</span><br><span class="line">ifx.byteasvarchar &#x3D; 0 ; 若打开，select 状态符返回一个 ‘ byte blob’ 字段的内容，而不是它的 id</span><br><span class="line">ifx.charasvarchar &#x3D; 0 ; 追踪从固定长度的字符列里剥离的空格。</span><br><span class="line">; 可能对 Informix SE 用户有效。</span><br><span class="line">ifx.blobinfile &#x3D; 0 ; 若打开，text 和 byte blobs 的内容被导出到一个文件</span><br><span class="line">; 而不是保存到内存。</span><br><span class="line">ifx.nullformat &#x3D; 0 ; NULL（空）被作为空字段返回，除非，这里被设为1。</span><br><span class="line">; 这种情况下（为1），NULL 作为字串NULL返回。</span><br><span class="line"></span><br><span class="line">[Session]</span><br><span class="line">;[会话]</span><br><span class="line">session.save_handler &#x3D; files ; 用于保存&#x2F;取回数据的控制方式</span><br><span class="line">session.save_path &#x3D; C:\win\temp ; 在 save_handler 设为文件时传给控制器的参数，</span><br><span class="line">; 这是数据文件将保存的路径。</span><br><span class="line">session.use_cookies &#x3D; 1 ; 是否使用 cookies</span><br><span class="line">session.name &#x3D; PHPSESSID</span><br><span class="line">; 用在 cookie 里的 session 的名字</span><br><span class="line">session.auto_start &#x3D; 0 ; 在请求启动时初始化 session</span><br><span class="line">session.cookie_lifetime &#x3D; 0 ; 为按秒记的 cookie 的保存时间，</span><br><span class="line">; 或为0时，直到浏览器被重启</span><br><span class="line">session.cookie_path &#x3D; &#x2F; ; cookie 的有效路径</span><br><span class="line">session.cookie_domain &#x3D; ; cookie 的有效域</span><br><span class="line">session.serialize_handler &#x3D; php ; 用于连接数据的控制器</span><br><span class="line">; php是 PHP 的标准控制器。</span><br><span class="line">session.gc_probability &#x3D; 1 ; 按百分比的 &#39;garbage collection（碎片整理）&#39; 进程</span><br><span class="line">; 在每次 session 初始化的时候开始的可能性。</span><br><span class="line">session.gc_maxlifetime &#x3D; 1440 ; 在这里数字所指的秒数后，保存的数据将被视为</span><br><span class="line">; &#39;碎片 (garbage) &#39; 并由 gc 进程清理掉。</span><br><span class="line">session.referer_check &#x3D; ; 检查 HTTP 引用以使额外包含于 URLs 中的 ids 无效</span><br><span class="line">session.entropy_length &#x3D; 0 ; 从文件中读取多少字节</span><br><span class="line">session.entropy_file &#x3D; ; 指定这里建立 session id</span><br><span class="line">; session.entropy_length &#x3D; 16</span><br><span class="line">; session.entropy_file &#x3D; &#x2F;dev&#x2F;urandom</span><br><span class="line">session.cache_limiter &#x3D; nocache ; 设为 &#123;nocache,private,public&#125; ,以决定 HTTP 的</span><br><span class="line">; 缓存问题</span><br><span class="line">session.cache_expire &#x3D; 180 ; 文档在 n 分钟后过时</span><br><span class="line">session.use_trans_sid &#x3D; 1 ; 使用过渡性的 sid 支持，若编译时许可了</span><br><span class="line">; --enable-trans-sid</span><br><span class="line">url_rewriter.tags &#x3D; &quot; a&#x3D;href,area&#x3D;href,frame&#x3D;src,input&#x3D;src,form&#x3D;fakeentry&quot;</span><br><span class="line"></span><br><span class="line">[MSSQL]</span><br><span class="line">;extension&#x3D;php_mssql.dll</span><br><span class="line">mssql.allow_persistent &#x3D; On ; 允许或禁止 持久连接</span><br><span class="line">mssql.max_persistent &#x3D; -1 ; 持久连接的最大数。-1 代表无限制</span><br><span class="line">mssql.max_links &#x3D; -1 ; 连接的最大数目（持久和非持久）。-1 代表无限制</span><br><span class="line">mssql.min_error_severity &#x3D; 10 ; 显示的错误的最低严重性</span><br><span class="line">mssql.min_message_severity &#x3D; 10 ; 显示的消息的最低重要性</span><br><span class="line">mssql.compatability_mode &#x3D; Off ; 与旧版的 PHP 3.0 兼容的模式。</span><br><span class="line"></span><br><span class="line">[Ingres II]</span><br><span class="line">ii.allow_persistent &#x3D; On ; 允许或禁止 持久连接</span><br><span class="line">ii.max_persistent &#x3D; -1 ; 持久连接的最大数。-1 代表无限制</span><br><span class="line">ii.max_links &#x3D; -1 ; 连接的最大数目（持久和非持久）。-1 代表无限制</span><br><span class="line">ii.default_database &#x3D; ; 默认 database (format : [node_id::]dbname[&#x2F;srv_class]</span><br><span class="line">ii.default_user &#x3D; ; 默认 user</span><br><span class="line">ii.default_password &#x3D; ; 默认 password</span><br><span class="line"></span><br><span class="line">[Verisign Payflow Pro]</span><br><span class="line">pfpro.defaulthost &#x3D; &quot; test.signio.com&quot; ; 默认的 Signio 服务器</span><br><span class="line">pfpro.defaultport &#x3D; 443 ; 连接的默认端口</span><br><span class="line">pfpro.defaulttimeout &#x3D; 30 ; 按秒计的默认超时时间</span><br><span class="line"></span><br><span class="line">; pfpro.proxyaddress &#x3D; ; 默认的代理的 IP 地址（如果需要）</span><br><span class="line">; pfpro.proxyport &#x3D; ; 默认的代理的端口</span><br><span class="line">; pfpro.proxylogon &#x3D; ; 默认的代理的登录（logon 用户名）</span><br><span class="line">; pfpro.proxypassword &#x3D; ; 默认的代理的密码</span><br><span class="line"></span><br><span class="line">[Sockets]</span><br><span class="line">sockets.use_system_read &#x3D; On ; 使用系统的 read() 函数替代 php_read() 封装</span><br><span class="line">; Local Variables: 局部变量</span><br><span class="line">; tab-width: 4</span><br><span class="line">; End:</span><br><span class="line"></span><br><span class="line">; XDEBUG 扩展</span><br><span class="line">[xdebug]</span><br><span class="line">zend_extension &#x3D;&quot;F:&#x2F;wamp&#x2F;bin&#x2F;php&#x2F;php7.1.9&#x2F;zend_ext&#x2F;php_xdebug-2.5.5-7.0-vc14-x86_64.dll&quot;</span><br><span class="line"></span><br><span class="line">xdebug.remote_enable &#x3D; off ; xdebug 远程</span><br><span class="line">xdebug.profiler_enable &#x3D; off ; xdebug 分析器</span><br><span class="line">xdebug.profiler_enable_trigger &#x3D; Off ; xdebug 分析器触发</span><br><span class="line">xdebug.profiler_output_name &#x3D; cachegrind.out.%t.%p ; xdebug 分析器输出名称</span><br><span class="line">xdebug.profiler_output_dir &#x3D;&quot;F:&#x2F;wamp&#x2F;tmp&quot; ; xdebug 分析器输出路径</span><br><span class="line">xdebug.show_local_vars&#x3D;0 ; xdebug 展示本地变量</span><br></pre></td></tr></table></figure>
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 chaofa_vip@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>phpini中文详解</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">4.9k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Hechaofa">Hechaofa</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-04-09, 09:09:47</p>
+    <p><span class="copy-title">最后更新:</span>2020-09-30, 16:01:12</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/04/09/php/base/phpini/" title="phpini中文详解">https://chaofavip.github.io/2020/04/09/php/base/phpini/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2020 Hechaofa</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#alipay','#composer','#linux','#host','#bogon','#docker','#php','#redis','#ext','#公司','#代码部署','#laravel','#git','#架构','#监控','#awk','#Linux','#Ubuntu','#mysql','#索引','#数据库','#mac','#tool','#jq','#压测','#vim','#zookeeper','#算法','#面试','#正则','#学习','#hyperf','#ajax',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.4;
+        background: url("https://blog-cdn.hechaofa.com/u%3D2182501265%2C1034715584%26fm%3D26%26gp%3D0.jpg");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
