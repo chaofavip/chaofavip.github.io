@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>PHP 面对主从不同步时解决方案</title>
+      <link href="/2020/11/13/php/change/zhucong/"/>
+      <url>/2020/11/13/php/change/zhucong/</url>
+      
+        <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>实际工作中，我们 插入/更新/删除 链接的是 主库，查询 链接的是 从库。<br>有时会遇到插入的数据需要及时展示，而这时数据库主从同步发生了延迟。</p><h2 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h2><p>在可能发生主从延迟的地方，调整成查询主库。</p><h2 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h2><p>在可能发生主从延迟的地方，对插入的数据做缓存，当从库查询失败的时候查询缓存。<br>此方案需要每个开发者了解缓存的数据格式，以及数据变化时及时更新缓存。<br>缓存做超时限制。</p><h2 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h2><p>在可能发生主从延迟的地方，对插入的数据ID做缓存，当从库查询失败的时候，根据数据ID去主库查询数据。<br>缓存在超时限制。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>php代码整洁之道</title>
       <link href="/2020/10/25/php/design/zhengjiezhidao/"/>
       <url>/2020/10/25/php/design/zhengjiezhidao/</url>
@@ -930,10 +955,10 @@
     
     <entry>
       <title>百度网盘（破解svip）下载Mac</title>
-      <link href="/2019/07/20/tool/baidu/"/>
-      <url>/2019/07/20/tool/baidu/</url>
+      <link href="/2019/07/20/tool/zipkin/"/>
+      <url>/2019/07/20/tool/zipkin/</url>
       
-        <content type="html"><![CDATA[<p><a href="https://github.com/CodeTips/BaiduNetdiskPlugin-macOS" target="_blank" rel="noopener">https://github.com/CodeTips/BaiduNetdiskPlugin-macOS</a></p>]]></content>
+        <content type="html"><![CDATA[<p>安装zipkin</p><p>cd /usr/local/src/ wget -O zipkin.jar ‘<a href="https://search.maven.org/remote_content?g=io.zipkin.java&amp;a=zipkin-server&amp;v=LATEST&amp;c=exec&#39;" target="_blank" rel="noopener">https://search.maven.org/remote_content?g=io.zipkin.java&amp;a=zipkin-server&amp;v=LATEST&amp;c=exec&#39;</a> </p><p>启动<br>java -jar zipkin.jar</p><p><a href="http://tracing-analysis-dc-hz.aliyuncs.com/adapt_fzi0qteick@05697a22301281e_fzi0qteick@53df7ad2afe8301/api/v2/spans" target="_blank" rel="noopener">http://tracing-analysis-dc-hz.aliyuncs.com/adapt_fzi0qteick@05697a22301281e_fzi0qteick@53df7ad2afe8301/api/v2/spans</a></p><p>ZipKin的原理的介绍</p><p>　　结构概述      </p><p>　　跟踪器（Tracers）存在在你的应用程序中生存，记录时间和关于操作的元数据。他们经常使用库，因此他们的使用对用户是透明的。例如，当它收到一个请求并发送一个响应时，一个感应器（instrumented ）的web服务器记录。所收集的跟踪数据称为Span。</p><p>　　在生产过程中，instrumention是安全的，并且没有太多的开销。由于这个原因，他们只在带内（in-band）传播id，告诉接收方有一个正在进行中的跟踪。完成的跨度被报告给Zipkin的“外带（out-of-band）”，类似于应用程序如何异步地报告指标。</p><p>　　例如，当一个操作被跟踪，它需要发出一个传出的http请求时，会添加几个头来传播IDs。header不用于发送诸如操作名称之类的细节。</p><p>　　将数据发送给Zipkin的应用程序的一种组件被称为Reporter。记者(Reporters)通过几个传输器(transports )中的一个传输跟踪数据到Zipkin收集器(collectors)，这些收集器将跟踪数据保存到存储（storage）中。稍后，通过API查询存储，以向UI提供数据。   </p><p>　　下面是一个描述这个流程的图表:</p><p>　　Zipkin architecture</p><p>本地启动<br>去到安装目录<br>执行下面命令，看到后面那个图就说明启动成功</p><p>本地访问<br><a href="http://192.168.10.10:9411/zipkin/" target="_blank" rel="noopener">http://192.168.10.10:9411/zipkin/</a></p><p>效果：</p>]]></content>
       
       
       <categories>
@@ -955,10 +980,10 @@
     
     <entry>
       <title>百度网盘（破解svip）下载Mac</title>
-      <link href="/2019/07/20/tool/zipkin/"/>
-      <url>/2019/07/20/tool/zipkin/</url>
+      <link href="/2019/07/20/tool/baidu/"/>
+      <url>/2019/07/20/tool/baidu/</url>
       
-        <content type="html"><![CDATA[<p>安装zipkin</p><p>cd /usr/local/src/ wget -O zipkin.jar ‘<a href="https://search.maven.org/remote_content?g=io.zipkin.java&amp;a=zipkin-server&amp;v=LATEST&amp;c=exec&#39;" target="_blank" rel="noopener">https://search.maven.org/remote_content?g=io.zipkin.java&amp;a=zipkin-server&amp;v=LATEST&amp;c=exec&#39;</a> </p><p>启动<br>java -jar zipkin.jar</p><p><a href="http://tracing-analysis-dc-hz.aliyuncs.com/adapt_fzi0qteick@05697a22301281e_fzi0qteick@53df7ad2afe8301/api/v2/spans" target="_blank" rel="noopener">http://tracing-analysis-dc-hz.aliyuncs.com/adapt_fzi0qteick@05697a22301281e_fzi0qteick@53df7ad2afe8301/api/v2/spans</a></p><p>ZipKin的原理的介绍</p><p>　　结构概述      </p><p>　　跟踪器（Tracers）存在在你的应用程序中生存，记录时间和关于操作的元数据。他们经常使用库，因此他们的使用对用户是透明的。例如，当它收到一个请求并发送一个响应时，一个感应器（instrumented ）的web服务器记录。所收集的跟踪数据称为Span。</p><p>　　在生产过程中，instrumention是安全的，并且没有太多的开销。由于这个原因，他们只在带内（in-band）传播id，告诉接收方有一个正在进行中的跟踪。完成的跨度被报告给Zipkin的“外带（out-of-band）”，类似于应用程序如何异步地报告指标。</p><p>　　例如，当一个操作被跟踪，它需要发出一个传出的http请求时，会添加几个头来传播IDs。header不用于发送诸如操作名称之类的细节。</p><p>　　将数据发送给Zipkin的应用程序的一种组件被称为Reporter。记者(Reporters)通过几个传输器(transports )中的一个传输跟踪数据到Zipkin收集器(collectors)，这些收集器将跟踪数据保存到存储（storage）中。稍后，通过API查询存储，以向UI提供数据。   </p><p>　　下面是一个描述这个流程的图表:</p><p>　　Zipkin architecture</p><p>本地启动<br>去到安装目录<br>执行下面命令，看到后面那个图就说明启动成功</p><p>本地访问<br><a href="http://192.168.10.10:9411/zipkin/" target="_blank" rel="noopener">http://192.168.10.10:9411/zipkin/</a></p><p>效果：</p>]]></content>
+        <content type="html"><![CDATA[<p><a href="https://github.com/CodeTips/BaiduNetdiskPlugin-macOS" target="_blank" rel="noopener">https://github.com/CodeTips/BaiduNetdiskPlugin-macOS</a></p>]]></content>
       
       
       <categories>
