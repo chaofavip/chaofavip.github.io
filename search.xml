@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>phper成长</title>
+      <link href="/2020/12/02/php/study/fazhan/"/>
+      <url>/2020/12/02/php/study/fazhan/</url>
+      
+        <content type="html"><![CDATA[<h2 id="phper发展之路遇到的情况"><a href="#phper发展之路遇到的情况" class="headerlink" title="phper发展之路遇到的情况"></a>phper发展之路遇到的情况</h2><p>找准定位：我是谁、我在哪里？<br>怎样做好架构师：我要做什么？<br>如何搭建架构师知识体系：我该怎么做？<br>如果你想要往架构师的方向发展的话，那或许你可以看一下我分享给你的这份进阶路线图，主要针对1到5年及以内的PHP开发人员，里面的技术包涵了PHP高并发、分布式、Swoole协程编程、微服务、框架内核、高性能等技术，这些也是目前中大型互联网企业比较常用的技术，那么来详细看看。</p><h3 id="一：常见模式与框架"><a href="#一：常见模式与框架" class="headerlink" title="一：常见模式与框架"></a>一：常见模式与框架</h3><p>学习PHP技术体系，设计模式，流行的框架</p><p>常见的设计模式，编码必备<br>Laravel、ThinkPHP开发必不可少的最新框架<br>YII、Symfony4.1核心源码剖析</p><h3 id="二：微服务架构与性能优化"><a href="#二：微服务架构与性能优化" class="headerlink" title="二：微服务架构与性能优化"></a>二：微服务架构与性能优化</h3><p>业务体系越来越复杂，协程编程，PHP并发编程、MySQL底层优化是架构升级的必经之路，PHP性能优化和微服务相关的技术有哪些呢？</p><p>Tars分布式RPC框架<br>Swoft微服务框架<br>服务器性能优化<br>算法与数据结构</p><h3 id="三：工程化与分布式架构"><a href="#三：工程化与分布式架构" class="headerlink" title="三：工程化与分布式架构"></a>三：工程化与分布式架构</h3><p>任何脱离细节的PPT架构师都是耍流氓，向上能运筹帷幄，向下能解决一线开发问题，PHP架构师需深入工程化、高并发，高可用，海量数据，没有分布式的架构知识肯定是玩不转的：</p><p>Linux操作/shell脚本编程<br>docker容器/自动化部署<br>分布式缓存/消息中间件<br>分布式架构原理/高并发分流</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> php </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>yaf</title>
       <link href="/2020/12/02/php/yaf/yaf/"/>
       <url>/2020/12/02/php/yaf/yaf/</url>
