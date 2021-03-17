@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>docker之安装amqp扩展</title>
+      <link href="/2021/03/17/docker/amqp/"/>
+      <url>/2021/03/17/docker/amqp/</url>
+      
+        <content type="html"><![CDATA[<h3 id="一、rabbitmq-c-0-8-0-tar-gz"><a href="#一、rabbitmq-c-0-8-0-tar-gz" class="headerlink" title="一、rabbitmq-c-0.8.0.tar.gz"></a>一、rabbitmq-c-0.8.0.tar.gz</h3><p>curl -L -o /tmp/rabbitmq.tar.gz  <a href="https://github.com/alanxz/rabbitmq-c/releases/download/v0.8.0/rabbitmq-c-0.8.0.tar.gz" target="_blank" rel="noopener">https://github.com/alanxz/rabbitmq-c/releases/download/v0.8.0/rabbitmq-c-0.8.0.tar.gz</a></p><p>tar -zxvf rabbitmq-c-0.8.0.tar.gz</p><p>cd rabbitmq-c-0.8.0</p><p>./configure –prefix=/usr/local/rabbitmq-c</p><p>make &amp;&amp; make install</p><h3 id="二、amqp"><a href="#二、amqp" class="headerlink" title="二、amqp"></a>二、amqp</h3><h4 id="检查自己系统"><a href="#检查自己系统" class="headerlink" title="检查自己系统"></a>检查自己系统</h4><p>在容器里查看镜像所使用的的Linux版本<br>cat /etc/issue</p><p>我这边下载的一个容器里面运行的是Welcome to Alpine Linux 3.10 的版本，</p><p>Alpine 软件管理器使用的是apk</p><p>Centos 软件管理器使用的是yum</p><p>ubuntu 软件管理器使用的是apt-get</p><h4 id="检查包"><a href="#检查包" class="headerlink" title="检查包"></a>检查包</h4><p>pecl search amqp</p><h4 id="执行安装"><a href="#执行安装" class="headerlink" title="执行安装"></a>执行安装</h4><p>pecl install 查询出来的版本</p><h4 id="要指定上面安装包的路径"><a href="#要指定上面安装包的路径" class="headerlink" title="要指定上面安装包的路径"></a>要指定上面安装包的路径</h4><p>Set the path to librabbitmq install prefix [autodetect] : /usr/local/rabbitmq-c</p><h4 id="坐等执行完成"><a href="#坐等执行完成" class="headerlink" title="坐等执行完成"></a>坐等执行完成</h4><h4 id="再到php-ini。添加"><a href="#再到php-ini。添加" class="headerlink" title="再到php.ini。添加"></a>再到php.ini。添加</h4><p>[AMQP]<br>extension= amqp.so</p><h4 id="最后重启php"><a href="#最后重启php" class="headerlink" title="最后重启php"></a>最后重启php</h4><p>done</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> amqp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>phper成长</title>
       <link href="/2020/12/02/php/study/fazhan/"/>
       <url>/2020/12/02/php/study/fazhan/</url>
