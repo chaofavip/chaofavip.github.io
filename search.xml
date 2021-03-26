@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>抓包</title>
+      <link href="/2021/03/24/tool/zhuabao/"/>
+      <url>/2021/03/24/tool/zhuabao/</url>
+      
+        <content type="html"><![CDATA[<h3 id="主流抓包工具对比"><a href="#主流抓包工具对比" class="headerlink" title="主流抓包工具对比"></a>主流抓包工具对比</h3><p>先来简单看下有哪些常见的抓包工具，主要有下面几种：</p><p>Charles</p><p>Fiddler</p><p>WireShark</p><p>TcpDump</p><p>Chrome Network</p><p>其中目前主流的抓包工具有：TcpDump、WireShark、Fiddler，下面我们对这几个抓包工具的性能进行一些简单的对比。</p><ol><li>TcpDump</li></ol><p>Android 平台下的网络数据抓包工具，Android模拟器中自带 TcpDump 文件。</p><p>用 TcpDump 对网络数据抓包，手机不用走代理——将网络数据包添加到 WireShark 中分析即可。</p><p>缺点：</p><p>手机必须获取 root 权限；</p><p>不能查看实时通信数据——因为抓取的是 dump 出来的文件，而不能实时数据交互；</p><p>获取的数据很多，分析时需要过滤出真正有用的信息。</p><ol start="2"><li>WireShark</li></ol><p>PC 端截获、分析通过该网卡的所有网络通信的数据包（针对移动端时候，就要对移动端设置代理服务器）强大的工具，完整查看网络中的每层、每个协议、每个数据包的详细组成信息；TCP、UDP、HTTP、HTTPS 等协议的数据包均可获取；</p><p>缺点：</p><p>获取的信息太多，需要手动过滤、进行分析。</p><p>只能查看，不能修改、重发送网络数据包。</p><ol start="3"><li>Fiddler</li></ol><p>HTTP 协议的代理工具，抓取、分析电脑中所有进出该网卡、与网络进行数据交互的数据（针对移动端抓包时，需要设置代理服务器)，主要针对的是 HTTP/HTTPS 协议；能够清晰查看数据包中的内容——HTTPS中的数据包可以解密出来。</p><p>缺点：</p><p>只适用于一次请求，下次请求需要重新设定</p><p>手动修改需要花费时间，如果程序等待超时，本次设定的 Response 结果失效</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 抓包 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GatewayWorker</title>
       <link href="/2021/03/18/workerman/GatewayWorker/"/>
       <url>/2021/03/18/workerman/GatewayWorker/</url>
